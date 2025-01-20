@@ -8,6 +8,7 @@ import { Button } from './ui/Button';
 import { DynamicField } from './DynamicField';
 import toast from 'react-hot-toast';
 import type { SystemField } from '../hooks/useSystemFields';
+import { validateNIP } from '../utils/validators';
 
 // Custom slugify function
 const createSlug = (text: string): string => {
@@ -179,6 +180,10 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
     return pattern.test(phone);
   };
 
+  const validateNip = (nip: string) => {
+    return validateNIP(nip);
+  };
+
   const formatPostalCode = (value: string) => {
     // Remove all non-digits
     const digits = value.replace(/\D/g, '');
@@ -204,6 +209,23 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
     return formatted.slice(0, 12); // 12 digits
   };
 
+  const formatNip = (value: string) => {
+    // Remove any non-digit characters
+    let formatted = value.replace(/[^0-9]/g, '');
+    
+    // Limit to 10 digits
+    formatted = formatted.slice(0, 10);
+    
+    // Add dashes after 3rd and 6th digits if we have enough digits
+    if (formatted.length > 6) {
+      formatted = `${formatted.slice(0, 3)}-${formatted.slice(3, 6)}-${formatted.slice(6, 8)}-${formatted.slice(8)}`;
+    } else if (formatted.length > 3) {
+      formatted = `${formatted.slice(0, 3)}-${formatted.slice(3)}`;
+    }
+    
+    return formatted;
+  };
+
   const handleChange = (name: string, value: any) => {
     // Format postal code as user types
     if (name === 'postal_code') {
@@ -216,9 +238,24 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
       value = formatPhone(value);
     }
 
+    // Format and validate NIP as user types
+    if (name === 'nip') {
+      value = formatNip(value);
+      // Only validate if we have all 10 digits (12 chars with dashes)
+      if (value.replace(/[^0-9]/g, '').length === 10) {
+        if (!validateNip(value)) {
+          setErrors(prev => ({ ...prev, nip: 'Nieprawidłowy numer NIP' }));
+        } else {
+          setErrors(prev => ({ ...prev, nip: '' }));
+        }
+      } else {
+        setErrors(prev => ({ ...prev, nip: '' }));
+      }
+    }
+
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field if exists
-    if (errors[name]) {
+    // Clear error for this field if exists (except NIP which is handled above)
+    if (errors[name] && name !== 'nip') {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
@@ -235,6 +272,12 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
     // Validate phone number
     if (formData.phone && !validatePhone(formData.phone)) {
       toast.error('Numer telefonu musi zawierać od 9 do 12 cyfr, opcjonalnie rozpoczynając się od +');
+      return;
+    }
+
+    // Validate NIP if provided
+    if (formData.nip && !validateNip(formData.nip)) {
+      toast.error('Nieprawidłowy numer NIP');
       return;
     }
 
@@ -323,7 +366,13 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
               />
 
               <DynamicField
-                field={createFieldConfig('nip', 'NIP', 'text', true)}
+                field={createFieldConfig(
+                  'nip', 
+                  'NIP', 
+                  'text', 
+                  true,
+                  'Format: XXX-XXX-XX-XX (np. 123-456-78-90)'
+                )}
                 value={formData.nip || ''}
                 onChange={(value) => handleChange('nip', value)}
                 error={errors.nip}
