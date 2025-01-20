@@ -92,9 +92,10 @@ export const CompaniesCatalog: React.FC<CompaniesCatalogProps> = ({ companies })
                   />
                 </div>
               )}
-              <h3 className="text-xl font-semibold text-[#1d1d1f] mb-2">{company.name}</h3>
+              <h3 className="text-xl font-semibold text-[#1d1d1f] mb-4">{company.name}</h3>
               <div className="text-sm text-[#424245] mb-4">
-                <p><span className="font-medium">Adres:</span> {company.street}, {company.postal_code} {company.city}</p>
+                <p><span className="font-medium">Adres:</span> {company.street}</p>
+                <p className="ml-[45px] mb-4">{company.postal_code} {company.city}</p>
                 {company.phone && <p><span className="font-medium">Tel:</span> {company.phone}</p>}
                 {company.email && <p><span className="font-medium">Email:</span> {company.email}</p>}
                 {company.nip && <p><span className="font-medium">NIP:</span> {company.nip}</p>}
