@@ -81,6 +81,9 @@ export const DynamicField: React.FC<DynamicFieldProps> = ({
             placeholder={`Enter ${field.name.toLowerCase()}`}
             required={field.is_required}
           />
+          {field.description && (
+            <p className="text-sm text-gray-500">{field.description}</p>
+          )}
           {error && (
             <p className="text-sm text-red-600">{error}</p>
           )}

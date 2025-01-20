@@ -174,6 +174,11 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
     return pattern.test(code);
   };
 
+  const validatePhone = (phone: string) => {
+    const pattern = /^\+?[0-9]{9,12}$/;
+    return pattern.test(phone);
+  };
+
   const formatPostalCode = (value: string) => {
     // Remove all non-digits
     const digits = value.replace(/\D/g, '');
@@ -183,11 +188,32 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
     return `${digits.slice(0, 2)}-${digits.slice(2, 5)}`;
   };
 
+  const formatPhone = (value: string) => {
+    // Remove all non-digits and non-plus sign
+    let formatted = value.replace(/[^\d+]/g, '');
+    
+    // Ensure plus sign is only at the start
+    if (formatted.includes('+') && !formatted.startsWith('+')) {
+      formatted = formatted.replace(/\+/g, '');
+    }
+    
+    // Limit length (12 digits + optional plus sign)
+    if (formatted.startsWith('+')) {
+      return formatted.slice(0, 13); // +12 digits
+    }
+    return formatted.slice(0, 12); // 12 digits
+  };
+
   const handleChange = (name: string, value: any) => {
     // Format postal code as user types
     if (name === 'postal_code') {
       value = formatPostalCode(value);
       if (value.length > 6) return; // Don't allow more than XX-XXX
+    }
+
+    // Format phone number as user types
+    if (name === 'phone') {
+      value = formatPhone(value);
     }
 
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -203,6 +229,12 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
     // Validate postal code
     if (formData.postal_code && !validatePostalCode(formData.postal_code)) {
       toast.error('Kod pocztowy musi być w formacie XX-XXX (np. 12-345)');
+      return;
+    }
+
+    // Validate phone number
+    if (formData.phone && !validatePhone(formData.phone)) {
+      toast.error('Numer telefonu musi zawierać od 9 do 12 cyfr, opcjonalnie rozpoczynając się od +');
       return;
     }
 
@@ -260,16 +292,20 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
   };
 
   // Helper function to create field config
-  const createFieldConfig = (id: string, name: string, type: string, required: boolean): SystemField => ({
+  const createFieldConfig = (
+    id: string, 
+    name: string, 
+    type: string, 
+    required: boolean,
+    description?: string
+  ): SystemField => ({
     id,
     name,
     field_type: type,
     is_required: required,
     module_id: 'company',
     field_key: id,
-    description: '',
-    options: null,
-    order_index: 0
+    description
   });
 
   return (
@@ -317,7 +353,13 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
               />
 
               <DynamicField
-                field={createFieldConfig('postal_code', 'Kod pocztowy', 'text', true)}
+                field={createFieldConfig(
+                  'postal_code', 
+                  'Kod pocztowy', 
+                  'text', 
+                  true,
+                  'Format: XX-XXX (np. 12-345)'
+                )}
                 value={formData.postal_code || ''}
                 onChange={(value) => handleChange('postal_code', value)}
                 error={errors.postal_code}
@@ -331,7 +373,13 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
               />
 
               <DynamicField
-                field={createFieldConfig('phone', 'Telefon', 'text', true)}
+                field={createFieldConfig(
+                  'phone', 
+                  'Telefon', 
+                  'text', 
+                  true,
+                  'Format: 9-12 cyfr, opcjonalnie rozpoczynając się od + (np. +48123456789 lub 123456789)'
+                )}
                 value={formData.phone || ''}
                 onChange={(value) => handleChange('phone', value)}
                 error={errors.phone}
