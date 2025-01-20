@@ -1,0 +1,37 @@
+# Bot detection for SEO pages - these must come first
+/slownik-erp     /seo/slownik-erp/index.html     200!     User-Agent=*Googlebot/2.1*
+/slownik-erp     /seo/slownik-erp/index.html     200!     User-Agent=*googlebot/2.1*
+/slownik-erp     /seo/slownik-erp/index.html     200!     User-Agent=*Bingbot/2.0*
+
+/slownik-erp/*   /seo/slownik-erp/:splat/index.html   200!   User-Agent=*Googlebot/2.1*
+/slownik-erp/*   /seo/slownik-erp/:splat/index.html   200!   User-Agent=*googlebot/2.1*
+/slownik-erp/*   /seo/slownik-erp/:splat/index.html   200!   User-Agent=*Bingbot/2.0*
+
+/systemy-erp     /seo/systemy-erp/index.html     200!     User-Agent=*Googlebot/2.1*
+/systemy-erp     /seo/systemy-erp/index.html     200!     User-Agent=*googlebot/2.1*
+/systemy-erp     /seo/systemy-erp/index.html     200!     User-Agent=*Bingbot/2.0*
+
+/partnerzy       /seo/partnerzy/index.html       200!     User-Agent=*Googlebot/2.1*
+/partnerzy       /seo/partnerzy/index.html       200!     User-Agent=*googlebot/2.1*
+/partnerzy       /seo/partnerzy/index.html       200!     User-Agent=*Bingbot/2.0*
+
+/koszt-wdrozenia-erp   /seo/koszt-wdrozenia-erp/index.html   200!   User-Agent=*Googlebot/2.1*
+/koszt-wdrozenia-erp   /seo/koszt-wdrozenia-erp/index.html   200!   User-Agent=*googlebot/2.1*
+/koszt-wdrozenia-erp   /seo/koszt-wdrozenia-erp/index.html   200!   User-Agent=*Bingbot/2.0*
+
+/                /seo/index.html                 200!     User-Agent=*Googlebot/2.1*
+/                /seo/index.html                 200!     User-Agent=*googlebot/2.1*
+/                /seo/index.html                 200!     User-Agent=*Bingbot/2.0*
+
+# Regular routes - these must come before the SPA fallback
+/slownik-erp/*          /index.html     200
+/slownik-erp            /index.html     200
+/wdrozenie-erp          /index.html     200
+/koszt-wdrozenia-erp    /index.html     200
+/systemy-erp            /index.html     200
+/porownaj-systemy-erp   /index.html     200
+/admin/*                /index.html     200
+/editor/*               /index.html     200
+
+# Default SPA fallback - this must come last
+/*    /index.html   200

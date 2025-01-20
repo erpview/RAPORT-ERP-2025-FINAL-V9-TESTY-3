@@ -1,0 +1,46 @@
+[build]
+  command = "npm run build && cp -r public/seo dist/"
+  publish = "dist"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "all"
+
+[[edge_functions]]
+  path = "/*"
+  function = "bot-detection"
+
+# SEO pages redirect
+[[redirects]]
+  from = "/slownik-erp/*"
+  to = "/slownik-erp/:splat/index.html"
+  status = 200
+  force = true
+
+# Systems page redirect for SEO
+[[redirects]]
+  from = "/systemy-erp"
+  to = "/seo/systemy-erp/index.html"
+  status = 200
+  conditions = {Cookie = ["__prerender_bypass"]}
+
+# Calculator page redirect for SEO
+[[redirects]]
+  from = "/kalkulator"
+  to = "/seo/kalkulator/index.html"
+  status = 200
+  conditions = {Cookie = ["__prerender_bypass"]}
+
+# Compare page redirect for SEO
+[[redirects]]
+  from = "/porownaj-systemy-erp"
+  to = "/seo/porownaj-systemy-erp/index.html"
+  status = 200
+  conditions = {Cookie = ["__prerender_bypass"]}
+
+# SPA fallback for client-side navigation
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

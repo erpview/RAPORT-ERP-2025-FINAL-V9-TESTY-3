@@ -1,0 +1,96 @@
+{
+  "rewrites": [
+    {
+      "source": "/porownaj-systemy-erp",
+      "destination": "/porownaj-systemy-erp/index.html"
+    },
+    {
+      "source": "/systemy-erp",
+      "destination": "/systemy-erp/index.html"
+    },
+    {
+      "source": "/partnerzy",
+      "destination": "/partnerzy/index.html"
+    },
+    {
+      "source": "/partnerzy/anegis",
+      "destination": "/partnerzy/anegis/index.html"
+    },
+    {
+      "source": "/partnerzy/asseco-business-solutions",
+      "destination": "/partnerzy/asseco-business-solutions/index.html"
+    },
+    {
+      "source": "/partnerzy/axians",
+      "destination": "/partnerzy/axians/index.html"
+    },
+    {
+      "source": "/partnerzy/bpsc",
+      "destination": "/partnerzy/bpsc/index.html"
+    },
+    {
+      "source": "/partnerzy/deveho-consulting",
+      "destination": "/partnerzy/deveho-consulting/index.html"
+    },
+    {
+      "source": "/partnerzy/digitland",
+      "destination": "/partnerzy/digitland/index.html"
+    },
+    {
+      "source": "/partnerzy/enova",
+      "destination": "/partnerzy/enova/index.html"
+    },
+    {
+      "source": "/partnerzy/ipcc",
+      "destination": "/partnerzy/ipcc/index.html"
+    },
+    {
+      "source": "/partnerzy/it.integro",
+      "destination": "/partnerzy/it.integro/index.html"
+    },
+    {
+      "source": "/partnerzy/proalpha",
+      "destination": "/partnerzy/proalpha/index.html"
+    },
+    {
+      "source": "/partnerzy/rambase",
+      "destination": "/partnerzy/rambase/index.html"
+    },
+    {
+      "source": "/partnerzy/rho-software",
+      "destination": "/partnerzy/rho-software/index.html"
+    },
+    {
+      "source": "/partnerzy/sente",
+      "destination": "/partnerzy/sente/index.html"
+    },
+    {
+      "source": "/partnerzy/simple",
+      "destination": "/partnerzy/simple/index.html"
+    },
+    {
+      "source": "/partnerzy/streamsoft",
+      "destination": "/partnerzy/streamsoft/index.html"
+    },
+    {
+      "source": "/partnerzy/sygrnity-business-solutions",
+      "destination": "/partnerzy/sygrnity-business-solutions/index.html"
+    },
+    {
+      "source": "/partnerzy/symfonia",
+      "destination": "/partnerzy/symfonia/index.html"
+    },
+    {
+      "source": "/partnerzy/vendo.erp",
+      "destination": "/partnerzy/vendo.erp/index.html"
+    },
+    {
+      "source": "/koszt-wdrozenia-erp",
+      "destination": "/koszt-wdrozenia-erp/index.html"
+    },
+    {
+      "source": "/**",
+      "destination": "/index.html"
+    }
+  ]
+}

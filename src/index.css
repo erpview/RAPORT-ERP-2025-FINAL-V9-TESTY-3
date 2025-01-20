@@ -1,0 +1,333 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#F5F5F7] text-[#1d1d1f] antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  h1 {
+    @apply text-[40px] leading-[1.1] font-semibold;
+    letter-spacing: -0.015em;
+  }
+
+  h2 {
+    @apply text-[32px] leading-[1.15] font-semibold;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    @apply text-[24px] leading-[1.2] font-semibold;
+    letter-spacing: -0.015em;
+  }
+
+  /* Apple-style smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Apple-style focus rings - excluding navigation */
+  *:focus:not(nav *) {
+    @apply outline-none ring-2 ring-[#2c3b67] ring-offset-2;
+  }
+
+  /* Apple-style selection color */
+  ::selection {
+    @apply bg-[#2c3b67]/20;
+  }
+
+  /* Apple-style select element */
+  select {
+    @apply text-[15px] font-medium;
+    background-image: none !important;
+  }
+
+  select option {
+    @apply py-2 px-4 text-[15px] cursor-pointer;
+    background-color: white;
+  }
+
+  select option:checked {
+    @apply bg-[#2c3b67] text-white;
+  }
+
+  select option:hover {
+    @apply bg-[#F5F5F7];
+  }
+
+  /* Disabled option styling */
+  select option:disabled {
+    @apply text-[#86868b];
+  }
+}
+
+@layer components {
+  .sf-input {
+    @apply px-4 py-3 rounded-xl border border-[#d2d2d7] bg-white/90 backdrop-blur-sm 
+           focus:ring-2 focus:ring-[#2c3b67] focus:border-transparent transition duration-200;
+  }
+
+  .sf-calendar-wrapper {
+    @apply relative cursor-pointer;
+  }
+
+  .sf-calendar-icon {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 
+           text-[#86868b] w-5 h-5 pointer-events-none z-10;
+  }
+
+  .sf-calendar-input {
+    @apply px-4 py-3 pl-10 w-full rounded-xl border border-[#d2d2d7] bg-white/90 backdrop-blur-sm
+           hover:border-[#2c3b67]/30 focus:border-[#2c3b67] focus:ring-2 focus:ring-[#2c3b67]
+           active:border-[#2c3b67] active:ring-2 active:ring-[#2c3b67] transition duration-200
+           cursor-pointer;
+  }
+
+  .sf-card {
+    @apply bg-white/90 backdrop-blur-sm shadow-sm rounded-2xl border border-[#d2d2d7]/30
+           transition duration-200;
+  }
+
+  .sf-button {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium 
+           transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .sf-button-primary {
+    @apply inline-flex items-center px-4 py-2 bg-[#2c3b67] text-white rounded-md hover:bg-[#2c3b67]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2c3b67];
+  }
+
+  .sf-button-secondary {
+    @apply inline-flex items-center px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2c3b67];
+  }
+
+  .sf-button-danger {
+    @apply inline-flex items-center px-4 py-2 bg-[#FF3B30] text-white rounded-md hover:bg-[#FF3B30]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF3B30];
+  }
+
+  .sf-checkbox {
+    @apply h-5 w-5 rounded-md border-[#d2d2d7] text-[#2c3b67] 
+           focus:ring-2 focus:ring-[#2c3b67] focus:ring-offset-0;
+  }
+
+  .sf-radio {
+    @apply h-5 w-5 border-[#d2d2d7] text-[#2c3b67] 
+           focus:ring-2 focus:ring-[#2c3b67] focus:ring-offset-0;
+  }
+}
+
+/* Apple-style typography */
+.prose {
+  @apply text-[17px] leading-relaxed text-[#1d1d1f];
+}
+
+.prose h2 {
+  @apply text-[32px] font-semibold text-[#1d1d1f] tracking-tight mt-12 mb-6;
+}
+
+.prose h3 {
+  @apply text-[24px] font-semibold text-[#1d1d1f] tracking-tight mt-8 mb-4;
+}
+
+.prose p {
+  @apply mb-6 text-[17px] leading-relaxed text-[#1d1d1f];
+}
+
+.prose ul {
+  @apply mb-6 space-y-2;
+}
+
+.prose li {
+  @apply text-[17px] text-[#1d1d1f];
+}
+
+/* FAQ Answer Styles */
+.faq-answer {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.faq-answer p {
+  margin-bottom: 1rem;
+}
+
+.faq-answer strong,
+.faq-answer b {
+  font-weight: 600;
+}
+
+.faq-answer em,
+.faq-answer i {
+  font-style: italic;
+}
+
+.faq-answer ul,
+.faq-answer ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.faq-answer ul {
+  list-style-type: disc;
+}
+
+.faq-answer ol {
+  list-style-type: decimal;
+}
+
+.faq-answer li {
+  margin: 0.5rem 0;
+}
+
+.faq-answer a {
+  color: #0066CC;
+  text-decoration: underline;
+}
+
+.faq-answer a:hover {
+  text-decoration: none;
+}
+
+.faq-answer blockquote {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-left: 4px solid #0066CC;
+  background-color: #F5F5F7;
+}
+
+.faq-answer table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.faq-answer th,
+.faq-answer td {
+  border: 1px solid #E5E5EA;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.faq-answer th {
+  background-color: #F5F5F7;
+  font-weight: 600;
+}
+
+/* Apple-style shadows */
+.shadow-sm {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Aspect Ratio Utilities */
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: calc(9 / 16 * 100%);
+}
+
+.aspect-h-9 {
+  position: relative;
+}
+
+.aspect-w-16 > *,
+.aspect-h-9 > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* React Select Apple-style Customization */
+.react-select-container .react-select__control {
+  @apply px-4 py-3 rounded-xl border border-[#d2d2d7] bg-white/90 backdrop-blur-sm !important;
+  min-height: unset !important;
+  box-shadow: none !important;
+}
+
+.react-select-container .react-select__control:hover {
+  @apply border-[#2c3b67]/30 !important;
+}
+
+.react-select-container .react-select__control--is-focused {
+  @apply border-[#2c3b67] ring-2 ring-[#2c3b67] !important;
+}
+
+.react-select-container .react-select__menu {
+  @apply mt-2 rounded-xl border border-[#d2d2d7] bg-white shadow-lg overflow-hidden !important;
+  animation: selectMenuFade 0.2s ease-out;
+}
+
+@keyframes selectMenuFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.react-select-container .react-select__option {
+  @apply px-4 py-3 text-[15px] font-medium cursor-pointer !important;
+}
+
+.react-select-container .react-select__option--is-focused {
+  @apply bg-[#F5F5F7] !important;
+}
+
+.react-select-container .react-select__option--is-selected {
+  @apply bg-[#2c3b67] text-white !important;
+}
+
+.react-select-container .react-select__value-container {
+  @apply p-0 !important;
+}
+
+.react-select-container .react-select__single-value {
+  @apply text-[15px] font-medium text-[#1d1d1f] !important;
+}
+
+.react-select-container .react-select__placeholder {
+  @apply text-[15px] text-[#86868b] !important;
+}
+
+.react-select-container .react-select__indicators {
+  @apply pl-2 !important;
+}
+
+.react-select-container .react-select__indicator-separator {
+  display: none !important;
+}
+
+.react-select-container .react-select__dropdown-indicator {
+  @apply p-0 text-[#86868b] !important;
+}
+
+.react-select-container .react-select__clear-indicator {
+  @apply p-0 text-[#86868b] hover:text-[#1d1d1f] !important;
+}
+
+/* Multi-select specific styles */
+.react-select-container .react-select__multi-value {
+  @apply m-0 mr-1 bg-[#F5F5F7] rounded-lg overflow-hidden !important;
+}
+
+.react-select-container .react-select__multi-value__label {
+  @apply px-2 py-1 text-[13px] font-medium text-[#1d1d1f] !important;
+}
+
+.react-select-container .react-select__multi-value__remove {
+  @apply p-1 text-[#86868b] hover:text-[#1d1d1f] hover:bg-transparent !important;
+}

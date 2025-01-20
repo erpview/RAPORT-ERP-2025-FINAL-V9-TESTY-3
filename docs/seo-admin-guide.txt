@@ -1,0 +1,107 @@
+SEO Admin Panel Guide - Raport ERP
+===============================
+
+URL: http://localhost:5173/admin/seo
+
+1. Overview
+-----------
+The SEO admin panel allows you to manage SEO templates and settings for all pages in the Raport ERP application. Each page can have its own template with dynamic content capabilities.
+
+2. Template Structure
+-------------------
+Each SEO template consists of:
+- page_identifier: Unique identifier for the page (e.g., "dictionary_term", "systems_list")
+- is_dynamic: Boolean flag indicating if the template uses dynamic content
+- title_template: Template for the page title
+- description_template: Template for meta description
+- keywords_template: Template for meta keywords
+- canonical_url_template: Template for canonical URL
+- structured_data_template: JSON-LD template for structured data
+
+3. Dynamic Content
+----------------
+Use curly braces to insert dynamic content:
+- {title} - Will be replaced with the actual title
+- {description} - Will be replaced with the actual description
+- {slug} - Will be replaced with the page slug
+Examples:
+- Title template: "{title} - Raport ERP by ERP-VIEW.PL"
+- Description template: "{description}"
+
+4. Managing Templates
+-------------------
+a) Adding a New Template:
+   1. Click "Add New Template"
+   2. Fill in the page identifier
+   3. Set is_dynamic if the page needs dynamic content
+   4. Fill in the templates
+   5. Save changes
+
+b) Editing Existing Templates:
+   1. Find the template in the list
+   2. Click "Edit"
+   3. Modify the fields
+   4. Save changes
+
+5. Template Examples
+------------------
+a) Static Page (e.g., Homepage):
+   - page_identifier: "home"
+   - is_dynamic: false
+   - title_template: "Raport ERP - Kompleksowy przewodnik po systemach ERP"
+   - description_template: "Poznaj systemy ERP, porównaj funkcjonalności i koszty wdrożenia."
+
+b) Dynamic Page (e.g., Dictionary Term):
+   - page_identifier: "dictionary_term"
+   - is_dynamic: true
+   - title_template: "{title} - Słownik ERP | Raport ERP"
+   - description_template: "{description}"
+   - structured_data_template: {
+       "@context": "https://schema.org",
+       "@type": "DefinedTerm",
+       "name": "{title}",
+       "description": "{description}",
+       "inDefinedTermSet": {
+         "@type": "DefinedTermSet",
+         "name": "Słownik ERP",
+         "url": "https://raport-erp.pl/slownik-erp"
+       }
+     }
+
+6. Best Practices
+---------------
+1. Always include essential meta tags:
+   - title
+   - description
+   - canonical URL (if needed)
+
+2. Keep titles under 60 characters
+   - Good: "{title} - Raport ERP"
+   - Bad: "{title} - Kompleksowy przewodnik po systemach ERP - Raport ERP by ERP-VIEW.PL"
+
+3. Keep descriptions between 120-155 characters
+   - Include key information in the first 120 characters
+   - Use action words and clear value propositions
+
+4. Use structured data appropriately:
+   - Article for blog posts
+   - DefinedTerm for dictionary entries
+   - WebApplication for tool pages
+   - Organization for company info
+
+7. Troubleshooting
+----------------
+If dynamic content isn't appearing:
+1. Check if is_dynamic is set to true
+2. Verify the dynamic field names match exactly
+3. Check the page component is passing the correct data
+4. Look for console errors in browser dev tools
+
+8. Important Notes
+---------------
+- Changes take effect immediately
+- Back up important templates before major changes
+- Test changes in development before pushing to production
+- Monitor Google Search Console for any SEO issues
+
+For technical support or questions, contact the development team.

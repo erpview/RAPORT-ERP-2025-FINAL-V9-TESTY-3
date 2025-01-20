@@ -1,0 +1,36 @@
+/* Force LTR for all elements */
+html {
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+}
+
+body {
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+    text-align: left !important;
+}
+
+p, div, span, h1, h2, h3, h4, h5, h6, li, td, th, input, textarea {
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+    text-align: left !important;
+}
+
+/* Force cursor position */
+.mce-content-body {
+    caret-color: black !important;
+    text-align: left !important;
+}
+
+/* Override any RTL settings */
+[dir="rtl"] {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+/* Force normal text rendering */
+* {
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    font-feature-settings: normal !important;
+}

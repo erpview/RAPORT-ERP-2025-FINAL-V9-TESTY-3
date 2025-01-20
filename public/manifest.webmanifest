@@ -1,0 +1,29 @@
+{
+  "name": "Kalkulator ERP by ERP-VIEW.PL",
+  "short_name": "ERP Calc",
+  "description": "Kalkulator kosztów wdrożenia systemu ERP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F5F7",
+  "theme_color": "#2c3b67",
+  "icons": [
+    {
+      "src": "https://erp-view.pl/images/icony/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://erp-view.pl/images/icony/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://erp-view.pl/images/icony/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,4067 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "Słownik ERP",
+  "description": "Kompleksowy słownik terminów i pojęć związanych z systemami ERP",
+  "url": "https://www.raport-erp.pl/slownik-erp",
+  "hasPart": [
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę A",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "AAS",
+            "description": "Infrastructure As A Service - infrastruktura jako usługa. Usługodawca zobowiązuje się do dostarczenia infrastruktury informatycznej.",
+            "url": "https://www.raport-erp.pl/slownik-erp/aas"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Adresy składowania",
+            "description": "Określanie adresów rzędów kolumn i pojemników lub palet dla konkretnego materiału lub partii materiału pozwala na odwzorowanie rzeczywistej sytuacji w zakresie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/adresy-skladowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analiza ABC wykonywana automatycznie wg zadanych kryteriów",
+            "description": "Analiza ABC wykonywana automatycznie wg zadanych kryteriów pozwala na łatwą klasyfikację materiałów wykonywaną zgodnie tzw. krzywą Pareto. Pozwala to na podział...",
+            "url": "https://www.raport-erp.pl/slownik-erp/analiza-abc-wykonywana-automatycznie-wg-zadanych-kryteriow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analiza dostawców (solidność  ceny  jakość itp.)",
+            "description": "Analiza dostawców na podstawie danych statystycznych i informacji z rynku co do solidności cen jakości pozwala na ich racjonalny wybór.",
+            "url": "https://www.raport-erp.pl/slownik-erp/analiza-dostawcow-solidnosc-ceny-jakosc-itp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analiza przepływów finansowych związanych z MRP",
+            "description": "Analiza przepływów finansowych związanych z MRP pozwala na zorientowanie się jakie będą koszty pracy ludzkiej energii materiałów i innych czynników koniecznych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/analiza-przeplywow-finansowych-zwiazanych-z-mrp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analiza rynków zbytu",
+            "description": "Analiza rynków zbytu jest niezbędna do prowadzenia analiz oraz prognozowania na przyszłość na podstawie danych z przeszłości.",
+            "url": "https://www.raport-erp.pl/slownik-erp/analiza-rynkow-zbytu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analiza solidności dostawców",
+            "description": "Zbieranie danych o dostawcach pozwala na ocenę ich solidności i zdolności produkcyjnych.",
+            "url": "https://www.raport-erp.pl/slownik-erp/analiza-solidnosci-dostawcow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analiza wartościowa sprzedaży wyrobów i ich grup",
+            "description": "Analiza wartościowa sprzedaży wyrobów i ich grup jest niezbędna do prowadzenia analiz oraz prognozowania na przyszłość na podstawie danych z przeszłości.",
+            "url": "https://www.raport-erp.pl/slownik-erp/analiza-wartosciowa-sprzedaxy-wyrobow-i-ich-grup"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analiza wartościowa zakupów",
+            "description": "Analiza wartościowa zakupów wg rynków i dostawców oraz innych wybranych cech dostarcza dane analityczne do prowadzenia analiz dostawców rynków i trendów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/analiza-wartosciowa-zakupow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analiza WE/WY",
+            "description": "Analiza WE/WY obejmuje: kolejkę prac oczekujących określenie przepustowości przedstawienia wykonania w kilku ostatnich tygodniach dla poszczególnych centrów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/analiza-wewy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analiza wskaźnikowa działalności przedsiębiorstwa",
+            "description": "Zaawansowane wspieranie decyzji biznesowych analiza wskaźnikowa działalności przedsiębiorstwa praktycznie nie odbiega od tych które są stosowane w kontrolingu....",
+            "url": "https://www.raport-erp.pl/slownik-erp/analiza-wskaznikowa-dzialalnosci-przedsiebiorstwa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Analizy wskaźnikowe sytuacji bieżącej przedsiębiorstwa",
+            "description": "Pozwalają na określanie sytuacji ekonomicznej przedsiębiorstwa a zwłaszcza rentowności płynności finansowej oraz zwrotu z inwestycji ROI (Return On Investment)....",
+            "url": "https://www.raport-erp.pl/slownik-erp/analizy-wskaznikowe-sytuacji-biexacej-przedsiebiorstwa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "API – interfejs programowy",
+            "description": "Jest ot zestaw procedur protokołów i narzędzi dla tworzenia oprogramowania aplikacyjnego oraz dla komunikacji z programami z innego systemu. Gwarantuje że...",
+            "url": "https://www.raport-erp.pl/slownik-erp/api-interfejs-programowy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "APS zaawansowane planowanie i harmonogramowanie",
+            "description": "APS (advanced planning and scheduling ) - zaawansowane planowanie i harmonogramowanie jest to technika stosowana przy planowaniu logistyki i produkcji w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/aps-zaawansowane-planowanie-i-harmonogramowanie"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Architektura klient / serwer",
+            "description": "Przy wyborze oprogramowania należy zwrócić uwagę która z wersji architektury klient – serwer jest dostępna w systemie a która rzeczywiście będzie przydatna w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/architektura-klient-serwer"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "ASP - dostarczyciel usług pełnej obsługi zastosowań",
+            "description": "ASP (application service provider) jest to dostawca zewnętrzny całości usług niezbędnych do zarządzania i dystrybucji licencjonowanego oprogramowania do...",
+            "url": "https://www.raport-erp.pl/slownik-erp/asp---dostarczyciel-uslug-pelnej-obslugi-zastosowan"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "ATP",
+            "description": "ATP (Available To Promise) – dostępne do rozdysponowania. Patrz APS",
+            "url": "https://www.raport-erp.pl/slownik-erp/atp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "ATP – dostępne do rozdysponowania",
+            "description": "ATP - dostępne do rozdysponowania (available to promise) jest to umożliwienie podania klientowi praktycznie na bieżąco ilości produktów w magazynie które mogą...",
+            "url": "https://www.raport-erp.pl/slownik-erp/atp-dostepne-do-rozdysponowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Automatyczne propozycje płatności dla grup dostawców",
+            "description": "Automatyczne propozycje płatności dla grup dostawców w tym prognoza stanu gotówki z uwzględnieniem wiarogodności klientów pozwala na przygotowanie zestawień...",
+            "url": "https://www.raport-erp.pl/slownik-erp/automatyczne-propozycje-platnosci-dla-grup-dostawcow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Autoryzacja",
+            "description": "Autoryzacją nazywamy upoważnienie poszczególnych użytkowników do dokonywania konkretnych typów transakcji obrotu materiałowego z identyfikacją wprowadzającego...",
+            "url": "https://www.raport-erp.pl/slownik-erp/autoryzacja"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę B",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "B2B Współpraca między przedsiębiorstwami",
+            "description": "Współpraca między przedsiębiorstwami B2B (Business To Business) jest to prowadzenie poprzez internet bezpośrednio spraw pomiędzy kontrahentami handlowymi....",
+            "url": "https://www.raport-erp.pl/slownik-erp/b2b-wspolpraca-miedzy-przedsiebiorstwami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "B2C Współpraca z klientami",
+            "description": "Współpraca z klientami (B2C) – (business to customer) jest to prowadzenie interesów pomiędzy przedsiębiorstwem a klientami końcowymi głównie przez internet....",
+            "url": "https://www.raport-erp.pl/slownik-erp/b2c-wspolpraca-z-klientami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Back Scheduling",
+            "description": "Back Scheduling - harmonogramowanie wsteczne. Technika obliczania daty rozpoczęcia i zakończenia realizacji zamówienia. Harmonogram realizacji zamówienia jest...",
+            "url": "https://www.raport-erp.pl/slownik-erp/back-scheduling"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Baza danych",
+            "description": "Dostawcy pakietów wskazują bazy danych z którymi współpracuje ich oprogramowanie. Pełna wersja baz danych wymagana jest w przypadku wprowadzania zmian i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/baza-danych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Baza danych stosowana dla hurtowni danych",
+            "description": "Może to być ta sama baza danych co dla ERP lub inna zewnętrzna.",
+            "url": "https://www.raport-erp.pl/slownik-erp/baza-danych-stosowana-dla-hurtowni-danych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Bezpośrednie powiązanie z systemami bankowymi",
+            "description": "Pozwala ono na szybkie weryfikowanie stanu kont a w bardziej rozbudowanej formie na realizowanie obrotu finansowego przelewów i płatności w sposób zdalny z...",
+            "url": "https://www.raport-erp.pl/slownik-erp/bezposrednie-powiazanie-z-systemami-bankowymi"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Bilansowanie obciążeń stanowisk - wyrównywanie obciążeń",
+            "description": "Bilansowanie obciążeń stanowisk i wyrównywanie ich obciążeń inaczej metoda skończonych zdolności produkcyjnych polega na automatycznym manipulowaniu zleceniami...",
+            "url": "https://www.raport-erp.pl/slownik-erp/bilansowanie-obciaxen-stanowisk---wyrownywanie-obciaxen"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Blokowanie własnych płatności",
+            "description": "Ta funkcja daje możliwość jak najpóźniejszego regulowania własnych zobowiązań dzięki czemu zmniejsza się zaangażowanie w kapitał obrotowy. Możliwe jest...",
+            "url": "https://www.raport-erp.pl/slownik-erp/blokowanie-wlasnych-platnosci"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "BOM obsługa struktury produktu",
+            "description": "Zestawienie materiałowe BOM (Bill Of Materials) opisuje strukturę wyrobu podając zestawienie materiałowe. Jest to lista składników wchodzących bezpośrednio do...",
+            "url": "https://www.raport-erp.pl/slownik-erp/bom-obsluga-struktury-produktu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "BOM zestawienie materiałowe konstrukcyjne – oddzielone od produkcyjnego",
+            "description": "Obsługa struktury konstrukcyjnej produktu BOM (Bill Of Materials)– zestawienia materiałowego obejmuje zakładanie modyfikacje i usuwanie opisu pozycji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/bom-zestawienie-materialowe-konstrukcyjne-oddzielone-od-produkcyjnego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "BOM zestawienie materiałowe - struktury produkcyjne",
+            "description": "Obsługa struktury produkcyjnej BOM (Bill Of Materials) – zestawienia materiałowego obejmuje taki opis pozycji asortymentowych (materiałów podzespołów i części)...",
+            "url": "https://www.raport-erp.pl/slownik-erp/bom-zestawienie-materialowe---struktury-produkcyjne"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "BSC",
+            "description": "Zrównoważona karta wyników BSC (Balansed Scorekard) to koncepcja zarządzania która opisuje i precyzuje co powinno być mierzone aby móc jak najlepiej ocenić...",
+            "url": "https://www.raport-erp.pl/slownik-erp/bsc"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Budżetowanie i prognozowanie",
+            "description": "Budżetowanie i prognozowanie są to elementy planowania finansowego pozwalające na tworzenie budżetów – planów finansowych na przyszłość dla poszczególnych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/budxetowanie-i-prognozowanie"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Budżety elastyczne",
+            "description": "Budżety elastyczne są to budżety które mogą być uzmiennione a następnie skorygowane w zależności od rozmiarów działalności i rozwoju sytuacji przedsiębiorstwa.",
+            "url": "https://www.raport-erp.pl/slownik-erp/budxety-elastyczne"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Business Intelligence - system informacji zarządczej",
+            "description": "Jest to oprogramowanie wspomagające procesy podejmowania decyzji poprzez analizę danych zgromadzonych w systemach informatycznych. Są to systemy ulokowane...",
+            "url": "https://www.raport-erp.pl/slownik-erp/business-intelligence---system-informacji-zarzadczej"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę C",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CAD/CAM - Interfejsy do systemów",
+            "description": "Interfejsy do systemów CAD/CAM (Computer Aided Design / Computer Aided Manufacturing) pozwalają na obsługę dostępu do rysunków technicznych i innych dokumentów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/cadcam---interfejsy-do-systemow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CASE",
+            "description": "Oprogramowanie wspomagające tworzenie oprogramowania aplikacyjnego– CASE (Computer-Assisted Software Engineering). Są to narzędzia komputerowe do wspomagania...",
+            "url": "https://www.raport-erp.pl/slownik-erp/case"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Centrum robocze zawierające grupy maszyn  linie produkcyjne",
+            "description": "Takim centrum jest na przykład wydział jako miejsce powstawania kosztów w którym zainstalowano linie produkcyjne i urządzenia. Ta funkcja pozwala na racjonalne...",
+            "url": "https://www.raport-erp.pl/slownik-erp/centrum-robocze-zawierajace-grupy-maszyn-linie-produkcyjne"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Centrum robocze zawierające maszyny i instalacje",
+            "description": "Mechanizm do tworzenia takiego centrum pozwala na racjonalne gospodarowanie składnikami majątku trwałego. Jest to szczególnie istotne w organizacji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/centrum-robocze-zawierajace-maszyny-i-instalacje"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Cloud computing",
+            "description": "GS1 – globalna organizacja o charakterze non profit zajmująca się standaryzacją w obszarze zarządzania łłłańcuchem dostaw oraz zarządzania popytem. Jej początki...",
+            "url": "https://www.raport-erp.pl/slownik-erp/cloud-computing"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CMMS",
+            "description": "Zarządzanie utrzymaniem ruchu urządzeń CMMS ( Computerized Maintenance Management Systems) jest to zautomatyzowany system wspierający utrzymanie ruchu a w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/cmms"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CPM",
+            "description": "CPM (Corporate Performance Management) zarządzanie efektywnością przedsiębiorstwa jest to zespół koncepcji zarządzania mierników oraz technologii...",
+            "url": "https://www.raport-erp.pl/slownik-erp/cpm"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CRM",
+            "description": "CRM (Customer Relationship Management) jest pojęciem ogólnym szeroko definiującym metody zarządzania kontaktami z klientami. Jest to oprogramowanie wspierające...",
+            "url": "https://www.raport-erp.pl/slownik-erp/crm"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CRM (Zarządzanie relacjami z klientami)",
+            "description": "CRM zarządzanie relacjami z klientami (customer relationship management) pozwala na obsługę całokształtu współpracy z klientami I wspieranie decyzji w tym...",
+            "url": "https://www.raport-erp.pl/slownik-erp/crm-zarzadzanie-relacjami-z-klientami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CRP",
+            "description": "Capacity Requirements Planning - CRP planowanie zdolności produkcyjnych): Funkcja ustalania mierzenia i dostosowywania limitów oraz poziomów zdolności...",
+            "url": "https://www.raport-erp.pl/slownik-erp/crp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CRP – planowanie zapotrzebowania na zdolności produkcyjne",
+            "description": "Planowanie zapotrzebowania na zdolności produkcyjne CRP (capacity requirements planning) jest to ustalanie pomiar i dostosowywanie poziomu obciążenia zasobów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/crp-planowanie-zapotrzebowania-na-zdolnosci-produkcyjne"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CTP",
+            "description": "CTP - Capable to Promise - możliwe do zrealizowania. Patrz APS",
+            "url": "https://www.raport-erp.pl/slownik-erp/ctp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CTP – możliwe do przyrzeczenia",
+            "description": "CTP (capable to Promise) możliwe do przyrzeczenia pozwala na potwierdzenie które z zamówień nowych lub dotychczas niepotwierdzonych może być zrealizowane po...",
+            "url": "https://www.raport-erp.pl/slownik-erp/ctp-moxliwe-do-przyrzeczenia"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "CTP - możliwe do rozdysponowania",
+            "description": "CTP - możliwe do rozdysponowania (Capable To Promise) jest to umożliwienie podania klientowi praktycznie na bieżąco ilości produktów w magazynie które mogą być...",
+            "url": "https://www.raport-erp.pl/slownik-erp/ctp---moxliwe-do-rozdysponowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Cyklu dostaw",
+            "description": "Cykl dostaw określany jest dla poszczególnych magazynów z centrów dystrybucyjnych i odnosi się także do uzupełniania zapasów od producentów.",
+            "url": "https://www.raport-erp.pl/slownik-erp/cyklu-dostaw"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę D",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dane dla serwisu wyprodukowanych wyrobów",
+            "description": "Są to zwykle opisy procedur lub technologii realizowania napraw i przeglądów do których dołączane są zestawienia niezbędnych materiałów materiałów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/dane-dla-serwisu-wyprodukowanych-wyrobow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Data ważności do użycia partii materiałów",
+            "description": "Weryfikacja daty ważności do użycia partii materiałów pozwala na właściwe zarządzanie materiałami w sferze produkcji i składowania. Jest to szczególnie istotne...",
+            "url": "https://www.raport-erp.pl/slownik-erp/data-waxnosci-do-uxycia-partii-materialow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Data wprowadzenia",
+            "description": "Data wprowadzenia aktualnie dystrybuowanej wersji oprogramowania na polski rynek.",
+            "url": "https://www.raport-erp.pl/slownik-erp/data-wprowadzenia"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Do kiedy obsługiwana aktualna wersja oprogramowania",
+            "description": "Do kiedy obsługiwana będzie aktualna wersja zlokalizowanego oprogramowania. Czy przewidywana jest obsługa serwisowa danej wersji oprogramowania bez ograniczeń?",
+            "url": "https://www.raport-erp.pl/slownik-erp/do-kiedy-obslugiwana-aktualna-wersja-oprogramowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dokumentacja warsztatowa",
+            "description": "Dokumentacja warsztatowa zawierająca karty pracy lista pobrań stan zlecenia priorytet itp. powinna ona być emitowana w momencie uruchamiania zleceń...",
+            "url": "https://www.raport-erp.pl/slownik-erp/dokumentacja-warsztatowa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dołączanie danych multimedialnych do pozycji asortymentowej",
+            "description": "Dołączanie danych multimedialnych do pozycji asortymentowej pozwala na umieszczanie rozbudowanych opisów i obrazów dotyczących danej pozycji np. szkiców...",
+            "url": "https://www.raport-erp.pl/slownik-erp/dolaczanie-danych-multimedialnych-do-pozycji-asortymentowej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dołączanie szkiców do opisów operacji technologicznych",
+            "description": "Umożliwia ono tworzenie kompletów dokumentacji elektronicznej i minimalizuje zastosowanie dokumentacji w postaci innej niż elektroniczna. Umożliwia dostęp do...",
+            "url": "https://www.raport-erp.pl/slownik-erp/dolaczanie-szkicow-do-opisow-operacji-technologicznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dołączanie tekstu do opisu operacji",
+            "description": "Pozwala to na dołączanie uwag i wskazówek dla operatora które pojawiają się w dokumentacji drukowanej oraz na formatkach ekranowych.",
+            "url": "https://www.raport-erp.pl/slownik-erp/dolaczanie-tekstu-do-opisu-operacji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dołączanie  tekstu do pozycji asortymentowej",
+            "description": "Dołączanie do pozycji asortymentowej dowolnego tekstu pozwala na umieszczanie danych tekstowych opisowych dotyczących pozycji. Mogą to być instrukcje...",
+            "url": "https://www.raport-erp.pl/slownik-erp/dolaczanie-tekstu-do-pozycji-asortymentowej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dostawy częściowe. Nadzorowanie harmonogramu dostaw",
+            "description": "Nadzorowanie harmonogramu dostaw w przypadku dostaw częściowych pozwala na rozliczanie poszczególnych dostaw wraz z wszelkimi reklamacjami.",
+            "url": "https://www.raport-erp.pl/slownik-erp/dostawy-czesciowe-nadzorowanie-harmonogramu-dostaw"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "DRP Hurtownie z siecią detalistów",
+            "description": "Obsługa hurtowni z siecią detalistów przez DRP (Distributed Resource Planning) zawiera w sobie planowanie uzupełniania stanu zapasów i zarządzanie zapasami w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/drp-hurtownie-z-siecia-detalistow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "DRP obsługa sieci dystrybucji",
+            "description": "Pozwala na planowanie uzupełniania zapasów w sieci powiązanych ze sobą składów konsygnacyjnych i magazynów regionalnych aż do indywidualnych odbiorców końcowych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/drp-obsluga-sieci-dystrybucji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "DRP powiązania między zakładami  hurtowniami  odbiorcami",
+            "description": "Pozwala na utworzenie sieci powiązanych między sobą dostawców magazynów i składów konsygnacyjnych regionalnych oraz odbiorców końcowych wraz z określeniem...",
+            "url": "https://www.raport-erp.pl/slownik-erp/drp-powiazania-miedzy-zakladami-hurtowniami-odbiorcami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dwustopniowa inwentaryzacja ciągła",
+            "description": "Dwustopniowa inwentaryzacja ciągła pozwala na usprawnienie spisów z natury. W powiązaniu z analizą ABC wg zadanych kryteriów zwykle jest to wartość obrotów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/dwustopniowa-inwentaryzacja-ciagla"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dysponowanie częścią zapasu bezpieczeństwa",
+            "description": "Ta funkcja umożliwia uniknięcie „nerwowych” reakcji systemu w procesie planistycznym a więc zawieszania się go lub sygnalizowanie błędu gdy zostaną np....",
+            "url": "https://www.raport-erp.pl/slownik-erp/dysponowanie-czescia-zapasu-bezpieczenstwa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dystrybutor oprgramowania",
+            "description": "Dystrybutor oprogramowania w Polsce. Jeżeli oprogramowanie ma więcej niż jednego dystrybutora należy wymienić znaczących ze względu na obroty.",
+            "url": "https://www.raport-erp.pl/slownik-erp/dystrybutor-oprgramowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Dziedziny przemysłu wskazywane przez dostawcę",
+            "description": "Przyporządkowanie poszczególnych pakietów do branż jest klasyfikacją dosyć arbitralną choć wiadomo że organizacja przedsiębiorstwa – jedno lub wielozakładowe a...",
+            "url": "https://www.raport-erp.pl/slownik-erp/dziedziny-przemyslu-wskazywane-przez-dostawce"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę E",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "EAM",
+            "description": "Enterprise Aasset Management – EAM zrządzanie aktywami przedsiębiorstwa): Aktywa przedsiębiorstwa mogą obejmować m.in. siłę roboczą narzędzia wyposażenie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/eam"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "e- biznes",
+            "description": "e- biznes (e- business) jest to zestaw aplikacji pozwalający na obsługę za pośrednictwem technicznych środków elektronicznych zwykle internetu wielu funkcji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/e--biznes"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "ECO (engineering change order) Obsługa zmian konstrukcyjnych",
+            "description": "Zestawienia konstrukcyjne pokazują w jaki sposób wyrób jest zbudowany oraz jakie są jego elementy składowe. Na tym zestawieniu pracuje konstruktor nanosząc...",
+            "url": "https://www.raport-erp.pl/slownik-erp/eco-engineering-change-order-obsluga-zmian-konstrukcyjnych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "EDI: Elektroniczna wymiana informacji",
+            "description": "Elektroniczna wymiana informacji (EDI - Electronic Data Interchange) powinna obejmować przesyłanie zamówień potwierdzanie zamówień przesyłanie faktur i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/edi-elektroniczna-wymiana-informacji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Ekonomiczna wielkość partii",
+            "description": "Ekonomiczna wielkość partii w przypadku produkcji zleceniowej może być określona wtedy gdy uruchomienie produkcji lub zakupu danych materiałów jest określone...",
+            "url": "https://www.raport-erp.pl/slownik-erp/ekonomiczna-wielkosc-partii"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Eksploatacja skomplikowanych urządzeń",
+            "description": "Są to przedsiębiorstwa nastawione na eksploatację skomplikowanych urządzeń takich jak elektrownie cementownie rafinerie jedno lub wielozakładowe eksploatujące...",
+            "url": "https://www.raport-erp.pl/slownik-erp/eksploatacja-skomplikowanych-urzadzen"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "e-Produkcja",
+            "description": "e-Produkcja pozwala na dostęp poprzez witrynę internetową do funkcji obsługi produkcji. Dzięki zastosowaniu tego narzędzia można drastycznie zwiększyć...",
+            "url": "https://www.raport-erp.pl/slownik-erp/e-produkcja"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "ERP",
+            "description": "Planowanie zasobów przedsiębiorstwa ERP (enterprise resources planning) jest to zorientowany na finanse system informacyjny który pozwala na identyfikację i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/erp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "ETO (engineering to order) – prowadzenie projektów  obsługa produkcji na indywidualne zamówienia klientów",
+            "description": "Projektowanie na zamówienie DTO (Design To Order) i ETO (engineering to order) – prowadzenie projektów i obsługa produkcji na indywidualne zamówienia klientów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/eto-engineering-to-order-prowadzenie-projektow-obsluga-produkcji-na-indywidualne-zamowienia-klientow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "ETO – produkcja projektowa",
+            "description": "ETO (engineer-to-order) projektowanie i produkcja na zamówienie. Odnosi się do produktów dla których klient wymaga specyficznego opracowania inżynierskiego...",
+            "url": "https://www.raport-erp.pl/slownik-erp/eto-produkcja-projektowa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Euro",
+            "description": "Gotowość aplikacji do obsługi euro wyraża się poprzez właściwą reprezentację walut i kursów oraz odpowiednie algorytmy przeliczania i zaokrąglania w systemie....",
+            "url": "https://www.raport-erp.pl/slownik-erp/euro"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Euro  obsługa zagadnień walutowych związanych z Unią Europejską",
+            "description": "Gotowość aplikacji do obsługi zagadnień walutowych związanych z Unią Europejską wyraża się poprzez właściwą reprezentację walut i kursów oraz odpowiednie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/euro-obsluga-zagadnien-walutowych-zwiazanych-z-unia-europejska"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Ewidencja obrotu materiałowego",
+            "description": "Jest niezbędna aby uzyskać informacje o stanach magazynowych. Księgowość przedsiębiorstwa jest zainteresowana w tym aby na zakończenie miesiąca znać wartość dla...",
+            "url": "https://www.raport-erp.pl/slownik-erp/ewidencja-obrotu-materialowego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Ewidencja spływu kosztów",
+            "description": "Taka ewidencja jest konieczna do naliczania rzeczywistych kosztów produkcji i rozliczania personelu. Zwykle jest realizowane jako element rozliczania zleceń...",
+            "url": "https://www.raport-erp.pl/slownik-erp/ewidencja-splywu-kosztow"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę G",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Gospodarka narzędziowa",
+            "description": "Gospodarka narzędziowa powinna być obsługiwana łącznie z MRP w przedsiębiorstwach w których odgrywa istotną rolę. Obsługa jej jest wskazana we wszystkich...",
+            "url": "https://www.raport-erp.pl/slownik-erp/gospodarka-narzedziowa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Gospodarka remontowa",
+            "description": "'Wymagania wobec tego obszaru są odmienne w poszczególnych typach przedsiębiorstw. W przedsiębiorstwach nastawionych na eksploatacje skomplikowanych urządzeń...",
+            "url": "https://www.raport-erp.pl/slownik-erp/gospodarka-remontowa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Graficzny interfejs użytkownika (GUI)",
+            "description": "Przyszły użytkownik powinien rozważyć czy graficzny interfejs jest mu rzeczywiście potrzebny i na jakich stanowiskach. Ma sens w przypadku średniego i wyższego...",
+            "url": "https://www.raport-erp.pl/slownik-erp/graficzny-interfejs-uxytkownika-gui"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Gromadzenie danych marketingowych w bazie danych",
+            "description": "Gromadzenie danych marketingowych w bazie danych o klientach potencjalnych klientach i rynkach pozwala na prowadzenie analiz i opracowywanie prognoz.",
+            "url": "https://www.raport-erp.pl/slownik-erp/gromadzenie-danych-marketingowych-w-bazie-danych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Grupy dostawców  ich klasyfikacja",
+            "description": "Tworzenie grup dostawców i ich klasyfikacja ze względu na wielkość obrotów poziom cen dyskonta itp. pozwala na prowadzenie łatwiejszej obsługi dostawców oraz...",
+            "url": "https://www.raport-erp.pl/slownik-erp/grupy-dostawcow-ich-klasyfikacja"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "GS1",
+            "description": "GTIN Globalny Numer Jednostki Handlowej - Global Trade Item Number określa unikatowy kod przedmiotu handlu wyrobu opakowanego lub usługi. Nazwa GTIN określa...",
+            "url": "https://www.raport-erp.pl/slownik-erp/gs1"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "GTIN",
+            "description": "GLN Globalny Numer Identyfikacyjny -G lobal Location Number GLN służy do identyfikacji przedsiębiorstwa lub organizacji jako jednostki prawnej. GLN są również...",
+            "url": "https://www.raport-erp.pl/slownik-erp/gtin"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę H",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Handel detaliczny",
+            "description": "Obsługa handlu detalicznego zawiera w sobie zwykle obsługę kas fiskalnych i rejestrację za pośrednictwem wielu stanowisk z wykorzystaniem kodów kreskowych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/handel-detaliczny"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Handel elektroniczny",
+            "description": "Handel elektroniczny (e-business) pozwala na prowadzenie handlu detalicznego z pominięciem pośredników za pośrednictwem własnej witryny internetowej.",
+            "url": "https://www.raport-erp.pl/slownik-erp/handel-elektroniczny"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Handel elektroniczny możliwość konfigurowania zamawianych produktów z wariantów i opcji",
+            "description": "Handel elektroniczny (e-business) a w jego ramach możliwość konfigurowania zamawianych produktów z wariantów i opcji jest szczególnie istotna przy wyborze...",
+            "url": "https://www.raport-erp.pl/slownik-erp/handel-elektroniczny-moxliwosc-konfigurowania-zamawianych-produktow-z-wariantow-i-opcji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Handel elektroniczny narzędzia do utworzenia strony www",
+            "description": "Handel elektroniczny (e-business) pozwala na prowadzenie handlu detalicznego z pominięciem pośredników za pośrednictwem własnej witryny internetowej.",
+            "url": "https://www.raport-erp.pl/slownik-erp/handel-elektroniczny-narzedzia-do-utworzenia-strony-www"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Handel elektroniczny (zabezpieczenie przekazywanych danych)",
+            "description": "Handel elektroniczny (e-business) a w jego ramach zabezpieczenie przekazywanych danych wymaga stosowania różnych technik szyfrowania dla zabezpieczenia...",
+            "url": "https://www.raport-erp.pl/slownik-erp/handel-elektroniczny-zabezpieczenie-przekazywanych-danych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Handel elektroniczny zarządzanie katalogami produktów",
+            "description": "Handel elektroniczny (e-business) a w jego ramach zarządzanie katalogami produktów pozwala na udostępnianie potencjalnym klientom aktualnych katalogów produktów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/handel-elektroniczny-zarzadzanie-katalogami-produktow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Harmonogramy dla rodzin wyrobów",
+            "description": "W przypadku posiadania długookresowych prognoz ta funkcja pomaga planować wielkość produkcji danego typu wyrobów choć nie można przewidzieć jakie ich konkretne...",
+            "url": "https://www.raport-erp.pl/slownik-erp/harmonogramy-dla-rodzin-wyrobow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Harmonogramy  zadań dziennych lub zmianowych",
+            "description": "Ta funkcja pozwala na tworzenie po sprawdzeniu zabezpieczenia materiałowego i zdolności produkcyjnych realnych harmonogramów dziennych lub zmianowych które mogą...",
+            "url": "https://www.raport-erp.pl/slownik-erp/harmonogramy-zadan-dziennych-lub-zmianowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Harmonogram z wieloma wariantami i opcjami wyrobów",
+            "description": "Ta funkcja umożliwia prognozowanie i planowanie produkcji wielkoseryjnej i na liniach produkcyjnych produktów o wielu wariantach lub opcjach np. maszyn...",
+            "url": "https://www.raport-erp.pl/slownik-erp/harmonogram-z-wieloma-wariantami-i-opcjami-wyrobow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Historia dokonanych transakcji",
+            "description": "Chodzi zwykle o dane z okresów kilkuletnich co umożliwia prowadzenie analiz statystycznych np. wychwytywanie trendów zbytu lub określanie sezonowości zużycia.",
+            "url": "https://www.raport-erp.pl/slownik-erp/historia-dokonanych-transakcji"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę I",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Identyfikacja i obsługa partii    numery seryjne",
+            "description": "Identyfikacja i obsługa partii materiału lub numerów seryjnych w magazynach i lokalizacjach jest niezbędna w procesie produkcji i dystrybucji. Materiały...",
+            "url": "https://www.raport-erp.pl/slownik-erp/identyfikacja-i-obsluga-partii-numery-seryjne"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Indeks pozycji asortymentowej",
+            "description": "Indeks pozycji asortymentowej powinien pozwalać na identyfikowanie w sposób jednoznaczny dowolnej pozycji występującej w procesie produkcji i zaopatrzenia....",
+            "url": "https://www.raport-erp.pl/slownik-erp/indeks-pozycji-asortymentowej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Indywidualne kalendarze dla każdej maszyny / centrum",
+            "description": "Dysponowanie indywidualnymi kalendarzami dla poszczególnych maszyn lub centrów produkcyjnych pozwala na określanie harmonogramu i rozmiarów dostępnych zdolności...",
+            "url": "https://www.raport-erp.pl/slownik-erp/indywidualne-kalendarze-dla-kaxdej-maszyny-centrum"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Indywidualny kalendarz dla centrum roboczego",
+            "description": "Pozwala na określanie dostępnego czasu pracy maszyn i urządzeń w centrum roboczym. Jest to szczególnie istotne w przypadku remontów lub awarii w centrach...",
+            "url": "https://www.raport-erp.pl/slownik-erp/indywidualny-kalendarz-dla-centrum-roboczego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Interfejsy do oprogramowania do analiz",
+            "description": "Umożliwiają one sięganie do danych i tworzenie różnych zestawień np. analiz rentowności analizy wskaźnikowej. Wykorzystywane są do tego albo tzw. generatory...",
+            "url": "https://www.raport-erp.pl/slownik-erp/interfejsy-do-oprogramowania-do-analiz"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Internet",
+            "description": "Internet ogólnoświatowa sieć komputerowa logicznie połączona w jednorodną sieć adresową opartą na protokole IP (ang. Internet Protocol). Dostarcza lub...",
+            "url": "https://www.raport-erp.pl/slownik-erp/internet"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Internet. Dostęp przez witrynę internetową www do obsługi innych danych",
+            "description": "Dostęp zdalny do innych funkcji za pośrednictwem iternetu których obsługa została zdefiniowana w systemie.",
+            "url": "https://www.raport-erp.pl/slownik-erp/internet-dostep-przez-witryne-internetowa-www-do-obslugi-innych-danych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Internet: wbudowany dostęp i wykorzystanie technik",
+            "description": "Wbudowany dostęp i wykorzystanie technik internetu obejmuje głównie możliwość zdalnego dostępu za pośrednictwem witryny internetowej do wybranych funkcji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/internet-wbudowany-dostep-i-wykorzystanie-technik"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Intranet wbudowany w oprogramowanie",
+            "description": "Pozwala na łatwe tworzenie i obsługę własnej sieci wewnętrznej działającej podobnie jak internet.",
+            "url": "https://www.raport-erp.pl/slownik-erp/intranet-wbudowany-w-oprogramowanie"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę J",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Jednolity system oznakowania towarów",
+            "description": "Pozwala na obsługę zagadnień związanych z rozliczeniami celnymi w obrocie z krajami poza UE.",
+            "url": "https://www.raport-erp.pl/slownik-erp/jednolity-system-oznakowania-towarow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "JIT dokładnie na czas",
+            "description": "JIT (Just In Time) – dokładnie na czas. Jest to strategia zarządzania krótkookresowego która powstała w Toyota Corporation. Polega na minimalizacji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/jit-dokladnie-na-czas"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "JIT produkcja na liniach",
+            "description": "'JIT (just in time) – dokładnie na czas. Jest to strategia zarządzania krótkookresowego która powstała w Toyota Corporation. Polega na minimalizacji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/jit-produkcja-na-liniach"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "JIT Sterowanie produkcją na liniach",
+            "description": "JIT Sterowanie produkcją na liniach pozwala na tworzenie po sprawdzeniu zabezpieczenia materiałowego i zdolności produkcyjnych realnych harmonogramów dziennych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/jit-sterowanie-produkcja-na-liniach"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "JIT w sferze produkcji",
+            "description": "JIT (just In time) – dokładnie na czas. Jest to strategia zarządzania krótkookresowego która powstała w Toyota Corporation. Polega na minimalizacji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/jit-w-sferze-produkcji"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę K",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kalendarz produkcyjny",
+            "description": "Powinien być jeden dla każdej samodzielnej jednostki produkcyjnej. Pozwala na określenie dysponowanego czasu pracy dni wolnych liczby zmian itd. Zwykle obejmuje...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kalendarz-produkcyjny"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "KANBAN w sferze produkcji i zaopatrzenia",
+            "description": "Kwity kanban (etykiety) stosowane są w technice JIT (Just In time) przy produkcji średnio i wielkoseryjnej. W przedsiębiorstwach stosujących kanban dostawy...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kanban-w-sferze-produkcji-i-zaopatrzenia"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Katalogi cenowe",
+            "description": "Obsługa katalogów cenowych pozwala na równoczesne prowadzenie wielu katalogów cenowych w różnych walutach dla różnych klientów i w razie potrzeby dla różnych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/katalogi-cenowe"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Komasacja zamówień",
+            "description": "Ta funkcja umożliwia zgrupowanie zamówień na różne pozycje u jednego dostawcy. Dzięki temu można uzyskać lepsze warunki finansowe zakupu i oszczędności w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/komasacja-zamowien"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Komasowanie zleceń produkcyjnych",
+            "description": "Komasowanie zleceń produkcyjnych pozwala na zmniejszenie liczby zleceń produkcyjnych kosztem zwiększenia poziomu prac w toku.",
+            "url": "https://www.raport-erp.pl/slownik-erp/komasowanie-zlecen-produkcyjnych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kompensata należności i zobowiązań",
+            "description": "Wzajemne należności rozlicza się okresowo według salda. Rozliczanie klientów będących także dostawcami jest dość często u nas stosowane jednak pociąga za sobą...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kompensata-nalexnosci-i-zobowiazan"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Konfigurator produktu",
+            "description": "Konfigurator produktu (Product Configurator) jest to oprogramowanie pozwalające na obsługę produktów z wieloma wariantami. Odnosi się to do projektowania na...",
+            "url": "https://www.raport-erp.pl/slownik-erp/konfigurator-produktu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Konsolidacja danych finansowych",
+            "description": "Konsolidacja danych finansowych przedsiębiorstw w ramach grupy / holdingu umożliwia konsolidację wyników jednostek składowych posiadających różne plany kont i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/konsolidacja-danych-finansowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Konsolidacja w rachunkowości przedsiębiorstwa wielozakładowego",
+            "description": "Ta funkcja w systemie umożliwia konsolidację wyników jednostek składowych posiadających różne plany kont i prowadzenie rozliczeń handlowych między jednostkami...",
+            "url": "https://www.raport-erp.pl/slownik-erp/konsolidacja-w-rachunkowosci-przedsiebiorstwa-wielozakladowego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Konsolidacja wyników wewnętrznych i zewnętrznych",
+            "description": "Pozwala na konsolidację danych liczbowych pochodzących z różnych jednostek – wydziałów wewnątrz przedsiębiorstwa jak i danych pochodzących z różnych jednostek...",
+            "url": "https://www.raport-erp.pl/slownik-erp/konsolidacja-wynikow-wewnetrznych-i-zewnetrznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kontrolą jakości - spirala jakości",
+            "description": "Kontrolą jakości pozwala na planowanie i ewidencjonowanie operacji kontroli i weryfikacji jakości poszczególnych stadiów produkcji. W zaawansowanych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kontrola-jakosci---spirala-jakosci"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kontrola kredytu przy sprzedaży",
+            "description": "Bieżąca kontrola kredytu przy sprzedaży pozwala na uniknięcie sytuacji kiedy zadłużony klient ponownie próbuje kupić lub gdy nierzetelny klient próbuje w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kontrola-kredytu-przy-sprzedaxy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kontrola realizacji zakupów",
+            "description": "Kontrola realizacji zakupów pozwala na ich rozliczanie oraz na wiekowanie zobowiązań. Oprócz tego możliwa jest obsługa reklamacji ilościowo – wartościowych.",
+            "url": "https://www.raport-erp.pl/slownik-erp/kontrola-realizacji-zakupow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kontrola realizacji zamówień",
+            "description": "Obejmuje nadzorowanie wysyłki towarów obsługi reklamacji i nadzorowania spływu płatności. W rozwiniętej postaci nadzorowane są wysyłki dostawy oraz płatności...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kontrola-realizacji-zamowien"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kontroling finansowy",
+            "description": "Zarządzanie i sterowanie finansowe w Polsce jest zwane czasami „kontrolingiem”. Jest to przekrojowa funkcja analityczno-syntetyczna realizowana w ramach...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kontroling-finansowy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kontrolowanie partii i dat przydatności (gdzie zostały użyte  numery seryjne ...)",
+            "description": "'Kontrolowanie partii i dat przydatności numery seryjne. Obecność tej funkcji coraz częściej jest niezbędna ze względu na stosowane systemy sterowania jakością...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kontrolowanie-partii-i-dat-przydatnosci-gdzie-zostaly-uxyte-numery-seryjne-"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kontrolowanie płatności dla grup  dostawców",
+            "description": "Ta funkcja pozwala na uwalnianie płatności tak aby minimalizować wypływ gotówki. Funkcja powinna być realizowana automatycznie natomiast w przypadku trudnej...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kontrolowanie-platnosci-dla-grup-dostawcow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Koordynacja harmonogramów produkcji i dostaw",
+            "description": "W przedsiębiorstwie wielozakładowym funkcja ta pozwala planiście na tworzenie prognoz sprzedaży i produkcji oraz planów uzupełnień zapasów w wielu powiązanych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/koordynacja-harmonogramow-produkcji-i-dostaw"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Koordynacja prognozowania i planowania",
+            "description": "Koordynacja prognozowania i planowania sprzedaży produkcji i zakupów są niezbędne do planowanie zbytu produkcji i dystrybucji w horyzoncie długoterminowym....",
+            "url": "https://www.raport-erp.pl/slownik-erp/koordynacja-prognozowania-i-planowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kopiowanie opisu procesów",
+            "description": "Pozwala na szybkie tworzenie procesów nowych ale podobnych do już istniejących metodą: skopiuj – dodaj – usuń różnice.",
+            "url": "https://www.raport-erp.pl/slownik-erp/kopiowanie-opisu-procesow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Koprodukt w produkcji procesowej",
+            "description": "Koprodukt jest to produkt lub kilka produktów wytwarzanych równocześnie z pozycją podstawową są użyteczne posiadające wartość Przykładem może być terpentyna...",
+            "url": "https://www.raport-erp.pl/slownik-erp/koprodukt-w-produkcji-procesowej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "KPI",
+            "description": "Podstawowe wskaźniki efektywności KPI - Key Performance Indicators. Wskaźniki mogą obejmować poza czysto finansowymi także inne ważne dla oceny działalności...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kpi"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kraj pochodzenia",
+            "description": "Kraj pochodzenia - siedziby firmy dostarczającej na rynek polski oprogramowanie.",
+            "url": "https://www.raport-erp.pl/slownik-erp/kraj-pochodzenia"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Kwity Kanban",
+            "description": "Kwity kanban (etykiety) stosowane są w technice JIT (Just In Time) przy produkcji średnio i wielkoseryjnej. W przedsiębiorstwach stosujących kanban dostawy...",
+            "url": "https://www.raport-erp.pl/slownik-erp/kwity-kanban"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę L",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "lead time – cykl wytwarzania lub dostaw",
+            "description": "Lead time - cykl wytwarzania lub dostaw jest to przedział czasu niezbędny do realizacji dostawy procesu lub serii operacji. Jest to czas pomiędzy przyjęciem...",
+            "url": "https://www.raport-erp.pl/slownik-erp/lead-time-cykl-wytwarzania-lub-dostaw"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "lean production – smukła produkcja",
+            "description": "'Lean Production – smukła produkcja opiera się o zastosowanie zespołu zasad i wskazówek praktycznych pozwalających na zmniejszenie kosztów poprzez bezwzględne...",
+            "url": "https://www.raport-erp.pl/slownik-erp/lean-production-smukla-produkcja"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Lista prac na poszczególnych centrach roboczych",
+            "description": "Lista prac do wykonania jest przydatna w powiązaniu ze sterowaniem priorytetami zleceń do organizowania bieżącej pracy centrum roboczego.",
+            "url": "https://www.raport-erp.pl/slownik-erp/lista-prac-na-poszczegolnych-centrach-roboczych"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę M",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Maksymalna długość konta",
+            "description": "Jest to ilość segmentów konta przemnożona przez długość segmentu każdy z nich o stałej długości.",
+            "url": "https://www.raport-erp.pl/slownik-erp/maksymalna-dlugosc-konta"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Maksymalna długość segmentu",
+            "description": "Jest to liczba znaków segment konta przy jego stałej długości. Pozwala na ocenę stopnia szczegółowości opisu konta.",
+            "url": "https://www.raport-erp.pl/slownik-erp/maksymalna-dlugosc-segmentu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Maksymalna ilość segmentów konta",
+            "description": "Ich liczba określa możliwość rozbudowy planu kont.",
+            "url": "https://www.raport-erp.pl/slownik-erp/maksymalna-ilosc-segmentow-konta"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Materiały / magazyny rezerwowane przez MRP lub nie podlegające rezerwacji",
+            "description": "Materiały / magazyny nie podlegające rezerwacji przez MRP to magazyny środków pomocniczych np. odzieży ochronnej itp. oraz środki pomocnicze. Przypadek...",
+            "url": "https://www.raport-erp.pl/slownik-erp/materialy-magazyny-rezerwowane-przez-mrp-lub-nie-podlegajace-rezerwacji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "MES",
+            "description": "Manufacturing Execution System – MES system zarządzania produkcją): System komunikacji i informowania obszaru produkcji. Zawiera funkcje takie jak alokacja oraz...",
+            "url": "https://www.raport-erp.pl/slownik-erp/mes"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Międzynarodowe Standardy Rachunkowości",
+            "description": "Ze względu na obowiązkowy zakres stosowania MSR informacja czy aplikacja umożliwia prowadzenie rachunkowości zgodnie z MSR jest istotna i powinna być...",
+            "url": "https://www.raport-erp.pl/slownik-erp/miedzynarodowe-standardy-rachunkowosci"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Modelowanie procesów gospodarczych",
+            "description": "Modelowanie procesów gospodarczych pozwala na ułatwienie i przyśpieszenie prac analitycznych i projektowych niezbędnych do przygotowania przedsiębiorstwa do...",
+            "url": "https://www.raport-erp.pl/slownik-erp/modelowanie-procesow-gospodarczych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Modyfikacja planu metodą ciągłą",
+            "description": "Ta metoda oznacza zmianę stanu systemu planistycznego po każdej transakcji np. wydania z magazynu wprowadzenia zlecenia itd. Wprowadzane są zmiany w zleceniach...",
+            "url": "https://www.raport-erp.pl/slownik-erp/modyfikacja-planu-metoda-ciagla"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Modyfikacja planu metodą zmian netto",
+            "description": "Ta funkcja pozwala na wprowadzenie zmian do planu. Zostają przeliczone jedynie efekty tychże zmian a nie cały plan od początku i w całości. Przyspiesza to...",
+            "url": "https://www.raport-erp.pl/slownik-erp/modyfikacja-planu-metoda-zmian-netto"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Modyfikacje oprogramowania przez nabywcę oprogramowania",
+            "description": "Oprogramowanie może umożliwiać udoskonalanie pakietu i wprowadzanie zmian poprzez modyfikacje programu i struktur danych przy wykorzystaniu uproszczonych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/modyfikacje-oprogramowania-przez-nabywce-oprogramowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Możliwość jednoczesnego stosowania wielu modeli kosztowych",
+            "description": "Jest to ważna funkcja jeśli jednostki organizacyjne przedsiębiorstwa działają według odmiennych zasad np. jest wydział produkcji ciągłej seryjna produkcji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/moxliwosc-jednoczesnego-stosowania-wielu-modeli-kosztowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Możliwość wprowadzania do harmonogramu części zamiennych",
+            "description": "Możliwość wprowadzania do harmonogramu części zamiennych jest przydatna w przypadku konieczności wprowadzania do harmonogramu elementów z niższych poziomów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/moxliwosc-wprowadzania-do-harmonogramu-czesci-zamiennych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "MPS – Harmonogram główny produkcji",
+            "description": "MPS (master production schedule) jest to zbiór danych planistycznych który z kolei steruje obsługą planowania zapotrzebowania materiałowego MRP. Pokazuje co...",
+            "url": "https://www.raport-erp.pl/slownik-erp/mps-harmonogram-glowny-produkcji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "MRP",
+            "description": "MRP (Materials Requirement Planning) oznacza planowanie potrzeb materiałowych na podstawie danych o strukturze wyrobu BOM (Bill of Materials) informacji o...",
+            "url": "https://www.raport-erp.pl/slownik-erp/mrp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "MRP closed loop",
+            "description": "MRP closed loop - zamknięta pętla MRP realizuje funkcje MRP oraz dodatkowo funkcje korygowania działalności zależnie od sytuacji bieżącej biorąc pod uwagę...",
+            "url": "https://www.raport-erp.pl/slownik-erp/mrp-closed-loop"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "MRP II",
+            "description": "MRP II (Manufacturing Resource Planning) obejmuje zarządzanie wszystkimi zasobami i produktami przedsiębiorstwa oraz zarządzanie działalnością przedsiębiorstwa...",
+            "url": "https://www.raport-erp.pl/slownik-erp/mrp-ii"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "MTO - produkcja na zlecenia",
+            "description": "Produkcja na zlecenie MTO (Make To Order) ma miejsce gdy odbiorca zleca wykonanie partii wyrobów według wystandaryzowanej uprzednio opracowanej dokumentacji. Te...",
+            "url": "https://www.raport-erp.pl/slownik-erp/mto---produkcja-na-zlecenia"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę N",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Nadzorowanie realizacji planu sprzedaży",
+            "description": "Pozwala na bieżące śledzenie planu sprzedaży we wcześniej zdefiniowanych przekrojach.",
+            "url": "https://www.raport-erp.pl/slownik-erp/nadzorowanie-realizacji-planu-sprzedaxy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Nadzorowanie rozliczeń z klientami",
+            "description": "Pozwala na sprawdzanie kondycji potencjalnych klientów a zwłaszcza stanu zadłużenia poziomu zakupów w ostatnich czasach oraz dopuszczalnego limitu kredytowego.",
+            "url": "https://www.raport-erp.pl/slownik-erp/nadzorowanie-rozliczen-z-klientami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Nadzorowanie  zużycia partii materiału",
+            "description": "Śledzenie zużycia partii materiałów pozwala na dokładną weryfikację składników z których powstał wyrób. Jest to często niezbędne np. w przemyśle lotniczym lub...",
+            "url": "https://www.raport-erp.pl/slownik-erp/nadzorowanie-zuxycia-partii-materialu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Nakładanie się operacji",
+            "description": "W produkcji zleceniowej lub średnioseryjnej funkcja nakładanie się operacji pozwala na zaplanowanie uruchomienia produkcji „na zakładkę” na następnym stanowisku...",
+            "url": "https://www.raport-erp.pl/slownik-erp/nakladanie-sie-operacji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Naliczanie amortyzacji zgodnie z polskimi przepisami",
+            "description": "Ze względu na oddzielenie wyceny bilansowej majątku trwałego od wyceny podatkowej konieczne jest aby system umożliwiał naliczanie amortyzacji bilansowej oraz...",
+            "url": "https://www.raport-erp.pl/slownik-erp/naliczanie-amortyzacji-zgodnie-z-polskimi-przepisami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Naliczanie cyklu produkcyjnego",
+            "description": "Cykl produkcyjny wyrobu jest naliczany na podstawie danych technologicznych dla konkretnej ilości do wyprodukowania i dostępnych zdolności produkcyjnych. Jest...",
+            "url": "https://www.raport-erp.pl/slownik-erp/naliczanie-cyklu-produkcyjnego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Naliczanie różnych  podatków (akcyza  itp.)",
+            "description": "Funkcja naliczania różnych podatków takich jak VAT i akcyza które przedsiębiorstwo jest zobowiązane odprowadzać do skarbu państwa powinna być realizowana...",
+            "url": "https://www.raport-erp.pl/slownik-erp/naliczanie-roxnych-podatkow-akcyza-itp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Naliczanie zapotrzebowania na zasoby krytyczne z danych  technologicznych",
+            "description": "Naliczanie zapotrzebowania na zasoby krytyczne z danych technologicznych pozwala na określenie w procesie planowania obciążenia zasobów uznanych za krytyczne....",
+            "url": "https://www.raport-erp.pl/slownik-erp/naliczanie-zapotrzebowania-na-zasoby-krytyczne-z-danych-technologicznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Narzędzia do analizy wykorzystania powierzchni magazynowych",
+            "description": "Ta funkcja jest użyteczna w dużych magazynach. Pozwala na racjonalne rozmieszczanie towaru z uwzględnieniem takich parametrów jak: waga objętość powierzchnia....",
+            "url": "https://www.raport-erp.pl/slownik-erp/narzedzia-do-analizy-wykorzystania-powierzchni-magazynowych"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę O",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obciążania centrum roboczego - inne parametry",
+            "description": "W przypadkach szczególnych podawane są inne parametry pozwalające na naliczanie obciążeń np. specjalne tabele do naliczania czasów operacji przy wykorzystaniu...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obciaxania-centrum-roboczego---inne-parametry"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obciążania centrum roboczego - operacje inne niż maszynowe",
+            "description": "Operacje inne niż maszynowe a zwłaszcza czas pracy obsługi powinny być podane oprócz operacji maszynowych w przypadku gdy jedna osoba obsługuje wiele maszyn lub...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obciaxania-centrum-roboczego---operacje-inne-nix-maszynowe"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obciążanie oprzyrządowania  i innych zasobów",
+            "description": "Pozwala to na planowanie zapotrzebowania na oprzyrządowanie energię elektryczną itp. Często oprzyrządowanie jest drogie i ma ograniczoną żywotność np....",
+            "url": "https://www.raport-erp.pl/slownik-erp/obciaxanie-oprzyrzadowania-i-innych-zasobow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa grup odbiorców",
+            "description": "Obsługa grup odbiorców i klasyfikacji utworzonych ze względu na dyskonta wiarogodność płatniczą itp. obejmuje ułatwienia w obsłudze poszczególnych grup...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-grup-odbiorcow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa kasy",
+            "description": "Obsługa kasy obejmuje prowadzenie i rozliczanie ewidencji obrotu gotówkowego czekowego oraz rozliczeń z bankami. Często do tego celu wykorzystywane są moduły...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-kasy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa kodów kreskowych",
+            "description": "Ta funkcja obejmuje odczytywanie kodów na dokumentach i opakowaniach w produkcji raportowanie i spedycję przy użyciu skanerów oraz drukowanie kodów na...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-kodow-kreskowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa kooperacji zewnętrznej",
+            "description": "Dane o kooperacji zewnętrznej służą do określenia czy dany element może być zlecony do wykonania firmie zewnętrznej a w razie pozytywnej odpowiedzi w powiązaniu...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-kooperacji-zewnetrznej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa korespondencji  wysyłki prospektów itp.",
+            "description": "Pozwala na obsługę funkcji administracyjno – biurowych związanych z marketingiem.",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-korespondencji-wysylki-prospektow-itp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa magazynu przyjęć",
+            "description": "Magazyn przyjęć - tranzytowy służy zwykle do przyjmowanych materiałów do inspekcji ilościowo – wartościowej. Jest to niezbędne aby umożliwić identyfikację...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-magazynu-przyjec"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa operacji celnych  zwłaszcza odliczeń przy reeksporcie",
+            "description": "Jest to ważne szczególnie w przedsiębiorstwach które importują materiały a następnie wytwarzają z nich produkty na eksport. Mają bowiem prawo do odliczenia cła...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-operacji-celnych-zwlaszcza-odliczen-przy-reeksporcie"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa produkcji specjalizowanej",
+            "description": "Obsługa produkcji specjalizowanej obejmuje zwykle specjalnie przykrojone do potrzeb poszczególnych dziedzin przemysłu lub handlu pakiety oprogramowania np. dla...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-produkcji-specjalizowanej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa reklamacji ilościowo - wartościowych",
+            "description": "Ilościowo-wartościowa obsługa reklamacji powinna zawierać obsługę korespondencji weryfikacje reklamacji na zgodność z kontraktami i umowami oraz wystawianie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-reklamacji-ilosciowo---wartosciowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa transportu",
+            "description": "Pozwala na planowanie potrzeb transportowych do przewozu towarów. W bardziej rozbudowanej postaci pozwala na wybór i planowanie załadunku środków transportu...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-transportu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa ubezpieczeń",
+            "description": "Obsługa ubezpieczeń powinna pozwolić na wyszukiwanie ubezpieczycieli na podstawie danych historycznych i rynkowych obsługę kosztów ubezpieczeń a następnie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-ubezpieczen"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Obsługa VAT",
+            "description": "Pozwala na zautomatyzowanie wyjątkowo pracochłonnych i kłopotliwych procedur związanych z VAT upustami itp. Przepisy te muszą być na bieżąco uwzględniane w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/obsluga-vat"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Oddzielne centra dla kooperantów",
+            "description": "Są one istotne w przypadku zlecania na zewnątrz realizacji części prac produkcyjnych do których zleceniodawca dostarcza kooperantowi niezbędne materiały i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/oddzielne-centra-dla-kooperantow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Odrębne jednostki miary",
+            "description": "Odrębne jednostki miary z przeliczeniem automatycznym dla: zakupów składowania sprzedaży i produkcji często są niezbędne szczególnie w przypadku wytwarzania i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/odrebne-jednostki-miary"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Określanie alternatywnej lokalizacji",
+            "description": "Przy użyciu wskazanej lokalizacji dla pozycji materiałowej określanie alternatywnej lokalizacji np. w pomieszczeniach klimatyzowanych jest czasem niezbędne aby...",
+            "url": "https://www.raport-erp.pl/slownik-erp/okreslanie-alternatywnej-lokalizacji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Określanie kosztów po każdej operacji",
+            "description": "Jest to istotne przy produkcji małoseryjnej o dużej zmienności przy organizacji technologicznej produkcji np. wytwarzanie maszyn budowlanych czy ciężkich...",
+            "url": "https://www.raport-erp.pl/slownik-erp/okreslanie-kosztow-po-kaxdej-operacji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Określanie stawek kosztów stałych i zmiennych",
+            "description": "Zwykle przy produkcji zorganizowanej technologicznie stawki kosztów stałych I zmiennych określane są dla centrum roboczego złożonego z jednej lub większej...",
+            "url": "https://www.raport-erp.pl/slownik-erp/okreslanie-stawek-kosztow-stalych-i-zmiennych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "OLAP – analizy ekonomiczne on line",
+            "description": "'OLAP (on-line analytical processing) jest to przetwarzanie informacji z wykorzystaniem wielowymiarowej bazy danych która przechowuje dane w sposób bardziej...",
+            "url": "https://www.raport-erp.pl/slownik-erp/olap-analizy-ekonomiczne-on-line"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "OLAP zaawansowany system analiz on line",
+            "description": "OLAP (On-Line Analytical Processing) jest to przetwarzanie informacji z wykorzystaniem wielowymiarowej bazy danych która przechowuje dane w sposób bardziej...",
+            "url": "https://www.raport-erp.pl/slownik-erp/olap-zaawansowany-system-analiz-on-line"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Operacje zlecane do kooperacji",
+            "description": "Funkcja ta umożliwia obliczenie obciążenia pracą zdolności produkcyjnych kooperanta i uwzględnienie tego w procesie planistycznym. Jest to przydatne szczególnie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/operacje-zlecane-do-kooperacji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Organizowanie przyjęć i wydań z magazynu",
+            "description": "Organizowanie przyjęć i wydań z magazynu do i z określonych lokalizacji wg określonych przez użytkownika zasad (kompletacja pobieranie z określonej lokalizacji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/organizowanie-przyjec-i-wydan-z-magazynu"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę P",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "PAAS",
+            "description": "PAAS - Platform As A Service - platforma jako usługa. Usługodawca udostępnia całe środowisko pracy",
+            "url": "https://www.raport-erp.pl/slownik-erp/paas"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "PDM – zarządzanie danymi produktów",
+            "description": "PDM (product data management) zarządzanie danymi wyrobu jest to system który zarządza wszystkimi danymi odnoszącymi się do produktów i związanymi z nimi pracami...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pdm-zarzadzanie-danymi-produktow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Pegging jednopoziomowy i wielopoziomowy",
+            "description": "Pegging jednopoziomowy wskazuje na bezpośrednie pochodzenie zapotrzebowania na pozycje zaplanowane do wytworzenia w danym zleceniu produkcyjnym. Jest to...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pegging-jednopoziomowy-i-wielopoziomowy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Pełna obsługa rachunkowości zgodna z polskimi przepisami (ustawa o rachunkowości   VAT ...)",
+            "description": "Ze względu na dużą zmienność polskiego prawa (zwłaszcza ustawy o rachunkowości i ustaw podatkowych) wyjątkowo trudno spełnić ten wymóg. Autorów oprogramowania...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pelna-obsluga-rachunkowosci-zgodna-z-polskimi-przepisami-ustawa-o-rachunkowosci-vat-"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Płace",
+            "description": "Naliczanie płac stanowi część zarządzania zasobami ludzkimi - personelem (HR). Systemy płacowe w polskich przedsiębiorstwach cechuje ogromna różnorodność...",
+            "url": "https://www.raport-erp.pl/slownik-erp/place"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Planowanie na konkretne daty",
+            "description": "Planowanie na konkretne daty jest wskazane w przypadku planowania dystrybucji towarów o krótkim cyklu produkcji określonych datach ważności lub w przypadku...",
+            "url": "https://www.raport-erp.pl/slownik-erp/planowanie-na-konkretne-daty"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Planowanie obciążenia stanowisk równoczesne z  naliczaniem MRP",
+            "description": "Planowanie obciążenia stanowisk równoczesne z naliczaniem MRP pozwala na oszacowanie czy realna jest realizacja założonego planu przy uwzględnieniu dostępnych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/planowanie-obciaxenia-stanowisk-rownoczesne-z-naliczaniem-mrp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Planowanie scenariuszowe",
+            "description": "Rozszerzone analizy na podstawie danych innych niż księgowe obejmuje planowanie scenariuszowe. Jest to sposób planowania długookresowego w warunkach znacznej...",
+            "url": "https://www.raport-erp.pl/slownik-erp/planowanie-scenariuszowe"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Planowanie strategiczne",
+            "description": "Zaawansowane wspieranie decyzji biznesowych – planowanie strategiczne pozwala na opracowywanie planów długookresowych i prognoz z wykorzystaniem technik...",
+            "url": "https://www.raport-erp.pl/slownik-erp/planowanie-strategiczne"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Planowanie uzupełniania zapasów",
+            "description": "Uzupełnianie zapasów pozwala na stosowanie dla poszczególnych grup pozycji jednej z rozpowszechnionych technik uzupełniania zapasów i sterowania ich poziomem...",
+            "url": "https://www.raport-erp.pl/slownik-erp/planowanie-uzupelniania-zapasow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Planowanie w okresach planistycznych",
+            "description": "Jest powszechnie stosowany w przypadku produkcji o średnim i długim cyklu wytwarzania. Okresy planistyczne nie muszą być sobie równe. Im bliższy jest termin w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/planowanie-w-okresach-planistycznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Platformy sprzętowe",
+            "description": "Platforma sprzętowa obejmuje główne typy komputerów i sieci na których mogą być zainstalowane pakiety oprogramowania.",
+            "url": "https://www.raport-erp.pl/slownik-erp/platformy-sprzetowe"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "PLM – cykl życia produktu",
+            "description": "PLM (product life management) jest to proces zarządzania całym cyklem życia produktu poczynając od koncepcji wyrobu przez opracowanie konstrukcyjno –...",
+            "url": "https://www.raport-erp.pl/slownik-erp/plm-cykl-xycia-produktu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Poczta elektroniczna",
+            "description": "Poczta elektroniczna pozwala na obsługę wymiany informacji wewnętrznej w przedsiębiorstwie planowanie spotkań zebrań itp. Możliwe jest także zwykle wyjście na...",
+            "url": "https://www.raport-erp.pl/slownik-erp/poczta-elektroniczna"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Podawanie i naliczanie  zdolności produkcyjnej",
+            "description": "Podawanie i naliczanie zdolności produkcyjnej jako sumy godzin którą dysponuje linia produkcyjna lub grupa stanowisk wzajemnie zamiennych – centrum robocze...",
+            "url": "https://www.raport-erp.pl/slownik-erp/podawanie-i-naliczanie-zdolnosci-produkcyjnej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Podawanie przepustowości centrum roboczego",
+            "description": "Ta informacja jest szczególnie istotna w produkcji wielkoseryjnej wyrobów o krótkim czasie wytwarzania. Podaje się wówczas zwykle liczbę sztuk jaka może być...",
+            "url": "https://www.raport-erp.pl/slownik-erp/podawanie-przepustowosci-centrum-roboczego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Polityka cenowa przedsiębiorstwa",
+            "description": "Prowadzenie takiej polityki ze wsparciem systemu informatycznego pozwala na automatyczną obsługę wielu różnych indywidualnych katalogów cenowych stosowanie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/polityka-cenowa-przedsiebiorstwa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Polonizacja oprogramowania - dokumentacja pisana systemu",
+            "description": "Polonizacja oprogramowania. Dokumentacja pisana systemu powinna zawierać tekst opisowy pozwalający na normalną eksploatację systemu oraz na ewentualną jego...",
+            "url": "https://www.raport-erp.pl/slownik-erp/polonizacja-oprogramowania---dokumentacja-pisana-systemu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Polonizacja oprogramowania - ekrany",
+            "description": "Polonizacja oprogramowania. Ekrany powinny być bezwzględnie przetłumaczone na polski. Brak polonizacji ekranów danego modułu oznacza brak jego polonizacji.",
+            "url": "https://www.raport-erp.pl/slownik-erp/polonizacja-oprogramowania---ekrany"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Polonizacja oprogramowania - instrukcje operowania oprogramowaniem",
+            "description": "Polonizacja oprogramowania. Instrukcje operowania oprogramowaniem dla konkretnego użytkownika tworzone są w procesie wdrażania oprogramowania. Zwykle...",
+            "url": "https://www.raport-erp.pl/slownik-erp/polonizacja-oprogramowania---instrukcje-operowania-oprogramowaniem"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Polonizacja oprogramowania - teksty pomocy",
+            "description": "Polonizacja oprogramowania. Teksty pomocy powinny być w wersji polskiej oczywiście przetłumaczone o ile oprogramowanie pochodzi z zagranicy. Jeżeli teksty...",
+            "url": "https://www.raport-erp.pl/slownik-erp/polonizacja-oprogramowania---teksty-pomocy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Polonizacja oprogramowania - zgodność z polskimi przepisami",
+            "description": "Polonizacja oprogramowania. Ustawa o VAT i rachunkowości muszą być respektowane. Niezbędne jest wprowadzanie na bieżąco zmian i uzupełnień w ślad za zmianami...",
+            "url": "https://www.raport-erp.pl/slownik-erp/polonizacja-oprogramowania---zgodnosc-z-polskimi-przepisami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "POS",
+            "description": "POS (Point Of Sale) właściwie: POSM (Point Of Sales Materials) - materiały wspierające sprzedaż; sformułowanie to odnosi się do różnych rodzajów nośników...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pos"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Potrzeby transportowe dla okresów planistycznych",
+            "description": "Określanie potrzeb transportowych jest niezbędne dla każdego okresu planistycznego. Na podstawie planu uzupełniania zapasów lub planu dostaw określane są ilości...",
+            "url": "https://www.raport-erp.pl/slownik-erp/potrzeby-transportowe-dla-okresow-planistycznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Powiązanie zleceń z odpowiedzialnym planistą",
+            "description": "Pozwala na zidentyfikowanie kto i kiedy uruchamiał zlecenie oraz kto je zaakceptował.",
+            "url": "https://www.raport-erp.pl/slownik-erp/powiazanie-zlecen-z-odpowiedzialnym-planista"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Poziom minimalny zapasów",
+            "description": "Określanie poziomu minimalnego pozwala na sterowaniem poziomem zapasów towarów tanich i używanych masowo. Po naruszeniu poziomu minimalnego automatycznie jest...",
+            "url": "https://www.raport-erp.pl/slownik-erp/poziom-minimalny-zapasow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Pozycja asortymentowa typu „fantom”",
+            "description": "Pozycja asortymentowa typu „fantom” zwykle występuje przy produkcji montażowej lub wtedy gdy sposób wytwarzania odbiega od sposobu przedstawiania złożenia...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pozycja-asortymentowa-typu-fantom"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Pozycja kosztowa",
+            "description": "Pozycja kosztowa nie musi przechodzić przez magazyn. Są to czynniki produkcji które nie mogą być składowane na przykład energia para wodna wytwarzane na miejscu...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pozycja-kosztowa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Pozycja podstawowa w produkcji procesowej",
+            "description": "Pozycja podstawowa: jest to główny wyrób powstający w produkcji procesowej. Pozycja podstawowa posiada wartość użyteczną. Mogą także występować koprodukty –...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pozycja-podstawowa-w-produkcji-procesowej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 30,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Pozycje typu 'fantom' do celów planistycznych",
+            "description": "Pozwalają na odwzorowanie struktury wytwarzania wyrobu na tworzenie pozycji które występują w rzeczywistości w procesie produkcji a które nie mają odbicia na...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pozycje-typu-fantom-do-celow-planistycznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 31,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Pozycje typu 'fantom' – komplety przechowywane w magazynie",
+            "description": "Zwykle pozycje typu „fantom” nie mogą być składowane w magazynie są to tzw. pozycje przepływowe. Czasem potrzebne jest aby tzw. komplety mogły być przechowywane...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pozycje-typu-fantom-komplety-przechowywane-w-magazynie"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 32,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Preferowane dziedziny",
+            "description": "'Przyporządkowanie poszczególnych pakietów oprogramowania do branż jest klasyfikacją dosyć arbitralną choć wiadomo że organizacja przedsiębiorstwa – jedno lub...",
+            "url": "https://www.raport-erp.pl/slownik-erp/preferowane-dziedziny"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 33,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Preferowane dziedziny przemysłu wg oceny dystrybutora",
+            "description": "Przyporządkowanie poszczególnych pakietów oprogramowania do branż jest klasyfikacją dosyć arbitralną choć wiadomo że organizacja przedsiębiorstwa – jedno lub...",
+            "url": "https://www.raport-erp.pl/slownik-erp/preferowane-dziedziny-przemyslu-wg-oceny-dystrybutora"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 34,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Procesy alternatywne",
+            "description": "Zastosowanie procesów alternatywnych jest potrzebne wówczas gdy proces podstawowy jest niedostępny np. w przypadku uszkodzenia maszyny lub wtedy gdy dostarczono...",
+            "url": "https://www.raport-erp.pl/slownik-erp/procesy-alternatywne"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 35,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Produkcja ciągła aparaturowa",
+            "description": "W przemyśle farmaceutycznym spożywczym i chemicznym często zanika pojęcie partii produkcyjnej. Istotna natomiast jest partia - wsad lub „szarża” przetwarzana...",
+            "url": "https://www.raport-erp.pl/slownik-erp/produkcja-ciagla-aparaturowa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 36,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Produkcja powtarzalna   masowa",
+            "description": "Produkcja masowa jest produkcją powtarzalną (np. samochodów telewizorów) na taśmach produkcyjnych lub liniach zorganizowanych przedmiotowo. Są to ciągi maszyn i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/produkcja-powtarzalna-masowa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 37,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Produkcja procesowa -  Blending",
+            "description": "Obsługuje produkcję procesową polegającą głównie na mieszaniu różnych substancji dla otrzymania wyrobu gotowego np. oleje samochodowe płyny chłodnicze itp.",
+            "url": "https://www.raport-erp.pl/slownik-erp/produkcja-procesowa---blending"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 38,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Produkcja procesowa - Definiowanie wielkości wsadu",
+            "description": "Jest to zwykle pojemność procesora lub pojemnika w którym zachodzą reakcje podane w jednostkach naturalnych (litry. Kilogramy itp.).",
+            "url": "https://www.raport-erp.pl/slownik-erp/produkcja-procesowa---definiowanie-wielkosci-wsadu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 39,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Produkcja procesowa - Określanie czasu operacji",
+            "description": "Wymaga podania czasu trwania przetwarzania wsadu przy danej recepturze włączając czas napełniania i przygotowania do nowego wsadu.",
+            "url": "https://www.raport-erp.pl/slownik-erp/produkcja-procesowa---okreslanie-czasu-operacji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 40,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Produkcja procesowa - Określanie składu wsadu",
+            "description": "Skład wsadu do procesu dla danej procedury może być określony ilościowo tj. przez podanie w jednostkach naturalnych . Często mozliwe jest określanie procentowe...",
+            "url": "https://www.raport-erp.pl/slownik-erp/produkcja-procesowa---okreslanie-skladu-wsadu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 41,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Produkcja w toku",
+            "description": "Transakcje związane z produkcją w toku takie jak masowe wydania na zlecenia produkcyjne przemieszczenie między lokalizacjami rejestracja przyjęcia wyrobów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/produkcja-w-toku"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 42,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Produkt uboczny w produkcji procesowej",
+            "description": "Produkt uboczny jest to zwykle bezwartościowy odpad powstający podczas produkcji często wymagający sporych wydatków ze względu na konieczność kosztownej...",
+            "url": "https://www.raport-erp.pl/slownik-erp/produkt-uboczny-w-produkcji-procesowej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 43,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Prognozowanie poziomu  zapasów",
+            "description": "Prognozowanie niezbędnego poziomu zapasów umożliwia przewidywanie stanu potrzebnych zapasów w zależności od przewidywanych i już otrzymanych zamówień klientów....",
+            "url": "https://www.raport-erp.pl/slownik-erp/prognozowanie-poziomu-zapasow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 44,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Prognozowanie poziomu zapasu bezpieczeństwa",
+            "description": "Prognozowanie poziomu zapasu bezpieczeństwa jest szczególnie istotne przy określaniu zapotrzebowań w produkcji sezonowej w związku z przewidywanym zbytem.",
+            "url": "https://www.raport-erp.pl/slownik-erp/prognozowanie-poziomu-zapasu-bezpieczenstwa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 45,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Prognozowanie przepływów finansowych",
+            "description": "Prognozowanie przepływów finansowych w poszczególnych okresach w przyszłości pozwala na stwierdzenie czy zapotrzebowanie na gotówkę może być zaspokojone ze...",
+            "url": "https://www.raport-erp.pl/slownik-erp/prognozowanie-przeplywow-finansowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 46,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Prognozy na podstawie danych z przeszłości",
+            "description": "Prognozowanie na podstawie danych z przeszłości jest szczególnie przydatne w przypadku towarów sezonowo sprzedawanych z krótkim terminem przydatności do...",
+            "url": "https://www.raport-erp.pl/slownik-erp/prognozy-na-podstawie-danych-z-przeszlosci"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 47,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Prognozy potrzeb",
+            "description": "Na podstawie danych marketingowych i danych z przeszłości dla każdego z zakładów i magazynów tworzona jest prognoza potrzeb. Powstaje w wyniku zastosowania...",
+            "url": "https://www.raport-erp.pl/slownik-erp/prognozy-potrzeb"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 48,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Proponowane  zlecenia na uzupełnienie zapasów",
+            "description": "Tworzenie proponowanych zleceń na uzupełnienie zapasów pozwala na przewidywanie zapotrzebowań i zarządzanie uzupełnieniami zapasów w poszczególnych magazynach i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/proponowane-zlecenia-na-uzupelnienie-zapasow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 49,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Proponowanie pozycji alternatywnych odbiorcom",
+            "description": "Proponowanie alternatywnych pozycji pozwala na zwiększenie sprzedaży i utrzymanie dobrego wizerunku w oczach klientów nawet wówczas gdy przedsiębiorstwo akurat...",
+            "url": "https://www.raport-erp.pl/slownik-erp/proponowanie-pozycji-alternatywnych-odbiorcom"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 50,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Prowizja agentów handlowych",
+            "description": "Pozwala na rozliczanie agentów w zależności od zdefiniowanej polityki handlowej firmy.",
+            "url": "https://www.raport-erp.pl/slownik-erp/prowizja-agentow-handlowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 51,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przedsiębiorstwo jednofirmowe",
+            "description": "Przedsiębiorstwo jednofirmowe jest jednostką prawną nie posiadającą podległych jednostek prawnych niezależnych firm np. spółek z ograniczoną odpowiedzialnością...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przedsiebiorstwo-jednofirmowe"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 52,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przedsiębiorstwo międzynarodowe",
+            "description": "Przedsiębiorstwo międzynarodowe charakteryzuje się tym że prowadzi cześć operacji za granicą przez swe wydzielone jednostki. Wymagania wobec systemu dotyczą...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przedsiebiorstwo-miedzynarodowe"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 53,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przedsiębiorstwo o produktach wielowariantowych i/lub wrażliwe na modę",
+            "description": "Przedsiębiorstwo o produktach wielowariantowych ma produkty które mogą być na różne sposoby wykończone lub wyposażane np. maszyny robocze i samochody o różnym...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przedsiebiorstwo-o-produktach-wielowariantowych-ilub-wraxliwe-na-mode"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 54,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przedsiębiorstwo o produktach wielowariantowych i/lub wrażliwych na modę",
+            "description": "Przedsiębiorstwo o produktach wielowariantowych ma produkty które mogą być na różne sposoby wykończone lub wyposażane np. maszyny robocze i samochody o różnym...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przedsiebiorstwo-o-produktach-wielowariantowych-ilub-wraxliwych-na-mode"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 55,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przedsiębiorstwo wielofirmowe",
+            "description": "Przedsiębiorstwo wielofirmowe to takie które ma wydzielone jednostki o istotnym stopniu swobody. Zwykle są to oddzielne byty prawne np. spółki z o.o. lub...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przedsiebiorstwo-wielofirmowe"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 56,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przedsiębiorstwo z  rozbudowaną siecią dystrybucyjną",
+            "description": "Przedsiębiorstwo z rozbudowaną siecią dystrybucyjną jest to przedsiębiorstwo produkcyjne handlowe lub produkcyjno - handlowe w którym istotną rolę odgrywa...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przedsiebiorstwo-z-rozbudowana-siecia-dystrybucyjna"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 57,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przekazywanie danych do innych modułów",
+            "description": "Przekazywanie danych do innych modułów umożliwia pobieranie danych np. o kosztach pośrednich w tym stałych w danym okresie i przekazywanie ich do podsystemu...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przekazywanie-danych-do-innych-modulow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 58,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przeszacowanie środków trwałych",
+            "description": "Traci na znaczeniu wraz ze spadkiem poziomu inflacji.",
+            "url": "https://www.raport-erp.pl/slownik-erp/przeszacowanie-srodkow-trwalych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 59,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przetwarzanie w chmurze",
+            "description": "Przetwarzanie w chmurze – Cloud Computing polega na przeniesieniu całego ciężaru świadczenia usług IT (danych oprogramowania lub mocy obliczeniowej) na serwer i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przetwarzanie-w-chmurze"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 60,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przygotowanie planowanych zleceń dla powiązanych między sobą zakładów",
+            "description": "Ta funkcja umożliwia tworzenie kaskady harmonogramów głównych. Przykładowy harmonogram kaskadowy wygląda następująco: harmonogram sprzedaży zakładu wyrobów...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przygotowanie-planowanych-zlecen-dla-powiazanych-miedzy-soba-zakladow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 61,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przypisanie magazynu prac w toku do centrum",
+            "description": "Wskazuje gdzie będzie odbierana produkcja danego centrum i umożliwia racjonalizację tworzenia marszrut technologicznych szczególnie przy produkcji na liniach...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przypisanie-magazynu-prac-w-toku-do-centrum"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 62,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przypisanie maszyn i pracowników do centrum",
+            "description": "W przypadku produkcji wielkoseryjnej lub powtarzalnej ta funkcja pozwala na racjonalizację naliczania i bilansowania obciążeń oraz na ułatwienie w naliczaniu...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przypisanie-maszyn-i-pracownikow-do-centrum"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 63,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Przypisanie obsługi do centrum / maszyny do naliczania zdolności produkcyjnych i rozliczania kosztów",
+            "description": "Przypisanie obsługi do centrum / maszyny do naliczania zdolności produkcyjnych i rozliczania kosztów jest istotne w przypadku gniazd wymagających obsługi...",
+            "url": "https://www.raport-erp.pl/slownik-erp/przypisanie-obslugi-do-centrum-maszyny-do-naliczania-zdolnosci-produkcyjnych-i-rozliczania-kosztow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 64,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "PTO  produkcja na zlecenia klientów",
+            "description": "Produkcja na zlecenie (production to order). Istnieje w wyrobach pewien podstawowy zestaw składników powtarzających się oraz inne składniki – warianty i opcje...",
+            "url": "https://www.raport-erp.pl/slownik-erp/pto-produkcja-na-zlecenia-klientow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 65,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "PTP - opłacalne do dostarczenia",
+            "description": "PTP – opłacalne do dostarczenia (Profitable To Promise) pozwala na określenie opłacalności dostawy dla klienta (analiza kosztowa I cenowa). Możliwe jest szybkie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/ptp---oplacalne-do-dostarczenia"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 66,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Punkt zlecania",
+            "description": "Jeżeli zostanie naruszony poziom zapasów określony jako punkt zlecania system wysyła sygnał o konieczności zakupu partii materiału. Określanie punktu zlecania...",
+            "url": "https://www.raport-erp.pl/slownik-erp/punkt-zlecania"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę R",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rachunek kosztów",
+            "description": "Zagadnienia związane z rachunkiem kosztów w przedsiębiorstwach o różnych typach działalności są skomplikowane i ich bliższy opis wykracza poza zakres tego...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rachunek-kosztow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rachunek kosztów - koszt rzeczywisty z zastosowaniem stawek kosztów",
+            "description": "Rachunek kosztów koszt rzeczywisty z zastosowaniem stawek kosztów pozwala na wydzielenie kosztów zmiennych dla poszczególnych jednostek organizacyjnych i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rachunek-kosztow---koszt-rzeczywisty-z-zastosowaniem-stawek-kosztow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rachunek kosztów standardowych",
+            "description": "Rachunek kosztów standardowych - normatywnych pozwala na planowanie kosztów według cen i stawek stałych w określonych okresach czasu zwykle rocznych (koszty...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rachunek-kosztow-standardowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rachunek kosztów wg faz produkcji (koszty półfabrykatów)",
+            "description": "Rachunek kosztów wg faz produkcji (koszty półfabrykatów) umożliwia naliczanie kosztów gdy poszczególne fazy produkcji mają odmienny charakter np. produkcja...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rachunek-kosztow-wg-faz-produkcji-koszty-polfabrykatow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rachunek normatywny kosztów z zastosowaniem narzutów",
+            "description": "Od zwykłego rachunku kosztów standardowych różni się tym że po przejściu przez każde miejsce powstawania kosztów (jednostki organizacyjne stanowiska itd.)...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rachunek-normatywny-kosztow-z-zastosowaniem-narzutow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rachunek procesowy kosztów (Activity Based Costing)",
+            "description": "Jest to metoda pozwalająca na porządkowanie kosztów zmiennych i stałych dla poszczególnych działań w ramach procesu produkcyjnego. Jest bardzo przydatny gdy...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rachunek-procesowy-kosztow-activity-based-costing"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Raportowanie zaawansowania produkcji",
+            "description": "Raportowanie zaawansowania produkcji: wykonane operacje spływ godzin braki wykonana ilość niezbędne jest do rozliczania produkcji i jej operatywnego planowania....",
+            "url": "https://www.raport-erp.pl/slownik-erp/raportowanie-zaawansowania-produkcji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Realizacja budżetu zakupów",
+            "description": "Jeżeli budżet środków na zakupy jest prawidłowo zbudowany z rozbiciem na poszczególne budżety branżowe to nadzorowanie realizacji umożliwia minimalizowanie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/realizacja-budxetu-zakupow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Repozytorium wiedzy",
+            "description": "Zaawansowane wspieranie decyzji biznesowych repozytorium wiedzy jest to katalog zawierający opis proponowanych technik zarządzania wspieranych przez...",
+            "url": "https://www.raport-erp.pl/slownik-erp/repozytorium-wiedzy"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Repozytorium wskaźników",
+            "description": "Zaawansowane wspieranie decyzji biznesowych repozytorium wskaźników jest to zestawienie przygotowanych do natychmiastowego użytkowania wskaźników określających...",
+            "url": "https://www.raport-erp.pl/slownik-erp/repozytorium-wskaznikow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rezerwacja materiałów pod potrzeby produkcyjne lub do kompletacji dostaw",
+            "description": "Rezerwacja materiałów pod potrzeby produkcyjne lub do kompletacji dostaw pozwala na zaznaczenie rezerwacji lub zablokowanie wydania przewidywanych ilości...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rezerwacja-materialow-pod-potrzeby-produkcyjne-lub-do-kompletacji-dostaw"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "RFID  Obsługa znaczników radiowych",
+            "description": "RFID (Radio Frequency Identification) – system identyfikacji radiowej jest to system kontroli przepływu towarów w oparciu o zdalny odczyt i zapis danych drogą...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rfid-obsluga-znacznikow-radiowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "ROCE",
+            "description": "Wydajność całkowitego zaangażowanego kapitału ROCE (Return On Capital Employed) jest to wskaźnik określający wydajność oraz rentowność inwestycji w które...",
+            "url": "https://www.raport-erp.pl/slownik-erp/roce"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "ROI",
+            "description": "Return On Investment – ROI zwrot z inwestycji): Wskaźnik finansowy względnego zwrotu z inwestycji zwykle wyrażony jako procent osiągniętych dochodów do kwoty...",
+            "url": "https://www.raport-erp.pl/slownik-erp/roi"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozdział zamówień na wielu dostawców",
+            "description": "Ta funkcja może być przydatna w sytuacji gdy jeden z dostawców nie jest w stanie zaspokoić potrzeb firmy lub gdy jeden dostawca – monopolista nie jest pożądany...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozdzial-zamowien-na-wielu-dostawcow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozdzielniki kosztów",
+            "description": "Ta funkcja pozwala na kwotowy lub procentowy podział kosztów ogólnych (wydziałowych ogólnozakładowych) pomiędzy jednostki rozliczeniowe tzw. miejsca powstawania...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozdzielniki-kosztow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie cła",
+            "description": "Pozwala na rozliczanie w sposób automatyczny należności i zwolnień celnych.",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-cla"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie dostaw",
+            "description": "Pozwala na prowadzenie rozliczeń i śledzenie płatności oraz ich wiekowanie.",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-dostaw"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie dostaw częściowych. Nadzorowanie harmonogramu dostaw",
+            "description": "Rozliczanie dostaw częściowych i nadzorowanie harmonogramu dostaw ma zastosowanie gdy przedsiębiorstwo prowadzi dostawy cykliczne powtarzające się w których...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-dostaw-czesciowych-nadzorowanie-harmonogramu-dostaw"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie kosztów koproduktów i produktów ubocznych",
+            "description": "Pozwala to na określenie rzeczywistych kosztów produktów użytecznych (produktów i koproduktów) oraz odpadów (produktów ubocznych) do utylizacji których trzeba...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-kosztow-koproduktow-i-produktow-ubocznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie rabatów i skont",
+            "description": "Jest to złożona operacja wymagająca znajomości ostatnich interpretacji przepisów. Trzeba zwrócić szczególną uwagę na pakiety zagraniczne bowiem polskie przepisy...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-rabatow-i-skont"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie rabatów i  skont  zgodnie z polskimi przepisami",
+            "description": "Rozliczanie rabatów skont i upustów zgodnie z polskimi przepisami wymaga ciągłego śledzenia zmian w odpowiednich przepisach. W wielu zagranicznych pakietach...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-rabatow-i-skont-zgodnie-z-polskimi-przepisami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie realizacji harmonogramów dla produkcji procesowej",
+            "description": "Odbywa się ono zwykle uproszczona metodą back-flushing – rozliczania wstecznego z wykorzystaniem konkretnie użytej receptury.",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-realizacji-harmonogramow-dla-produkcji-procesowej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie realizacji produkcji",
+            "description": "Wykorzystuje się zwykle rozliczanie wsteczne materiałów i robocizny. Możliwa jest też w przypadku pojawienia się nadmiernej ilości braków możliwość wyłączenia...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-realizacji-produkcji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie różnic kursowych",
+            "description": "Rozliczanie różnic kursowych pozwala na szacowanie zysków lub strat które powstały na skutek zmian kursów podczas realizacji transakcji w różnych walutach w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-roxnic-kursowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczanie ubezpieczeń",
+            "description": "Automatyczne rozliczanie ubezpieczenia środka trwałego jest istotne ponieważ stanowi istotny element kosztów. Jednak zawierają ją nieliczne pakiety.",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczanie-ubezpieczen"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczenia finansowe z dostawcami",
+            "description": "Obsługa rozliczeń z dostawcami w tym nadzorowanie płatności i odsetek pozwala na płacenie w najpóźniejszym dopuszczalnym terminie ale jeszcze bez karnych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczenia-finansowe-z-dostawcami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozliczenie wsteczne materiałów (back- flushing)",
+            "description": "Rozliczenie wsteczne materiałów i zużycia robocizny (back-flushing) oznacza skrajnie uproszczone rozliczanie zużycia materiałów i innych zasobów produkcyjnych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozliczenie-wsteczne-materialow-back--flushing"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Różne ceny i polityki cenowe dla różnych klas odbiorców",
+            "description": "Pozwalają na dywersyfikację polityki cenowej stosowanej wobec różnych grup i klas klientów.",
+            "url": "https://www.raport-erp.pl/slownik-erp/roxne-ceny-i-polityki-cenowe-dla-roxnych-klas-odbiorcow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 30,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozwijanie 'do przodu'",
+            "description": "Rozwijanie &bdquo;do przodu&rdquo; pozwala na określenie na kiedy począwszy od daty rozważanej zwykle daty bieżącej mogą być wykonane produkty. Określenie tej...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozwijanie-do-przodu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 31,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Rozwijanie planu „do tyłu”",
+            "description": "Rozwijanie „do tyłu” (od żądanej daty dysponowalności) polega na realizacji w dość grubym uproszczeniu następujących założeń: Data dostępności produktu dla...",
+            "url": "https://www.raport-erp.pl/slownik-erp/rozwijanie-planu-do-tylu"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę S",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "SaaS",
+            "description": "Software as a service SaaS - oprogramowanie jako usługa. Aplikacja jest przechowywana i udostępniana przez producenta użytkownikom poprzez internet. Model SaaS...",
+            "url": "https://www.raport-erp.pl/slownik-erp/saas"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "SAS",
+            "description": "Software as a service SaaS oprogramowanie jako usługa to model dystrybucji oprogramowania gdzie aplikacja jest przechowywana i udostępniana przez producenta...",
+            "url": "https://www.raport-erp.pl/slownik-erp/sas"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "SCM  zarządzanie łańcuchem dostaw",
+            "description": "Supply Chain Management – SCM zarządzanie łańcuchem dostaw. Projektowanie planowanie realizacja kontrola oraz monitoring czynności należących do łańcucha dostaw...",
+            "url": "https://www.raport-erp.pl/slownik-erp/scm-zarzadzanie-lancuchem-dostaw"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "SCM  Zintegrowany łańcuch dostaw",
+            "description": "Obsługa zintegrowanego łańcucha dostaw SCM (supply chain management) pozwala w sieci powiązanych ze sobą przedsiębiorstw na powiązanie planowania potrzeb i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/scm-zintegrowany-lancuch-dostaw"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Serwis techniczny produktów przedsiębiorstwa",
+            "description": "Pakiet zawierający tę funkcję powinien zapewnić możliwość zbierania różnych danych w celu zapewnienia obsługi gwarancyjnej i posprzedażnej produktów. Niezbędne...",
+            "url": "https://www.raport-erp.pl/slownik-erp/serwis-techniczny-produktow-przedsiebiorstwa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "SFA",
+            "description": "SFA to profesjonalne systemy mobilne wsparcia sprzedaży klasy Sales Force Automation zapewniające pełną obsługę punktu sprzedaży przez mobilnych pracowników...",
+            "url": "https://www.raport-erp.pl/slownik-erp/sfa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Sieci dystrybucji",
+            "description": "Obsługa sieci dystrybucyjnych pozwala na wspomaganie procesów dystrybucji towarów transportu i uzupełnianie zapasów u odbiorców. Często jest to wspomaganiem...",
+            "url": "https://www.raport-erp.pl/slownik-erp/sieci-dystrybucji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Sieć powiązań logistycznych",
+            "description": "Możliwość zdefiniowania sieci powiązań logistycznych pomiędzy magazynami zakładami i centrami dystrybucyjnymi służy do określania dróg transportowych i pomagać...",
+            "url": "https://www.raport-erp.pl/slownik-erp/siec-powiazan-logistycznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "SOA",
+            "description": "SOA (Service Oriented Architecture) architektury zorientowanej na obsługę poszczególnych usług pozwala na uzyskanie wyjątkowo dużej efektywności pracy z...",
+            "url": "https://www.raport-erp.pl/slownik-erp/soa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "S&OP",
+            "description": "Planowanie sprzedaży I działalności operacyjnej S&OP (Sales and Operations Planning) jest to formalny proces pozwalający na określenie strategii realizacji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/sop"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Specyfikacja oprzyrządowania i innych zasobów dla operacji",
+            "description": "Pozwala na planowanie obciążenia specjalistycznego oprzyrządowania przez planowane zadania produkcyjne. Ma to istotne znaczenie w przypadku oprzyrządowania...",
+            "url": "https://www.raport-erp.pl/slownik-erp/specyfikacja-oprzyrzadowania-i-innych-zasobow-dla-operacji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Sposób obciążania centrum roboczego - operacje maszynowe - Tpz i Tj",
+            "description": "Dla operacji maszynowych podanie Tpz i Tj pozwala na naliczanie obciążeń stanowisk roboczych. Jest wystarczające w przypadku gdy jedna osoba obsługuje jedną...",
+            "url": "https://www.raport-erp.pl/slownik-erp/sposob-obciaxania-centrum-roboczego---operacje-maszynowe---tpz-i-tj"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Sprawdzanie warunków płatności i upustów wg kontraktów",
+            "description": "Automatyczne sprawdzanie warunków płatności i upustów pozwala na zabezpieczenie się przed nierzetelnymi kontrahentami i ułatwia procesy fakturowania i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/sprawdzanie-warunkow-platnosci-i-upustow-wg-kontraktow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Sprawdzanie zabezpieczenia materiałowego do realizacji MPS",
+            "description": "Sprawdzanie zabezpieczenia materiałowego do realizacji MPS istotne w powiązaniu z możliwością uruchamiania zleceń na poziomie MPS.",
+            "url": "https://www.raport-erp.pl/slownik-erp/sprawdzanie-zabezpieczenia-materialowego-do-realizacji-mps"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "SRM",
+            "description": "Zarządzanie relacjami z dostawcami SRM - Supply Relationship Management",
+            "url": "https://www.raport-erp.pl/slownik-erp/srm"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "SRM - zarządzanie relacjami z dostawcami",
+            "description": "Zarządzanie kontaktami z dostawcami SRM (Supply Relationship Management) jest systemem zarządzania stosunkami z dostawcami dóbr i usług z których korzysta...",
+            "url": "https://www.raport-erp.pl/slownik-erp/srm---zarzadzanie-relacjami-z-dostawcami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "SSCC",
+            "description": "Zarządzanie łańcuchem dostaw (ang. Supply Chain Management (SCM)) - rozwiązania informatyczne które służą przedsiębiorstwu do zarządzania sieciowym łańcuchem...",
+            "url": "https://www.raport-erp.pl/slownik-erp/sscc"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Statystyczna kontrola jakości",
+            "description": "Narzędzia do obsługi statystycznej kontroli jakości są zwykle potrzebne przy produkcji wyrobów masowych w dużych seriach gdzie do kontroli stosuje się...",
+            "url": "https://www.raport-erp.pl/slownik-erp/statystyczna-kontrola-jakosci"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Sterowanie jakością (ISO 9000  GMP)",
+            "description": "Obsługa zarządzania jakością w przedsiębiorstwie zwykle służy do utworzenia biblioteki procedur katalogu czynności i operacji mających na celu utrzymywania...",
+            "url": "https://www.raport-erp.pl/slownik-erp/sterowanie-jakoscia-iso-9000-gmp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Sterowanie jakością w przedsiębiorstwie",
+            "description": "Obsługa zarządzania jakością w przedsiębiorstwie zwykle służy do utworzenia biblioteki procedur katalogu czynności i operacji mających na celu utrzymywania...",
+            "url": "https://www.raport-erp.pl/slownik-erp/sterowanie-jakoscia-w-przedsiebiorstwie"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Struktura konta  wielowymiarowość / liczba segmentów",
+            "description": "Struktura konta może być zaproponowana przez system (“na sztywno”) lub zbudowana przez użytkownika zgodnie z jego potrzebami na jeden z dwóch sposobów. Pierwszy...",
+            "url": "https://www.raport-erp.pl/slownik-erp/struktura-konta-wielowymiarowosc-liczba-segmentow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Struktura planistyczna",
+            "description": "Struktura planistyczna pozwala na obsługę wariantów i opcji oraz tworzenie harmonogram montażu. Zawiera dane o stałym „szkielecie wyrobu” np. samochodu oraz...",
+            "url": "https://www.raport-erp.pl/slownik-erp/struktura-planistyczna"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Struktura środka trwałego",
+            "description": "Ta funkcja w systemie jest istotna w przypadku gdy np. linia produkcyjna składa się z wielu maszyn kupowanych w różnych okresach i amortyzowanych według różnych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/struktura-srodka-trwalego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Symulacja harmonogramu głównego",
+            "description": "Ta funkcja jest przydatna jeśli zmienne lub nieprzewidywalne warunki rynkowe zmuszają do prześledzenia wielu wariantów strategii produkcyjnej. Jeden z...",
+            "url": "https://www.raport-erp.pl/slownik-erp/symulacja-harmonogramu-glownego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Symulacja kosztów i umorzeń",
+            "description": "Jest to ważny element prognoz finansowych w szczególności kosztów produkcji. Pozwala na tworzenie bardziej realistycznych budżetów.",
+            "url": "https://www.raport-erp.pl/slownik-erp/symulacja-kosztow-i-umorzen"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Symulacja kosztów produktów konfigurowalnych z wariantów i opcji",
+            "description": "Pozwala ona na określenie kosztów konkretnego rozwiązania produktu na przykład samochodu z określoną jednostką napędową wybranym kolorem tapicerki i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/symulacja-kosztow-produktow-konfigurowalnych-z-wariantow-i-opcji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Symulacje kosztowe wg wybranego algorytmu proponowanego przez system",
+            "description": "Ta funkcja umożliwia na podstawie danych technicznych i znanych kosztów materiałowych i robocizny przewidywanie poziomu kosztów produkcji. Zwykle każdy pakiet...",
+            "url": "https://www.raport-erp.pl/slownik-erp/symulacje-kosztowe-wg-wybranego-algorytmu-proponowanego-przez-system"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Symulacje what-if",
+            "description": "Symulacje what-if są to narzędzia symulacyjne pozwalające na tworzenie wielu wariantów rozwoju sytuacji i badanie ich efektów. W najprostszym przypadku...",
+            "url": "https://www.raport-erp.pl/slownik-erp/symulacje-what-if"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Systemy operacyjne",
+            "description": "Jest to oprogramowanie podstawowe sterujące działalnością komputera lub powiązanych ze sobą w tzw. klaster procesorów i ich powiązaniem ze światem zewnętrznym....",
+            "url": "https://www.raport-erp.pl/slownik-erp/systemy-operacyjne"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę T",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Tabele norm. Naliczania czasów  zależnie od parametrów technologicznych",
+            "description": "Dzięki tym tabelom znacząco zmniejsza się liczba błędów i nakład pracy przy normowaniu czasu pracy. Są to dwu- lub trójwymiarowe tabele w których operacje...",
+            "url": "https://www.raport-erp.pl/slownik-erp/tabele-norm-naliczania-czasow-zalexnie-od-parametrow-technologicznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "TCO całkowity koszt posiadania",
+            "description": "TCO (Total Cost of Ownership) jest to całkowity koszt posiadania rozwiązania. Zawiera w sobie: koszt zakupu koszt wdrożenia oraz bieżące koszty eksploatacji w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/tco-calkowity-koszt-posiadania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Technologia grupowa - klasyfikacja do grupowania zleceń produkcyjnych",
+            "description": "Ten sposób stosuje się wtedy gdy czas przygotowywania maszyn jest znaczący np. w produkcji farb. Proces produkcyjny poszczególnych kolorów farb ustawia się w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/technologia-grupowa---klasyfikacja-do-grupowania-zlecen-produkcyjnych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Technologia grupowa - tworzenie procesów technologicznych na podstawie szablonów",
+            "description": "Jest to uniwersalny sposób który upraszcza i standaryzuje wytwarzanie. Na przykład możliwe jest zgrupowanie wytwarzania wszystkich wałków o tej samej średnicy...",
+            "url": "https://www.raport-erp.pl/slownik-erp/technologia-grupowa---tworzenie-procesow-technologicznych-na-podstawie-szablonow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "TMS",
+            "description": "Transportation Management system - zarządzanie transportem zespolony z WMS lub oddzielny moduł.",
+            "url": "https://www.raport-erp.pl/slownik-erp/tms"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "TOC - DBR w teorii ograniczeń",
+            "description": "'Werbel – bufor – sznur DBR (drum buffer rope) jest zastosowaniem metody TOC (theory of constraints). Podstawowe element to: werbel albo wąskie gardło bufor to...",
+            "url": "https://www.raport-erp.pl/slownik-erp/toc---dbr-w-teorii-ograniczen"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "TOC teoria ograniczeń",
+            "description": "Teoria ograniczeń TOC (theory of constraints) jest to metodologia usprawniania systemów która zakłada że w każdym systemie zbudowanym z wielu powiązanych ze...",
+            "url": "https://www.raport-erp.pl/slownik-erp/toc-teoria-ograniczen"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Transport: planowanie i rozliczanie przewozów",
+            "description": "Oprogramowanie powinno umożliwiać planowanie zapotrzebowania na transport własny i obcy rozliczanie personelu i kosztów. Jego celem jest minimalizowanie pracy...",
+            "url": "https://www.raport-erp.pl/slownik-erp/transport-planowanie-i-rozliczanie-przewozow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Tworzenie harmonogramów zadań dziennych lub zmianowych",
+            "description": "Ta funkcja pozwala na tworzenie po sprawdzeniu zabezpieczenia materiałowego i zdolności produkcyjnych realnych harmonogramów dziennych lub zmianowych które mogą...",
+            "url": "https://www.raport-erp.pl/slownik-erp/tworzenie-harmonogramow-zadan-dziennych-lub-zmianowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Tworzenie manualne zleceń produkcyjnych",
+            "description": "Umożliwia ono wprowadzanie w ostatniej chwili nieplanowanych uprzednio pilnych zleceń klienta.",
+            "url": "https://www.raport-erp.pl/slownik-erp/tworzenie-manualne-zlecen-produkcyjnych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Tworzenie planu metodą regeneratywną",
+            "description": "Tworzenie planu metodą regeneratywną wymaga aby wprowadzić od nowa prognozy oraz wszystkie otwarte zlecenia do systemu planistycznego. System je przeliczy tak...",
+            "url": "https://www.raport-erp.pl/slownik-erp/tworzenie-planu-metoda-regeneratywna"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Tworzenie zapotrzebowania na transport",
+            "description": "Tworzenie zapotrzebowania na transport odbywa się na podstawie zleceń międzymagazynowych z podaniem wagi wymiarów i innych parametrów.",
+            "url": "https://www.raport-erp.pl/slownik-erp/tworzenie-zapotrzebowania-na-transport"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Tworzenie zapotrzebowań na materiały nie objęte MRP",
+            "description": "Tworzenie zapotrzebowań na materiały nie objęte MRP pozwala na wprowadzenie zapotrzebowania na części zamienne materiały pomocnicze podzespoły zwykle używane do...",
+            "url": "https://www.raport-erp.pl/slownik-erp/tworzenie-zapotrzebowan-na-materialy-nie-objete-mrp"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Tworzenie zestawień bilansowych (propozycje F-01  F-02 ...)",
+            "description": "Ta funkcja ma na celu sporządzanie typowych sprawozdań finansowych do celów fiskalnych na bazie zestawienia obrotów i sald.",
+            "url": "https://www.raport-erp.pl/slownik-erp/tworzenie-zestawien-bilansowych-propozycje-f-01-f-02-"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Typ pozycji rodzajowych ze względu na potrzeby rynku",
+            "description": "Jest to klasyfikacja pozycji rodzajowych zwykle ze względu na potrzeby penetracji rynku pozwala na podzielenie wyrobów gotowych na grupy asortymentowe na ogół...",
+            "url": "https://www.raport-erp.pl/slownik-erp/typ-pozycji-rodzajowych-ze-wzgledu-na-potrzeby-rynku"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Typ pozycji ze względu na potrzeby organizacji wytwarzania",
+            "description": "Jest to klasyfikacja pozycji rodzajowych dokonywana zwykle na podstawie różnych technologii lub miejsca wytwarzania tzn. na jakim wydziale na jakich maszynach...",
+            "url": "https://www.raport-erp.pl/slownik-erp/typ-pozycji-ze-wzgledu-na-potrzeby-organizacji-wytwarzania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Typ produkcji obsługiwany",
+            "description": "Wyróżnia się kilka podstawowych typów produkcji. Nie każdy pakiet oprogramowania obsługuje wszystkie typy. Ważne jest dokładne dobranie pakietu do charakteru...",
+            "url": "https://www.raport-erp.pl/slownik-erp/typ-produkcji-obslugiwany"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę U",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Uruchamianie masowe zleceń produkcyjnych",
+            "description": "Uruchamianie masowe zleceń produkcyjnych na poziomie MRP pozwala na minimalizację pracy w prostszych przypadkach tzn. wtedy gdy nie brakuje materiałów lub...",
+            "url": "https://www.raport-erp.pl/slownik-erp/uruchamianie-masowe-zlecen-produkcyjnych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Uruchamianie zleceń produkcyjnych na poziomie MPS",
+            "description": "W przypadku prostszej produkcji ta funkcja umożliwia ominięcie zbędnych pośrednich poziomów planistycznych i po wstępnym sprawdzeniu możliwości realizacji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/uruchamianie-zlecen-produkcyjnych-na-poziomie-mps"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Ustalania wielkości partii",
+            "description": "Ustalanie wielkości partii jest zależne od wymagań procesu produkcyjnego i wyposażenia technicznego np. obróbka termiczna w piecu o określonej objętości oraz...",
+            "url": "https://www.raport-erp.pl/slownik-erp/ustalania-wielkosci-partii"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Uzysk i współczynnik braków",
+            "description": "Uzysk jest to wielkość pozwalająca określić przydatność określonej części materiału np. z metra kwadratowego blachy można wykorzystać 0 85 jego powierzchni....",
+            "url": "https://www.raport-erp.pl/slownik-erp/uzysk-i-wspolczynnik-brakow"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę V",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "VMI zarządzanie zapasem przez dostawcę",
+            "description": "Zarządzanie zapasem przez dostawcę VMI (Vendor-Managed Inventory) jest to proces biznesowy w którym dostawca danego produktu zarządza zapasami u odborcy w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/vmi-zarzadzanie-zapasem-przez-dostawce"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę W",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wartościowanie zapasów. Cena bieżąca",
+            "description": "Wycena wg ceny bieżącej następuje wg cen bieżących zwykle ostatnich znanych cen pochodzących ze zrealizowanych transakcji niezależnie od daty zakupu lub...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wartosciowanie-zapasow-cena-biexaca"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wartościowanie zapasów. Cena ewidencyjna",
+            "description": "Wycena wg ceny ewidencyjnej jest to wartościowanie wg ustalanej i rewidowanej okresowo ceny. Stosowane jest przy niewysokiej inflacji a odchylenia wartości...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wartosciowanie-zapasow-cena-ewidencyjna"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wartościowanie zapasów. FIFO",
+            "description": "Wycena stanu końcowego zapasów według FIFO - pierwsze weszło – pierwsze wyszło tj. przyjmując że rozchód składnika aktywów wycenia się kolejno po cenach tych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wartosciowanie-zapasow-fifo"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wartościowanie zapasów. FILO",
+            "description": "Wycena wg FILO - pierwsze weszło – ostatnie wyszło przyjmuje że rozchód składników aktywów wycenia się kolejno po cenach tych składników aktywów które jednostka...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wartosciowanie-zapasow-filo"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wartościowanie zapasów. Średnia ważona",
+            "description": "Wycena wg średniej ważonej umożliwia zmniejszenie wpływu przypadkowych wahań cen pochodzących z różnych zawieranych transakcji. Algorytm zapisany jest w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wartosciowanie-zapasow-srednia-waxona"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wartościowanie zapasów. Zaktualizowana wartość pozycji zapasu",
+            "description": "Zaktualizowana wartość pozycji zapasu – możliwość uwzględnienia w wycenie zapasu konieczności obniżenia jego wartości wskutek trwałej utraty wartości jest to...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wartosciowanie-zapasow-zaktualizowana-wartosc-pozycji-zapasu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "WEB",
+            "description": "World Wide Web – hipertekstowy multimedialny internetowy system informacyjny oparty na publicznie dostępnych otwartych standardach IETF i W3C. WWW jest usługą...",
+            "url": "https://www.raport-erp.pl/slownik-erp/web"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wersja oferowana",
+            "description": "Wersja oferowana aktualnie zlokalizowanego oprogramowania. Powinna zawierać numer aktualnej wersji wyrobu oraz numer jej ostatniej modyfikacji. Często dostępne...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wersja-oferowana"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wiele jednostek miary",
+            "description": "Wiele jednostek miary dla jednej pozycji kupowanej jest istotne w przypadku zakupów materiałów z różnych źródeł i w różnych opakowaniach. Ułatwia to rejestrację...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wiele-jednostek-miary"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wiele lokalizacji w jednym magazynie",
+            "description": "Pozwala na tworzenie mapy lokalizacji składowania materiałów w jednym magazynie. Jest to szczególnie przydatne w dużych magazynach drobnych elementów. Pozwala...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wiele-lokalizacji-w-jednym-magazynie"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wiele magazynów",
+            "description": "Wiele magazynów fizycznych lub logicznych na jednym wydziale lub w jednym zakładzie w których mogą być przechowywane te same materiały pozwala na odwzorowanie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wiele-magazynow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wiele źródeł pokrycia należności",
+            "description": "Dosyć często w biznesie występuje taka sytuacja że firma sprzedaje komuś towar dostarczany następnie do kilku różnych punktów a płatnikiem jest jeszcze inny...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wiele-zrodel-pokrycia-nalexnosci"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wiele źródeł pokrycia zobowiązań",
+            "description": "Wiele źródeł pokrycia zobowiązań gdy występują inni płatnicy niż nabywca jest szczególnie użyteczne w przedsiębiorstwach wielozakładowych w których jeden...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wiele-zrodel-pokrycia-zobowiazan"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wielkość przedsiębiorstwa",
+            "description": "Do definicji rozmiarów przedsiębiorstwa najczęściej przyjmuje się wielkość zatrudnienia lub wielkość obrotów. W warunkach polskich w których dominują duże...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wielkosc-przedsiebiorstwa"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wielojęzyczność  obsługa przedsiębiorstwa międzynarodowego",
+            "description": "Pakiet umożliwia wystawianie dokumentów w różnych językach a teksty i szablony dokumentów prezentowanych na ekranach i opisy wydruków przechowywane są w...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wielojezycznosc-obsluga-przedsiebiorstwa-miedzynarodowego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wielojęzyczność  teksty",
+            "description": "Pakiet umożliwia wystawianie dokumentów w różnych językach. Teksty i szablony dokumentów przechowywane są w systemie informatycznym.",
+            "url": "https://www.raport-erp.pl/slownik-erp/wielojezycznosc-teksty"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wielopoziomowy harmonogram główny  plany produkcji",
+            "description": "W przedsiębiorstwach wielozakładowych i wielofirmowych zwykle konieczne jest tworzenie wielopoziomowego harmonogramu głównego – planu długookresowego dostaw i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wielopoziomowy-harmonogram-glowny-plany-produkcji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wielowalutowość",
+            "description": "Obsługa wielowalutowości jest konieczna w pakietach dla przedsiębiorstw eksportujących i importujących i międzynarodowych czyli tam gdzie istnieje konieczność...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wielowalutowosc"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wielowalutowość  obsługa przedsiębiorstwa międzynarodowego",
+            "description": "Ta funkcja jest konieczna w pakietach dla przedsiębiorstw eksportujących i importujących oraz międzynarodowych tam gdzie istnieje konieczność częstego...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wielowalutowosc-obsluga-przedsiebiorstwa-miedzynarodowego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "WMS",
+            "description": "Warehause Management System - zarządzanie gospodarką magazynową (razem z ERP lub oddzielny moduł).",
+            "url": "https://www.raport-erp.pl/slownik-erp/wms"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wprowadzanie danych z dzienników zewnętrznych",
+            "description": "Wprowadzanie danych z ksiąg pierwotnego zapisu do księgi głównej pozwala na weryfikację danych przed ich ostatecznym zaksięgowaniem i zwiększa przejrzystość...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wprowadzanie-danych-z-dziennikow-zewnetrznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wprowadzanie tekstów opisowych do zleceń produkcyjnych",
+            "description": "Teksty te mogą być drukowane na dokumentach warsztatowych. Przekazują wykonawcom dodatkowe informacje zwłaszcza na temat specyficznych wymagań co do zleceń...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wprowadzanie-tekstow-opisowych-do-zlecen-produkcyjnych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wprowadzanie zleceń - order entry",
+            "description": "Wprowadzanie zleceń - order entry jest to proces akceptowania i tłumaczenia życzeń klienta na pojęcia używane w produkcji lub dystrybucji. Akceptacja powinna...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wprowadzanie-zlecen---order-entry"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wprowadzanie zleceń z poza MPS",
+            "description": "Wprowadzanie zleceń z poza MPS pozwala na ręczne wprowadzanie modyfikacji lub uzupełnień danych planistycznych przez planistę.",
+            "url": "https://www.raport-erp.pl/slownik-erp/wprowadzanie-zlecen-z-poza-mps"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wsad importowy: odliczanie przy reeksporcie towarów",
+            "description": "W przypadku produkcji na eksport ze znacznym wsadem składników z importu niezbędne jest dla każdej partii towaru rozliczenie importowanych elementów tzw. wsadu....",
+            "url": "https://www.raport-erp.pl/slownik-erp/wsad-importowy-odliczanie-przy-reeksporcie-towarow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wskaźnik rozliczania wstecznego",
+            "description": "Umożliwia analizę zużycia czynników produkcji według normatywów już po zaraportowaniu wykonania produkcji. Zwykle po zaraportowaniu wykonania określonej ilości...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wskaznik-rozliczania-wstecznego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wybór technologii zależnie od wielkości partii",
+            "description": "W przypadku posiadania maszyn i urządzeń produkcyjnych przeznaczonych do tych samych operacji ale o różnej wydajności istotne jest właściwe ich wykorzystanie....",
+            "url": "https://www.raport-erp.pl/slownik-erp/wybor-technologii-zalexnie-od-wielkosci-partii"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wykorzystanie centrów roboczych",
+            "description": "Śledzenie wykorzystania centrów roboczych przez zlecenia produkcyjne jest istotne przy nierównomiernym obłożeniu zdolności produkcyjnych i pozwala na korekty...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wykorzystanie-centrow-roboczych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wykorzystanie danych istniejących w systemach  informatycznych",
+            "description": "Wykorzystanie danych istniejących obecnie w systemach informatycznych pozwala na uproszczenie a często także w znacznym stopniu zautomatyzowanie migracji z...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wykorzystanie-danych-istniejacych-w-systemach-informatycznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 30,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wykorzystanie prognozy i zamówień do planowania",
+            "description": "Jest to istotne przy planowaniu w średnim horyzoncie planistycznym. Szczególnie przy produkcji na magazyn istotne jest korzystanie z prognoz zbytu i znanych...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wykorzystanie-prognozy-i-zamowien-do-planowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 31,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wykorzystanie tylko prognozy przy planowaniu",
+            "description": "Gdy rozważa się wiele wariantów popytu w długim horyzoncie planistycznym to do szacowania realizowalności konkretnej wersji planu użyteczne są tylko prognozy...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wykorzystanie-tylko-prognozy-przy-planowaniu"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 32,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wykorzystanie tylko zamówień do planowania",
+            "description": "Gdy zamówienia są regularne lub realizuje się długookresowe umowy to do planowania wystarczają jedynie zamówienia. Także należy przyjąć tą opcję gdy planowanie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wykorzystanie-tylko-zamowien-do-planowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 33,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wykorzystanie wartości większej z zamówień i prognozy do planowania.",
+            "description": "Ten sposób jest szczególnie przydatny przy dużym poziomie niepewności na rynku. Jest to swojego typu „wróżenie z kart”.",
+            "url": "https://www.raport-erp.pl/slownik-erp/wykorzystanie-wartosci-wiekszej-z-zamowien-i-prognozy-do-planowania"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 34,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wymiana elektroniczna informacji z bankami",
+            "description": "Wymiana elektroniczna informacji z bankami obejmuje przynajmniej zasięganie informacji o stanach i obrotach na kontach elektroniczne podpisywanie i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wymiana-elektroniczna-informacji-z-bankami"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 35,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wyniki obciążania stanowisk  dla zmiennych okresów planistycznych",
+            "description": "Wyniki obciążania stanowisk dla zmiennych okresów planistycznych pozwalają na szybkie zgrubne określanie możliwości realizacji różnych wariantów harmonogramu...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wyniki-obciaxania-stanowisk-dla-zmiennych-okresow-planistycznych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 36,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wyrównywanie obciążeń centrów roboczych",
+            "description": "Jest to technika stosowana do planowania krótkookresowego. Celem jest możliwie duże i równomierne wykorzystanie zdolności produkcyjnych poprzez właściwe...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wyrownywanie-obciaxen-centrow-roboczych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 37,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wystawianie dokumentacji handlowej",
+            "description": "Automatyzacja wystawiania dokumentacji handlowej pozwala na oszczędność czasu i nakładu pracy. Dokumentacja spedycyjna i celna głównie przy eksporcie wymaga...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wystawianie-dokumentacji-handlowej"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 38,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Wystawianie dokumentacji warsztatowej dla produkcji procesowej",
+            "description": "Powinno ono być maksymalnie uproszczone i odnosić się raczej do harmonogramu niż zleceń co pozwala na unikanie nadmiaru informacji. W konkretnym przypadku...",
+            "url": "https://www.raport-erp.pl/slownik-erp/wystawianie-dokumentacji-warsztatowej-dla-produkcji-procesowej"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę Y",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "YMS",
+            "description": "Yard Management System - zarządzanie przestrzenią składowania ( zespolony z WMS czy jako oddzielny moduł).",
+            "url": "https://www.raport-erp.pl/slownik-erp/yms"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Terminy na literę Z",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zaawansowane narzędzia do analiz ekonomiczno  finansowych",
+            "description": "Zarządzanie i sterowanie finansowe w Polsce jest zwane czasami „kontrolingiem”. Jest to przekrojowa funkcja analityczno-syntetyczna realizowana w ramach...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zaawansowane-narzedzia-do-analiz-ekonomiczno-finansowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zaawansowane wspieranie decyzji biznesowych",
+            "description": "Zaawansowane wspieranie decyzji biznesowych typu BI (Business Intelligence) zawiera pogłębione analizy ekonomiczne. Cechą charakterystyczną jest zastosowanie...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zaawansowane-wspieranie-decyzji-biznesowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zabezpieczenie  materiałowe",
+            "description": "Zabezpieczenie materiałowe jest sprawdzane przed uruchomieniem zleceń produkcyjnych. Obejmuje to: stany magazynowe rezerwacje materiałów produkcję w toku itp....",
+            "url": "https://www.raport-erp.pl/slownik-erp/zabezpieczenie-materialowe"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zarządzanie personelem wykonawczym (przydział operatorów)",
+            "description": "Zarządzanie personelem wykonawczym przydział operatorów pozwala na określenie niezbędnej liczbę specjalistów – operatorów maszyn ich przydział i czas...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zarzadzanie-personelem-wykonawczym-przydzial-operatorow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zarządzanie płatnościami dla poszczególnych dostawców",
+            "description": "Zarządzanie płatnościami dla poszczególnych dostawców jest szczególnie istotne wtedy gdy przedsiębiorstwo nie ma nadmiaru gotówki. Trzeba wtedy częściowymi...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zarzadzanie-platnosciami-dla-poszczegolnych-dostawcow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zarządzanie relacjami z właścicielami kapitału w powiązaniu z zarządzaniem strategicznym",
+            "description": "Zarządzanie relacjami z właścicielami kapitału w powiązaniu z zarządzaniem strategicznym jest to metoda pozwalająca na: wspieranie funkcjonowania organizacji...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zarzadzanie-relacjami-z-wlascicielami-kapitalu-w-powiazaniu-z-zarzadzaniem-strategicznym"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zasady uzupełniania zapasów",
+            "description": "Uzupełnianie zapasów materiałów tanich i o masowym zużyciu odbywa się z wykorzystaniem jednej z powszechnie używanych metod takich jak FIFO LIFO Mini-maks itp.",
+            "url": "https://www.raport-erp.pl/slownik-erp/zasady-uzupelniania-zapasow"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zasoby krytyczne inne niż 'wąskie gardła' na produkcji",
+            "description": "Takie zasoby są definiowane i tworzone ręcznie przez planistę. Mogą nimi być np. pracownicy pieniądze przepustowość sieci transportowej. Praktycznie każdy zasób...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zasoby-krytyczne-inne-nix-waskie-gardla-na-produkcji"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zasoby krytyczne -  materiały o długim cyklu dostaw.",
+            "description": "Sprawdzenie dostępności materiał&oacute;w krytycznych zwykle o długim cyklu dostaw pozwala na szybkie sprawdzenie na poziomie harmonogramu gł&oacute;wnego ich...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zasoby-krytyczne---materialy-o-dlugim-cyklu-dostaw"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zastosowane algorytmy programowania liniowego",
+            "description": "W przypadku rozwiązywania dużych zagadnień optymalizacyjnych celowym jest zastosowanie technik programowania liniowego. Stało się to możliwe od pewnego czasu...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zastosowane-algorytmy-programowania-liniowego"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zastosowanie kosztów planowanych  postulowanych i rzeczywistych",
+            "description": "Ten sposób pozwala na w miarę precyzyjne rozliczanie produkcji i dystrybucji przy produkcji seryjnej i wielkoseryjnej. Koszty planuje się raz na rok po...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zastosowanie-kosztow-planowanych-postulowanych-i-rzeczywistych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zbieranie danych marketingowych",
+            "description": "Zbieranie danych marketingowych takich jak wyniki badań ankietowych mailing itp. pozwala na nadzorowanie rynku poprzez zbieranie danych o jego chłonności i...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zbieranie-danych-marketingowych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zdecentralizowane zamówienia",
+            "description": "Zdecentralizowane zamówienia mogą być wprowadzane w różnych komórkach przedsiębiorstwa przez poszczególne osoby zgodnie z przyznanymi uprawnieniami. Mogą to być...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zdecentralizowane-zamowienia"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zgodność z polskimi przepisami o rachunkowości",
+            "description": "Ze względu na dużą zmienność polskiego prawa (zwłaszcza ustawy o rachunkowości i ustaw podatkowych) wyjątkowo trudno spełnić ten wymóg. Autorów oprogramowania...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zgodnosc-z-polskimi-przepisami-o-rachunkowosci"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zmiany do planowanych zleceń produkcyjnych",
+            "description": "Ta funkcja umożliwia korektę ilości i terminów zleceń produkcyjnych w ostatnim momencie przed ich uruchomieniem. Zarządzający czyni to manualnie i na własną...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zmiany-do-planowanych-zlecen-produkcyjnych"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "item": {
+            "@type": "DefinedTerm",
+            "name": "Zwalnianie masowe zleceń produkcyjnych",
+            "description": "Przy ustabilizowanej mało złożonej produkcji ta funkcja pozwala na zminimalizowanie prac planistycznych gdyż umożliwia po analizie dostępności materiałów na...",
+            "url": "https://www.raport-erp.pl/slownik-erp/zwalnianie-masowe-zlecen-produkcyjnych"
+          }
+        }
+      ]
+    }
+  ]
+}

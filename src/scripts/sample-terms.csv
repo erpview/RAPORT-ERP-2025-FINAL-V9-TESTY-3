@@ -1,0 +1,4 @@
+term,definition,tags,related_terms
+"ERP","System ERP (Enterprise Resource Planning) to zintegrowane oprogramowanie do zarządzania przedsiębiorstwem, które łączy wszystkie działy i procesy w jednym systemie.","system;zarządzanie;przedsiębiorstwo","MRP;CRM;BI"
+"MRP","System MRP (Material Requirements Planning) to metoda planowania zapotrzebowania materiałowego w procesie produkcji.","produkcja;planowanie;materiały","ERP;MRP II"
+"CRM","System CRM (Customer Relationship Management) to narzędzie do zarządzania relacjami z klientami.","klienci;sprzedaż;marketing","ERP;Marketing Automation"
