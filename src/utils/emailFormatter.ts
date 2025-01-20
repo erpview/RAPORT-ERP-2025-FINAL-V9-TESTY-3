@@ -99,6 +99,28 @@ export const formatEmailTemplate = (formData: FormData) => {
 export const formatRegistrationEmailTemplate = (email: string) => {
   return {
     to_email: email,
+    subject: '🎉 Witamy w Raporcie ERP!',
+    message: `
+      👋 Witaj!
+
+      🎯 Dziękujemy za rejestrację w Raporcie ERP. Twoje konto zostało utworzone i jest w trakcie weryfikacji.
+
+      ⏳ Co dalej?
+      1. Nasz zespół zweryfikuje Twoje dane
+      2. Otrzymasz email z potwierdzeniem aktywacji konta
+      3. Po aktywacji będziesz mieć pełny dostęp do raportu
+
+      📧 Używasz adresu: ${email}
+
+      ❓ Masz pytania?
+      Odpowiedz na tego emaila lub skontaktuj się z nami przez formularz kontaktowy.
+
+      🔒 Bezpieczeństwo
+      Twoje dane są u nas bezpieczne i nie zostaną udostępnione osobom trzecim.
+
+      Pozdrawiamy,
+      Zespół Raportu ERP 🚀
+    `.trim()
   };
 };
 
