@@ -169,21 +169,43 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
     return true;
   };
 
+  const validatePostalCode = (code: string) => {
+    const pattern = /^\d{2}-\d{3}$/;
+    return pattern.test(code);
+  };
+
+  const formatPostalCode = (value: string) => {
+    // Remove all non-digits
+    const digits = value.replace(/\D/g, '');
+    
+    // Format as XX-XXX
+    if (digits.length <= 2) return digits;
+    return `${digits.slice(0, 2)}-${digits.slice(2, 5)}`;
+  };
+
   const handleChange = (name: string, value: any) => {
+    // Format postal code as user types
+    if (name === 'postal_code') {
+      value = formatPostalCode(value);
+      if (value.length > 6) return; // Don't allow more than XX-XXX
+    }
+
     setFormData(prev => ({ ...prev, [name]: value }));
     // Clear error for this field if exists
     if (errors[name]) {
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
-      });
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate postal code
+    if (formData.postal_code && !validatePostalCode(formData.postal_code)) {
+      toast.error('Kod pocztowy musi być w formacie XX-XXX (np. 12-345)');
+      return;
+    }
+
     try {
       // First save the company data
       await onSubmit(formData);
