@@ -52,9 +52,9 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.10.2",
-    "@types/react": "^18.2.55",
+    "@types/react": "^18.3.18",
     "@types/react-datepicker": "^6.1.0",
-    "@types/react-dom": "^18.2.19",
+    "@types/react-dom": "^18.3.5",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.3.4",
@@ -70,8 +70,8 @@
     "terser": "^5.37.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
-    "typescript": "^5.2.2",
-    "vite": "^5.1.0",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.13",
     "vite-plugin-pwa": "^0.21.1"
   }
 }
