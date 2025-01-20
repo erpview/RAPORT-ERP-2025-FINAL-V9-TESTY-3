@@ -171,10 +171,10 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
             {
               "@type": "ListItem",
               "position": 2,
-              "name": "Partnerzy Technologiczni",
+              "name": "Partnerzy technologiczni",
               "item": {
                 "@type": "ItemList",
-                "name": "Partnerzy Technologiczni Raportu ERP",
+                "name": "Partnerzy technologiczni Raportu ERP",
                 "description": "Partnerzy technologiczni wspierający Raport ERP"
               }
             }
