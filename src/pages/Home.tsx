@@ -24,6 +24,7 @@ interface Partner {
   logo_url: string;
   website_url: string;
   is_main_partner: boolean;
+  slug: string;
 }
 
 interface FaqItem {
@@ -234,10 +235,14 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-center mb-8">Główni partnerzy</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8">
               {mainPartners.map(partner => (
-                <a href={partner.website_url} key={partner.id} 
-                   className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow aspect-video">
+                <Link 
+                  to={`/partnerzy/${partner.slug}`} 
+                  key={partner.id} 
+                  onClick={() => window.scrollTo(0, 0)}
+                  className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow aspect-video"
+                >
                   <img src={partner.logo_url} alt={partner.name} className="max-h-12 md:max-h-16 w-auto object-contain" />
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -249,10 +254,14 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-center mb-8">Partnerzy technologiczni</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8">
               {techPartners.map(partner => (
-                <a href={partner.website_url} key={partner.id}
-                   className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow aspect-video">
+                <Link 
+                  to={`/partnerzy/${partner.slug}`} 
+                  key={partner.id}
+                  onClick={() => window.scrollTo(0, 0)}
+                  className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow aspect-video"
+                >
                   <img src={partner.logo_url} alt={partner.name} className="max-h-10 md:max-h-12 w-auto object-contain" />
-                </a>
+                </Link>
               ))}
             </div>
           </div>
