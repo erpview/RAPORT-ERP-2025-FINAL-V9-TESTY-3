@@ -31,45 +31,82 @@ export const SystemForm: React.FC<SystemFormProps> = ({
   useEffect(() => {
     if (system?.id) {
       loadFieldValues();
-      // Don't load previous review notes for editors when editing
-      if (!isCreating && system.review_notes && false) {
-        setReviewNotes(system.review_notes);
-      }
+      // Always start with empty review notes when editing
+      setReviewNotes('');
     }
   }, [system?.id, fields]);
 
   const loadFieldValues = async () => {
     if (!system?.id) return;
-    const values = await getFieldValues(system.id);
-    const valueMap = values.reduce((acc, val) => ({
-      ...acc,
-      [val.field_id]: val.value
-    }), {});
-    setFieldValues(valueMap);
+    
+    try {
+      const values = await getFieldValues(system.id);
+      const valueMap = values.reduce((acc, val) => ({
+        ...acc,
+        [val.field_id]: val.value
+      }), {});
+      
+      // Add core system values to the field values
+      const coreFields = {
+        name: fields.find(f => f.field_key === 'system_name'),
+        vendor: fields.find(f => f.field_key === 'supplier'),
+        website: fields.find(f => f.field_key === 'website'),
+        size: fields.find(f => f.field_key === 'company_size'),
+        description: fields.find(f => f.field_key === 'description'),
+      };
+      
+      if (coreFields.name?.id) valueMap[coreFields.name.id] = system.name || '';
+      if (coreFields.vendor?.id) valueMap[coreFields.vendor.id] = system.vendor || '';
+      if (coreFields.website?.id) valueMap[coreFields.website.id] = system.website || '';
+      if (coreFields.size?.id) {
+        // Handle size as a comma-separated string for multiselect
+        const sizeValue = Array.isArray(system.size) ? system.size.join(',') : system.size || '';
+        valueMap[coreFields.size.id] = sizeValue;
+      }
+      if (coreFields.description?.id) valueMap[coreFields.description.id] = system.description || '';
+      
+      setFieldValues(valueMap);
+    } catch (error) {
+      console.error('Error loading field values:', error);
+      toast.error('Failed to load field values');
+    }
   };
 
-  const validateField = (field: any, value: string) => {
-    if (field.is_required && !value) {
+  const validateField = (field: any, value: string | string[] | null | undefined) => {
+    // Special handling for multiselect fields
+    if (field.field_type === 'multiselect') {
+      let values: string[] = [];
+      if (Array.isArray(value)) {
+        values = value;
+      } else if (typeof value === 'string') {
+        values = value.split(',').filter(v => v.trim() !== '');
+      }
+      if (field.is_required && values.length === 0) {
+        return 'Please select at least one option';
+      }
+      return '';
+    }
+    
+    // For other fields - convert to string
+    const stringValue = String(value || '');
+    
+    // For other fields
+    if (field.is_required && !stringValue.trim()) {
       return 'This field is required';
     }
     
-    if (value) {
+    if (stringValue.trim()) {
       switch (field.field_type) {
         case 'email':
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(stringValue)) {
             return 'Invalid email address';
           }
           break;
         case 'url':
           try {
-            new URL(value);
+            new URL(stringValue);
           } catch {
             return 'Invalid URL';
-          }
-          break;
-        case 'multiselect':
-          if (field.is_required && (!value || value.split(',').length === 0)) {
-            return 'Please select at least one option';
           }
           break;
       }
@@ -144,7 +181,7 @@ export const SystemForm: React.FC<SystemFormProps> = ({
         name: fieldValues[coreFields.name.id],
         vendor: fieldValues[coreFields.vendor.id],
         website: fieldValues[coreFields.website?.id || ''],
-        size: fieldValues[coreFields.size?.id || ''],
+        size: fieldValues[coreFields.size?.id || ''] ? [fieldValues[coreFields.size?.id]] : ['Small'], // Ensure size is always an array
         description: fieldValues[coreFields.description?.id || ''],
         review_notes: !isCreating ? reviewNotes : undefined,
       };
@@ -163,23 +200,23 @@ export const SystemForm: React.FC<SystemFormProps> = ({
     }
   };
 
-  const handleFieldChange = (fieldId: string, value: string) => {
+  const handleFieldChange = (fieldId: string, value: string | string[]) => {
     setFieldValues(prev => {
       const newValues = { ...prev };
       
       // Special handling for multiselect fields
       const field = fields.find(f => f.id === fieldId);
       if (field?.field_type === 'multiselect') {
-        // Split by comma and clean up any whitespace
-        const cleanedValues = value
-          .split(',')
-          .map(v => v.trim())
-          .filter(Boolean);
-        
-        // Store as comma-separated string
-        newValues[fieldId] = cleanedValues.join(',');
+        // Handle array of values from MultiSelect component
+        if (Array.isArray(value)) {
+          newValues[fieldId] = value.join(',');
+        } else {
+          // Handle string value (comma-separated)
+          const values = value.split(',').map(v => v.trim()).filter(Boolean);
+          newValues[fieldId] = values.join(',');
+        }
       } else {
-        newValues[fieldId] = value;
+        newValues[fieldId] = String(value || ''); // Ensure we always store a string
       }
       
       return newValues;

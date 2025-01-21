@@ -99,12 +99,12 @@ export const AdminSystems: React.FC = () => {
           name: data.system.name,
           vendor: data.system.vendor,
           website: data.system.website || '',
-          size: [data.system.size || selectedSystem.size[0]],
+          size: Array.isArray(data.system.size) ? data.system.size : [data.system.size || selectedSystem.size[0]],
           description: data.system.description || selectedSystem.description || 'Brak opisu',
           status: isEditor ? 'pending' : 'published',
           reviewed_by: null,
           reviewed_at: null,
-          review_notes: null
+          review_notes: data.system.review_notes || null
         };
 
         console.log('Updating system with data:', systemData);
@@ -352,7 +352,7 @@ export const AdminSystems: React.FC = () => {
           </div>
         )}
 
-        {reassignSystem && (
+        {reassignSystem && reassignSystem.created_by && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
             <ReassignOwnerModal
               isOpen={true}

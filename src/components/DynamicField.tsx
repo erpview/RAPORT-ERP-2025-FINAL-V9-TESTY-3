@@ -16,39 +16,29 @@ export const DynamicField: React.FC<DynamicFieldProps> = ({
   onChange,
   error
 }) => {
-  const handleChange = (value: any) => {
-    let finalValue = value;
-    
-    // Handle multiselect values
+  const handleChange = (newValue: any) => {
+    // For multiselect, we get an array of values
     if (field.field_type === 'multiselect') {
-      if (Array.isArray(value)) {
-        finalValue = value;
-      } else if (typeof value === 'string') {
-        // Split by comma and clean up any whitespace
-        finalValue = value
-          .split(',')
-          .map(v => v.trim())
-          .filter(Boolean);
+      if (Array.isArray(newValue)) {
+        onChange(newValue);
       } else {
-        finalValue = [];
+        // Split by comma and clean up any whitespace
+        const values = (newValue || '').split(',').map(v => v.trim()).filter(Boolean);
+        onChange(values);
       }
+    } else {
+      onChange(newValue || '');
     }
-    
-    onChange(finalValue);
   };
 
   const getFieldValue = () => {
     if (field.field_type === 'multiselect') {
+      // Handle both string and array values
       if (Array.isArray(value)) {
         return value;
-      } else if (typeof value === 'string' && value) {
-        // Split by comma and clean up any whitespace
-        return value
-          .split(',')
-          .map(v => v.trim())
-          .filter(Boolean);
       }
-      return [];
+      // Split by comma and clean up any whitespace
+      return (value || '').split(',').map((v: string) => v.trim()).filter(Boolean);
     }
     return value || '';
   };

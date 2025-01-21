@@ -85,7 +85,23 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
         .in('id', systems.map(s => s.id));
 
       if (error) throw error;
-      setSystemDetails(data || []);
+      
+      // Create a map for ordering based on the input systems array
+      const systemPositions = systems.reduce((acc, sys, index) => {
+        acc[sys.id] = index;
+        return acc;
+      }, {} as Record<string, number>);
+      
+      // Sort the data to match the input order
+      const orderedData = [...(data || [])].sort((a, b) => {
+        const posA = systemPositions[a.id] ?? 0;
+        const posB = systemPositions[b.id] ?? 0;
+        return posA - posB;
+      });
+      
+      console.log('Systems to compare:', systems.map(s => s.id));
+      console.log('Ordered system details:', orderedData.map(s => s.id));
+      setSystemDetails(orderedData);
     } catch (error) {
       console.error('Error loading system details:', error);
     }
@@ -94,20 +110,39 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
   const loadFieldValues = async () => {
     setLoading(true);
     try {
-      const allValues = await Promise.all(
-        systems.map(system => getFieldValues(system.id))
-      );
-      
-      const groupedValues = allValues.reduce((acc, systemValues, index) => {
-        systemValues.forEach(value => {
-          if (!acc[value.field_id]) {
-            acc[value.field_id] = [];
-          }
-          acc[value.field_id][index] = value;
-        });
+      // Create a map of system IDs to their position in the systems array
+      const systemPositions = systems.reduce((acc, sys, index) => {
+        acc[sys.id] = index;
         return acc;
-      }, {} as Record<string, SystemFieldValue[]>);
+      }, {} as Record<string, number>);
 
+      // Load all field values at once
+      const { data: allValues, error } = await supabase
+        .from('system_field_values')
+        .select('*')
+        .in('system_id', systems.map(s => s.id));
+
+      if (error) throw error;
+
+      // Group values by field_id, maintaining system order
+      const groupedValues: Record<string, SystemFieldValue[]> = {};
+      
+      // First, initialize arrays for all fields
+      const uniqueFieldIds = [...new Set(allValues?.map(v => v.field_id) || [])];
+      uniqueFieldIds.forEach(fieldId => {
+        groupedValues[fieldId] = new Array(systems.length).fill(null);
+      });
+
+      // Then fill in the values in their correct positions
+      allValues?.forEach(value => {
+        const systemPosition = systemPositions[value.system_id];
+        if (typeof systemPosition === 'number') {
+          groupedValues[value.field_id][systemPosition] = value;
+        }
+      });
+
+      console.log('Loaded field values:', allValues);
+      console.log('Grouped values:', groupedValues);
       setFieldValues(groupedValues);
     } catch (error) {
       console.error('Error loading field values:', error);
@@ -116,18 +151,18 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
     }
   };
 
-  const formatFieldValue = (value: any, field: { field_type?: string, field_key?: string }) => {
-    if (value === null || value === undefined) return '-';
+  const formatFieldValue = (fieldValue: SystemFieldValue | null, field: { field_type?: string, field_key?: string }) => {
+    if (!fieldValue || !fieldValue.value) return '-';
     
     if (field.field_type === 'boolean') {
-      return value === true || value === 'true' ? 'Tak' : 'Nie';
+      return fieldValue.value === 'true' ? 'Tak' : 'Nie';
     }
 
     if (isMultiselectField(field)) {
-      return <MultiSelectDisplay value={value} />;
+      return <MultiSelectDisplay value={fieldValue.value} />;
     }
     
-    return value.toString();
+    return fieldValue.value;
   };
 
   // Check if we have custom fields available
@@ -269,14 +304,17 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
                                   </p>
                                 )}
                               </td>
-                              {systems.map((system, index) => (
-                                <td
-                                  key={system.id}
-                                  className="py-2 px-4 border-b"
-                                >
-                                  {formatFieldValue(fieldValues[field.id]?.[index]?.value, field)}
-                                </td>
-                              ))}
+                              {systems.map((system, index) => {
+                                const value = fieldValues[field.id]?.[index];
+                                return (
+                                  <td
+                                    key={system.id}
+                                    className="py-2 px-4 border-b"
+                                  >
+                                    {formatFieldValue(value, field)}
+                                  </td>
+                                );
+                              })}
                             </tr>
                           ))}
                       </React.Fragment>
