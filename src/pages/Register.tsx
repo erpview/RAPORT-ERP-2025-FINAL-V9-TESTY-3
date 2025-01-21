@@ -26,6 +26,7 @@ import { PrivacyPolicyModal } from '../components/PrivacyPolicyModal';
 import emailjs from '@emailjs/browser';
 import { emailConfig } from '../config/email';
 import { formatRegistrationEmailTemplate } from '../utils/emailFormatter';
+import { useAuth } from '../context/AuthContext';
 
 // Validation helpers
 const validateNIP = (nip: string): boolean => {
@@ -313,9 +314,7 @@ export const Register: React.FC = () => {
           // Don't throw error here to allow registration to complete even if email fails
         }
 
-        // Sign out the user after successful registration
-        await supabase.auth.signOut();
-
+        // Show success message and redirect (no signout needed here)
         toast.success('Rejestracja przebiegła pomyślnie');
         navigate('/rejestracja/sukces');
       }

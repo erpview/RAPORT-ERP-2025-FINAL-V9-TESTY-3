@@ -8,7 +8,7 @@ export const RegistrationSuccess: React.FC = () => {
       <div className="w-full max-w-md">
         <div className="sf-card p-8 text-center space-y-6">
           <div className="flex justify-center">
-            <CheckCircle className="w-16 h-16 text-green-500" />
+            <CheckCircle className="w-16 h-16 text-[#0066CC]" />
           </div>
           
           <h1 className="text-2xl font-semibold text-[#1d1d1f]">

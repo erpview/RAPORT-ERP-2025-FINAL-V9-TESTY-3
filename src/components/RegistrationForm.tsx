@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
 import { toast } from 'react-hot-toast';
-import { useRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Mail, Phone, Building2, User, AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../config/supabase';
 import { validateNIP, validatePolishPhone, validateBusinessEmail } from '../utils/validators';
+import { useAuth } from '../context/AuthContext';
 
 const registrationSchema = z.object({
   companyName: z.string().min(1, 'Nazwa firmy jest wymagana'),
@@ -31,7 +32,8 @@ const generateSecurePassword = () => {
 };
 
 export const RegistrationForm: React.FC = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
   const [formData, setFormData] = useState({
     companyName: '',
     nip: '',
@@ -94,8 +96,12 @@ export const RegistrationForm: React.FC = () => {
 
       if (managementError) throw managementError;
 
+      // Sign out silently and without navigation
+      await signOut(true);
+
+      // Show success message and redirect
       toast.success('Rejestracja przebiegła pomyślnie. Oczekuj na zatwierdzenie przez administratora.');
-      router.push('/registration-success');
+      navigate('/registration-success');
 
     } catch (error) {
       if (error instanceof z.ZodError) {

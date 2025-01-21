@@ -10,7 +10,7 @@ interface AuthContextType {
   isEditor: boolean;
   canViewUsers: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signOut: () => Promise<void>;
+  signOut: (silent?: boolean) => Promise<void>;
   loading: boolean;
 }
 
@@ -79,7 +79,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       setUser(session?.user ?? null);
       checkUserRole(session?.user ?? null);
     });
@@ -143,8 +143,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const signOut = async () => {
+  const signOut = async (silent = false) => {
     try {
+      const isRegistrationFlow = window.location.pathname.includes('/rejestracja');
+
       // Clear browser storage first
       localStorage.clear();
       sessionStorage.clear();
@@ -162,19 +164,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsEditor(false);
       setCanViewUsers(false);
 
-      // Navigate and show success message
-      navigate('/');
-      toast.success('Wylogowano pomyślnie');
+      // Only navigate and show toast for explicit logout (not silent, not registration)
+      if (!silent && !isRegistrationFlow) {
+        navigate('/');
+        toast.success('Wylogowano pomyślnie');
+      }
     } catch (error) {
       console.error('Error during sign out:', error);
       
-      // Still clear state and redirect even if there's an error
+      // Still clear state even if there's an error
       setUser(null);
       setIsAdmin(false);
       setIsEditor(false);
       setCanViewUsers(false);
-      navigate('/');
-      toast.success('Wylogowano pomyślnie');
     }
   };
 
