@@ -348,7 +348,9 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
     is_required: required,
     module_id: 'company',
     field_key: id,
-    description
+    description: description || null,
+    options: null,
+    order_index: 0
   });
 
   return (
@@ -386,7 +388,8 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
               />
 
               <DynamicField
-                field={createFieldConfig('logo_url', 'Logo URL', 'url', false)}
+                field={createFieldConfig('logo_url', 'Logo URL', 'url', false,
+                  'Wklej adres url do logotypu w formacie jpg lub png o wymiarach: szerokość 600 px oraz wysokość 192 px')}
                 value={formData.logo_url || ''}
                 onChange={(value) => handleChange('logo_url', value)}
                 error={errors.logo_url}
