@@ -3,6 +3,7 @@ import { X, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '../config/supabase';
 import Select from 'react-select';
 import toast from 'react-hot-toast';
+import { useAuth } from '../context/AuthContext';
 
 interface Editor {
   user_id: string;
@@ -28,6 +29,7 @@ export const ReassignOwnerModal: React.FC<ReassignOwnerModalProps> = ({
   const [selectedEditor, setSelectedEditor] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchEditors = async () => {
@@ -60,12 +62,35 @@ export const ReassignOwnerModal: React.FC<ReassignOwnerModalProps> = ({
 
     setIsSubmitting(true);
     try {
-      const { error } = await supabase
+      // Start a transaction
+      const { error: systemError } = await supabase
         .from('systems')
         .update({ created_by: selectedEditor })
         .eq('id', systemId);
 
-      if (error) throw error;
+      if (systemError) throw systemError;
+
+      // First check if an entry already exists
+      const { data: existingEntry } = await supabase
+        .from('system_editors')
+        .select('*')
+        .eq('system_id', systemId)
+        .eq('editor_id', selectedEditor)
+        .single();
+
+      if (!existingEntry) {
+        // Add entry to system_editors table only if it doesn't exist
+        const { error: editorError } = await supabase
+          .from('system_editors')
+          .insert([{
+            system_id: systemId,
+            editor_id: selectedEditor,
+            assigned_by: user?.id,  // Current admin who's making the change
+            assigned_at: new Date().toISOString()
+          }]);
+
+        if (editorError) throw editorError;
+      }
 
       toast.success('Właściciel systemu został zmieniony');
       onSuccess();

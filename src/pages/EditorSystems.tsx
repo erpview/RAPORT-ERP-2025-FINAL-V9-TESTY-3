@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Loader2, AlertCircle, Settings2, FileEdit, Eye, MoreVertical, ChevronDown } from 'lucide-react';
+import { Plus, Pencil, Loader2, AlertCircle, Settings2, FileEdit, Eye, MoreVertical, ChevronDown, X } from 'lucide-react';
 import { supabase } from '../config/supabase';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
@@ -8,6 +8,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useNavigate } from 'react-router-dom';
 import { SystemForm } from '../components/SystemForm';
 import { useSystemFields } from '../hooks/useSystemFields';
+import { SystemStatusBadge } from '../components/SystemStatusBadge';
 
 export const EditorSystems: React.FC = () => {
   const [systems, setSystems] = useState<System[]>([]);
@@ -167,7 +168,7 @@ export const EditorSystems: React.FC = () => {
           <div className="flex items-center gap-3">
             <Settings2 className="w-8 h-8 text-[#2c3b67]" />
             <h1 className="text-[32px] font-semibold text-[#1d1d1f]">
-              Zarządzanie systemami ERP
+              Moje systemy ERP
             </h1>
           </div>
           <button
@@ -178,122 +179,102 @@ export const EditorSystems: React.FC = () => {
             className="sf-button-primary"
           >
             <Plus className="w-5 h-5 mr-2" />
-            Dodaj system
+            Dodaj nowy system
           </button>
         </div>
 
-        <div className="mb-6">
-          <div className="flex items-center gap-4">
-            <span className="text-[#86868b]">Filtruj według statusu:</span>
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value as SystemStatus | 'all')}
-              className="sf-select"
-            >
-              <option value="all">Wszystkie</option>
-              <option value="draft">Szkic</option>
-              <option value="pending">Oczekujące</option>
-              <option value="published">Opublikowane</option>
-              <option value="rejected">Odrzucone</option>
-            </select>
+        {loading ? (
+          <div className="flex items-center justify-center h-64">
+            <div className="flex items-center gap-3 text-[#86868b]">
+              <Loader2 className="w-6 h-6 animate-spin" />
+              <p className="text-[17px]">Ładowanie systemów...</p>
+            </div>
           </div>
-        </div>
-
-        <div className="space-y-4">
-          {loading ? (
-            <div className="flex items-center justify-center h-64">
-              <Loader2 className="w-8 h-8 animate-spin text-gray-500" />
-            </div>
-          ) : filteredSystems.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-500">Nie znaleziono systemów</p>
-            </div>
-          ) : (
-            <div className="grid gap-4">
-              {filteredSystems.map(system => (
-                <div
-                  key={system.id}
-                  className="sf-card p-6 hover:shadow-md transition-shadow"
-                >
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-lg font-medium">{system.name}</h3>
-                      <p className="text-sm text-gray-500">{system.vendor}</p>
+        ) : systems.length === 0 ? (
+          <div className="sf-card p-8 text-center">
+            <AlertCircle className="w-8 h-8 text-[#86868b] mx-auto mb-4" />
+            <p className="text-[17px] text-[#86868b]">
+              Nie masz jeszcze przypisanych systemów
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-4">
+            {filteredSystems.map((system) => (
+              <div
+                key={system.id}
+                className="sf-card p-6 hover:shadow-md transition-shadow"
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-[19px] font-semibold text-[#1d1d1f]">
+                      {system.name}
+                    </h3>
+                    <div className="flex items-center gap-3 mt-2">
+                      <p className="text-[15px] text-[#86868b]">
+                        {system.vendor}
+                      </p>
+                      <SystemStatusBadge status={system.status} />
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className={`px-3 py-1 rounded-full text-sm ${
-                        system.status === 'published' ? 'bg-green-100 text-green-800' :
-                        system.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                        system.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {system.status === 'published' ? 'Opublikowany' :
-                         system.status === 'pending' ? 'Oczekuje na zatwierdzenie' :
-                         system.status === 'rejected' ? 'Odrzucony' :
-                         'Szkic'}
-                      </span>
-                      <DropdownMenu.Root>
-                        <DropdownMenu.Trigger asChild>
-                          <button className="p-2 hover:bg-gray-100 rounded-full">
-                            <MoreVertical className="w-5 h-5 text-gray-500" />
-                          </button>
-                        </DropdownMenu.Trigger>
-                        <DropdownMenu.Portal>
-                          <DropdownMenu.Content className="bg-white rounded-lg shadow-lg py-1 min-w-[160px]">
-                            <DropdownMenu.Item className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                              onClick={() => {
-                                setSelectedSystem(system);
-                                setIsCreating(false);
-                              }}
-                              disabled={system.status === 'pending'}
-                            >
-                              <FileEdit className="w-4 h-4 mr-2" />
-                              {system.status === 'pending' ? 'Oczekuje na zatwierdzenie' : 'Edytuj'}
-                            </DropdownMenu.Item>
-                            <DropdownMenu.Item className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
-                              <Eye className="w-4 h-4 mr-2" />
-                              Podgląd
-                            </DropdownMenu.Item>
-                          </DropdownMenu.Content>
-                        </DropdownMenu.Portal>
-                      </DropdownMenu.Root>
-                    </div>
-                  </div>
-                  {system.status === 'rejected' && system.review_notes && (
-                    <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
-                      <div className="flex items-start gap-2">
-                        <AlertCircle className="w-5 h-5 text-red-500 mt-0.5" />
-                        <div>
-                          <h4 className="font-medium text-red-800">Uwagi od administratora:</h4>
-                          <p className="text-sm text-red-700 mt-1">{system.review_notes}</p>
-                        </div>
+                    {system.review_notes && (
+                      <div className="mt-3 p-3 bg-[#F5F5F7] rounded-xl">
+                        <p className="text-[15px] text-[#1d1d1f]">
+                          <span className="font-medium">Uwagi od administratora:</span><br/>
+                          {system.review_notes}
+                        </p>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        setSelectedSystem(system);
+                        setIsCreating(false);
+                      }}
+                      disabled={system.status === 'pending'}
+                      className={`sf-button ${
+                        system.status === 'pending' 
+                          ? 'bg-[#F5F5F7] text-[#86868b] cursor-not-allowed opacity-50' 
+                          : 'bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED]'
+                      }`}
+                    >
+                      <Pencil className="w-5 h-5 mr-2" />
+                      {system.status === 'pending' ? 'Oczekuje na zatwierdzenie' : 'Edytuj'}
+                    </button>
+                  </div>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {(isCreating || selectedSystem) && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <h2 className="text-2xl font-bold mb-4">
-                {isCreating ? 'Dodaj nowy system' : 'Edytuj system'}
-              </h2>
-              <SystemForm
-                system={selectedSystem}
-                fields={fields}
-                onSave={handleSave}
-                onCancel={handleCancel}
-                isSaving={isSaving}
-                isCreating={isCreating}
-              />
-            </div>
+              </div>
+            ))}
           </div>
         )}
       </div>
+
+      {(isCreating || selectedSystem) && (
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-4xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-[24px] font-semibold text-[#1d1d1f]">
+                  {isCreating ? 'Dodaj nowy system' : 'Edytuj system'}
+                </h2>
+                <button
+                  onClick={handleCancel}
+                  className="p-2 hover:bg-[#F5F5F7] rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <SystemForm
+                system={selectedSystem}
+                onSave={handleSave}
+                onCancel={handleCancel}
+                isSaving={isSaving}
+                fields={fields}
+                mode="editor"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
