@@ -79,11 +79,14 @@ function extractMetaTags(html: string) {
   }
   
   // Extract structured data
-  const structuredDataMatch = html.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/);
-  if (structuredDataMatch) {
+  const structuredDataMatches = html.match(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/g);
+  if (structuredDataMatches) {
     try {
-      const jsonData = JSON.parse(structuredDataMatch[1].trim());
-      metaTags.structuredData = JSON.stringify(jsonData, null, 2);
+      const jsonData = structuredDataMatches.map(match => {
+        const content = match.replace(/<script[^>]*>|<\/script>/g, '').trim();
+        return JSON.parse(content);
+      });
+      metaTags.structuredData = JSON.stringify(jsonData[0], null, 2); // Use first structured data block
     } catch (err) {
       console.error('SEO Plugin: Error parsing structured data JSON:', err);
     }
