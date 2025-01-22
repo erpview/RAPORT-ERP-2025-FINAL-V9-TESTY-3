@@ -20,6 +20,7 @@ interface Slide {
   button_text: string;
   button_url: string;
   order_index: number;
+  overlay_image_url: string | null;
 }
 
 interface Partner {
@@ -175,7 +176,8 @@ export default function AdminHome() {
           overlay_description: formData.get('overlay_description'),
           button_text: formData.get('button_text'),
           button_url: formData.get('button_url'),
-          order_index: slides.length + 1
+          order_index: slides.length + 1,
+          overlay_image_url: formData.get('overlay_image_url')
         });
 
       if (error) throw error;
@@ -309,6 +311,7 @@ export default function AdminHome() {
           overlay_description: formData.get('overlay_description')?.toString() || '',
           button_text: formData.get('button_text')?.toString() || '',
           button_url: formData.get('button_url')?.toString() || '',
+          overlay_image_url: formData.get('overlay_image_url')?.toString() || '',
           updated_at: new Date().toISOString()
         })
         .eq('id', editingSlide.id);
@@ -620,6 +623,9 @@ export default function AdminHome() {
                     required
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   />
+                  <p className="mt-1 text-sm text-gray-500">
+                    Zalecane wymiary obrazu: szerokość do 1920px, wysokość do 1080px lub 960px. Obraz zostanie dopasowany z zachowaniem proporcji.
+                  </p>
                 </div>
                 <div>
                   <label htmlFor="link_url" className="block text-sm font-medium text-gray-700 mb-1">
@@ -679,6 +685,20 @@ export default function AdminHome() {
                     required
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   />
+                </div>
+                <div>
+                  <label htmlFor="overlay_image_url" className="block text-sm font-medium text-gray-700 mb-1">
+                    URL obrazu nakładki
+                  </label>
+                  <input
+                    type="url"
+                    id="overlay_image_url"
+                    name="overlay_image_url"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <p className="mt-1 text-sm text-gray-500">
+                    Zalecane wymiary obrazu: szerokość do 800px, wysokość do 268px. Obraz zostanie dopasowany z zachowaniem proporcji.
+                  </p>
                 </div>
                 <div className="flex gap-2">
                   <Button type="submit">Dodaj slajd</Button>
@@ -1065,6 +1085,9 @@ export default function AdminHome() {
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
               />
+              <p className="mt-1 text-sm text-gray-500">
+                Zalecane wymiary obrazu: szerokość do 1920px, wysokość do 1080px lub 960px. Obraz zostanie dopasowany z zachowaniem proporcji.
+              </p>
             </div>
             <div>
               <label htmlFor="link_url-modal" className="block text-sm font-medium text-gray-700 mb-1">
@@ -1130,6 +1153,21 @@ export default function AdminHome() {
               rows={4}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
             />
+          </div>
+          <div>
+            <label htmlFor="overlay_image_url-modal" className="block text-sm font-medium text-gray-700 mb-1">
+              URL obrazu nakładki
+            </label>
+            <input
+              type="url"
+              id="overlay_image_url-modal"
+              name="overlay_image_url"
+              defaultValue={editingSlide?.overlay_image_url || ''}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+            />
+            <p className="mt-1 text-sm text-gray-500">
+              Zalecane wymiary obrazu: szerokość do 800px, wysokość do 268px. Obraz zostanie dopasowany z zachowaniem proporcji.
+            </p>
           </div>
           <div className="flex justify-end gap-2">
             <Button type="button" variant="secondary" onClick={() => setEditingSlide(null)}>

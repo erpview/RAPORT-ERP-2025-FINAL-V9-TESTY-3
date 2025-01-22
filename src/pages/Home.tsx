@@ -16,6 +16,7 @@ interface Slide {
   overlay_description: string | null;
   button_text: string;
   button_url: string;
+  overlay_image_url: string | null;
 }
 
 interface Partner {
@@ -145,35 +146,68 @@ export default function Home() {
                     {/* Content overlay */}
                     <div className="absolute inset-0">
                       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
-                        <div className="relative max-w-[90vw] sm:max-w-none ml-[5%] sm:ml-[10%] mr-[max(5%,_calc(100%-95vw))] sm:mr-0 w-min min-w-[80%] sm:min-w-[55%]">
-                          {/* White overlay behind text */}
-                          {(slide.overlay_heading || slide.overlay_description) && (
-                            <div className="absolute inset-0 bg-white opacity-70 rounded-lg" />
-                          )}
-                          
-                          {/* Content */}
-                          <div className="relative text-navy-700">
-                            <div className="p-4">
-                              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 whitespace-normal break-words">
-                                {slide.overlay_heading}
-                              </h1>
-                              {slide.overlay_description && (
-                                <p className="text-sm xs:text-base sm:text-lg md:text-xl mb-3 sm:mb-4 md:mb-8 whitespace-normal break-words">
-                                  {slide.overlay_description}
-                                </p>
+                        <div className="flex items-center gap-8">
+                          {/* Text Content */}
+                          <div className="relative max-w-[90vw] sm:max-w-none ml-[5%] sm:ml-[10%] mr-[max(5%,_calc(100%-95vw))] sm:mr-0 w-min min-w-[55%] sm:min-w-[55%]">
+                            {/* White overlay behind text */}
+                            {(slide.overlay_heading || slide.overlay_description) && (
+                              <div className="absolute inset-0 bg-white opacity-70 rounded-lg" />
+                            )}
+                            
+                            {/* Content */}
+                            <div className="relative text-navy-700">
+                              <div className="p-4">
+                                <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 whitespace-normal break-words">
+                                  {slide.overlay_heading}
+                                </h1>
+                                {slide.overlay_description && (
+                                  <p className="text-sm xs:text-base sm:text-lg md:text-xl mb-3 sm:mb-4 md:mb-8 whitespace-normal break-words">
+                                    {slide.overlay_description}
+                                  </p>
+                                )}
+                              </div>
+                              {slide.button_text && slide.button_url && (
+                                <div className="flex justify-end px-4 pb-4">
+                                  <a
+                                    href={slide.button_url}
+                                    target="_blank"
+                                    rel="nofollow noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-2 xs:px-3 py-1 xs:py-1.5 rounded-lg transition-colors bg-[#2c3b67] text-white hover:bg-[#1a2440] text-[12px] xs:text-[13px] sm:text-[15px] font-medium"
+                                  >
+                                    {slide.button_text}
+                                  </a>
+                                </div>
                               )}
                             </div>
-                            {slide.button_text && slide.button_url && (
-                              <div className="flex justify-end px-4 pb-4">
-                                <a
-                                  href={slide.button_url}
-                                  className="inline-flex items-center gap-2 px-2 xs:px-3 py-1 xs:py-1.5 rounded-lg transition-colors bg-[#2c3b67] text-white hover:bg-[#1a2440] text-[12px] xs:text-[13px] sm:text-[15px] font-medium"
-                                >
-                                  {slide.button_text}
-                                </a>
-                              </div>
-                            )}
                           </div>
+
+                          {/* Overlay Image with Link */}
+                          {slide.overlay_image_url && (
+                            <div className="hidden sm:block relative w-[45%] h-[300px]">
+                              <div className="relative p-4 h-full">
+                                {slide.link_url ? (
+                                  <a 
+                                    href={slide.link_url} 
+                                    target="_blank"
+                                    rel="nofollow noopener noreferrer"
+                                    className="block h-full"
+                                  >
+                                    <img 
+                                      src={slide.overlay_image_url} 
+                                      alt={slide.title}
+                                      className="w-full h-full object-contain rounded-lg"
+                                    />
+                                  </a>
+                                ) : (
+                                  <img 
+                                    src={slide.overlay_image_url} 
+                                    alt={slide.title}
+                                    className="w-full h-full object-contain rounded-lg"
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
