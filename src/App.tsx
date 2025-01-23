@@ -90,8 +90,24 @@ export const App: React.FC = () => {
                 <Route 
                   path="/systems/new" 
                   element={
-                    <ProtectedRoute>
+                    <ProtectedRoute requireSystemView>
                       <SystemForm mode="create" />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/systems/:systemId/edit" 
+                  element={
+                    <ProtectedRoute requireSystemView>
+                      <SystemForm mode="edit" />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/moje-systemy" 
+                  element={
+                    <ProtectedRoute requireSystemView>
+                      <Systems />
                     </ProtectedRoute>
                   } 
                 />

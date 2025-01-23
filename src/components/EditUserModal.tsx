@@ -13,6 +13,8 @@ interface EditUserModalProps {
     is_active: boolean;
     status: string;
     can_view_users?: boolean;
+    can_view_systems?: boolean;
+    can_view_companies?: boolean;
     company_name?: string;
     full_name?: string;
     nip?: string;
@@ -35,6 +37,8 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({
     is_active: user.is_active,
     status: user.status || 'pending',
     can_view_users: String(user.can_view_users || false),
+    can_view_systems: String(user.can_view_systems || false),
+    can_view_companies: String(user.can_view_companies || false),
     company_name: user.company_name || '',
     full_name: user.full_name || '',
     nip: user.nip || '',
@@ -59,6 +63,8 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({
           status: formData.is_active ? 'active' : 'inactive',
           is_active: formData.is_active,
           can_view_users: formData.can_view_users === 'true',
+          can_view_systems: formData.can_view_systems === 'true',
+          can_view_companies: formData.can_view_companies === 'true',
           updated_at: new Date().toISOString()
         })
         .eq('user_id', user.user_id);
@@ -193,6 +199,44 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({
                   </div>
                   <p className="mt-1 text-sm text-gray-500">
                     Pozwala edytorowi na przeglądanie listy użytkowników
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="can-view-systems" className="block text-sm font-medium text-gray-700 mb-1">
+                    Dostęp do systemów
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="can-view-systems"
+                      value={formData.can_view_systems}
+                      onChange={(e) => setFormData({ ...formData, can_view_systems: e.target.value })}
+                      className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-lg"
+                    >
+                      <option value="false">Nie</option>
+                      <option value="true">Tak</option>
+                    </select>
+                  </div>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Pozwala edytorowi na zarządzanie systemami
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="can-view-companies" className="block text-sm font-medium text-gray-700 mb-1">
+                    Dostęp do firm
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="can-view-companies"
+                      value={formData.can_view_companies}
+                      onChange={(e) => setFormData({ ...formData, can_view_companies: e.target.value })}
+                      className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-lg"
+                    >
+                      <option value="false">Nie</option>
+                      <option value="true">Tak</option>
+                    </select>
+                  </div>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Pozwala edytorowi na zarządzanie firmami
                   </p>
                 </div>
               </div>

@@ -8,15 +8,17 @@ interface ProtectedRouteProps {
   requireAdmin?: boolean;
   allowEditor?: boolean;
   requireUserView?: boolean;
+  requireSystemView?: boolean;
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
   children, 
   requireAdmin = false,
   allowEditor = false,
-  requireUserView = false
+  requireUserView = false,
+  requireSystemView = false
 }) => {
-  const { user, isAdmin, isEditor, canViewUsers, loading } = useAuth();
+  const { user, isAdmin, isEditor, canViewUsers, canViewSystems, loading } = useAuth();
 
   if (loading) {
     return (
@@ -41,7 +43,11 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     return <Navigate to="/" />;
   }
 
-  if (requireUserView && !canViewUsers) {
+  if (requireUserView && !canViewUsers && !isAdmin) {
+    return <Navigate to="/" />;
+  }
+
+  if (requireSystemView && !canViewSystems && !isAdmin) {
     return <Navigate to="/" />;
   }
 

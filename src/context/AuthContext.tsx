@@ -9,9 +9,11 @@ interface AuthContextType {
   isAdmin: boolean;
   isEditor: boolean;
   canViewUsers: boolean;
+  canViewSystems: boolean;
+  canViewCompanies: boolean;
+  loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: (silent?: boolean) => Promise<void>;
-  loading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -19,9 +21,11 @@ const AuthContext = createContext<AuthContextType>({
   isAdmin: false,
   isEditor: false,
   canViewUsers: false,
+  canViewSystems: false,
+  canViewCompanies: false,
+  loading: true,
   signIn: async () => {},
   signOut: async () => {},
-  loading: true,
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -29,6 +33,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isAdmin, setIsAdmin] = useState(false);
   const [isEditor, setIsEditor] = useState(false);
   const [canViewUsers, setCanViewUsers] = useState(false);
+  const [canViewSystems, setCanViewSystems] = useState(false);
+  const [canViewCompanies, setCanViewCompanies] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -37,6 +43,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsAdmin(false);
       setIsEditor(false);
       setCanViewUsers(false);
+      setCanViewSystems(false);
+      setCanViewCompanies(false);
       setLoading(false);
       return;
     }
@@ -44,7 +52,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const { data: userData, error: userError } = await supabase
         .from('user_management')
-        .select('role, is_active, status, can_view_users')
+        .select('role, is_active, status, can_view_users, can_view_systems, can_view_companies')
         .eq('user_id', user.id)
         .maybeSingle();
 
@@ -64,6 +72,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsAdmin(userData.role === 'admin');
       setIsEditor(userData.role === 'editor');
       setCanViewUsers(userData.can_view_users || userData.role === 'admin');
+      setCanViewSystems(userData.can_view_systems || userData.role === 'admin');
+      setCanViewCompanies(userData.can_view_companies || userData.role === 'admin');
       setLoading(false);
     } catch (error) {
       console.error('Error checking user role:', error);
@@ -163,6 +173,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsAdmin(false);
       setIsEditor(false);
       setCanViewUsers(false);
+      setCanViewSystems(false);
+      setCanViewCompanies(false);
 
       // Only navigate and show toast for explicit logout (not silent, not registration)
       if (!silent && !isRegistrationFlow) {
@@ -177,11 +189,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsAdmin(false);
       setIsEditor(false);
       setCanViewUsers(false);
+      setCanViewSystems(false);
+      setCanViewCompanies(false);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAdmin, isEditor, canViewUsers, signIn, signOut, loading }}>
+    <AuthContext.Provider value={{
+      user,
+      isAdmin,
+      isEditor,
+      canViewUsers,
+      canViewSystems,
+      canViewCompanies,
+      loading,
+      signIn,
+      signOut,
+    }}>
       {children}
     </AuthContext.Provider>
   );

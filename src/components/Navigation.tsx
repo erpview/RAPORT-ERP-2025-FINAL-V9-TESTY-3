@@ -37,7 +37,7 @@ export const Navigation: React.FC = () => {
   const location = useLocation();
   const { totalUsers } = useUsers();
   const { selectedSystems } = useComparison();
-  const { user, isAdmin, isEditor, canViewUsers } = useAuth();
+  const { user, isAdmin, isEditor, canViewUsers, canViewSystems, canViewCompanies } = useAuth();
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -149,6 +149,25 @@ export const Navigation: React.FC = () => {
                 </>
               )}
             </NavLink>
+            {user && (canViewSystems || isAdmin) && (
+              <NavLink
+                to="/moje-systemy"
+                className={({ isActive }) =>
+                  `inline-flex items-center px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
+                  ${isActive 
+                    ? 'text-[#2c3b67]'
+                    : 'text-[#2c3b67]/60 hover:text-[#2c3b67] hover:shadow-sm'
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {isActive && <MenuIcon />}
+                    Moje systemy
+                  </>
+                )}
+              </NavLink>
+            )}
             {user && (
               <NavLink
                 to="/companies"
@@ -214,36 +233,40 @@ export const Navigation: React.FC = () => {
               <>
                 {isEditor && !isAdmin && (
                   <>
-                    <NavLink
-                      to="/editor/systems"
-                      className={({ isActive }) =>
-                        `flex items-center gap-2 px-2 py-2 rounded-lg transition-colors whitespace-nowrap
-                        ${isActive 
-                          ? 'bg-[#2c3b67] text-white'
-                          : 'bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED]'
-                        }`
-                      }
-                    >
-                      <Settings className="w-4 h-4" />
-                      <span className="text-[15px] font-medium">
-                        Moje systemy
-                      </span>
-                    </NavLink>
-                    <NavLink
-                      to="/editor/companies"
-                      className={({ isActive }) =>
-                        `flex items-center gap-2 px-2 py-2 rounded-lg transition-colors whitespace-nowrap
-                        ${isActive 
-                          ? 'bg-[#2c3b67] text-white'
-                          : 'bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED]'
-                        }`
-                      }
-                    >
-                      <Settings className="w-4 h-4" />
-                      <span className="text-[15px] font-medium">
-                        Moje firmy
-                      </span>
-                    </NavLink>
+                    {canViewSystems && (
+                      <NavLink
+                        to="/editor/systems"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 px-2 py-2 rounded-lg transition-colors whitespace-nowrap
+                          ${isActive 
+                            ? 'bg-[#2c3b67] text-white'
+                            : 'bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED]'
+                          }`
+                        }
+                      >
+                        <Settings className="w-4 h-4" />
+                        <span className="text-[15px] font-medium">
+                          Moje systemy
+                        </span>
+                      </NavLink>
+                    )}
+                    {canViewCompanies && (
+                      <NavLink
+                        to="/editor/companies"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 px-2 py-2 rounded-lg transition-colors whitespace-nowrap
+                          ${isActive 
+                            ? 'bg-[#2c3b67] text-white'
+                            : 'bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED]'
+                          }`
+                        }
+                      >
+                        <Settings className="w-4 h-4" />
+                        <span className="text-[15px] font-medium">
+                          Moje firmy
+                        </span>
+                      </NavLink>
+                    )}
                     {canViewUsers && (
                       <NavLink
                         to="/editor/users"
@@ -481,6 +504,25 @@ export const Navigation: React.FC = () => {
                 </>
               )}
             </NavLink>
+            {user && (canViewSystems || isAdmin) && (
+              <NavLink
+                to="/moje-systemy"
+                className={({ isActive }) =>
+                  `flex items-center px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
+                  ${isActive 
+                    ? 'text-[#2c3b67]'
+                    : 'text-[#2c3b67]/60 hover:text-[#2c3b67] hover:shadow-sm'
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {isActive && <MenuIcon />}
+                    Moje systemy
+                  </>
+                )}
+              </NavLink>
+            )}
             {user && (
               <NavLink
                 to="/companies"
@@ -522,32 +564,36 @@ export const Navigation: React.FC = () => {
               <>
                 {isEditor && !isAdmin && (
                   <>
-                    <NavLink
-                      to="/editor/systems"
-                      className={({ isActive }) =>
-                        `flex items-center gap-2 px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
-                        ${isActive 
-                          ? 'text-[#2c3b67]'
-                          : 'text-[#2c3b67]/60 hover:text-[#2c3b67] hover:shadow-sm'
-                        }`
-                      }
-                    >
-                      <Settings className="w-4 h-4" />
-                      Moje systemy
-                    </NavLink>
-                    <NavLink
-                      to="/editor/companies"
-                      className={({ isActive }) =>
-                        `flex items-center gap-2 px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
-                        ${isActive 
-                          ? 'text-[#2c3b67]'
-                          : 'text-[#2c3b67]/60 hover:text-[#2c3b67] hover:shadow-sm'
-                        }`
-                      }
-                    >
-                      <Settings className="w-4 h-4" />
-                      Moje firmy
-                    </NavLink>
+                    {canViewSystems && (
+                      <NavLink
+                        to="/editor/systems"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
+                          ${isActive 
+                            ? 'text-[#2c3b67]'
+                            : 'text-[#2c3b67]/60 hover:text-[#2c3b67] hover:shadow-sm'
+                          }`
+                        }
+                      >
+                        <Settings className="w-4 h-4" />
+                        Moje systemy
+                      </NavLink>
+                    )}
+                    {canViewCompanies && (
+                      <NavLink
+                        to="/editor/companies"
+                        className={({ isActive }) =>
+                          `flex items-center gap-2 px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
+                          ${isActive 
+                            ? 'text-[#2c3b67]'
+                            : 'text-[#2c3b67]/60 hover:text-[#2c3b67] hover:shadow-sm'
+                          }`
+                        }
+                      >
+                        <Settings className="w-4 h-4" />
+                        Moje firmy
+                      </NavLink>
+                    )}
                     {canViewUsers && (
                       <NavLink
                         to="/editor/users"
