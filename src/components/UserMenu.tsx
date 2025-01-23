@@ -27,12 +27,10 @@ export const UserMenu: React.FC = () => {
       <div className="relative" ref={menuRef}>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-[#F5F5F7] transition-colors"
+          className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-[#F5F5F7] transition-colors"
+          aria-label="User menu"
         >
           <User className="w-5 h-5 text-[#2c3b67]" />
-          <span className="text-[15px] font-medium text-[#1d1d1f]">
-            {user.email?.split('@')[0]}
-          </span>
         </button>
 
         {isMenuOpen && (
