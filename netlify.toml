@@ -39,13 +39,6 @@
   status = 200
   conditions = {Cookie = ["__prerender_bypass"]}
 
-# Partners page redirect for SEO
-[[redirects]]
-  from = "/partnerzy/*"
-  to = "/partnerzy/:splat/index.html"
-  status = 200
-  force = true
-
 # SPA fallback for client-side navigation
 [[redirects]]
   from = "/*"
