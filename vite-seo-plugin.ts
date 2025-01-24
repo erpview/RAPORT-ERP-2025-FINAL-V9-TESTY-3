@@ -36,6 +36,7 @@ const PARTNER_SLUGS = [
   'streamsoft',
   'sygrnity-business-solutions',
   'symfonia',
+  'sygnity-business-solutions',
   'vendo.erp'
 ];
 

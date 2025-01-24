@@ -76,7 +76,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
           simple: resolve(__dirname, 'partnerzy/simple/index.html'),
           streamsoft: resolve(__dirname, 'partnerzy/streamsoft/index.html'),
           symfonia: resolve(__dirname, 'partnerzy/symfonia/index.html'),
-          sygrnity: resolve(__dirname, 'partnerzy/sygrnity-business-solutions/index.html'),
+          sygrnity: resolve(__dirname, 'partnerzy/sygnity-business-solutions/index.html'),
           vendo: resolve(__dirname, 'partnerzy/vendo.erp/index.html'),
           ...termEntries
         },
