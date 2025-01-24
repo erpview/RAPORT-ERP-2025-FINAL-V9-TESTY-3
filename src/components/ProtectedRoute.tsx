@@ -9,6 +9,7 @@ interface ProtectedRouteProps {
   allowEditor?: boolean;
   requireUserView?: boolean;
   requireSystemView?: boolean;
+  requireCompanyView?: boolean;
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
@@ -16,9 +17,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   requireAdmin = false,
   allowEditor = false,
   requireUserView = false,
-  requireSystemView = false
+  requireSystemView = false,
+  requireCompanyView = false
 }) => {
-  const { user, isAdmin, isEditor, canViewUsers, canViewSystems, loading } = useAuth();
+  const { user, isAdmin, isEditor, canViewUsers, canViewSystems, canViewCompanies, loading } = useAuth();
 
   if (loading) {
     return (
@@ -48,6 +50,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   }
 
   if (requireSystemView && !canViewSystems && !isAdmin) {
+    return <Navigate to="/" />;
+  }
+
+  if (requireCompanyView && !canViewCompanies && !isAdmin) {
     return <Navigate to="/" />;
   }
 

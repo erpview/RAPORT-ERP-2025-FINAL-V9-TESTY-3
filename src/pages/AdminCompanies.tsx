@@ -113,7 +113,7 @@ export const AdminCompanies: React.FC = () => {
         module_values: data.module_values ?? {},
         meta_title: data.meta_title ?? requiredFields.name,
         meta_description: data.meta_description ?? requiredFields.description.substring(0, 160),
-        canonical_url: data.canonical_url ?? `/companies/${requiredFields.slug}`,
+        canonical_url: data.canonical_url ?? `/firmy-it/${requiredFields.slug}`,
         website: data.website,
         logo_url: data.logo_url,
       };

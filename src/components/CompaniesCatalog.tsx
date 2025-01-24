@@ -79,7 +79,7 @@ export const CompaniesCatalog: React.FC<CompaniesCatalogProps> = ({ companies })
         {filteredCompanies.map((company) => (
           <Link
             key={company.id}
-            to={`/companies/${company.slug}`}
+            to={`/firmy-it/${company.slug}`}
             className="block bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#d2d2d7]/30 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-1"
           >
             <div className="p-6">

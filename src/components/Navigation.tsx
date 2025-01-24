@@ -170,7 +170,7 @@ export const Navigation: React.FC = () => {
             )}
             {user && (
               <NavLink
-                to="/companies"
+                to="/firmy-it"
                 className={({ isActive }) =>
                   `inline-flex items-center px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
                   ${isActive 
@@ -252,7 +252,7 @@ export const Navigation: React.FC = () => {
                     )}
                     {canViewCompanies && (
                       <NavLink
-                        to="/editor/companies"
+                        to="/editor/firmy-it"
                         className={({ isActive }) =>
                           `flex items-center gap-2 px-2 py-2 rounded-lg transition-colors whitespace-nowrap
                           ${isActive 
@@ -321,7 +321,7 @@ export const Navigation: React.FC = () => {
                     </NavLink>
 
                     <NavLink
-                      to="/admin/companies"
+                      to="/admin/firmy-it"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-2 py-2 rounded-lg transition-colors whitespace-nowrap
                         ${isActive 
@@ -525,7 +525,7 @@ export const Navigation: React.FC = () => {
             )}
             {user && (
               <NavLink
-                to="/companies"
+                to="/firmy-it"
                 className={({ isActive }) =>
                   `flex items-center px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
                   ${isActive 
@@ -581,7 +581,7 @@ export const Navigation: React.FC = () => {
                     )}
                     {canViewCompanies && (
                       <NavLink
-                        to="/editor/companies"
+                        to="/editor/firmy-it"
                         className={({ isActive }) =>
                           `flex items-center gap-2 px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
                           ${isActive 
@@ -642,7 +642,7 @@ export const Navigation: React.FC = () => {
                     </NavLink>
 
                     <NavLink
-                      to="/admin/companies"
+                      to="/admin/firmy-it"
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
                         ${isActive 

@@ -29,7 +29,7 @@ interface SystemDetails {
 }
 
 export default function ComparisonModal({ systems, isOpen, onClose }: ComparisonModalProps) {
-  const { user, isAdmin, isEditor } = useAuth();
+  const { user, isAdmin, isEditor, canViewUsers, canViewSystems } = useAuth();
   const navigate = useNavigate();
   const { getModuleFields, getFieldValues, loading: fieldsLoading } = useSystemFields();
   const { startTracking, endTracking } = useComparisonTracking(user?.id);
@@ -38,6 +38,11 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
   const [moduleFields, setModuleFields] = useState<ReturnType<typeof getModuleFields>>([]);
   const [systemDetails, setSystemDetails] = useState<SystemDetails[]>([]);
 
+  // Check if user has full access to comparison
+  const hasFullAccess = isAdmin || 
+                       (!isEditor && user) || // regular user (role: user)
+                       (isEditor && (canViewUsers || canViewSystems)); // editor with at least one permission
+
   useEffect(() => {
     if (isOpen) {
       console.log('ComparisonModal opened with user:', user?.id);
@@ -45,7 +50,7 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
       loadFieldValues();
       const allModules = getModuleFields();
       
-      // Filter modules based on authentication status
+      // Filter modules based on authentication status and permissions
       const filteredModules = allModules.filter(({ module }) => {
         const isBasicInfo = module.name.toLowerCase().includes('podstawowe');
         const isPublic = Boolean(module.is_public);
@@ -56,9 +61,9 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
           moduleData: module
         });
         
-        if (!user) {
-          const shouldShow = isBasicInfo || isPublic;
-          return shouldShow;
+        // Show only basic info and public modules for users without full access
+        if (!hasFullAccess) {
+          return isBasicInfo || isPublic;
         }
         
         return true;
@@ -214,7 +219,7 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
             </div>
           ) : (
             <>
-              <div className={`overflow-x-auto ${user ? 'max-h-[calc(100vh-120px)]' : 'max-h-[calc(80vh-120px)]'}`}>
+              <div className={`overflow-x-auto ${hasFullAccess ? 'max-h-[calc(100vh-120px)]' : 'max-h-[calc(80vh-120px)]'}`}>
                 <table className="w-full">
                   <thead className="sticky top-0 z-10">
                     <tr>
@@ -252,7 +257,7 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
                         </td>
                       ))}
                     </tr>
-                    {(user || isAdmin || isEditor) && (
+                    {hasFullAccess && (
                       <tr>
                         <td className="py-2 px-4 border-b">Strona internetowa</td>
                         {systemDetails.map(system => (
@@ -292,7 +297,6 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
                           </td>
                         </tr>
                         {fields
-                          // Filter out basic fields if they're in a custom module to avoid duplication
                           .filter(field => !basicFieldKeys.includes(field.field_key))
                           .map(field => (
                             <tr key={field.id}>
@@ -323,34 +327,39 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
                 </table>
               </div>
               
-              {!user && (
+              {!hasFullAccess && !isAdmin && (
                 <div className="mt-8 p-6 bg-[#F5F5F7] rounded-lg">
                   <div className="flex flex-col items-center text-center space-y-4">
                     <p className="text-lg text-[#1d1d1f]">
-                      Zarejestruj się lub zaloguj, aby zobaczyć pełną treść raportu.
+                      {user ? 
+                        "Nie masz wystarczających uprawnień, aby zobaczyć pełną treść raportu. Skontaktuj się z administratorem." :
+                        "Zarejestruj się lub zaloguj, aby zobaczyć pełną treść raportu."
+                      }
                     </p>
-                    <div className="flex gap-4">
-                      <button 
-                        onClick={() => {
-                          handleClose();
-                          navigate('/admin/register');
-                        }}
-                        className="sf-button-primary inline-flex items-center"
-                      >
-                        <UserCog className="w-5 h-5 mr-2" />
-                        Zarejestruj się
-                      </button>
-                      <button 
-                        onClick={() => {
-                          handleClose();
-                          navigate('/admin/login');
-                        }}
-                        className="sf-button-primary inline-flex items-center"
-                      >
-                        <LogIn className="w-5 h-5 mr-2" />
-                        Zaloguj się
-                      </button>
-                    </div>
+                    {!user && (
+                      <div className="flex gap-4">
+                        <button 
+                          onClick={() => {
+                            handleClose();
+                            navigate('/admin/register');
+                          }}
+                          className="sf-button-primary inline-flex items-center"
+                        >
+                          <UserCog className="w-5 h-5 mr-2" />
+                          Zarejestruj się
+                        </button>
+                        <button 
+                          onClick={() => {
+                            handleClose();
+                            navigate('/admin/login');
+                          }}
+                          className="sf-button-primary inline-flex items-center"
+                        >
+                          <LogIn className="w-5 h-5 mr-2" />
+                          Zaloguj się
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

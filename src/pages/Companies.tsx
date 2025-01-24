@@ -8,7 +8,7 @@ export const Companies: React.FC = () => {
       <MetaTags
         title="Firmy - Wdrożenia i Sukcesy Firm"
         description="Poznaj historie sukcesu firm, które osiągnęły sukces dzięki odpowiednim rozwiązaniom biznesowym."
-        canonicalUrl="/companies"
+        canonicalUrl="/firmy-it"
       />
       
       <div className="min-h-screen bg-[#F5F5F7] py-12">

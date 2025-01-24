@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
@@ -176,12 +176,18 @@ export const App: React.FC = () => {
                   } 
                 />
                 <Route 
-                  path="/admin/companies" 
+                  path="/admin/firmy-it" 
                   element={
                     <ProtectedRoute requireAdmin>
                       <AdminCompanies />
                     </ProtectedRoute>
                   } 
+                />
+                <Route 
+                  path="/admin/companies" 
+                  element={
+                    <Navigate to="/admin/firmy-it" replace />
+                  }
                 />
                 <Route 
                   path="/admin/company-modules" 
@@ -217,14 +223,6 @@ export const App: React.FC = () => {
                     } 
                   />
                   <Route 
-                    path="companies" 
-                    element={
-                      <ProtectedRoute allowEditor>
-                        <AdminCompanies />
-                      </ProtectedRoute>
-                    } 
-                  />
-                  <Route 
                     path="users"
                     element={
                       <ProtectedRoute requireAdmin allowEditor requireUserView>
@@ -232,24 +230,38 @@ export const App: React.FC = () => {
                       </ProtectedRoute>
                     }
                   />
+                  <Route 
+                    path="firmy-it" 
+                    element={
+                      <ProtectedRoute requireCompanyView allowEditor>
+                        <AdminCompanies />
+                      </ProtectedRoute>
+                    } 
+                  />
+                  <Route 
+                    path="companies" 
+                    element={
+                      <Navigate to="/editor/firmy-it" replace />
+                    }
+                  />
                 </Route>
                 <Route path="/slownik-erp" element={<SlownikErp />} />
                 <Route path="/slownik-erp/:slug" element={<SlownikErpTerm />} />
                 <Route 
+                  path="/firmy-it" 
+                  element={<Companies />} 
+                />
+                <Route 
+                  path="/firmy-it/:slug" 
+                  element={<CompanyDetail />} 
+                />
+                <Route 
                   path="/companies" 
-                  element={
-                    <ProtectedRoute>
-                      <Companies />
-                    </ProtectedRoute>
-                  }
+                  element={<Navigate to="/firmy-it" replace />} 
                 />
                 <Route 
                   path="/companies/:slug" 
-                  element={
-                    <ProtectedRoute>
-                      <CompanyDetail />
-                    </ProtectedRoute>
-                  }
+                  element={<Navigate to="/firmy-it/:slug" replace />} 
                 />
               </Routes>
               <Footer />
