@@ -251,50 +251,61 @@ export const CompanyDetail: React.FC = () => {
                 {[...modules]
                   .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
                   .map(module => {
-                  const moduleFields = fields.filter(field => field.module_id === module.id);
-                  const moduleValues = company.module_values?.[module.id] || {};
+                    const moduleFields = fields.filter(field => field.module_id === module.id);
+                    const moduleValues = company.module_values?.[module.id] || {};
 
-                  if (moduleFields.length === 0) {
-                    return null;
-                  }
+                    // Check if module has any fields with values
+                    const hasAnyValues = moduleFields.some(field => {
+                      const value = moduleValues[field.field_key];
+                      return value !== undefined && value !== null && value !== '';
+                    });
 
-                  return (
-                    <div 
-                      key={module.id} 
-                      className="bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#d2d2d7]/30 p-6 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-1"
-                    >
-                      <div className="border-b border-[#d2d2d7]/30 pb-4 mb-4">
-                        <h3 className="text-xl font-semibold text-[#1d1d1f]">{module.name}</h3>
-                      </div>
-                      <div className="space-y-4">
-                        {moduleFields
-                          .sort((a, b) => a.order_index - b.order_index)
-                          .map(field => {
-                            const value = moduleValues[field.field_key];
-                            return (
-                              <div key={field.id} className="group">
-                                {field.description && (
-                                  <p className="text-[13px] text-[#86868b] mb-1">{field.description}</p>
-                                )}
-                                <div>
-                                  <span className="font-medium text-[#1d1d1f]">{field.name}:</span>{' '}
-                                  {field.field_type === 'multiselect' ? (
-                                    <div className="mt-2">
-                                      {renderFieldValue(field, value)}
-                                    </div>
-                                  ) : (
-                                    <span className="text-[#424245]">
-                                      {renderFieldValue(field, value)}
-                                    </span>
+                    // Skip module if it has no fields with values
+                    if (!hasAnyValues) {
+                      return null;
+                    }
+
+                    return (
+                      <div 
+                        key={module.id} 
+                        className="bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#d2d2d7]/30 p-6 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-1"
+                      >
+                        <div className="border-b border-[#d2d2d7]/30 pb-4 mb-4">
+                          <h3 className="text-xl font-semibold text-[#1d1d1f]">{module.name}</h3>
+                        </div>
+                        <div className="space-y-4">
+                          {moduleFields
+                            .sort((a, b) => a.order_index - b.order_index)
+                            .map(field => {
+                              const value = moduleValues[field.field_key];
+                              // Skip fields without values
+                              if (value === undefined || value === null || value === '') {
+                                return null;
+                              }
+                              return (
+                                <div key={field.id} className="group">
+                                  {field.description && (
+                                    <p className="text-[13px] text-[#86868b] mb-1">{field.description}</p>
                                   )}
+                                  <div>
+                                    <span className="font-medium text-[#1d1d1f]">{field.name}:</span>{' '}
+                                    {field.field_type === 'multiselect' ? (
+                                      <div className="mt-2">
+                                        {renderFieldValue(field, value)}
+                                      </div>
+                                    ) : (
+                                      <span className="text-[#424245]">
+                                        {renderFieldValue(field, value)}
+                                      </span>
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                            );
-                          })}
+                              );
+                            })}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </div>
           )}
