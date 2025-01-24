@@ -148,7 +148,7 @@ export default function Home() {
                       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
                         <div className="flex items-center gap-8">
                           {/* Text Content */}
-                          <div className="relative max-w-[90vw] sm:max-w-none ml-[5%] sm:ml-[10%] mr-[max(5%,_calc(100%-95vw))] sm:mr-0 w-min min-w-[55%] sm:min-w-[55%]">
+                          <div className="relative max-w-[95vw] sm:max-w-none ml-[2.5%] sm:ml-[10%] mr-[2.5%] sm:mr-0 w-full sm:w-min sm:min-w-[55%]">
                             {/* White overlay behind text */}
                             {(slide.overlay_heading || slide.overlay_description) && (
                               <div className="absolute inset-0 bg-white opacity-70 rounded-lg" />
@@ -156,7 +156,7 @@ export default function Home() {
                             
                             {/* Content */}
                             <div className="relative text-navy-700">
-                              <div className="p-4">
+                              <div className="p-4 sm:p-6">
                                 <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 whitespace-normal break-words">
                                   {slide.overlay_heading}
                                 </h1>
