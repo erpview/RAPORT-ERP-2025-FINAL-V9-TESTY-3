@@ -149,7 +149,7 @@ export const Navigation: React.FC = () => {
                 </>
               )}
             </NavLink>
-            {user && (canViewSystems || isAdmin) && (
+            {user && canViewSystems && !isAdmin && (
               <NavLink
                 to="/moje-systemy"
                 className={({ isActive }) =>
@@ -504,7 +504,7 @@ export const Navigation: React.FC = () => {
                 </>
               )}
             </NavLink>
-            {user && (canViewSystems || isAdmin) && (
+            {user && canViewSystems && !isAdmin && (
               <NavLink
                 to="/moje-systemy"
                 className={({ isActive }) =>
