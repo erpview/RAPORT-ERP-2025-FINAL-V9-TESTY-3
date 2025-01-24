@@ -6,7 +6,7 @@ const DEFAULT_SEO_TEMPLATES = {
     id: 'default-home',
     page_identifier: 'home',
     is_dynamic: false,
-    title_template: 'Raport ERP - Kompleksowy przewodnik po systemach ERP',
+    title_template: 'Raport ERP - systemy ERP - dostawcy ERP - przewodnik po systemach ERP',
     description_template: 'Poznaj najnowszy raport o systemach ERP w Polsce. Sprawdź ranking, porównaj funkcjonalności wiodących systemów ERP.',
     keywords_template: 'erp, system erp, zarządzanie przedsiębiorstwem, oprogramowanie dla firm, raport erp, ranking erp',
     structured_data_template: {
