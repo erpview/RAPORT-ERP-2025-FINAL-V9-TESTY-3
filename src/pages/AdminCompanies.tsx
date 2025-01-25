@@ -116,6 +116,7 @@ export const AdminCompanies: React.FC = () => {
         canonical_url: data.canonical_url ?? `/firmy-it/${requiredFields.slug}`,
         website: data.website,
         logo_url: data.logo_url,
+        category: data.category
       };
 
       if (selectedCompany && 'id' in selectedCompany && selectedCompany.id) {

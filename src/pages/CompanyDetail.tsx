@@ -174,9 +174,16 @@ export const CompanyDetail: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-            <h1 className="text-3xl font-bold text-center md:text-left text-[#1d1d1f] order-2 md:order-1">
-              {company.name}
-            </h1>
+            <div className="order-2 md:order-1">
+              <h1 className="text-3xl font-bold text-center md:text-left text-[#1d1d1f] mb-2">
+                {company.name}
+              </h1>
+              {company.category && (
+                <div className="text-[#424245] text-center md:text-left">
+                  {company.category}
+                </div>
+              )}
+            </div>
             {company.logo_url && (
               <div className="mb-4 md:mb-0 order-1 md:order-2">
                 <img

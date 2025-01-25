@@ -8,6 +8,7 @@ export interface Company {
   website?: string;
   email: string;
   nip: string;
+  category?: 'Producent' | 'Integrator' | 'Konsulting IT' | 'Szkolenia IT';
   logo_url?: string;
   description: string;
   status: 'draft' | 'published' | 'archived';

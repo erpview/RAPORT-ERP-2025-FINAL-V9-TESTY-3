@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Building2, ChevronDown } from 'lucide-react';
 import { Company } from '../types/company';
 import { useAuth } from '../context/AuthContext';
 import { BLOCKED_DOMAINS } from '../constants/domains';
@@ -49,6 +50,7 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
     meta_title: '',
     meta_description: '',
     canonical_url: '',
+    category: undefined,
     module_values: {},
   });
 
@@ -130,6 +132,7 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
           meta_title: company.meta_title || '',
           meta_description: company.meta_description || '',
           canonical_url: company.canonical_url || '',
+          category: company.category || undefined,
           module_values: initialModuleValues,
         });
       }
@@ -253,6 +256,20 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
       }
     }
 
+    // Handle category field
+    if (name === 'category') {
+      console.log('Setting category to:', value);
+      // Convert empty string to undefined (not null) to match the type
+      if (value === '') {
+        value = undefined;
+      } else {
+        // Ensure it's one of the valid enum values
+        const validCategories = ['Producent', 'Integrator', 'Konsulting IT', 'Szkolenia IT'] as const;
+        value = validCategories.includes(value as any) ? value : undefined;
+      }
+      console.log('Final category value:', value);
+    }
+
     setFormData(prev => ({ ...prev, [name]: value }));
     // Clear error for this field if exists (except NIP which is handled above)
     if (errors[name] && name !== 'nip') {
@@ -263,6 +280,8 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    console.log('Form data before submission:', formData);
+
     // Validate postal code
     if (formData.postal_code && !validatePostalCode(formData.postal_code)) {
       toast.error('Kod pocztowy musi być w formacie XX-XXX (np. 12-345)');
@@ -379,6 +398,35 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({
                 onChange={(value) => handleChange('nip', value)}
                 error={errors.nip}
               />
+
+              <div>
+                <label className="block text-[17px] font-medium text-[#1d1d1f] mb-2">
+                  Kategoria
+                </label>
+                <div className="relative">
+                  <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#86868b] w-5 h-5" />
+                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#86868b] w-5 h-5 pointer-events-none" />
+                  <select
+                    name="category"
+                    id="category"
+                    value={formData.category ?? ''}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      handleChange('category', value === '' ? undefined : value);
+                    }}
+                    className="sf-input pl-10 pr-10 w-full appearance-none bg-white cursor-pointer hover:bg-[#F5F5F7] transition-colors duration-200"
+                  >
+                    <option value="">Wybierz kategorię</option>
+                    <option value="Producent">Producent</option>
+                    <option value="Integrator">Integrator</option>
+                    <option value="Konsulting IT">Konsulting IT</option>
+                    <option value="Szkolenia IT">Szkolenia IT</option>
+                  </select>
+                </div>
+                <p className="mt-2 text-[15px] text-[#86868b]">
+                  Wybierz kategorię, która opisuje główny obszar działalności twojej firmy
+                </p>
+              </div>
 
               <DynamicField
                 field={createFieldConfig('website', 'Strona WWW', 'url', false)}

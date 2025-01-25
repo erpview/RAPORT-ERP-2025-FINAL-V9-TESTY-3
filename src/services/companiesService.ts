@@ -22,14 +22,15 @@ const COMPANY_SELECT = `
   meta_title,
   meta_description,
   canonical_url,
-  module_values
+  module_values,
+  category
 `;
 
 export const fetchCompanies = async (): Promise<Company[]> => {
   const { data, error } = await supabase
     .from('companies')
     .select(`
-      *,
+      ${COMPANY_SELECT},
       company_field_values (
         id,
         field_id,
@@ -195,20 +196,34 @@ export const updateCompany = async (id: string, companyData: Partial<Company>): 
   // Extract module_values before updating company
   const { module_values, ...companyFields } = companyData;
 
+  console.log('Updating company with data:', companyFields);
+  console.log('Category value type:', typeof companyFields.category);
+  console.log('Category value:', companyFields.category);
+
   try {
+    // Prepare update data without manual type casting
+    const updateData = {
+      ...companyFields,
+      updated_by: userData.user.id,
+      updated_at: new Date().toISOString()
+    };
+    
+    console.log('Final update data:', updateData);
+
     const { data, error } = await supabase
       .from('companies')
-      .update({
-        ...companyFields,
-        updated_by: userData.user.id,
-        updated_at: new Date().toISOString()
-      })
+      .update(updateData)
       .eq('id', id)
-      .select()
+      .select(COMPANY_SELECT)
       .single();
 
-    if (error) throw error;
+    if (error) {
+      console.error('Supabase error:', error);
+      throw error;
+    }
     if (!data) throw new Error('No data returned from update');
+
+    console.log('Updated company data:', data);
 
     // Save module field values if present
     if (module_values && Object.keys(module_values).length > 0) {
