@@ -60,6 +60,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
           cost: resolve(__dirname, 'koszt-wdrozenia-erp/index.html'),
           dictionary: resolve(__dirname, 'slownik-erp/index.html'),
           calculator: resolve(__dirname, 'kalkulator/index.html'),
+          companies: resolve(__dirname, 'firmy-it/index.html'),
           anegis: resolve(__dirname, 'partnerzy/anegis/index.html'),
           asseco: resolve(__dirname, 'partnerzy/asseco-business-solutions/index.html'),
           axians: resolve(__dirname, 'partnerzy/axians/index.html'),

@@ -15,7 +15,8 @@ const ROUTES_MAP: RouteMap = {
   'slownik-erp/index.html': '/slownik-erp',
   'kalkulator/index.html': '/kalkulator',
   'kalkulator.html': '/kalkulator',
-  'firmy-it/index.html': '/firmy-it'
+  'firmy-it/index.html': 'firmy-it',
+  'firmy-it.html': 'firmy-it'
 };
 
 // List of partner slugs for SEO
@@ -377,26 +378,8 @@ export function seoPlugin(): Plugin {
           if (partnerMatch && PARTNER_SLUGS.includes(partnerMatch[1])) {
             seoFolder = `partnerzy/${partnerMatch[1]}`;
           } else {
-            // Handle static pages
-            const staticRoutes: { [key: string]: string } = {
-              'kalkulator/index.html': 'kalkulator',
-              'kalkulator.html': 'kalkulator',
-              'systemy-erp/index.html': 'systemy-erp',
-              'systemy-erp.html': 'systemy-erp',
-              'porownaj-systemy-erp/index.html': 'porownaj-systemy-erp',
-              'porownaj-systemy-erp.html': 'porownaj-systemy-erp',
-              'slownik-erp/index.html': 'slownik-erp',
-              'slownik-erp.html': 'slownik-erp',
-              'partnerzy/index.html': 'partnerzy',
-              'partnerzy.html': 'partnerzy',
-              'koszt-wdrozenia-erp/index.html': 'koszt-wdrozenia-erp',
-              'koszt-wdrozenia-erp.html': 'koszt-wdrozenia-erp',
-              'firmy-it/index.html': 'firmy-it',
-              'firmy-it.html': 'firmy-it',
-              'index.html': ''
-            };
-            
-            seoFolder = staticRoutes[routePath] || '';
+            // Get mapped route from ROUTES_MAP
+            seoFolder = ROUTES_MAP[routePath];
             console.log('SEO Plugin: Static route path:', routePath, 'mapped to:', seoFolder);
           }
 
@@ -404,6 +387,12 @@ export function seoPlugin(): Plugin {
           const termMatch = routePath.match(/^slownik-erp\/([^\/]+)\/index\.html$/);
           if (termMatch) {
             seoFolder = `slownik-erp/${termMatch[1]}`;
+          }
+
+          // Special handling for firmy-it route
+          if (routePath === 'firmy-it/index.html' || routePath === 'firmy-it.html') {
+            seoFolder = 'firmy-it';
+            console.log('SEO Plugin: Handling firmy-it route explicitly');
           }
           
           const seoPath = path.join(projectDir, 'public/seo', seoFolder, 'index.html');
@@ -414,8 +403,9 @@ export function seoPlugin(): Plugin {
           let seoHtml;
           try {
             seoHtml = await fs.readFile(seoPath, 'utf-8');
-            console.log('SEO Plugin: Successfully read route-specific SEO file');
+            console.log('SEO Plugin: Successfully read route-specific SEO file:', seoPath);
           } catch (err) {
+            console.warn('SEO Plugin: Failed to read SEO file:', seoPath, err);
             console.log('SEO Plugin: No route-specific SEO file, using default');
             seoHtml = await fs.readFile(path.join(projectDir, 'public/seo/index.html'), 'utf-8');
           }
