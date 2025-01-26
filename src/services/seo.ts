@@ -160,6 +160,27 @@ const DEFAULT_SEO_TEMPLATES = {
     },
     robots: 'index, follow'
   },
+  '/firmy-it': {
+    id: 'it-companies',
+    page_identifier: '/firmy-it',
+    is_dynamic: false,
+    title_template: 'Firmy IT - Dostawcy i Wdrożeniowcy Systemów ERP | Raport ERP 2025',
+    description_template: 'Kompleksowy katalog firm IT specjalizujących się we wdrożeniach systemów ERP. Znajdź zaufanego partnera do wdrożenia systemu ERP w Twojej firmie.',
+    keywords_template: 'firmy it, dostawcy erp, wdrożeniowcy erp, integratorzy systemów erp, firmy wdrażające erp',
+    structured_data_template: {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Firmy IT - Dostawcy Systemów ERP",
+      "description": "Katalog firm IT specjalizujących się we wdrożeniach systemów ERP",
+      "publisher": {
+        "@type": "Organization",
+        "name": "ERP-VIEW.PL",
+        "url": "https://www.raport-erp.pl"
+      },
+      "inLanguage": "pl-PL"
+    },
+    robots: 'index, follow'
+  },
   'partner': {
     id: 'partner',
     page_identifier: 'partner',
