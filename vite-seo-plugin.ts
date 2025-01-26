@@ -8,14 +8,14 @@ interface RouteMap {
 
 const ROUTES_MAP: RouteMap = {
   'index.html': '',
-  'porownaj-systemy-erp/index.html': 'porownaj-systemy-erp',
-  'systemy-erp/index.html': 'systemy-erp',
-  'partnerzy/index.html': 'partnerzy',
-  'koszt-wdrozenia-erp/index.html': 'koszt-wdrozenia-erp',
-  'slownik-erp/index.html': 'slownik-erp',
-  'kalkulator/index.html': 'kalkulator',
-  'kalkulator.html': 'kalkulator',
-  'firmy-it/index.html': 'firmy-it'
+  'porownaj-systemy-erp/index.html': '/porownaj-systemy-erp',
+  'systemy-erp/index.html': '/systemy-erp',
+  'partnerzy/index.html': '/partnerzy',
+  'koszt-wdrozenia-erp/index.html': '/koszt-wdrozenia-erp',
+  'slownik-erp/index.html': '/slownik-erp',
+  'kalkulator/index.html': '/kalkulator',
+  'kalkulator.html': '/kalkulator',
+  'firmy-it/index.html': '/firmy-it'
 };
 
 // List of partner slugs for SEO

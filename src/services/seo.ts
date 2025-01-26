@@ -2,9 +2,9 @@ import { supabase } from '../config/supabase';
 import { SEOData, DynamicSEOData, ProcessedSEOData } from '../types/seo';
 
 const DEFAULT_SEO_TEMPLATES = {
-  home: {
+  '': {
     id: 'default-home',
-    page_identifier: 'home',
+    page_identifier: '',
     is_dynamic: false,
     title_template: 'Raport ERP - systemy ERP - dostawcy ERP - przewodnik po systemach ERP',
     description_template: 'Poznaj najnowszy raport o systemach ERP w Polsce. Sprawdź ranking, porównaj funkcjonalności wiodących systemów ERP.',
