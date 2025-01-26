@@ -204,6 +204,75 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
         }
       }
     },
+    '/firmy-it': {
+      title: "Katalog Firm IT | Raport ERP by ERP-VIEW.PL",
+      description: "Poznaj sprawdzone firmy IT w Polsce. Znajdź dostawcę, integratora lub firmę konsultingową dla Twojego projektu ERP.",
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Katalog Firm IT | Raport ERP by ERP-VIEW.PL",
+        "description": "Katalog firm IT - znajdź i porównaj najlepsze firmy informatyczne w Polsce",
+        "mainEntity": {
+          "@type": "ItemList",
+          "name": "Katalog Firm IT",
+          "description": "Lista firm IT specjalizujących się w systemach ERP",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Producenci systemów ERP",
+              "item": {
+                "@type": "ItemList",
+                "name": "Producenci systemów ERP",
+                "description": "Firmy tworzące i rozwijające systemy ERP"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Integratorzy systemów",
+              "item": {
+                "@type": "ItemList",
+                "name": "Integratorzy systemów ERP",
+                "description": "Firmy specjalizujące się we wdrożeniach i integracji systemów ERP"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Firmy konsultingowe",
+              "item": {
+                "@type": "ItemList",
+                "name": "Firmy konsultingowe IT",
+                "description": "Firmy świadczące usługi doradcze w zakresie systemów ERP"
+              }
+            }
+          ]
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Raport ERP by ERP-VIEW.PL",
+          "url": "https://www.raport-erp.pl"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Strona główna",
+              "item": "https://www.raport-erp.pl"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Katalog Firm IT",
+              "item": "https://www.raport-erp.pl/firmy-it"
+            }
+          ]
+        }
+      }
+    },
     '/slownik-erp': {
       title: "Słownik ERP - Terminologia systemów ERP | Raport ERP by ERP-VIEW.PL",
       description: "Poznaj terminologię związaną z systemami ERP. Kompleksowy słownik pojęć i definicji z zakresu systemów ERP, który pomoże Ci lepiej zrozumieć ten obszar.",

@@ -42,6 +42,13 @@
   status = 200
   conditions = {Cookie = ["__prerender_bypass"]}
 
+# Companies index page redirect for SEO
+[[redirects]]
+  from = "/firmy-it"
+  to = "/seo/firmy-it/index.html"
+  status = 200
+  conditions = {Cookie = ["__prerender_bypass"]}
+
 # SPA fallback for client-side navigation
 [[redirects]]
   from = "/*"

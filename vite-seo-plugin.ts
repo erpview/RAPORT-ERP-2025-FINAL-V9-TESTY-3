@@ -14,7 +14,8 @@ const ROUTES_MAP: RouteMap = {
   'koszt-wdrozenia-erp/index.html': 'koszt-wdrozenia-erp',
   'slownik-erp/index.html': 'slownik-erp',
   'kalkulator/index.html': 'kalkulator',
-  'kalkulator.html': 'kalkulator'
+  'kalkulator.html': 'kalkulator',
+  'firmy-it/index.html': 'firmy-it'
 };
 
 // List of partner slugs for SEO
@@ -160,6 +161,25 @@ export function seoPlugin(): Plugin {
             return res.end(html);
           } catch (error) {
             console.error('Error serving calculator page:', error);
+          }
+        }
+
+        // Handle companies index page
+        if (route === '/firmy-it') {
+          const seoPath = path.join(process.cwd(), 'public/seo/firmy-it/index.html');
+          
+          try {
+            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const metaTags = extractMetaTags(seoContent);
+            
+            // Inject SEO meta tags into the HTML response
+            res.setHeader('Content-Type', 'text/html');
+            let html = await fs.readFile(path.join(process.cwd(), 'index.html'), 'utf-8');
+            html = injectMetaTags(html, metaTags);
+            
+            return res.end(html);
+          } catch (error) {
+            console.error('Error serving companies index page:', error);
           }
         }
 

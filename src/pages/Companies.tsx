@@ -6,8 +6,8 @@ export const Companies: React.FC = () => {
   return (
     <>
       <MetaTags
-        title="Firmy - Wdrożenia i Sukcesy Firm"
-        description="Poznaj historie sukcesu firm, które osiągnęły sukces dzięki odpowiednim rozwiązaniom biznesowym."
+        title="Katalog Firm IT | Raport ERP by ERP-VIEW.PL"
+        description="Poznaj sprawdzone firmy IT w Polsce. Znajdź dostawcę, integratora lub firmę konsultingową dla Twojego projektu ERP."
         canonicalUrl="/firmy-it"
       />
       

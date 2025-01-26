@@ -15,7 +15,9 @@
     "import-csv": "tsx src/scripts/importFromCsv.ts",
     "generate-seo": "tsx scripts/generate-seo-pages.ts",
     "generate-term-seo": "tsx scripts/generate-term-seo.ts",
-    "generate:partner-seo": "ts-node scripts/generate-partner-seo.ts"
+    "generate:partner-seo": "tsx scripts/generate-partner-seo.ts",
+    "generate:company-seo": "tsx scripts/generate-company-seo.ts",
+    "generate:companies-index": "tsx scripts/generate-companies-index-seo.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.1.0",
