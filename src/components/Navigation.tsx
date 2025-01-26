@@ -149,25 +149,6 @@ export const Navigation: React.FC = () => {
                 </>
               )}
             </NavLink>
-            {user && canViewSystems && !isAdmin && (
-              <NavLink
-                to="/moje-systemy"
-                className={({ isActive }) =>
-                  `inline-flex items-center px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
-                  ${isActive 
-                    ? 'text-[#2c3b67]'
-                    : 'text-[#2c3b67]/60 hover:text-[#2c3b67] hover:shadow-sm'
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {isActive && <MenuIcon />}
-                    Moje systemy
-                  </>
-                )}
-              </NavLink>
-            )}
             {user && (
               <NavLink
                 to="/firmy-it"
@@ -504,25 +485,6 @@ export const Navigation: React.FC = () => {
                 </>
               )}
             </NavLink>
-            {user && canViewSystems && !isAdmin && (
-              <NavLink
-                to="/moje-systemy"
-                className={({ isActive }) =>
-                  `flex items-center px-2 py-2 text-[15px] font-medium transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none whitespace-nowrap
-                  ${isActive 
-                    ? 'text-[#2c3b67]'
-                    : 'text-[#2c3b67]/60 hover:text-[#2c3b67] hover:shadow-sm'
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {isActive && <MenuIcon />}
-                    Moje systemy
-                  </>
-                )}
-              </NavLink>
-            )}
             {user && (
               <NavLink
                 to="/firmy-it"

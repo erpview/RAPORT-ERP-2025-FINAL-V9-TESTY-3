@@ -104,14 +104,6 @@ export const App: React.FC = () => {
                   } 
                 />
                 <Route 
-                  path="/moje-systemy" 
-                  element={
-                    <ProtectedRoute requireSystemView>
-                      <Systems />
-                    </ProtectedRoute>
-                  } 
-                />
-                <Route 
                   path="/admin/systemy" 
                   element={
                     <ProtectedRoute requireAdmin>
