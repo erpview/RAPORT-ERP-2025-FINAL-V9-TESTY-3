@@ -73,7 +73,7 @@ export const Compare: React.FC = () => {
         }}
       />
       <Helmet>
-        <title>Porównanie systemów ERP - porównywarka ERP | Raport ERP</title>
+        <title>Porównanie systemów ERP - porównywarka ERP | Raport ERP by ERP-VIEW.PL</title>
         <meta 
           name="description" 
           content="Porównaj systemy ERP dostępne w Polsce. Zestawienie funkcjonalności, cen i możliwości najpopularniejszych systemów ERP." 

@@ -126,7 +126,7 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       }
     },
     '/porownaj-systemy-erp': {
-      title: "Porównanie systemów ERP - porównywarka ERP | Raport ERP",
+      title: "Porównanie systemów ERP - porównywarka ERP | Raport ERP by ERP-VIEW.PL",
       description: "Porównaj systemy ERP dostępne w Polsce. Zestawienie funkcjonalności, modułów i możliwości najpopularniejszych systemów ERP. Wybierz najlepsze rozwiązanie dla swojej firmy.",
       schema: {
         "@context": "https://schema.org",
