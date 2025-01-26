@@ -110,30 +110,50 @@ function injectMetaTags(html: string, metaTags: { [key: string]: string }) {
   // Insert new meta tags before closing head tag
   let metaHtml = '';
   
-  // Add charset first
+  // Add charset first if present
   if (metaTags.charset) {
     metaHtml += `<meta charset="${metaTags.charset}">\n`;
   }
   
-  // Add viewport
+  // Add viewport next
   metaHtml += `<meta name="viewport" content="width=device-width, initial-scale=1.0">\n`;
   
+  // Add title
   if (metaTags.title) {
     metaHtml += `<title>${metaTags.title}</title>\n`;
   }
   
+  // Add description and keywords first
+  if (metaTags.description) {
+    metaHtml += `<meta name="description" content="${metaTags.description}">\n`;
+  }
+  if (metaTags.keywords) {
+    metaHtml += `<meta name="keywords" content="${metaTags.keywords}">\n`;
+  }
+  if (metaTags.robots) {
+    metaHtml += `<meta name="robots" content="${metaTags.robots}">\n`;
+  }
+  
+  // Add OpenGraph tags
   Object.entries(metaTags).forEach(([key, value]) => {
-    if (['title', 'structuredData', 'charset'].includes(key)) return;
-    
     if (key.startsWith('og:')) {
       metaHtml += `<meta property="${key}" content="${value}">\n`;
-    } else if (key === 'canonical') {
-      metaHtml += `<link rel="canonical" href="${value}">\n`;
-    } else {
+    }
+  });
+  
+  // Add canonical
+  if (metaTags.canonical) {
+    metaHtml += `<link rel="canonical" href="${metaTags.canonical}">\n`;
+  }
+  
+  // Add any remaining meta tags
+  Object.entries(metaTags).forEach(([key, value]) => {
+    if (!['title', 'structuredData', 'charset', 'description', 'keywords', 'robots', 'canonical'].includes(key) && !key.startsWith('og:')) {
       metaHtml += `<meta name="${key}" content="${value}">\n`;
     }
   });
   
+  // Add structured data last
   if (metaTags.structuredData) {
     metaHtml += `<script type="application/ld+json">${metaTags.structuredData}</script>\n`;
   }
