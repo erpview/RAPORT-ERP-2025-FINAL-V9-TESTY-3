@@ -47,7 +47,13 @@
   from = "/firmy-it"
   to = "/seo/firmy-it/index.html"
   status = 200
-  conditions = {Cookie = ["__prerender_bypass"]}
+  conditions = {Not = [{Cookie = ["__prerender_bypass"]}]}
+
+# Default redirect for /firmy-it to serve React app
+[[redirects]]
+  from = "/firmy-it"
+  to = "/index.html"
+  status = 200
 
 # SPA fallback for client-side navigation
 [[redirects]]
