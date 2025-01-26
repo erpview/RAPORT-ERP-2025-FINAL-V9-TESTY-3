@@ -66,8 +66,11 @@ function extractMetaTags(html: string) {
     const nameMatch = tag.match(/name="([^"]+)"/);
     const contentMatch = tag.match(/content="([^"]+)"/);
     const propertyMatch = tag.match(/property="([^"]+)"/);
+    const charsetMatch = tag.match(/charset="([^"]+)"/);
     
-    if ((nameMatch || propertyMatch) && contentMatch) {
+    if (charsetMatch) {
+      metaTags['charset'] = charsetMatch[1];
+    } else if ((nameMatch || propertyMatch) && contentMatch) {
       const key = nameMatch ? nameMatch[1] : propertyMatch![1];
       metaTags[key] = contentMatch[1];
     }
@@ -100,22 +103,27 @@ function extractMetaTags(html: string) {
 function injectMetaTags(html: string, metaTags: { [key: string]: string }) {
   // Remove existing SEO tags
   html = html.replace(/<title>.*?<\/title>/, '');
-  html = html.replace(/<meta[^>]+name="description"[^>]*>/g, '');
-  html = html.replace(/<meta[^>]+name="keywords"[^>]*>/g, '');
-  html = html.replace(/<meta[^>]+name="robots"[^>]*>/g, '');
-  html = html.replace(/<meta[^>]+property="og:[^"]*"[^>]*>/g, '');
+  html = html.replace(/<meta[^>]+>/g, '');
   html = html.replace(/<link[^>]+rel="canonical"[^>]*>/g, '');
   html = html.replace(/<script[^>]+type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g, '');
   
   // Insert new meta tags before closing head tag
   let metaHtml = '';
   
+  // Add charset first
+  if (metaTags.charset) {
+    metaHtml += `<meta charset="${metaTags.charset}">\n`;
+  }
+  
+  // Add viewport
+  metaHtml += `<meta name="viewport" content="width=device-width, initial-scale=1.0">\n`;
+  
   if (metaTags.title) {
     metaHtml += `<title>${metaTags.title}</title>\n`;
   }
   
   Object.entries(metaTags).forEach(([key, value]) => {
-    if (key === 'title' || key === 'structuredData') return;
+    if (['title', 'structuredData', 'charset'].includes(key)) return;
     
     if (key.startsWith('og:')) {
       metaHtml += `<meta property="${key}" content="${value}">\n`;
@@ -175,11 +183,44 @@ export function seoPlugin(): Plugin {
             // Inject SEO meta tags into the HTML response
             res.setHeader('Content-Type', 'text/html');
             let html = await fs.readFile(path.join(process.cwd(), 'index.html'), 'utf-8');
-            html = injectMetaTags(html, metaTags);
             
+            // Only remove and replace specific meta tags for /firmy-it
+            html = html.replace(/<title>.*?<\/title>/, '');
+            html = html.replace(/<meta[^>]+name="description"[^>]*>/g, '');
+            html = html.replace(/<meta[^>]+name="keywords"[^>]*>/g, '');
+            html = html.replace(/<meta[^>]+name="robots"[^>]*>/g, '');
+            html = html.replace(/<meta[^>]+property="og:[^"]*"[^>]*>/g, '');
+            html = html.replace(/<link[^>]+rel="canonical"[^>]*>/g, '');
+            html = html.replace(/<script[^>]+type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g, '');
+            
+            // Insert new meta tags before closing head tag
+            let metaHtml = '';
+            
+            if (metaTags.title) {
+              metaHtml += `<title>${metaTags.title}</title>\n`;
+            }
+            
+            Object.entries(metaTags).forEach(([key, value]) => {
+              if (key === 'title' || key === 'structuredData') return;
+              
+              if (key.startsWith('og:')) {
+                metaHtml += `<meta property="${key}" content="${value}">\n`;
+              } else if (key === 'canonical') {
+                metaHtml += `<link rel="canonical" href="${value}">\n`;
+              } else {
+                metaHtml += `<meta name="${key}" content="${value}">\n`;
+              }
+            });
+            
+            if (metaTags.structuredData) {
+              metaHtml += `<script type="application/ld+json">${metaTags.structuredData}</script>\n`;
+            }
+            
+            html = html.replace('</head>', metaHtml + '</head>');
             return res.end(html);
           } catch (error) {
             console.error('Error serving companies index page:', error);
+            next();
           }
         }
 
@@ -410,10 +451,7 @@ export function seoPlugin(): Plugin {
           
           // Remove existing SEO tags from HTML
           html = html.replace(/<title>.*?<\/title>/, '');
-          html = html.replace(/<meta[^>]+name="description"[^>]*>/g, '');
-          html = html.replace(/<meta[^>]+name="keywords"[^>]*>/g, '');
-          html = html.replace(/<meta[^>]+name="robots"[^>]*>/g, '');
-          html = html.replace(/<meta[^>]+property="og:[^"]*"[^>]*>/g, '');
+          html = html.replace(/<meta[^>]+>/g, '');
           html = html.replace(/<link[^>]+rel="canonical"[^>]*>/g, '');
           html = html.replace(/<script[^>]+type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g, '');
           
