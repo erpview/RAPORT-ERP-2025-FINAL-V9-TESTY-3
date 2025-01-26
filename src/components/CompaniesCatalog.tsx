@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { Company } from '../types/company';
 import { fetchCompanies } from '../services/companiesService';
+import { useAuth } from '../context/AuthContext';
 
 type CompanyCategory = 'Producent' | 'Integrator' | 'Konsulting IT' | 'Szkolenia IT';
 
@@ -13,6 +14,13 @@ interface CompaniesCatalogProps {
 export const CompaniesCatalog: React.FC<CompaniesCatalogProps> = ({ companies }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<Set<CompanyCategory>>(new Set());
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleCardClick = (path: string) => {
+    window.scrollTo(0, 0);
+    navigate(path);
+  };
 
   // Get unique categories from companies
   const categories = Array.from(new Set(companies
@@ -138,41 +146,73 @@ export const CompaniesCatalog: React.FC<CompaniesCatalogProps> = ({ companies })
       )}
 
       {/* Companies Grid */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredCompanies.map((company) => (
-          <Link
-            key={company.id}
-            to={`/firmy-it/${company.slug}`}
-            className="block bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#d2d2d7]/30 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-1"
-          >
-            <div className="p-6">
-              <div className="mb-4 flex justify-center h-16">
-                {company.logo_url ? (
-                  <img 
-                    src={company.logo_url} 
-                    alt={`${company.name} logo`}
-                    className="h-16 object-contain"
-                  />
-                ) : (
-                  <div className="h-16" />
+          user ? (
+            <div
+              onClick={() => handleCardClick(`/firmy-it/${company.slug}`)}
+              key={company.id}
+              className="block bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#d2d2d7]/30 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-1 cursor-pointer"
+            >
+              <div className="p-6">
+                <div className="mb-4 flex justify-center h-16">
+                  {company.logo_url ? (
+                    <img 
+                      src={company.logo_url} 
+                      alt={`${company.name} logo`}
+                      className="h-16 object-contain"
+                    />
+                  ) : (
+                    <div className="h-16" />
+                  )}
+                </div>
+                <h3 className="text-xl font-semibold text-[#1d1d1f] mb-4 group-hover:text-[#0066CC] transition-colors">{company.name}</h3>
+                <div className="text-sm text-[#424245] mb-4">
+                  {company.category && (
+                    <p className="mb-4"><span className="font-medium">Kategoria:</span> {company.category}</p>
+                  )}
+                  <p><span className="font-medium">Adres:</span> {company.street}</p>
+                  <p className="ml-[45px] mb-4">{company.postal_code} {company.city}</p>
+                  {company.phone && <p><span className="font-medium">Tel:</span> {company.phone}</p>}
+                  {company.email && <p><span className="font-medium">Email:</span> {company.email}</p>}
+                  {company.nip && <p><span className="font-medium">NIP:</span> {company.nip}</p>}
+                </div>
+                {company.description && (
+                  <p className="text-[#424245] line-clamp-3">{company.description}</p>
                 )}
               </div>
-              <h3 className="text-xl font-semibold text-[#1d1d1f] mb-4">{company.name}</h3>
-              <div className="text-sm text-[#424245] mb-4">
-                {company.category && (
-                  <p className="mb-4"><span className="font-medium">Kategoria:</span> {company.category}</p>
-                )}
-                <p><span className="font-medium">Adres:</span> {company.street}</p>
-                <p className="ml-[45px] mb-4">{company.postal_code} {company.city}</p>
-                {company.phone && <p><span className="font-medium">Tel:</span> {company.phone}</p>}
-                {company.email && <p><span className="font-medium">Email:</span> {company.email}</p>}
-                {company.nip && <p><span className="font-medium">NIP:</span> {company.nip}</p>}
-              </div>
-              {company.description && (
-                <p className="text-[#424245] line-clamp-3">{company.description}</p>
-              )}
             </div>
-          </Link>
+          ) : (
+            <div
+              onClick={() => handleCardClick('/admin/login')}
+              key={company.id}
+              className="group bg-white rounded-2xl p-6 shadow-sm border border-[#d2d2d7]/30 hover:border-[#d2d2d7] transition-all duration-300 hover:shadow-md cursor-pointer"
+            >
+              <div className="flex flex-col h-full">
+                <div className="flex-shrink-0 h-24 flex items-center justify-center mb-4">
+                  {company.logo_url && (
+                    <img
+                      src={company.logo_url}
+                      alt={user ? `${company.name} logo` : ''}
+                      className="w-full h-full object-contain"
+                    />
+                  )}
+                </div>
+                <div className="flex-grow">
+                  <h3 
+                    className={`text-lg font-medium mb-2 ${
+                      user ? 'text-[#1d1d1f] hover:text-[#0066CC]' : 'text-[#1d1d1f]'
+                    } transition-colors`}
+                  >
+                    {company.name}
+                  </h3>
+                  <p className="text-[#6e6e73] text-sm">
+                    {company.category}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )
         ))}
       </div>
 

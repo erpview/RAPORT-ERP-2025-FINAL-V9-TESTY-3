@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Lock, Mail, Loader2, AlertCircle } from 'lucide-react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate, Link } from 'react-router-dom';
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -9,11 +9,19 @@ export const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { user, signIn } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Redirect if already logged in
-  if (user) {
-    return <Navigate to="/admin/systemy" />;
-  }
+  // Get the redirect path from location state
+  const from = location.state?.from || '/admin/systemy';
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // Redirect if already logged in
+    if (user) {
+      navigate(from);
+    }
+  }, [user, from, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +30,7 @@ export const Login: React.FC = () => {
     
     try {
       await signIn(email, password);
+      navigate(from);
     } catch (err) {
       setError('Nieprawidłowy email lub hasło');
     } finally {
@@ -31,7 +40,7 @@ export const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F5F5F7] flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md space-y-6">
         <form onSubmit={handleSubmit} className="sf-card p-6 space-y-6">
           {error && (
             <div className="flex items-center gap-2 p-3 rounded-lg bg-[#FF3B30]/10 text-[#FF3B30]">
@@ -91,6 +100,19 @@ export const Login: React.FC = () => {
             )}
           </button>
         </form>
+
+        {/* Registration Card */}
+        <div className="sf-card p-6 space-y-4">
+          <p className="text-[15px] text-[#424245] text-center">
+            Jeśli nie posiadasz konta zarejestruj się
+          </p>
+          <Link
+            to="/admin/register"
+            className="sf-button-secondary w-full justify-center inline-flex"
+          >
+            Zarejestruj się
+          </Link>
+        </div>
       </div>
     </div>
   );

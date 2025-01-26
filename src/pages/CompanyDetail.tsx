@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchCompanyBySlug } from '../services/companiesService';
 import { fetchActiveModules } from '../services/modulesService';
 import { fetchModuleFields } from '../services/moduleFieldsService';
@@ -12,6 +12,7 @@ import { MultiSelectValue } from '../components/ui/MultiSelectValue';
 
 export const CompanyDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const [company, setCompany] = useState<Company | null>(null);
   const [modules, setModules] = useState<Module[]>([]);
   const [fields, setFields] = useState<ModuleField[]>([]);
@@ -20,6 +21,13 @@ export const CompanyDetail: React.FC = () => {
   const isAdmin = user?.user_metadata?.role === 'admin';
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    // Redirect to login if not authenticated
+    if (!authLoading && !user) {
+      navigate('/login', { state: { from: `/firmy-it/${slug}` } });
+      return;
+    }
+
     const loadData = async () => {
       try {
         setLoading(true);
