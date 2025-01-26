@@ -381,8 +381,9 @@ export function seoPlugin(): Plugin {
               'partnerzy.html': 'partnerzy',
               'koszt-wdrozenia-erp/index.html': 'koszt-wdrozenia-erp',
               'koszt-wdrozenia-erp.html': 'koszt-wdrozenia-erp',
-              'index.html': '',
-              'firmy-it/index.html': 'firmy-it'
+              'firmy-it/index.html': 'firmy-it',
+              'firmy-it.html': 'firmy-it',
+              'index.html': ''
             };
             
             seoFolder = staticRoutes[routePath] || '';
@@ -420,7 +421,8 @@ export function seoPlugin(): Plugin {
           
           // Remove existing SEO tags from HTML
           html = html.replace(/<title>.*?<\/title>/, '');
-          html = html.replace(/<meta[^>]+>/g, '');
+          html = html.replace(/<meta[^>]+name="[^"]*"[^>]*>/g, '');
+          html = html.replace(/<meta[^>]+property="[^"]*"[^>]*>/g, '');
           html = html.replace(/<link[^>]+rel="canonical"[^>]*>/g, '');
           html = html.replace(/<script[^>]+type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g, '');
           
