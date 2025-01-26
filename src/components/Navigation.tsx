@@ -342,14 +342,14 @@ export const Navigation: React.FC = () => {
                   className="sf-button-primary"
                 >
                   <LogIn className="w-5 h-5 mr-2" />
-                  Zaloguj się
+                  Logowanie
                 </NavLink>
                 <NavLink
                   to="/admin/register"
                   className="sf-button-primary"
                 >
                   <UserCog className="w-5 h-5 mr-2" />
-                  Zarejestruj się
+                  Rejestracja
                 </NavLink>
               </div>
             ) : (
@@ -638,14 +638,14 @@ export const Navigation: React.FC = () => {
                   className="flex items-center gap-2 px-2 py-2 text-[15px] font-medium text-[#2c3b67]/60 hover:text-[#2c3b67] whitespace-nowrap"
                 >
                   <LogIn className="w-4 h-4" />
-                  Zaloguj się
+                  Logowanie
                 </NavLink>
                 <NavLink
                   to="/admin/register"
                   className="flex items-center gap-2 px-2 py-2 text-[15px] font-medium text-[#2c3b67]/60 hover:text-[#2c3b67] whitespace-nowrap"
                 >
                   <UserCog className="w-4 h-4" />
-                  Zarejestruj się
+                  Rejestracja
                 </NavLink>
               </div>
             ) : (

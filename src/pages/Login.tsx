@@ -96,7 +96,7 @@ export const Login: React.FC = () => {
                 Logowanie...
               </>
             ) : (
-              'Zaloguj się'
+              'Logowanie'
             )}
           </button>
         </form>
@@ -110,7 +110,7 @@ export const Login: React.FC = () => {
             to="/admin/register"
             className="sf-button-secondary w-full justify-center inline-flex"
           >
-            Zarejestruj się
+            Rejestracja
           </Link>
         </div>
       </div>
