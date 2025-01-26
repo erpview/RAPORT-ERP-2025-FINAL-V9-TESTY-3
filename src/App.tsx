@@ -241,11 +241,19 @@ export const App: React.FC = () => {
                 <Route path="/slownik-erp/:slug" element={<SlownikErpTerm />} />
                 <Route 
                   path="/firmy-it" 
-                  element={<Companies />} 
+                  element={
+                    <ProtectedRoute>
+                      <Companies />
+                    </ProtectedRoute>
+                  } 
                 />
                 <Route 
                   path="/firmy-it/:slug" 
-                  element={<CompanyDetail />} 
+                  element={
+                    <ProtectedRoute>
+                      <CompanyDetail />
+                    </ProtectedRoute>
+                  } 
                 />
                 <Route 
                   path="/companies" 
