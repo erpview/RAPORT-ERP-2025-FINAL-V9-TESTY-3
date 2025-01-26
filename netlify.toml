@@ -2,6 +2,9 @@
   command = "npm run build && cp -r public/seo dist/"
   publish = "dist"
 
+[build.environment]
+  NODE_VERSION = "18"
+
 [[headers]]
   for = "/*"
   [headers.values]
