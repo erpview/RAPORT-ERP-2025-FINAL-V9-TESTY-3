@@ -102,7 +102,7 @@ export const Compare: React.FC = () => {
         <div className="pt-12 pb-32 lg:pb-24 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h1 className="text-[#1d1d1f] mb-4">Porównaj systemy ERP</h1>
+              <h1 className="text-[#1d1d1f] mb-4">Raport ERP: Porównaj systemy ERP</h1>
               <p className="text-[21px] leading-relaxed text-[#86868b]">
                 {isMobile ? 'Wybierz i porównaj do 2 systemów ERP' : 'Wybierz i porównaj do 4 systemów ERP'}
               </p>
