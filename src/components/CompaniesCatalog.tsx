@@ -146,15 +146,17 @@ export const CompaniesCatalog: React.FC<CompaniesCatalogProps> = ({ companies })
             className="block bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#d2d2d7]/30 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-1"
           >
             <div className="p-6">
-              {company.logo_url && (
-                <div className="mb-4 flex justify-center">
+              <div className="mb-4 flex justify-center h-16">
+                {company.logo_url ? (
                   <img 
                     src={company.logo_url} 
                     alt={`${company.name} logo`}
                     className="h-16 object-contain"
                   />
-                </div>
-              )}
+                ) : (
+                  <div className="h-16" />
+                )}
+              </div>
               <h3 className="text-xl font-semibold text-[#1d1d1f] mb-4">{company.name}</h3>
               <div className="text-sm text-[#424245] mb-4">
                 {company.category && (
