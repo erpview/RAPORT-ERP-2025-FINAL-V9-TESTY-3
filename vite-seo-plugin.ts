@@ -55,103 +55,68 @@ function extractMetaTags(html: string) {
   const metaTags: { [key: string]: string } = {};
   
   // Extract title
-  const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/);
+  const titleMatch = html.match(/<title>(.*?)<\/title>/);
   if (titleMatch) {
     metaTags.title = titleMatch[1];
   }
-  
+
   // Extract meta tags
-  const matches = html.match(/<meta[^>]+>/g) || [];
-  matches.forEach(tag => {
-    const nameMatch = tag.match(/name="([^"]+)"/);
-    const contentMatch = tag.match(/content="([^"]+)"/);
-    const propertyMatch = tag.match(/property="([^"]+)"/);
-    const charsetMatch = tag.match(/charset="([^"]+)"/);
+  const metaRegex = /<meta[^>]+>/g;
+  const metas = html.match(metaRegex) || [];
+  metas.forEach(meta => {
+    const nameMatch = meta.match(/name="([^"]+)"/);
+    const propertyMatch = meta.match(/property="([^"]+)"/);
+    const contentMatch = meta.match(/content="([^"]+)"/);
     
-    if (charsetMatch) {
-      metaTags['charset'] = charsetMatch[1];
-    } else if ((nameMatch || propertyMatch) && contentMatch) {
-      const key = nameMatch ? nameMatch[1] : propertyMatch![1];
-      metaTags[key] = contentMatch[1];
+    if (contentMatch) {
+      const name = (nameMatch && nameMatch[1]) || (propertyMatch && propertyMatch[1]);
+      if (name) {
+        metaTags[name] = contentMatch[1];
+      }
     }
   });
-  
+
+  // Extract structured data
+  const structuredDataMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  if (structuredDataMatch) {
+    metaTags.structuredData = structuredDataMatch[1];
+  }
+
   // Extract canonical link
-  const canonicalMatch = html.match(/<link[^>]+rel="canonical"[^>]+href="([^"]+)"/);
+  const canonicalMatch = html.match(/<link rel="canonical" href="([^"]+)"/);
   if (canonicalMatch) {
     metaTags.canonical = canonicalMatch[1];
   }
-  
-  // Extract structured data
-  const structuredDataMatches = html.match(/<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/g);
-  if (structuredDataMatches) {
-    try {
-      const jsonData = structuredDataMatches.map(match => {
-        const content = match.replace(/<script[^>]*>|<\/script>/g, '').trim();
-        return JSON.parse(content);
-      });
-      metaTags.structuredData = JSON.stringify(jsonData[0], null, 2); // Use first structured data block
-    } catch (err) {
-      console.error('SEO Plugin: Error parsing structured data JSON:', err);
-    }
-  }
-  
+
   return metaTags;
 }
 
 // Helper function to inject meta tags into HTML
 function injectMetaTags(html: string, metaTags: { [key: string]: string }) {
-  // Remove existing SEO tags
-  html = html.replace(/<title>.*?<\/title>/, '');
-  html = html.replace(/<meta[^>]+>/g, '');
-  html = html.replace(/<link[^>]+rel="canonical"[^>]*>/g, '');
-  html = html.replace(/<script[^>]+type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g, '');
-  
-  // Insert new meta tags before closing head tag
   let metaHtml = '';
   
-  // Add charset first if present
-  if (metaTags.charset) {
-    metaHtml += `<meta charset="${metaTags.charset}">\n`;
-  }
-  
-  // Add viewport next
-  metaHtml += `<meta name="viewport" content="width=device-width, initial-scale=1.0">\n`;
-  
-  // Add title
+  // Add title if present
   if (metaTags.title) {
     metaHtml += `<title>${metaTags.title}</title>\n`;
   }
-  
-  // Add description and keywords first
-  if (metaTags.description) {
-    metaHtml += `<meta name="description" content="${metaTags.description}">\n`;
-  }
-  if (metaTags.keywords) {
-    metaHtml += `<meta name="keywords" content="${metaTags.keywords}">\n`;
-  }
-  if (metaTags.robots) {
-    metaHtml += `<meta name="robots" content="${metaTags.robots}">\n`;
-  }
-  
-  // Add OpenGraph tags
+
+  // Add meta tags
   Object.entries(metaTags).forEach(([key, value]) => {
+    if (key === 'title' || key === 'structuredData' || key === 'canonical') {
+      return;
+    }
+    
     if (key.startsWith('og:')) {
       metaHtml += `<meta property="${key}" content="${value}">\n`;
-    }
-  });
-  
-  // Add canonical
-  if (metaTags.canonical) {
-    metaHtml += `<link rel="canonical" href="${metaTags.canonical}">\n`;
-  }
-  
-  // Add any remaining meta tags
-  Object.entries(metaTags).forEach(([key, value]) => {
-    if (!['title', 'structuredData', 'charset', 'description', 'keywords', 'robots', 'canonical'].includes(key) && !key.startsWith('og:')) {
+    } else {
       metaHtml += `<meta name="${key}" content="${value}">\n`;
     }
   });
+
+  // Add canonical if present
+  if (metaTags.canonical) {
+    metaHtml += `<link rel="canonical" href="${metaTags.canonical}">\n`;
+  }
   
   // Add structured data last
   if (metaTags.structuredData) {
