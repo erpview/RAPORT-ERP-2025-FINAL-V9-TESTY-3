@@ -9,6 +9,7 @@ import { UsersProvider } from './context/UsersContext';
 import { ComparisonProvider } from './context/ComparisonContext';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { useScrollToTop } from './hooks/useScrollToTop';
 import Calculator from './pages/Calculator';
 import { Cost } from './pages/Cost';
 import { Systems } from './pages/Systems';
@@ -41,6 +42,8 @@ import AdminCompanyModuleFields from './pages/AdminCompanyModuleFields';
 import AdminCompanyFields from './pages/AdminCompanyFields';
 
 export const App: React.FC = () => {
+  useScrollToTop();
+  
   return (
     <HelmetProvider>
       <AuthProvider>
