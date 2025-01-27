@@ -4,6 +4,7 @@ import { dictionaryService } from '../services/dictionary';
 import { DictionaryTerm } from '../types/dictionary';
 import { Card } from '../components/ui/Card';
 import { MetaTags } from '../components/MetaTags';
+import { Helmet } from 'react-helmet-async';
 
 const AlphabetBar = ({ letters, onLetterClick }: { letters: string[], onLetterClick: (letter: string) => void }) => {
   return (
@@ -116,6 +117,17 @@ const SlownikErp: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="width" />
+      </Helmet>
+      
       <MetaTags pageData={{ terms }} />
       <div className="min-h-screen bg-[#F5F5F7] py-12">
         <div className="container mx-auto px-8 sm:px-8 lg:px-12">

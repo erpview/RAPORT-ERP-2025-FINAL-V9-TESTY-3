@@ -14,7 +14,13 @@
   path = "/*"
   function = "bot-detection"
 
-# SEO pages redirect
+# Dictionary pages redirect for SEO
+[[redirects]]
+  from = "/slownik-erp"
+  to = "/seo/slownik-erp/index.html"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/slownik-erp/*"
   to = "/slownik-erp/:splat/index.html"
