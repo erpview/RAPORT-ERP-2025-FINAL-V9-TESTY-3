@@ -23,7 +23,7 @@
 
 [[redirects]]
   from = "/slownik-erp/*"
-  to = "/slownik-erp/:splat/index.html"
+  to = "/seo/slownik-erp/:splat/index.html"
   status = 200
   force = true
 
