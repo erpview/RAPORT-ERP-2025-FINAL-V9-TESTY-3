@@ -1,42 +1,249 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Calculator (Home) Page -->
   <url>
-    <loc>https://kalkulator-erp.com/</loc>
-    <lastmod>2024-11-24</lastmod>
+    <loc>https://raport-erp.pl/</loc>
+    <lastmod>2025-01-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- Implementation Page -->
   <url>
-    <loc>https://kalkulator-erp.com/wdrozenie-erp</loc>
-    <lastmod>2024-11-240</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://raport-erp.pl/firmy-it</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- Cost Page -->
   <url>
-    <loc>https://kalkulator-erp.com/koszt-wdrozenia-erp</loc>
-    <lastmod>2024-11-24</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://raport-erp.pl/systemy</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Systems Page -->
   <url>
-    <loc>https://kalkulator-erp.com/systemy-erp</loc>
-    <lastmod>2024-11-24</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://raport-erp.pl/koszty</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Compare Page -->
   <url>
-    <loc>https://kalkulator-erp.com/porownaj-systemy-erp</loc>
-    <lastmod>2024-11-24</lastmod>
+    <loc>https://raport-erp.pl/kalkulator</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/porownaj</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/erp</loc>
+    <lastmod>2025-01-27</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/mrp</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/mrp-ii</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/crm</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/bi</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/scm</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/wms</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/mes</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/ecm</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/plm</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/ppm</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/eam</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/hcm</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/slownik-erp/bpm</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/sente</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/rambase</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/axians</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/ipcc</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/sygrnity-business-solutions</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/deveho-consulting</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/anegis</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/simple</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/bpsc</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/proalpha</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/asseco-business-solutions</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/streamsoft</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/digitland</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/enova</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/vendo.erp</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/symfonia</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/sygnity-business-solutions</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/rho-software</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raport-erp.pl/partnerzy/it.integro</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 </urlset>
