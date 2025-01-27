@@ -42,7 +42,9 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
           .eq('id', user.id)
           .single();
 
-        if (error) throw error;
+        if (error && error.code !== 'PGRST116') { // Only show error if it's not a "not found" error
+          throw error;
+        }
 
         if (data) {
           setFormData({

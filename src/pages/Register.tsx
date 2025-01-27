@@ -268,55 +268,60 @@ export const Register: React.FC = () => {
       if (authError) throw authError;
 
       if (authData.user) {
-        // Use adminSupabase client to bypass RLS policies
-        // Insert user profile data
-        const { error: profileError } = await adminSupabase
-          .from('profiles')
-          .insert({
-            id: authData.user.id,
-            full_name: validatedData.fullName,
-            company_name: validatedData.companyName,
-            phone_number: cleanPhone,
-            nip: cleanNIP,
-            position: validatedData.position,
-            industry: validatedData.industry,
-            company_size: validatedData.companySize,
-            status: 'pending',
-            marketing_accepted: validatedData.marketingAccepted
-          });
-
-        if (profileError) throw profileError;
-
-        // Insert user management record
-        const { error: managementError } = await adminSupabase
-          .from('user_management')
-          .insert({
-            user_id: authData.user.id,
-            email: validatedData.email,
-            role: 'user',
-            is_active: false,
-            status: 'pending'
-          });
-
-        if (managementError) throw managementError;
-
-        // Send registration confirmation email
+        // Immediately redirect to success page
+        navigate('/rejestracja/sukces', { replace: true });
+        
+        // Continue with profile creation in the background
         try {
-          const templateParams = formatRegistrationEmailTemplate(validatedData.email);
-          await emailjs.send(
-            emailConfig.serviceId,
-            emailConfig.registrationTemplateId,
-            templateParams,
-            emailConfig.publicKey
-          );
-        } catch (emailError) {
-          console.error('Error sending registration email:', emailError);
-          // Don't throw error here to allow registration to complete even if email fails
-        }
+          // Use adminSupabase client to bypass RLS policies
+          // Insert user profile data
+          const { error: profileError } = await adminSupabase
+            .from('profiles')
+            .insert({
+              id: authData.user.id,
+              full_name: validatedData.fullName,
+              company_name: validatedData.companyName,
+              phone_number: cleanPhone,
+              nip: cleanNIP,
+              position: validatedData.position,
+              industry: validatedData.industry,
+              company_size: validatedData.companySize,
+              status: 'pending',
+              marketing_accepted: validatedData.marketingAccepted
+            });
 
-        // Show success message and redirect (no signout needed here)
+          if (profileError) console.error('Profile creation error:', profileError);
+
+          // Insert user management record
+          const { error: managementError } = await adminSupabase
+            .from('user_management')
+            .insert({
+              user_id: authData.user.id,
+              email: validatedData.email,
+              role: 'user',
+              is_active: false,
+              status: 'pending'
+            });
+
+          if (managementError) console.error('User management creation error:', managementError);
+
+          // Send registration confirmation email
+          try {
+            const templateParams = formatRegistrationEmailTemplate(validatedData.email);
+            await emailjs.send(
+              emailConfig.serviceId,
+              emailConfig.registrationTemplateId,
+              templateParams,
+              emailConfig.publicKey
+            );
+          } catch (emailError) {
+            console.error('Error sending registration email:', emailError);
+          }
+        } catch (error) {
+          console.error('Background tasks error:', error);
+        }
+        
         toast.success('Rejestracja przebiegła pomyślnie');
-        navigate('/rejestracja/sukces');
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
