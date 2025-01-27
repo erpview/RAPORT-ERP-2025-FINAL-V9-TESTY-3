@@ -122,7 +122,7 @@ export default function Home() {
 
   return (
     <>
-      <SEOHead pageIdentifier="home" />
+      <SEOHead pageIdentifier="" />
       <div className="min-h-screen bg-white">
         <Helmet>
           <title>Kalkulator ERP - Strona główna</title>

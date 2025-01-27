@@ -84,6 +84,55 @@ const DEFAULT_SEO_TEMPLATES = {
     },
     robots: 'index, follow'
   },
+  'home': {
+    id: 'default-home',
+    page_identifier: 'home',
+    is_dynamic: false,
+    title_template: 'Raport ERP - systemy ERP - dostawcy ERP - przewodnik po systemach ERP',
+    title_fallback_template: 'Raport ERP - systemy ERP - dostawcy ERP - przewodnik po systemach ERP',
+    description_template: 'RAPORT ERP - zestawienie i porównanie 70 dostępnych na polskim rynku systemów ERP, opisanych przez 565 kluczowych funkcjonalności ERP. Kalkulator kosztów wdrożenia systemów ERP.',
+    description_fallback_template: 'RAPORT ERP - zestawienie i porównanie 70 dostępnych na polskim rynku systemów ERP, opisanych przez 565 kluczowych funkcjonalności ERP. Kalkulator kosztów wdrożenia systemów ERP.',
+    keywords_template: 'erp, system erp, zarządzanie przedsiębiorstwem, oprogramowanie dla firm, raport erp, ranking erp, wdrożenie erp, koszt wdrożenia erp',
+    keywords_fallback_template: 'erp, system erp, zarządzanie przedsiębiorstwem, oprogramowanie dla firm, raport erp, ranking erp, wdrożenie erp, koszt wdrożenia erp',
+    canonical_url_template: 'https://www.raport-erp.pl',
+    structured_data_template: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Raport ERP by ERP-VIEW.PL",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Jakie moduły zawiera system ERP?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "System ERP składa się z wielu zintegrowanych modułów, które obsługują różne obszary działalności przedsiębiorstwa. Podstawowe moduły to: Finanse i księgowość, Zarządzanie produkcją, Zarządzanie magazynem, Zarządzanie łańcuchem dostaw (SCM), Zarządzanie relacjami z klientami (CRM), Zarządzanie zasobami ludzkimi (HR)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Czy wdrożenie systemu ERP jest opłacalne, jeśli firma już posiada różne, wyspecjalizowane narzędzia informatyczne?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Tak, wdrożenie systemu ERP może być opłacalne nawet jeśli firma korzysta już z innych narzędzi. ERP integruje wszystkie procesy w jednym systemie, co eliminuje problemy z synchronizacją danych, redukuje koszty utrzymania wielu systemów i zwiększa efektywność pracy."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    robots: 'index, follow'
+  },
   '/slownik-erp': {
     id: 'dictionary',
     page_identifier: '/slownik-erp',
