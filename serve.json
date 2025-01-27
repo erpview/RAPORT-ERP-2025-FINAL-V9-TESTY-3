@@ -37,10 +37,6 @@
       "destination": "/partnerzy/digitland/index.html"
     },
     {
-      "source": "/partnerzy/enova",
-      "destination": "/partnerzy/enova/index.html"
-    },
-    {
       "source": "/partnerzy/ipcc",
       "destination": "/partnerzy/ipcc/index.html"
     },
@@ -79,6 +75,10 @@
     {
       "source": "/partnerzy/symfonia",
       "destination": "/partnerzy/symfonia/index.html"
+    },
+    {
+      "source": "/partnerzy/soneta",
+      "destination": "/partnerzy/soneta/index.html"
     },
     {
       "source": "/partnerzy/vendo.erp",

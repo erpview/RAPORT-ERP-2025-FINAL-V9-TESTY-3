@@ -48,7 +48,7 @@ const partners = [
   'asseco-business-solutions',
   'streamsoft',
   'digitland',
-  'enova',
+  'soneta',
   'vendo.erp',
   'symfonia',
   'sygnity-business-solutions',

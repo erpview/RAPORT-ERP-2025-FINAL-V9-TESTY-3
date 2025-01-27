@@ -27,7 +27,7 @@ const PARTNER_SLUGS = [
   'bpsc',
   'deveho-consulting',
   'digitland',
-  'enova',
+  'soneta',
   'ipcc',
   'it.integro',
   'proalpha',
