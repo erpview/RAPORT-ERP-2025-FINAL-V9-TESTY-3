@@ -105,3 +105,6 @@ If dynamic content isn't appearing:
 - Monitor Google Search Console for any SEO issues
 
 For technical support or questions, contact the development team.
+
+to update public/seo/firmy-it/index.html run this:
+node --import tsx scripts/generate-companies-index-seo.ts
