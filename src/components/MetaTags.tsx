@@ -331,9 +331,20 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
 
   return (
     <Helmet>
+      {/* Title */}
       <title>{metaTitle}</title>
+      
+      {/* Basic Meta Tags */}
       <meta name="description" content={metaDescription} />
-      <meta name="application-name" content={baseMetaTags.siteName} />
+      
+      {/* Viewport and Mobile Settings */}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="apple-touch-fullscreen" content="yes" />
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="HandheldFriendly" content="true" />
       
       {/* Open Graph */}
       <meta property="og:title" content={metaTitle} />
