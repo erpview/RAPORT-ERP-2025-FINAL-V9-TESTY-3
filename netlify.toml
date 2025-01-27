@@ -28,6 +28,13 @@
   status = 200
   force = true
 
+# Partners page redirect for SEO
+[[redirects]]
+  from = "/partnerzy"
+  to = "/seo/partnerzy/index.html"
+  status = 200
+  force = true
+
 # Systems page redirect for SEO
 [[redirects]]
   from = "/systemy-erp"
