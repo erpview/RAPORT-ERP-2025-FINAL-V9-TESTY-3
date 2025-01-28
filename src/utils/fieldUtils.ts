@@ -34,6 +34,7 @@ export const normalizeMultiselectValue = (value: string | string[] | null | unde
  * Check if a field should be treated as a multiselect field
  */
 export const isMultiselectField = (field: SystemField | { field_type?: string, field_key?: string }): boolean => {
-  return field.field_type === 'multiselect' || 
-         (field.field_key && MULTISELECT_FIELD_KEYS.includes(field.field_key));
+  const isMultiselect = field.field_type === 'multiselect';
+  const isMultiselectKey = field.field_key ? MULTISELECT_FIELD_KEYS.includes(field.field_key) : false;
+  return isMultiselect || isMultiselectKey;
 };
