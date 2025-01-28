@@ -5,6 +5,7 @@ import { useComparison } from '../context/ComparisonContext';
 import { useAuth } from '../context/AuthContext';
 import { System } from '../types/system';
 import { MultiSelectValue } from './ui/MultiSelectValue';
+import { normalizeMultiselectValue } from '../utils/fieldUtils';
 
 const SystemsCatalog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,21 +15,13 @@ const SystemsCatalog: React.FC = () => {
   const { selectedSystems, addSystem, removeSystem } = useComparison();
   const { user, isAdmin, isEditor } = useAuth();
 
-  // Normalize size array
-  const normalizeSize = (size: string | string[]): string[] => {
-    if (Array.isArray(size)) {
-      return size.flatMap(s => s.split(',').map(v => v.trim())).filter(Boolean);
-    }
-    return size ? size.split(',').map(v => v.trim()).filter(Boolean) : [];
-  };
-
   // Sort vendors alphabetically
   const vendors = Array.from(new Set(systems.map(system => system.vendor))).sort();
   
   // Get unique sizes from all systems with custom sort order
   const sizeOrder = ['Małe', 'Średnie', 'Duże'];
   const sizes = Array.from(new Set(
-    systems.flatMap(system => normalizeSize(system.size))
+    systems.flatMap(system => normalizeMultiselectValue(system.size))
   )).sort((a, b) => {
     const indexA = sizeOrder.indexOf(a);
     const indexB = sizeOrder.indexOf(b);
@@ -40,7 +33,7 @@ const SystemsCatalog: React.FC = () => {
                          system.vendor.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          system.description.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const systemSizes = normalizeSize(system.size);
+    const systemSizes = normalizeMultiselectValue(system.size);
     const matchesSize = selectedSize.length === 0 || 
                        systemSizes.some(size => selectedSize.includes(size));
     
@@ -163,7 +156,7 @@ const SystemsCatalog: React.FC = () => {
       <div className="grid grid-cols-1 gap-6">
         {filteredSystems.map((system) => {
           const isSelected = selectedSystems.some(s => s.id === system.id);
-          const systemSizes = normalizeSize(system.size);
+          const systemSizes = normalizeMultiselectValue(system.size);
           
           return (
             <div key={system.id} className="sf-card p-6 space-y-4 hover:shadow-md transition-all duration-200">
@@ -211,7 +204,7 @@ const SystemsCatalog: React.FC = () => {
               </p>
 
               <div className="flex flex-wrap gap-2">
-                {normalizeSize(system.size).map((size, index) => (
+                {normalizeMultiselectValue(system.size).map((size, index) => (
                   <MultiSelectValue
                     key={`${size}-${index}`}
                     value={size}

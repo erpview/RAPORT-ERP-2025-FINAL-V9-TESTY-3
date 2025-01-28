@@ -20,10 +20,12 @@ const MULTISELECT_FIELD_KEYS = [
 /**
  * Normalize a multiselect value into an array of strings
  */
-export const normalizeMultiselectValue = (value: string | string[]): string[] => {
+export const normalizeMultiselectValue = (value: string | string[] | null | undefined): string[] => {
   if (!value) return [];
   if (Array.isArray(value)) {
-    return value.flatMap(v => v.split(',').map(s => s.trim())).filter(Boolean);
+    return value.filter(Boolean).flatMap(v => 
+      typeof v === 'string' ? v.split(',').map(s => s.trim()) : []
+    ).filter(Boolean);
   }
   return value.split(',').map(v => v.trim()).filter(Boolean);
 };
