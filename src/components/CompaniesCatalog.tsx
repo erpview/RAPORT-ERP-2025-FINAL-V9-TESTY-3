@@ -101,20 +101,22 @@ export const CompaniesCatalog: React.FC<CompaniesCatalogProps> = ({ companies })
   return (
     <div>
       {/* Search */}
-      <div className="mb-4">
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-[#86868b]" />
+      {user && (
+        <div className="mb-4">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-[#86868b]" />
+            </div>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Szukaj we wszystkich polach firmy..."
+              className="block w-full pl-10 pr-3 py-2 border border-[#d2d2d7] rounded-xl bg-white placeholder-[#86868b] focus:outline-none focus:ring-2 focus:ring-[#0066cc] focus:border-transparent transition-shadow text-[15px]"
+            />
           </div>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Szukaj we wszystkich polach firmy..."
-            className="block w-full pl-10 pr-3 py-2 border border-[#d2d2d7] rounded-xl bg-white placeholder-[#86868b] focus:outline-none focus:ring-2 focus:ring-[#0066cc] focus:border-transparent transition-shadow text-[15px]"
-          />
         </div>
-      </div>
+      )}
 
       {/* Category Filters */}
       {categories.length > 0 && (
@@ -186,29 +188,17 @@ export const CompaniesCatalog: React.FC<CompaniesCatalogProps> = ({ companies })
             <div
               onClick={() => handleCardClick('/admin/login')}
               key={company.id}
-              className="group bg-white rounded-2xl p-6 shadow-sm border border-[#d2d2d7]/30 hover:border-[#d2d2d7] transition-all duration-300 hover:shadow-md cursor-pointer"
+              className="block bg-white rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-[#d2d2d7]/30 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-1 cursor-pointer"
             >
-              <div className="flex flex-col h-full">
-                <div className="flex-shrink-0 h-24 flex items-center justify-center mb-4">
-                  {company.logo_url && (
-                    <img
-                      src={company.logo_url}
-                      alt={user ? `${company.name} logo` : ''}
-                      className="w-full h-full object-contain"
-                    />
-                  )}
-                </div>
-                <div className="flex-grow">
-                  <h3 
-                    className={`text-lg font-medium mb-2 ${
-                      user ? 'text-[#1d1d1f] hover:text-[#0066CC]' : 'text-[#1d1d1f]'
-                    } transition-colors`}
-                  >
-                    {company.name}
-                  </h3>
-                  <p className="text-[#6e6e73] text-sm">
-                    {company.category}
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-[#1d1d1f] mb-4 text-center">{company.name}</h3>
+                {company.category && (
+                  <p className="text-sm text-[#424245] text-center">
+                    <span className="font-medium">Kategoria:</span> {company.category}
                   </p>
+                )}
+                <div className="mt-4 text-center text-sm text-[#6e6e73]">
+                  Zaloguj się, aby zobaczyć więcej szczegółów
                 </div>
               </div>
             </div>
