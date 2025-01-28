@@ -139,26 +139,6 @@ function injectMetaTags(html: string, metaTags: { [key: string]: string }) {
     }
   });
 
-  // Add Twitter Card tags
-  Object.entries(metaTags).forEach(([key, value]) => {
-    if (key.startsWith('twitter:')) {
-      metaHtml += `<meta name="${key}" content="${value}">\n`;
-    }
-  });
-
-  // Add image dimensions and alt text for OpenGraph
-  if (metaTags['og:image']) {
-    if (metaTags['og:image:width']) {
-      metaHtml += `<meta property="og:image:width" content="${metaTags['og:image:width']}">\n`;
-    }
-    if (metaTags['og:image:height']) {
-      metaHtml += `<meta property="og:image:height" content="${metaTags['og:image:height']}">\n`;
-    }
-    if (metaTags['og:image:alt']) {
-      metaHtml += `<meta property="og:image:alt" content="${metaTags['og:image:alt']}">\n`;
-    }
-  }
-
   // Add canonical if present
   if (metaTags.canonical) {
     metaHtml += `<link rel="canonical" href="${metaTags.canonical}">\n`;
