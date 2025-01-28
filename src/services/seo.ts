@@ -34,51 +34,6 @@ const DEFAULT_SEO_TEMPLATES = {
             "name": "Raport ERP by ERP-VIEW.PL",
             "url": "https://www.raport-erp.pl"
           }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Jakie moduły zawiera system ERP?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "System ERP składa się z wielu modułów, które odpowiadają za różne aspekty działalności przedsiębiorstwa. Najważniejsze z nich to moduł finansowy, zarządzania zasobami ludzkimi (HR), sprzedaży, zarządzania magazynem i łańcuchem dostaw, produkcji oraz CRM (Customer Relationship Management). Moduł finansowy obsługuje kwestie księgowe, budżetowanie i raportowanie finansowe, umożliwiając firmie monitorowanie swoich finansów. Moduł HR wspiera zarządzanie pracownikami, od rekrutacji po obliczanie wynagrodzeń. Moduł sprzedaży z kolei ułatwia zarządzanie procesem sprzedaży, od ofertowania po fakturowanie. Moduły magazynowe i produkcyjne wspierają zarządzanie zapasami i procesem produkcji, a CRM umożliwia zarządzanie relacjami z klientami. Te moduły współpracują ze sobą, tworząc spójny system, który optymalizuje zarządzanie firmą."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Jakie korzyści z wdrożenia systemu ERP?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Wdrożenie systemu ERP przynosi firmom liczne korzyści, które bezpośrednio wpływają na efektywność i optymalizację procesów biznesowych. Przede wszystkim ERP pozwala na automatyzację powtarzalnych zadań, co zmniejsza potrzebę ręcznego wprowadzania danych i eliminuje błędy wynikające z ludzkich pomyłek. Dzięki temu pracownicy mogą skupić się na bardziej strategicznych działaniach, zamiast na powtarzalnych czynnościach. System ERP integruje dane z różnych działów firmy, co przyczynia się do lepszej koordynacji działań i spójności informacji. W efekcie menedżerowie mają dostęp do aktualnych i precyzyjnych danych, co ułatwia podejmowanie świadomych decyzji biznesowych. Dodatkowo, ERP umożliwia lepsze zarządzanie zasobami, a także redukcję kosztów operacyjnych poprzez optymalizację procesów i efektywne alokowanie zasobów."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Czy systemy ERP są odpowiednie tylko dla dużych korporacji?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Nie, nowoczesne systemy ERP są dostępne w skalowalnych wersjach, dostosowanych do potrzeb zarówno małych, jak i średnich przedsiębiorstw. Dzięki modułowej budowie i elastycznemu modelowi wdrożenia (np. w chmurze), firmy o różnej wielkości mogą skorzystać z funkcjonalności ERP, nie narażając się na nadmierne koszty czy skomplikowaną integrację. W ten sposób również mniejsze organizacje mogą zyskać narzędzie wspierające rozwój oraz poprawę efektywności operacyjnej."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Jak system ERP poprawia efektywność operacyjną?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "System ERP w istotny sposób usprawnia operacje w przedsiębiorstwie, likwidując izolowane źródła informacji i umożliwiając swobodną wymianę danych pomiędzy różnymi działami. W efekcie wszyscy pracownicy korzystają ze spójnych, jednolitych informacji, co poprawia współpracę i eliminuje konieczność wielokrotnego wprowadzania tych samych danych do różnych systemów. Ponadto ERP automatyzuje rutynowe czynności, takie jak przygotowywanie raportów czy rozliczanie faktur, dzięki czemu zmniejsza liczbę pomyłek i pozwala zaoszczędzić cenny czas. Menedżerowie, mając dostęp do aktualnych danych w czasie rzeczywistym, są w stanie szybciej podejmować bardziej trafne decyzje, co przekłada się na efektywniejsze wykorzystanie zasobów. Co więcej, system ERP umożliwia precyzyjne monitorowanie stanów magazynowych i dokładne śledzenie przepływu dóbr, sprzyjając optymalizacji zarządzania zapasami i przepływem towarów."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Czy wdrożenie systemu ERP jest opłacalne, jeśli firma już posiada różne, wyspecjalizowane narzędzia informatyczne?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Wiele przedsiębiorstw korzysta z różnych aplikacji cząstkowych – do księgowości, zarządzania magazynem czy kadrami. Jednak brak spójności między tymi systemami często rodzi problemy z przepływem informacji, powoduje duplikację pracy i błędy. ERP integruje wszystkie kluczowe obszary w jednym środowisku, dzięki czemu firma zyskuje holistyczny wgląd w działalność, usprawnia procesy, a w dłuższej perspektywie może ograniczyć koszty utrzymania wielu odrębnych aplikacji."
-              }
-            }
-          ]
         }
       ]
     },
@@ -92,9 +47,7 @@ const DEFAULT_SEO_TEMPLATES = {
     title_fallback_template: 'Raport ERP - systemy ERP - dostawcy ERP - przewodnik po systemach ERP',
     description_template: 'RAPORT ERP - zestawienie i porównanie 70 dostępnych na polskim rynku systemów ERP, opisanych przez 565 kluczowych funkcjonalności ERP. Kalkulator kosztów wdrożenia systemów ERP.',
     description_fallback_template: 'RAPORT ERP - zestawienie i porównanie 70 dostępnych na polskim rynku systemów ERP, opisanych przez 565 kluczowych funkcjonalności ERP. Kalkulator kosztów wdrożenia systemów ERP.',
-    keywords_template: 'erp, system erp, zarządzanie przedsiębiorstwem, oprogramowanie dla firm, raport erp, ranking erp, wdrożenie erp, koszt wdrożenia erp',
-    keywords_fallback_template: 'erp, system erp, zarządzanie przedsiębiorstwem, oprogramowanie dla firm, raport erp, ranking erp, wdrożenie erp, koszt wdrożenia erp',
-    canonical_url_template: 'https://www.raport-erp.pl',
+    keywords_template: 'erp, system erp, zarządzanie przedsiębiorstwem, oprogramowanie dla firm, raport erp, ranking erp, wdrożenie erp, koszt wdrożenia erp,IT INTEGRO,SAP, COMARCH,BPSC ,UNIT4TETA,ABAS ERP,ASSECO SOFTLAB ERP, ERP BERBERIS,COMARCH CDN XL, EPICOR,HORNET,IMPULS 5 | INFOR10 ERP ENTERPRISE  (LN),INFOR ERP SL, INFOR LOWSON, ISCALA,ISOF,JDE,MAAT,MICROSOFT DYNAMICS NAV | MICROSOFT DYNAMIX AX,MADAR ERP,NAVIREO,ORACLE E-BUSINESS SUITE,QAD ENTERPRISE APPLICATIONS,SAGE ERP,SAP ERP,SENTE,SIMPLE.ERP,SZYK2,TETA ERP,MACROLOGIC ERP, MACROLOGIC MERIT',
     structured_data_template: {
       "@context": "https://schema.org",
       "@graph": [
@@ -107,27 +60,6 @@ const DEFAULT_SEO_TEMPLATES = {
             "@type": "Offer",
             "price": "0"
           }
-        },
-        {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Jakie moduły zawiera system ERP?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "System ERP składa się z wielu zintegrowanych modułów, które obsługują różne obszary działalności przedsiębiorstwa. Podstawowe moduły to: Finanse i księgowość, Zarządzanie produkcją, Zarządzanie magazynem, Zarządzanie łańcuchem dostaw (SCM), Zarządzanie relacjami z klientami (CRM), Zarządzanie zasobami ludzkimi (HR)."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Czy wdrożenie systemu ERP jest opłacalne, jeśli firma już posiada różne, wyspecjalizowane narzędzia informatyczne?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Tak, wdrożenie systemu ERP może być opłacalne nawet jeśli firma korzysta już z innych narzędzi. ERP integruje wszystkie procesy w jednym systemie, co eliminuje problemy z synchronizacją danych, redukuje koszty utrzymania wielu systemów i zwiększa efektywność pracy."
-              }
-            }
-          ]
         }
       ]
     },
