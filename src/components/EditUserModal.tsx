@@ -60,7 +60,7 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({
         .from('user_management')
         .update({
           role: formData.role,
-          status: formData.is_active ? 'active' : 'inactive',
+          status: formData.status, // Keep the original status
           is_active: formData.is_active,
           can_view_users: formData.can_view_users === 'true',
           can_view_systems: formData.can_view_systems === 'true',

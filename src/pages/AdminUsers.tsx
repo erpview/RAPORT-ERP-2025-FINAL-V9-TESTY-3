@@ -214,6 +214,7 @@ export const AdminUsers: React.FC = () => {
         .from('user_management')
         .select(`
           email,
+          role,
           profiles (
             company_name,
             nip,
@@ -225,7 +226,7 @@ export const AdminUsers: React.FC = () => {
           )
         `)
         .eq('user_id', userId)
-        .single<UserWithProfiles>();
+        .single<UserWithProfiles & { role: string }>();
 
       if (userError) throw userError;
 
@@ -242,27 +243,29 @@ export const AdminUsers: React.FC = () => {
         console.error('Error sending simple approval email:', emailError);
       }
 
-      // Send second approval email (detailed)
-      try {
-        const detailedTemplateParams = formatApprovalDetailsEmailTemplate({
-          email: userData.email,
-          fullName: userData.profiles?.full_name || '',
-          companyName: userData.profiles?.company_name || '',
-          nip: userData.profiles?.nip || '',
-          companySize: userData.profiles?.company_size || '',
-          industry: userData.profiles?.industry || '',
-          phoneNumber: userData.profiles?.phone_number || '',
-          position: userData.profiles?.position || ''
-        });
-        
-        await emailjs.send(
-          emailConfig.serviceId,
-          emailConfig.approvalDetailsTemplateId,
-          detailedTemplateParams,
-          emailConfig.publicKey
-        );
-      } catch (emailError) {
-        console.error('Error sending detailed approval email:', emailError);
+      // Send second approval email (detailed) only for users with 'user' role
+      if (userData.role === 'user') {
+        try {
+          const detailedTemplateParams = formatApprovalDetailsEmailTemplate({
+            email: userData.email,
+            fullName: userData.profiles?.full_name || '',
+            companyName: userData.profiles?.company_name || '',
+            nip: userData.profiles?.nip || '',
+            companySize: userData.profiles?.company_size || '',
+            industry: userData.profiles?.industry || '',
+            phoneNumber: userData.profiles?.phone_number || '',
+            position: userData.profiles?.position || ''
+          });
+          
+          await emailjs.send(
+            emailConfig.serviceId,
+            emailConfig.approvalDetailsTemplateId,
+            detailedTemplateParams,
+            emailConfig.publicKey
+          );
+        } catch (emailError) {
+          console.error('Error sending detailed approval email:', emailError);
+        }
       }
 
       toast.success('Użytkownik został zatwierdzony');
@@ -386,6 +389,13 @@ export const AdminUsers: React.FC = () => {
                             className="sf-button-primary text-sm"
                           >
                             Zatwierdź
+                          </button>
+                          <button
+                            onClick={() => setEditingUser(user)}
+                            className="sf-button-secondary text-sm"
+                          >
+                            <Edit2 className="w-4 h-4 mr-1" />
+                            Edytuj
                           </button>
                           <button
                             onClick={() => handleDelete(user.user_id)}
