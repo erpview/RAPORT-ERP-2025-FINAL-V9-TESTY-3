@@ -14,6 +14,7 @@ export const BLOCKED_DOMAINS = [
   'zoho.com',
   'me.com',
   'me.com',
+  'proton.me', 
 
   // Additional email providers
   '0-mail.com',
