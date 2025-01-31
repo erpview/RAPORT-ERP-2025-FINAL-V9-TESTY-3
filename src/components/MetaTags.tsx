@@ -148,7 +148,7 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       }
     },
     '/partnerzy': {
-      title: "Partnerzy raportu ERP - dostawcy systemów ERP | Raport ERP by ERP-VIEW.PL",
+      title: "Partnerzy Raportu ERP | Raport ERP by ERP-VIEW.PL",
       description: "Poznaj partnerów Raportu ERP - firmy wdrożeniowe, dostawców i ekspertów branży ERP. Sprawdź oferty i wybierz najlepszego partnera dla swojej firmy.",
       schema: {
         "@context": "https://schema.org",
