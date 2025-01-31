@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../config/supabase';
 import { PartnerCard } from '../../components/partners/PartnerCard';
-import { MetaTags } from '../../components/MetaTags';
 import { Helmet } from 'react-helmet-async';
 
 interface Partner {
@@ -93,7 +92,6 @@ export default function PartnersPage() {
         <meta name="MobileOptimized" content="width" />
       </Helmet>
       
-      <MetaTags />
       <div className="min-h-screen bg-[#F5F5F7] py-12">
         <div className="container mx-auto px-4 py-8">
           {/* Main Partners Section */}
