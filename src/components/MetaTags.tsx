@@ -55,56 +55,6 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
         "dateModified": "2024-12-13"
       }
     },
-    '/slownik-erp': {
-      title: "Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL",
-      description: "Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.",
-      schema: (pageData?: any) => {
-        const baseSchema = {
-          "@context": "https://schema.org",
-          "@type": "DefinedTermSet",
-          "name": "Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL",
-          "description": "Kompleksowy słownik pojęć i terminów związanych z systemami ERP",
-          "publisher": {
-            "@type": "Organization",
-            "name": "Raport ERP by ERP-VIEW.PL",
-            "url": "https://www.raport-erp.pl"
-          },
-          "inLanguage": "pl-PL",
-          "breadcrumb": {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Strona główna",
-                "item": "https://www.raport-erp.pl"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Słownik ERP",
-                "item": "https://www.raport-erp.pl/slownik-erp"
-              }
-            ]
-          }
-        };
-
-        if (pageData?.terms?.length > 0) {
-          return {
-            ...baseSchema,
-            "hasPart": pageData.terms.map((term: any) => ({
-              "@type": "DefinedTerm",
-              "name": term.term,
-              "description": term.explanation,
-              "inDefinedTermSet": "https://www.raport-erp.pl/slownik-erp",
-              "url": `https://www.raport-erp.pl/slownik-erp/${term.slug}`
-            }))
-          };
-        }
-
-        return baseSchema;
-      }
-    },
     '/koszt-wdrozenia-erp': {
       title: "Ile kosztuje wdrożenie ERP? Kompleksowy przewodnik po kosztach wdrożenia ERP | Raport ERP",
       description: "Sprawdź, ile kosztuje wdrożenie systemu ERP. Poznaj wszystkie składniki kosztów, porównaj modele wdrożenia i dowiedz się, jak zaplanować budżet na system ERP.",
