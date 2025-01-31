@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && cp -r public/seo dist/"
+  command = "npm run build && cp -r public/seo dist/ && chmod 644 dist/sitemap.xml"
   publish = "dist"
 
 [build.environment]
@@ -8,6 +8,12 @@
 [[headers]]
   for = "/*"
   [headers.values]
+    X-Robots-Tag = "all"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"
     X-Robots-Tag = "all"
 
 [[edge_functions]]
