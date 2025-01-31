@@ -24,6 +24,12 @@
 # Dictionary index page
 [[redirects]]
   from = "/slownik-erp"
+  to = "/seo/slownik-erp/index.html"
+  status = 200
+  conditions = {Cookie = ["__prerender_bypass"]}
+
+[[redirects]]
+  from = "/slownik-erp"
   to = "/index.html"
   status = 200
 

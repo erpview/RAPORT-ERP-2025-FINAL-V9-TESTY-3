@@ -12,17 +12,16 @@ interface Context {
 
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
-  const slug = url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
+  const slug = url.pathname === '/slownik-erp' ? '' : url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
   
-  if (!slug) {
+  if (slug === undefined) {
     return;
   }
 
   // Format the term name for display
   const termName = slug
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    ? slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+    : 'Słownik ERP';
 
   const html = `<!DOCTYPE html>
 <html lang="pl">
@@ -50,21 +49,22 @@ export default async function handler(request: Request, context: Context) {
   <meta name="HandheldFriendly" content="true">
   
   <!-- SEO Meta Tags -->
-  <title>Słownik ERP - ${termName} | ERP-VIEW.PL</title>
-  <meta name="description" content="Poznaj definicję terminu ${termName} w kontekście systemów ERP. Dowiedz się więcej na ERP-VIEW.PL">
-  <meta name="keywords" content="${termName}, definicja ${termName}, ${termName} erp, znaczenie ${termName}, system erp ${termName}">
+  <title>${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL</title>
+  <meta name="description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
+  <meta name="keywords" content="${slug ? `${termName}, definicja ${termName}, ${termName} erp, znaczenie ${termName}, system erp ${termName}` : 'słownik erp, terminologia erp, pojęcia erp, definicje erp, system erp, słowniczek erp'}">
   <meta name="robots" content="index, follow">
   
   <!-- OpenGraph Tags -->
-  <meta property="og:title" content="Słownik ERP - ${termName} | ERP-VIEW.PL">
-  <meta property="og:description" content="Poznaj definicję terminu ${termName} w kontekście systemów ERP. Dowiedz się więcej na ERP-VIEW.PL">
+  <meta property="og:title" content="${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL">
+  <meta property="og:description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://www.raport-erp.pl/slownik-erp/${slug}">
+  <meta property="og:url" content="https://www.raport-erp.pl${slug ? `/slownik-erp/${slug}` : '/slownik-erp'}">
   
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
+    ${slug ? `
     "@type": "DefinedTerm",
     "name": "${termName}",
     "description": "Definicja terminu ${termName} w kontekście systemów ERP",
@@ -72,7 +72,11 @@ export default async function handler(request: Request, context: Context) {
       "@type": "DefinedTermSet",
       "name": "Słownik ERP",
       "url": "https://www.raport-erp.pl/slownik-erp"
-    }
+    }` : `
+    "@type": "DefinedTermSet",
+    "name": "Słownik ERP",
+    "description": "Kompleksowy słownik pojęć i terminów związanych z systemami ERP",
+    "url": "https://www.raport-erp.pl/slownik-erp"`}
   }
   </script>
 
