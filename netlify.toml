@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && cp -r public/seo dist/ && chmod 644 dist/sitemap.xml"
+  command = "npm run build"
   publish = "dist"
 
 [build.environment]
@@ -10,77 +10,42 @@
   [headers.values]
     X-Robots-Tag = "all"
 
-[[headers]]
-  for = "/sitemap.xml"
-  [headers.values]
-    Content-Type = "application/xml; charset=utf-8"
-    X-Content-Type-Options = "nosniff"
-    X-Robots-Tag = "all"
-
-[[headers]]
-  for = "/sitemap.xsl"
-  [headers.values]
-    Content-Type = "application/xml; charset=utf-8"
-    X-Content-Type-Options = "nosniff"
-
-[[edge_functions]]
-  path = "/*"
-  function = "bot-detection"
-
+# Dictionary term pages with edge function
 [[edge_functions]]
   path = "/slownik-erp/*"
   function = "dictionary-term"
 
-# Dictionary pages redirect for SEO
-[[redirects]]
-  from = "/slownik-erp"
-  to = "/seo/slownik-erp/index.html"
-  status = 200
-  force = true
-
+# Dictionary term pages fallback
 [[redirects]]
   from = "/slownik-erp/*"
-  to = "/seo/slownik-erp/:splat/index.html"
+  to = "/index.html"
   status = 200
-  force = true
 
-# Companies index page redirect for SEO
+# Dictionary index page
+[[redirects]]
+  from = "/slownik-erp"
+  to = "/index.html"
+  status = 200
+
+# Other pages with SEO versions
 [[redirects]]
   from = "/firmy-it"
   to = "/seo/firmy-it/index.html"
   status = 200
-  force = true
+  conditions = {Cookie = ["__prerender_bypass"]}
 
-# Partners page redirect for SEO
+[[redirects]]
+  from = "/firmy-it"
+  to = "/index.html"
+  status = 200
+
 [[redirects]]
   from = "/partnerzy"
   to = "/seo/partnerzy/index.html"
   status = 200
-  force = true
-
-# Systems page redirect for SEO
-[[redirects]]
-  from = "/systemy-erp"
-  to = "/seo/systemy-erp/index.html"
-  status = 200
   conditions = {Cookie = ["__prerender_bypass"]}
 
-# Calculator page redirect for SEO
 [[redirects]]
-  from = "/kalkulator"
-  to = "/seo/kalkulator/index.html"
-  status = 200
-  conditions = {Cookie = ["__prerender_bypass"]}
-
-# Compare page redirect for SEO
-[[redirects]]
-  from = "/porownaj-systemy-erp"
-  to = "/seo/porownaj-systemy-erp/index.html"
-  status = 200
-  conditions = {Cookie = ["__prerender_bypass"]}
-
-# Fallback redirect
-[[redirects]]
-  from = "/*"
+  from = "/partnerzy"
   to = "/index.html"
   status = 200
