@@ -27,6 +27,10 @@
   path = "/*"
   function = "bot-detection"
 
+[[edge_functions]]
+  path = "/slownik-erp/*"
+  function = "dictionary-term"
+
 # Dictionary pages redirect for SEO
 [[redirects]]
   from = "/slownik-erp"
