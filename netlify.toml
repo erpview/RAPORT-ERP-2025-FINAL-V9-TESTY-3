@@ -12,6 +12,10 @@
 
 # Dictionary term pages with edge function
 [[edge_functions]]
+  path = "/slownik-erp"
+  function = "dictionary-term"
+
+[[edge_functions]]
   path = "/slownik-erp/*"
   function = "dictionary-term"
 
@@ -20,6 +24,13 @@
   from = "/slownik-erp/*"
   to = "/index.html"
   status = 200
+
+# Dictionary index page with trailing slash
+[[redirects]]
+  from = "/slownik-erp/"
+  to = "/slownik-erp"
+  status = 301
+  force = true
 
 # Dictionary index page
 [[redirects]]
