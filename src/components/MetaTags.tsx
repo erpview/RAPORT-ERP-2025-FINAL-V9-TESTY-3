@@ -61,61 +61,22 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       schema: {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Ile kosztuje wdrożenie systemu ERP?",
-        "description": "Sprawdź, ile kosztuje wdrożenie systemu ERP. Poznaj wszystkie składniki kosztów, porównaj modele wdrożenia i dowiedz się, jak zaplanować budżet na system ERP.",
-        "image": "https://erp-view.pl/images/artykuly/zdjecia/raport-erp-share.jpg",
-        "datePublished": "2024-01-01",
-        "dateModified": "2024-12-13"
-      }
-    },
-    '/slownik-erp': {
-      title: "Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL",
-      description: "Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.",
-      schema: (pageData?: any) => {
-        const baseSchema = {
-          "@context": "https://schema.org",
-          "@type": "DefinedTermSet",
-          "name": "Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL",
-          "description": "Kompleksowy słownik pojęć i terminów związanych z systemami ERP",
-          "publisher": {
-            "@type": "Organization",
-            "name": "Raport ERP by ERP-VIEW.PL",
-            "url": "https://www.raport-erp.pl"
-          },
-          "inLanguage": "pl-PL",
-          "breadcrumb": {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Strona główna",
-                "item": "https://www.raport-erp.pl"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Słownik ERP",
-                "item": "https://www.raport-erp.pl/slownik-erp"
-              }
-            ]
-          }
-        };
-
-        if (pageData?.terms?.length > 0) {
-          return {
-            ...baseSchema,
-            "hasPart": pageData.terms.map((term: any) => ({
-              "@type": "DefinedTerm",
-              "name": term.term,
-              "description": term.explanation,
-              "inDefinedTermSet": "https://www.raport-erp.pl/slownik-erp",
-              "url": `https://www.raport-erp.pl/slownik-erp/${term.slug}`
-            }))
-          };
+        "name": "Ile kosztuje wdrożenie ERP? Kompleksowy przewodnik po kosztach wdrożenia ERP | Raport ERP",
+        "headline": "Kompleksowy przewodnik po kosztach wdrożenia systemu ERP",
+        "description": "Sprawdź, ile kosztuje wdrożenie systemu ERP. Poznaj wszystkie składniki kosztów i dowiedz się, jak zaplanować budżet.",
+        "author": {
+          "@type": "Organization",
+          "name": baseMetaTags.siteName
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": baseMetaTags.siteName,
+          "url": "https://www.raport-erp.pl"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.raport-erp.pl/koszt-wdrozenia-erp"
         }
-
-        return baseSchema;
       }
     },
     '/systemy-erp': {
@@ -310,6 +271,56 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
             }
           ]
         }
+      }
+    },
+    '/slownik-erp': {
+      title: "Słownik ERP - Terminologia systemów ERP | Raport ERP by ERP-VIEW.PL",
+      description: "Poznaj terminologię związaną z systemami ERP. Kompleksowy słownik pojęć i definicji z zakresu systemów ERP, który pomoże Ci lepiej zrozumieć ten obszar.",
+      schema: (pageData?: any) => {
+        const baseSchema = {
+          "@context": "https://schema.org",
+          "@type": "DefinedTermSet",
+          "name": "Słownik ERP - Terminologia systemów ERP | Raport ERP by ERP-VIEW.PL",
+          "description": "Kompleksowy słownik pojęć i definicji z zakresu systemów ERP",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Raport ERP by ERP-VIEW.PL",
+            "url": "https://www.raport-erp.pl"
+          },
+          "inLanguage": "pl-PL",
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Strona główna",
+                "item": "https://www.raport-erp.pl"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Słownik ERP",
+                "item": "https://www.raport-erp.pl/slownik-erp"
+              }
+            ]
+          }
+        };
+
+        if (pageData?.terms?.length > 0) {
+          return {
+            ...baseSchema,
+            "hasPart": pageData.terms.map((term: any) => ({
+              "@type": "DefinedTerm",
+              "name": term.term,
+              "description": term.explanation,
+              "inDefinedTermSet": "https://www.raport-erp.pl/slownik-erp",
+              "url": `https://www.raport-erp.pl/slownik-erp/${term.slug}`
+            }))
+          };
+        }
+
+        return baseSchema;
       }
     },
   };
