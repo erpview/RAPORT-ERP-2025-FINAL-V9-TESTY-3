@@ -12,11 +12,9 @@ interface Context {
 
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
-  const path = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) : url.pathname;
-  const slug = path === '/slownik-erp' ? '' : path.split('/slownik-erp/')[1];
+  const slug = url.pathname === '/slownik-erp' ? '' : url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
   
-  // If it's not a dictionary page at all, return undefined
-  if (!path.startsWith('/slownik-erp')) {
+  if (slug === undefined) {
     return;
   }
 
