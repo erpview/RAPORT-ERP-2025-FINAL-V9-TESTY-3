@@ -18,6 +18,21 @@ export default async function handler(request: Request, context: Context) {
     return;
   }
 
+  // For the main dictionary page, return the app HTML
+  if (!slug) {
+    const response = await context.next();
+    const page = await response.text();
+    const modifiedPage = page.replace(
+      /<title>.*?<\/title>/,
+      '<title>Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL</title>'
+    );
+    return new Response(modifiedPage, {
+      headers: {
+        'content-type': 'text/html;charset=UTF-8',
+      },
+    });
+  }
+
   // Format the term name for display
   const termName = slug
     ? slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')

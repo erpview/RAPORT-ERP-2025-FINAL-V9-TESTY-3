@@ -21,12 +21,12 @@
 
 # Dictionary pages fallback
 [[redirects]]
-  from = "/slownik-erp/*"
+  from = "/slownik-erp"
   to = "/index.html"
   status = 200
 
 [[redirects]]
-  from = "/slownik-erp"
+  from = "/slownik-erp/*"
   to = "/index.html"
   status = 200
 
