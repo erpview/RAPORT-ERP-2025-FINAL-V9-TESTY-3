@@ -893,6 +893,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+    <url>
+    <loc>https://raport-erp.pl/slownik-erp/maat</loc>
+    <lastmod>2025-02-01T16:22:24+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://raport-erp.pl/slownik-erp/maksymalna-ilosc-segmentow-konta</loc>
     <lastmod>2025-02-01T16:22:24+01:00</lastmod>
