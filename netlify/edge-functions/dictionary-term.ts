@@ -74,7 +74,7 @@ export default async function handler(request: Request, context: Context) {
       "url": "https://www.raport-erp.pl/slownik-erp"
     }` : `
     "@type": "DefinedTermSet",
-    "name": "Słownik ERP",
+    "name": "Słownik ERP - Kompendium wiedzy o systemach ERP",
     "description": "Kompleksowy słownik pojęć i terminów związanych z systemami ERP",
     "url": "https://www.raport-erp.pl/slownik-erp"`}
   }
