@@ -8,11 +8,12 @@ interface MetaTagsProps {
   title?: string;
   description?: string;
   canonicalUrl?: string;
+  path?: string;
 }
 
-export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description, canonicalUrl }) => {
+export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description, canonicalUrl, path: propPath }) => {
   const location = useLocation();
-  const path = location.pathname;
+  const path = propPath || location.pathname;
 
   // Base meta tags that are common across all pages
   const baseMetaTags = {

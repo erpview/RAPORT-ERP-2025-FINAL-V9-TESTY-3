@@ -93,7 +93,7 @@ export default function PartnersPage() {
         <meta name="MobileOptimized" content="width" />
       </Helmet>
       
-      <MetaTags />
+      <MetaTags path="/partnerzy" />
       <div className="min-h-screen bg-[#F5F5F7] py-12">
         <div className="container mx-auto px-4 py-8">
           {/* Main Partners Section */}
