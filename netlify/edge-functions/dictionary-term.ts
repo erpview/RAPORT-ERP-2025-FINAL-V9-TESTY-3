@@ -12,7 +12,9 @@ interface Context {
 
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
-  const slug = url.pathname === '/slownik-erp' ? '' : url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
+  const path = url.pathname;
+  const normalizedPath = (path !== '/slownik-erp' && path.endsWith('/')) ? path.slice(0, -1) : path;
+  const slug = normalizedPath === '/slownik-erp' ? '' : normalizedPath.split('/slownik-erp/')[1] || '';
   
   if (slug === undefined) {
     return;
@@ -58,7 +60,7 @@ export default async function handler(request: Request, context: Context) {
   <meta property="og:title" content="${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL">
   <meta property="og:description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://www.raport-erp.pl${slug ? `/slownik-erp/${slug}` : '/slownik-erp'}">
+  <meta property="og:url" content="https://www.raport-erp.pl${normalizedPath}">
   
   <!-- Structured Data -->
   <script type="application/ld+json">

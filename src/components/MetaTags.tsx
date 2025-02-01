@@ -13,6 +13,7 @@ interface MetaTagsProps {
 export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description, canonicalUrl }) => {
   const location = useLocation();
   const path = location.pathname;
+  const normalizedPath = (path !== '/' && path.endsWith('/')) ? path.slice(0, -1) : path;
 
   // Base meta tags that are common across all pages
   const baseMetaTags = {
@@ -325,12 +326,12 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
     },
   };
 
-  const defaultData = pageMetaData[path] || {};
+  const defaultData = pageMetaData[normalizedPath as keyof typeof pageMetaData] || {};
   const finalTitle = metaTitle || defaultData.title;
   const finalDescription = metaDescription || defaultData.description;
   const finalCanonicalUrl = metaCanonicalUrl || defaultData.canonicalUrl;
 
-  const currentPage = pageMetaData[path as keyof typeof pageMetaData];
+  const currentPage = pageMetaData[normalizedPath as keyof typeof pageMetaData];
   
   if (!currentPage) return null;
 
@@ -354,7 +355,7 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       {/* Open Graph */}
       <meta property="og:title" content={finalTitle} />
       <meta property="og:description" content={finalDescription} />
-      <meta property="og:url" content={`https://www.raport-erp.pl${path}`} />
+      <meta property="og:url" content={`https://www.raport-erp.pl${normalizedPath}`} />
       <meta property="og:image" content={baseMetaTags.image} />
       <meta property="og:site_name" content={baseMetaTags.siteName} />
       
