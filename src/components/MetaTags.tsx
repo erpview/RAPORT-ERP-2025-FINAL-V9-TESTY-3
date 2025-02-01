@@ -13,7 +13,7 @@ interface MetaTagsProps {
 export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description, canonicalUrl }) => {
   const location = useLocation();
   const path = location.pathname;
-  const normalizedPath = (path !== '/' && path.endsWith('/')) ? path.slice(0, -1) : path;
+  const normalizedPath = path.endsWith('/') ? path.slice(0, -1) : path;
 
   // Base meta tags that are common across all pages
   const baseMetaTags = {
@@ -22,16 +22,11 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
     twitterSite: "@erpview"
   };
 
-  // If direct props are provided, use them instead of pageData
-  const metaTitle = title || pageData?.title;
-  const metaDescription = description || pageData?.description;
-  const metaCanonicalUrl = canonicalUrl || pageData?.canonicalUrl;
-
   // Page-specific meta data
   const pageMetaData: Record<string, { title: string; description: string; schema: any; canonicalUrl?: string }> = {
     '/': {
-      title: "Raport ERP - Kompleksowy przewodnik po systemach ERP",
-      description: "Poznaj najnowszy raport o systemach ERP w Polsce. Sprawdź ranking, porównaj ceny i funkcjonalności wiodących systemów ERP.",
+      title: "Raport ERP 2025 - Ranking systemów ERP | ERP-VIEW.PL",
+      description: "Poznaj najlepsze systemy ERP w Polsce. Sprawdź ranking ERP 2025, porównaj ceny i funkcjonalności. Wybierz idealny system dla swojej firmy!",
       schema: {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -57,14 +52,14 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       }
     },
     '/koszt-wdrozenia-erp': {
-      title: "Ile kosztuje wdrożenie ERP? Kompleksowy przewodnik po kosztach wdrożenia ERP | Raport ERP",
-      description: "Sprawdź, ile kosztuje wdrożenie systemu ERP. Poznaj wszystkie składniki kosztów, porównaj modele wdrożenia i dowiedz się, jak zaplanować budżet na system ERP.",
+      title: "Koszty wdrożenia systemu ERP 2025 | ERP-VIEW.PL",
+      description: "Sprawdź, ile kosztuje wdrożenie systemu ERP w 2025 roku. Poznaj ceny, składowe kosztów i sposoby finansowania.",
       schema: {
         "@context": "https://schema.org",
         "@type": "Article",
-        "name": "Ile kosztuje wdrożenie ERP? Kompleksowy przewodnik po kosztach wdrożenia ERP | Raport ERP",
-        "headline": "Kompleksowy przewodnik po kosztach wdrożenia systemu ERP",
-        "description": "Sprawdź, ile kosztuje wdrożenie systemu ERP. Poznaj wszystkie składniki kosztów i dowiedz się, jak zaplanować budżet.",
+        "name": "Koszty wdrożenia systemu ERP 2025 | ERP-VIEW.PL",
+        "headline": "Koszty wdrożenia systemu ERP w 2025 roku",
+        "description": "Sprawdź, ile kosztuje wdrożenie systemu ERP w 2025 roku. Poznaj ceny, składowe kosztów i sposoby finansowania.",
         "author": {
           "@type": "Organization",
           "name": baseMetaTags.siteName
@@ -81,13 +76,13 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       }
     },
     '/systemy-erp': {
-      title: "Systemy ERP w Polsce - Dostawcy ERP | Raport ERP by ERP-VIEW.PL",
-      description: "Poznaj najpopularniejsze systemy ERP dostępne w Polsce. Porównaj funkcjonalności, sprawdź opinie i wybierz najlepsze rozwiązanie dla swojej firmy.",
+      title: "Systemy ERP - Lista producentów i dostawców | ERP-VIEW.PL",
+      description: "Kompleksowa lista systemów ERP dostępnych w Polsce. Poznaj producentów, funkcjonalności i znajdź idealny system dla swojej firmy.",
       schema: {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": "Systemy ERP w Polsce | Raport ERP by ERP-VIEW.PL",
-        "description": "Kompleksowy przegląd i porównanie systemów ERP dostępnych na polskim rynku",
+        "name": "Systemy ERP - Lista producentów i dostawców | ERP-VIEW.PL",
+        "description": "Kompleksowa lista systemów ERP dostępnych w Polsce",
         "mainEntity": {
           "@type": "ItemList",
           "itemListElement": systems.map((system, index) => ({
@@ -127,14 +122,14 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       }
     },
     '/porownaj-systemy-erp': {
-      title: "Porównanie systemów ERP - porównywarka ERP | Raport ERP by ERP-VIEW.PL",
-      description: "Porównaj systemy ERP dostępne w Polsce. Zestawienie funkcjonalności, modułów i możliwości najpopularniejszych systemów ERP. Wybierz najlepsze rozwiązanie dla swojej firmy.",
+      title: "Porównanie systemów ERP - Zestawienie 2025 | ERP-VIEW.PL",
+      description: "Porównaj systemy ERP i ich funkcjonalności. Sprawdź, który system najlepiej spełni potrzeby Twojej firmy.",
       schema: {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Porównanie systemów ERP - porównywarka ERP | Raport ERP",
+        "name": "Porównanie systemów ERP - Zestawienie 2025 | ERP-VIEW.PL",
         "applicationCategory": "BusinessApplication",
-        "description": "Porównaj systemy ERP dostępne w Polsce. Zestawienie funkcjonalności i możliwości systemów ERP.",
+        "description": "Porównaj systemy ERP i ich funkcjonalności. Sprawdź, który system najlepiej spełni potrzeby Twojej firmy.",
         "operatingSystem": "All",
         "offers": {
           "@type": "Offer",
@@ -149,13 +144,13 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       }
     },
     '/partnerzy': {
-      title: "Partnerzy Raportu ERP | Raport ERP by ERP-VIEW.PL",
-      description: "Poznaj partnerów Raportu ERP - firmy wdrożeniowe, dostawców i ekspertów branży ERP. Sprawdź oferty i wybierz najlepszego partnera dla swojej firmy.",
+      title: "Partnerzy Wdrożeniowi - Dostawcy systemów ERP | ERP-VIEW.PL",
+      description: "Lista certyfikowanych partnerów wdrożeniowych systemów ERP. Znajdź sprawdzonego dostawcę dla swojej firmy.",
       schema: {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": "Partnerzy Raportu ERP | Raport ERP by ERP-VIEW.PL",
-        "description": "Poznaj partnerów Raportu ERP - firmy wdrożeniowe, dostawców i ekspertów branży ERP",
+        "name": "Partnerzy Wdrożeniowi - Dostawcy systemów ERP | ERP-VIEW.PL",
+        "description": "Lista certyfikowanych partnerów wdrożeniowych systemów ERP",
         "mainEntity": {
           "@type": "ItemList",
           "itemListElement": [
@@ -206,17 +201,17 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       }
     },
     '/firmy-it': {
-      title: "Katalog Firm IT | Raport ERP by ERP-VIEW.PL",
-      description: "Poznaj sprawdzone firmy IT w Polsce. Znajdź dostawcę, integratora lub firmę konsultingową dla Twojego projektu ERP.",
+      title: "Firmy IT - Integratorzy systemów ERP | ERP-VIEW.PL",
+      description: "Katalog firm IT specjalizujących się we wdrożeniach systemów ERP. Wybierz doświadczonego integratora.",
       schema: {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": "Katalog Firm IT | Raport ERP by ERP-VIEW.PL",
-        "description": "Katalog firm IT - znajdź i porównaj najlepsze firmy informatyczne w Polsce",
+        "name": "Firmy IT - Integratorzy systemów ERP | ERP-VIEW.PL",
+        "description": "Katalog firm IT specjalizujących się we wdrożeniach systemów ERP",
         "mainEntity": {
           "@type": "ItemList",
           "name": "Katalog Firm IT",
-          "description": "Lista firm IT specjalizujących się w systemach ERP",
+          "description": "Lista firm IT specjalizujących się we wdrożeniach systemów ERP",
           "itemListElement": [
             {
               "@type": "ListItem",
@@ -275,14 +270,14 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       }
     },
     '/slownik-erp': {
-      title: "Słownik ERP - Terminologia systemów ERP | Raport ERP by ERP-VIEW.PL",
-      description: "Poznaj terminologię związaną z systemami ERP. Kompleksowy słownik pojęć i definicji z zakresu systemów ERP, który pomoże Ci lepiej zrozumieć ten obszar.",
+      title: "Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL",
+      description: "Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.",
       schema: (pageData?: any) => {
         const baseSchema = {
           "@context": "https://schema.org",
           "@type": "DefinedTermSet",
-          "name": "Słownik ERP - Terminologia systemów ERP | Raport ERP by ERP-VIEW.PL",
-          "description": "Kompleksowy słownik pojęć i definicji z zakresu systemów ERP",
+          "name": "Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL",
+          "description": "Kompleksowy słownik pojęć i terminów związanych z systemami ERP",
           "publisher": {
             "@type": "Organization",
             "name": "Raport ERP by ERP-VIEW.PL",
@@ -326,22 +321,22 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
     },
   };
 
-  const defaultData = pageMetaData[normalizedPath as keyof typeof pageMetaData] || {};
-  const finalTitle = metaTitle || defaultData.title;
-  const finalDescription = metaDescription || defaultData.description;
-  const finalCanonicalUrl = metaCanonicalUrl || defaultData.canonicalUrl;
-
   const currentPage = pageMetaData[normalizedPath as keyof typeof pageMetaData];
   
-  if (!currentPage) return null;
+  // Use provided title/description or fall back to page metadata
+  const finalTitle = title || (currentPage?.title) || "Raport ERP 2025 | ERP-VIEW.PL";
+  const finalDescription = description || (currentPage?.description) || "Poznaj najlepsze systemy ERP w Polsce. Sprawdź ranking ERP 2025, porównaj ceny i funkcjonalności.";
+  const finalCanonicalUrl = canonicalUrl || currentPage?.canonicalUrl || `https://www.raport-erp.pl${normalizedPath}`;
+
+  if (!currentPage && !title) return null;
 
   return (
     <Helmet>
       {/* Title */}
-      {finalTitle && <title>{finalTitle}</title>}
+      <title>{finalTitle}</title>
       
       {/* Basic Meta Tags */}
-      {finalDescription && <meta name="description" content={finalDescription} />}
+      <meta name="description" content={finalDescription} />
       
       {/* Viewport and Mobile Settings */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
@@ -366,10 +361,10 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       <meta name="twitter:site" content={baseMetaTags.twitterSite} />
       
       {/* Canonical URL */}
-      {finalCanonicalUrl && <link rel="canonical" href={finalCanonicalUrl} />}
+      <link rel="canonical" href={finalCanonicalUrl} />
       
       {/* Schema.org */}
-      {currentPage.schema && (
+      {currentPage?.schema && (
         <script type="application/ld+json">
           {JSON.stringify(typeof currentPage.schema === 'function' ? currentPage.schema(pageData) : currentPage.schema)}
         </script>
