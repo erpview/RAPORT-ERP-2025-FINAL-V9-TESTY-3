@@ -22,8 +22,8 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
   };
 
   // If direct props are provided, use them instead of pageData
-  const metaTitle = title || pageData?.title;
-  const metaDescription = description || pageData?.description;
+  const metaTitle = title || pageData?.title || pageMetaData[path as keyof typeof pageMetaData]?.title;
+  const metaDescription = description || pageData?.description || pageMetaData[path as keyof typeof pageMetaData]?.description;
   const metaCanonicalUrl = canonicalUrl || pageData?.canonicalUrl;
 
   // Page-specific meta data
@@ -280,7 +280,7 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
         const baseSchema = {
           "@context": "https://schema.org",
           "@type": "DefinedTermSet",
-          "name": "Słownik ERP - Terminologia systemów ERP | Raport ERP by ERP-VIEW.PL",
+          "name": "Słownik ERP by ERP-VIEW.PL",
           "description": "Kompleksowy słownik pojęć i definicji z zakresu systemów ERP",
           "publisher": {
             "@type": "Organization",
