@@ -27,7 +27,7 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
   const metaCanonicalUrl = canonicalUrl || pageData?.canonicalUrl;
 
   // Page-specific meta data
-  const pageMetaData: Record<string, { title: string; description: string; schema: any; canonicalUrl?: string }> = {
+  const pageMetaData = {
     '/': {
       title: "Raport ERP - Kompleksowy przewodnik po systemach ERP",
       description: "Poznaj najnowszy raport o systemach ERP w Polsce. Sprawdź ranking, porównaj ceny i funkcjonalności wiodących systemów ERP.",

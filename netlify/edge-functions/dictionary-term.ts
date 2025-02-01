@@ -12,9 +12,7 @@ interface Context {
 
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
-  const path = url.pathname;
-  const normalizedPath = (path !== '/slownik-erp' && path.endsWith('/')) ? path.slice(0, -1) : path;
-  const slug = normalizedPath === '/slownik-erp' ? '' : normalizedPath.split('/slownik-erp/')[1] || '';
+  const slug = url.pathname === '/slownik-erp' ? '' : url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
   
   if (slug === undefined) {
     return;
@@ -51,16 +49,16 @@ export default async function handler(request: Request, context: Context) {
   <meta name="HandheldFriendly" content="true">
   
   <!-- SEO Meta Tags -->
-  <title>${slug ? `${termName} - Definicja w Słowniku ERP` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL</title>
+  <title>${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL</title>
   <meta name="description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
   <meta name="keywords" content="${slug ? `${termName}, definicja ${termName}, ${termName} erp, znaczenie ${termName}, system erp ${termName}` : 'słownik erp, terminologia erp, pojęcia erp, definicje erp, system erp, słowniczek erp'}">
   <meta name="robots" content="index, follow">
   
   <!-- OpenGraph Tags -->
-  <meta property="og:title" content="${slug ? `${termName} - Definicja w Słowniku ERP` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL">
+  <meta property="og:title" content="${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL">
   <meta property="og:description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://www.raport-erp.pl${normalizedPath}">
+  <meta property="og:url" content="https://www.raport-erp.pl${slug ? `/slownik-erp/${slug}` : '/slownik-erp'}">
   
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -83,9 +81,9 @@ export default async function handler(request: Request, context: Context) {
   </script>
 
   <!-- App Resources -->
-  <script type="module" crossorigin src="/assets/js/vendor-O2RIE6o4.js"></script>
-  <script type="module" crossorigin src="/assets/js/main-CJpgmRj7.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-CBZhq_I6.css">
+  <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
+  <script type="module" crossorigin src="/assets/js/main-D-Laz3Bo.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/css/style-Bo9wvlM9.css">
 </head>
 <body>
   <div id="root"></div>
