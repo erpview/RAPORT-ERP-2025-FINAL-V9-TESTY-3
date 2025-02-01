@@ -1,7 +1,6 @@
 interface Context {
   ip: string;
   requestId: string;
-  next: () => Promise<Response>;
   geo: {
     city?: string;
     country?: {
@@ -17,45 +16,6 @@ export default async function handler(request: Request, context: Context) {
   
   if (slug === undefined) {
     return;
-  }
-
-  // For the main dictionary page, return the app HTML
-  if (!slug) {
-    // Pass through the request to get the app's HTML
-    const response = await context.next();
-    
-    // Get the original response headers
-    const headers = new Headers(response.headers);
-    headers.set('content-type', 'text/html;charset=UTF-8');
-    
-    // If the response is compressed, we need to handle it differently
-    const contentEncoding = headers.get('content-encoding');
-    if (contentEncoding === 'gzip' || contentEncoding === 'br' || contentEncoding === 'deflate') {
-      // For compressed responses, just modify the title in the headers
-      headers.set('x-title', 'Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL');
-      return new Response(response.body, {
-        headers: headers,
-        status: response.status,
-        statusText: response.statusText,
-      });
-    }
-
-    // For uncompressed responses, we can modify the HTML directly
-    try {
-      const page = await response.text();
-      const modifiedPage = page.replace(
-        /<title>.*?<\/title>/,
-        '<title>Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL</title>'
-      );
-      return new Response(modifiedPage, {
-        headers: headers,
-        status: response.status,
-        statusText: response.statusText,
-      });
-    } catch (error) {
-      // If we can't modify the HTML, return the original response
-      return response;
-    }
   }
 
   // Format the term name for display
@@ -114,7 +74,7 @@ export default async function handler(request: Request, context: Context) {
       "url": "https://www.raport-erp.pl/slownik-erp"
     }` : `
     "@type": "DefinedTermSet",
-    "name": "Słownik ERP - Kompendium wiedzy o systemach ERP",
+    "name": "Słownik ERP",
     "description": "Kompleksowy słownik pojęć i terminów związanych z systemami ERP",
     "url": "https://www.raport-erp.pl/slownik-erp"`}
   }

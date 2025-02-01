@@ -118,7 +118,6 @@ const SlownikErp: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -129,11 +128,7 @@ const SlownikErp: React.FC = () => {
         <meta name="MobileOptimized" content="width" />
       </Helmet>
       
-      <MetaTags 
-        pageData={{ terms }}
-        title="Słownik ERP - Kompendium wiedzy o systemach ERP | ERP-VIEW.PL"
-        description="Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP."
-      />
+      <MetaTags pageData={{ terms }} />
       <div className="min-h-screen bg-[#F5F5F7] py-12">
         <div className="container mx-auto px-8 sm:px-8 lg:px-12">
           <div className="text-center pt-12 mb-4">
