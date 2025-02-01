@@ -84,9 +84,9 @@ export default async function handler(request: Request, context: Context) {
   </script>
 
   <!-- App Resources -->
-  <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
-  <script type="module" crossorigin src="/assets/js/main-D-Laz3Bo.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/css/style-Bo9wvlM9.css">
+  <script type="module" crossorigin src="/assets/js/vendor-O2RIE6o4.js"></script>
+  <script type="module" crossorigin src="/assets/js/main-CJpgmRj7.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CBZhq_I6.css">
 </head>
 <body>
   <div id="root"></div>
