@@ -121,17 +121,14 @@ const SlownikErp: React.FC = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Raport ERP" />
-        <meta name="HandheldFriendly" content="true" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="format-detection" content="telephone=no" />
+        <meta name="HandheldFriendly" content="true" />
         <meta name="MobileOptimized" content="width" />
       </Helmet>
       
-      <MetaTags 
-        pageData={{ terms }} 
-        title="Słownik ERP - Terminologia systemów ERP | Raport ERP by ERP-VIEW.PL"
-        description="Poznaj terminologię związaną z systemami ERP. Kompleksowy słownik pojęć i definicji z zakresu systemów ERP, który pomoże Ci lepiej zrozumieć ten obszar."
-      />
+      <MetaTags pageData={{ terms }} />
       <div className="min-h-screen bg-[#F5F5F7] py-12">
         <div className="container mx-auto px-8 sm:px-8 lg:px-12">
           <div className="text-center pt-12 mb-4">
