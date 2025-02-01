@@ -27,7 +27,7 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
   const metaCanonicalUrl = canonicalUrl || pageData?.canonicalUrl;
 
   // Page-specific meta data
-  const pageMetaData = {
+  const pageMetaData: Record<string, { title: string; description: string; schema: any; canonicalUrl?: string }> = {
     '/': {
       title: "Raport ERP - Kompleksowy przewodnik po systemach ERP",
       description: "Poznaj najnowszy raport o systemach ERP w Polsce. Sprawdź ranking, porównaj ceny i funkcjonalności wiodących systemów ERP.",
@@ -325,6 +325,11 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
     },
   };
 
+  const defaultData = pageMetaData[path] || {};
+  const finalTitle = metaTitle || defaultData.title;
+  const finalDescription = metaDescription || defaultData.description;
+  const finalCanonicalUrl = metaCanonicalUrl || defaultData.canonicalUrl;
+
   const currentPage = pageMetaData[path as keyof typeof pageMetaData];
   
   if (!currentPage) return null;
@@ -332,10 +337,10 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
   return (
     <Helmet>
       {/* Title */}
-      <title>{metaTitle}</title>
+      {finalTitle && <title>{finalTitle}</title>}
       
       {/* Basic Meta Tags */}
-      <meta name="description" content={metaDescription} />
+      {finalDescription && <meta name="description" content={finalDescription} />}
       
       {/* Viewport and Mobile Settings */}
       <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
@@ -347,20 +352,20 @@ export const MetaTags: React.FC<MetaTagsProps> = ({ pageData, title, description
       <meta name="HandheldFriendly" content="true" />
       
       {/* Open Graph */}
-      <meta property="og:title" content={metaTitle} />
-      <meta property="og:description" content={metaDescription} />
+      <meta property="og:title" content={finalTitle} />
+      <meta property="og:description" content={finalDescription} />
       <meta property="og:url" content={`https://www.raport-erp.pl${path}`} />
       <meta property="og:image" content={baseMetaTags.image} />
       <meta property="og:site_name" content={baseMetaTags.siteName} />
       
       {/* Twitter */}
-      <meta name="twitter:title" content={metaTitle} />
-      <meta name="twitter:description" content={metaDescription} />
+      <meta name="twitter:title" content={finalTitle} />
+      <meta name="twitter:description" content={finalDescription} />
       <meta name="twitter:image" content={baseMetaTags.image} />
       <meta name="twitter:site" content={baseMetaTags.twitterSite} />
       
       {/* Canonical URL */}
-      <link rel="canonical" href={metaCanonicalUrl} />
+      {finalCanonicalUrl && <link rel="canonical" href={finalCanonicalUrl} />}
       
       {/* Schema.org */}
       {currentPage.schema && (
