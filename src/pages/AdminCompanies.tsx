@@ -128,16 +128,41 @@ export const AdminCompanies: React.FC = () => {
         const templateParams = formatCompanyUpdateTemplate(companyData, action, user.email);
         
         try {
+          console.log('Attempting to send email notification with params:', {
+            serviceId: emailConfig.serviceId,
+            templateId: emailConfig.companyUpdateTemplateId,
+            hasPublicKey: !!emailConfig.publicKey,
+            action,
+            userEmail: user.email
+          });
+
+          if (!emailConfig.serviceId || !emailConfig.companyUpdateTemplateId || !emailConfig.publicKey) {
+            throw new Error('Missing required EmailJS configuration');
+          }
+
           await emailjs.send(
             emailConfig.serviceId,
             emailConfig.companyUpdateTemplateId,
             templateParams,
             emailConfig.publicKey
           );
+          
+          console.log('Email notification sent successfully');
         } catch (emailError) {
           console.error('Error sending email notification:', emailError);
+          console.error('Email configuration:', {
+            serviceId: emailConfig.serviceId,
+            templateId: emailConfig.companyUpdateTemplateId,
+            hasPublicKey: !!emailConfig.publicKey,
+            templateParams
+          });
           // Don't throw the error to allow the company save to continue
         }
+      } else {
+        console.log('Skipping email notification:', {
+          isEditor,
+          hasUserEmail: !!user?.email
+        });
       }
 
       if (selectedCompany && 'id' in selectedCompany && selectedCompany.id) {

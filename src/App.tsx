@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Navigation } from './components/Navigation';
@@ -40,10 +40,23 @@ import AdminSEO from './pages/AdminSEO';
 import AdminCompanyModules from './pages/AdminCompanyModules';
 import AdminCompanyModuleFields from './pages/AdminCompanyModuleFields';
 import AdminCompanyFields from './pages/AdminCompanyFields';
+import { emailConfig } from './config/email';
+import emailjs from '@emailjs/browser';
 
 export const App: React.FC = () => {
   useScrollToTop();
-  
+
+  useEffect(() => {
+    // Initialize EmailJS
+    try {
+      console.log('Initializing EmailJS...');
+      emailjs.init(emailConfig.publicKey);
+      console.log('EmailJS initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize EmailJS:', error);
+    }
+  }, []);
+
   return (
     <HelmetProvider>
       <AuthProvider>
