@@ -15,6 +15,9 @@ import {
 } from '../services/companiesService';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../config/supabase';
+import emailjs from '@emailjs/browser';
+import { emailConfig } from '../config/email';
+import { formatCompanyUpdateTemplate } from '../utils/companyEmailFormatter';
 
 export const AdminCompanies: React.FC = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
@@ -118,6 +121,24 @@ export const AdminCompanies: React.FC = () => {
         logo_url: data.logo_url,
         category: data.category
       };
+
+      // Send notification if the user is an editor
+      if (isEditor && user?.email) {
+        const action = selectedCompany && 'id' in selectedCompany ? 'updated' : 'created';
+        const templateParams = formatCompanyUpdateTemplate(companyData, action, user.email);
+        
+        try {
+          await emailjs.send(
+            emailConfig.serviceId,
+            emailConfig.companyUpdateTemplateId,
+            templateParams,
+            emailConfig.publicKey
+          );
+        } catch (emailError) {
+          console.error('Error sending email notification:', emailError);
+          // Don't throw the error to allow the company save to continue
+        }
+      }
 
       if (selectedCompany && 'id' in selectedCompany && selectedCompany.id) {
         await updateCompany(selectedCompany.id, companyData);
