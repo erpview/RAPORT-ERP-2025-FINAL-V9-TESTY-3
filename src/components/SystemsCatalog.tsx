@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Search, Building2, Globe, Filter, ChevronDown, X, Loader2, Scale } from 'lucide-react';
 import { useSystems } from '../hooks/useSystems';
 import { useComparison } from '../context/ComparisonContext';
@@ -6,13 +6,11 @@ import { useAuth } from '../context/AuthContext';
 import { System } from '../types/system';
 import { MultiSelectValue } from './ui/MultiSelectValue';
 import { normalizeMultiselectValue } from '../utils/fieldUtils';
-import { Link } from 'react-router-dom';
 
 const SystemsCatalog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSize, setSelectedSize] = useState<string[]>([]);
   const [selectedVendor, setSelectedVendor] = useState<string>('');
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   const { systems, loading, error } = useSystems();
   const { selectedSystems, addSystem, removeSystem } = useComparison();
   const { user, isAdmin, isEditor } = useAuth();
@@ -44,8 +42,6 @@ const SystemsCatalog: React.FC = () => {
     return matchesSearch && matchesSize && matchesVendor;
   });
 
-  const maxSystems = isMobile ? 2 : 4;
-
   const toggleSize = (size: string) => {
     setSelectedSize(prev =>
       prev.includes(size)
@@ -58,20 +54,10 @@ const SystemsCatalog: React.FC = () => {
     const isSelected = selectedSystems.some(s => s.id === system.id);
     if (isSelected) {
       removeSystem(system.id);
-    } else if (selectedSystems.length < maxSystems) {
+    } else if (selectedSystems.length < 4) {
       addSystem(system);
     }
   };
-
-  // Add mobile detection
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   if (loading) {
     return (
@@ -186,22 +172,17 @@ const SystemsCatalog: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleCompareToggle(system)}
-                    disabled={!isSelected && selectedSystems.length >= maxSystems}
+                    disabled={!isSelected && selectedSystems.length >= 4}
                     className={`sf-button text-[15px] font-medium
                       ${isSelected 
                         ? 'bg-[#2c3b67] text-white hover:bg-[#2c3b67]/90'
-                        : selectedSystems.length >= maxSystems
+                        : selectedSystems.length >= 4
                           ? 'bg-[#F5F5F7] text-[#86868b] cursor-not-allowed'
                           : 'bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED]'
                       }`}
                   >
                     <Scale className="w-5 h-5 mr-2" />
-                    <span className="hidden sm:inline">
-                      {isSelected ? 'Usuń z raportu ERP' : 'Dodaj do raportu ERP'}
-                    </span>
-                    <span className="sm:hidden">
-                      ERP
-                    </span>
+                    {isSelected ? 'Usuń z raportu ERP' : 'Dodaj do raportu ERP'}
                   </button>
                   {(user || isAdmin || isEditor) && (
                     <a
@@ -245,57 +226,6 @@ const SystemsCatalog: React.FC = () => {
           </div>
         )}
       </div>
-
-      {/* Mobile Floating Bar */}
-      {selectedSystems.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/80 backdrop-blur-md border-t border-[#d2d2d7]/30 sm:hidden">
-          <div className="p-4">
-            {/* Counter and Compare Button */}
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-2">
-                <Scale className="w-5 h-5 text-[#2c3b67]" />
-                <span className="text-[15px] font-medium text-[#1d1d1f]">
-                  {selectedSystems.length}/{maxSystems} systemów
-                </span>
-              </div>
-              <Link
-                to="/porownaj-systemy-erp?compare=true"
-                className={`sf-button-primary text-[15px] py-2
-                  ${selectedSystems.length < 2 
-                    ? 'opacity-50 cursor-not-allowed' 
-                    : ''}`}
-                onClick={(e) => {
-                  if (selectedSystems.length < 2) {
-                    e.preventDefault();
-                  }
-                }}
-              >
-                Porównaj systemy
-              </Link>
-            </div>
-            
-            {/* Selected Systems Chips */}
-            <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
-              {selectedSystems.map((system) => (
-                <div
-                  key={system.id}
-                  className="flex items-center gap-2 bg-[#F5F5F7] px-3 py-1.5 rounded-full flex-shrink-0"
-                >
-                  <span className="text-[13px] font-medium text-[#1d1d1f]">
-                    {system.name}
-                  </span>
-                  <button
-                    onClick={() => handleCompareToggle(system)}
-                    className="p-0.5 hover:bg-[#E8E8ED] rounded-full transition-colors"
-                  >
-                    <X className="w-4 h-4 text-[#86868b]" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
