@@ -18,11 +18,41 @@ const stripHtmlAndTruncate = (html: string, maxLength: number = 160): string => 
     : cleanText;
 };
 
+declare global {
+  interface Window {
+    __PRELOADED_STATE__?: {
+      dictionary: {
+        currentTerm: {
+          slug: string;
+          name: string;
+        };
+      };
+    };
+  }
+}
+
 const SlownikErpTerm: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [term, setTerm] = useState<DictionaryTerm | null>(null);
+  const [term, setTerm] = useState<DictionaryTerm | null>(() => {
+    // Initialize from preloaded state if available
+    const preloadedState = window.__PRELOADED_STATE__;
+    const currentTerm = preloadedState?.dictionary?.currentTerm;
+    
+    if (currentTerm && currentTerm.slug === slug) {
+      return {
+        id: 0,
+        term: currentTerm.name,
+        slug: currentTerm.slug,
+        explanation: '',
+        letter: currentTerm.name.charAt(0).toUpperCase(),
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      };
+    }
+    return null;
+  });
   const [banners, setBanners] = useState<DictionaryBanner[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!term);
 
   useEffect(() => {
     const fetchTermData = async () => {

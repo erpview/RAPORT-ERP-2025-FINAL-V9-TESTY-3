@@ -85,6 +85,18 @@ export default async function handler(request: Request, context: Context) {
   }
   </script>
 
+  <!-- Initial State -->
+  <script>
+    window.__PRELOADED_STATE__ = {
+      dictionary: {
+        currentTerm: {
+          slug: "${slug}",
+          name: "${termName}"
+        }
+      }
+    };
+  </script>
+
   <!-- App Resources -->
   <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
   <script type="module" crossorigin src="/assets/js/browser-siKyeAva.js"></script>
