@@ -21,7 +21,16 @@ export default async function handler(request: Request, context: Context) {
   // Format the term name for display
   const termName = slug
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(word => {
+      // Special case for ABC
+      if (word.toLowerCase() === 'abc') return 'ABC';
+      // Special case for ERP
+      if (word.toLowerCase() === 'erp') return 'ERP';
+      // Special case for IT
+      if (word.toLowerCase() === 'it') return 'IT';
+      // For other words, just capitalize first letter
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
     .join(' ');
 
   const html = `<!DOCTYPE html>
@@ -52,7 +61,7 @@ export default async function handler(request: Request, context: Context) {
   <!-- SEO Meta Tags -->
   <title>Słownik ERP - ${termName} | ERP-VIEW.PL</title>
   <meta name="description" content="Poznaj definicję terminu ${termName} w kontekście systemów ERP. Dowiedz się więcej na ERP-VIEW.PL">
-  <meta name="keywords" content="${termName}, definicja ${termName}, ${termName} erp, znaczenie ${termName}, system erp ${termName}">
+  <meta name="keywords" content="${termName}, definicja ${termName}, ${termName} ERP, znaczenie ${termName}, system ERP ${termName}">
   <meta name="robots" content="index, follow">
   
   <!-- OpenGraph Tags -->
@@ -76,10 +85,22 @@ export default async function handler(request: Request, context: Context) {
   }
   </script>
 
+  <!-- Initial State -->
+  <script>
+    window.__PRELOADED_STATE__ = {
+      dictionary: {
+        currentTerm: {
+          slug: "${slug}",
+          name: "${termName}"
+        }
+      }
+    };
+  </script>
+
   <!-- App Resources -->
-  <script type="module" crossorigin src="/assets/js/vendor-O2RIE6o4.js"></script>
-  <script type="module" crossorigin src="/assets/js/main-CJpgmRj7.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-CBZhq_I6.css">
+  <script type="module" crossorigin src="/assets/js/vendor.js"></script>
+  <script type="module" crossorigin src="/assets/js/main.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/css/style.css">
 </head>
 <body>
   <div id="root"></div>
@@ -89,7 +110,8 @@ export default async function handler(request: Request, context: Context) {
   return new Response(html, {
     headers: {
       'content-type': 'text/html;charset=UTF-8',
-      'x-robots-tag': 'index,follow'
+      'x-robots-tag': 'index,follow',
+      'cache-control': 'no-cache, no-store, must-revalidate'
     }
   });
 }

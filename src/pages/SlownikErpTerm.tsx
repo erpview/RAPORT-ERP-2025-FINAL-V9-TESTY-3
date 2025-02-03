@@ -18,11 +18,39 @@ const stripHtmlAndTruncate = (html: string, maxLength: number = 160): string => 
     : cleanText;
 };
 
+declare global {
+  interface Window {
+    __PRELOADED_STATE__?: {
+      dictionary: {
+        currentTerm: {
+          slug: string;
+          name: string;
+        };
+      };
+    };
+  }
+}
+
 const SlownikErpTerm: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [term, setTerm] = useState<DictionaryTerm | null>(null);
+  const [term, setTerm] = useState<DictionaryTerm | null>(() => {
+    // Initialize from preloaded state if available
+    const preloadedState = window.__PRELOADED_STATE__;
+    if (preloadedState?.dictionary?.currentTerm?.slug === slug) {
+      return {
+        id: 0,
+        term: preloadedState.dictionary.currentTerm.name,
+        slug: preloadedState.dictionary.currentTerm.slug,
+        explanation: '',
+        letter: preloadedState.dictionary.currentTerm.name.charAt(0).toUpperCase(),
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      };
+    }
+    return null;
+  });
   const [banners, setBanners] = useState<DictionaryBanner[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!term);
 
   useEffect(() => {
     const fetchTermData = async () => {
@@ -55,15 +83,15 @@ const SlownikErpTerm: React.FC = () => {
 
   if (!term) {
     return (
-      <div className="container mx-auto px-8 sm:px-8 lg:px-12 py-8">
-        <h4 className="text-2xl text-center mb-4">
-          Nie znaleziono definicji
-        </h4>
-        <div className="flex justify-center">
-          <Button component={Link} to="/slownik-erp" variant="primary">
-            <ChevronLeft className="w-4 h-4 mr-2" />
-            Powrót do słownika
-          </Button>
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Nie znaleziono hasła</h1>
+          <Link to="/slownik-erp">
+            <Button>
+              <ChevronLeft className="w-4 h-4 mr-2" />
+              Wróć do słownika
+            </Button>
+          </Link>
         </div>
       </div>
     );
