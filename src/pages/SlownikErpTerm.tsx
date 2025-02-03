@@ -18,6 +18,18 @@ const stripHtmlAndTruncate = (html: string, maxLength: number = 160): string => 
     : cleanText;
 };
 
+declare global {
+  interface Window {
+    __INITIAL_STATE__?: {
+      currentTerm: {
+        slug: string;
+        name: string;
+        isPrerendered: boolean;
+      };
+    };
+  }
+}
+
 const SlownikErpTerm: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [term, setTerm] = useState<DictionaryTerm | null>(null);
@@ -29,6 +41,21 @@ const SlownikErpTerm: React.FC = () => {
       if (!slug) return;
       
       try {
+        // Check if we have initial state from SSR
+        const initialState = window.__INITIAL_STATE__;
+        if (initialState?.currentTerm?.slug === slug) {
+          // Use the prerendered data
+          setTerm({
+            id: 0, // This will be updated when we fetch the full data
+            term: initialState.currentTerm.name,
+            slug: initialState.currentTerm.slug,
+            explanation: '', // This will be updated when we fetch the full data
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          });
+        }
+
+        // Always fetch the full term data to get the content
         const termData = await dictionaryService.getTermBySlug(slug);
         if (termData) {
           setTerm(termData);
@@ -45,7 +72,7 @@ const SlownikErpTerm: React.FC = () => {
     fetchTermData();
   }, [slug]);
 
-  if (loading) {
+  if (loading && !term) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>

@@ -33,6 +33,15 @@ export default async function handler(request: Request, context: Context) {
     })
     .join(' ');
 
+  // Create initial state for the app
+  const initialState = {
+    currentTerm: {
+      slug,
+      name: termName,
+      isPrerendered: true
+    }
+  };
+
   const html = `<!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -83,6 +92,11 @@ export default async function handler(request: Request, context: Context) {
       "url": "https://www.raport-erp.pl/slownik-erp"
     }
   }
+  </script>
+
+  <!-- Initial State -->
+  <script>
+    window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
   </script>
 
   <!-- App Resources -->
