@@ -10,18 +10,12 @@
   [headers.values]
     X-Robots-Tag = "all"
 
-# Dictionary term pages with edge function
-[[edge_functions]]
-  path = "/slownik-erp/*"
-  function = "dictionary-term"
-
-# Dictionary term pages fallback
+# Dictionary pages fallback
 [[redirects]]
   from = "/slownik-erp/*"
   to = "/index.html"
   status = 200
 
-# Dictionary index page
 [[redirects]]
   from = "/slownik-erp"
   to = "/index.html"
