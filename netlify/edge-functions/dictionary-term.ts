@@ -12,10 +12,10 @@ interface Context {
 
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
-  const slug = url.pathname === '/slownik-erp' ? '' : url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
+  const slug = url.pathname === '/slownik-erp' || url.pathname === '/slownik-erp/' ? '' : url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
   
   if (slug === undefined) {
-    return;
+    return new Response('Not Found', { status: 404 });
   }
 
   // Format the term name for display
@@ -82,7 +82,7 @@ export default async function handler(request: Request, context: Context) {
 
   <!-- App Resources -->
   <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
-  <script type="module" crossorigin src="/assets/js/main-D-Laz3Bo.js"></script>
+  <script type="module" crossorigin src="/assets/js/main-BQkLDaqi.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/css/style-Bo9wvlM9.css">
 </head>
 <body>
