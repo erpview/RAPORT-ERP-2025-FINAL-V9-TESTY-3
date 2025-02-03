@@ -10,16 +10,14 @@
   [headers.values]
     X-Robots-Tag = "all"
 
-# Dictionary pages with edge function (only for SEO)
+# Dictionary pages with edge function
 [[edge_functions]]
   path = "/slownik-erp"
   function = "dictionary-term"
-  condition = {User-Agent = ["Googlebot|bingbot|DuckDuckBot|facebookexternalhit|Twitterbot"]}
 
 [[edge_functions]]
   path = "/slownik-erp/*"
   function = "dictionary-term"
-  condition = {User-Agent = ["Googlebot|bingbot|DuckDuckBot|facebookexternalhit|Twitterbot"]}
 
 # Handle trailing slashes
 [[redirects]]
@@ -27,6 +25,21 @@
   to = "/slownik-erp"
   status = 301
   force = true
+
+# Handle SEO bot requests
+[[redirects]]
+  from = "/slownik-erp"
+  to = "/.netlify/functions/dictionary-term"
+  status = 200
+  force = true
+  conditions = {User-Agent = ["Googlebot|bingbot|DuckDuckBot|facebookexternalhit|Twitterbot"]}
+
+[[redirects]]
+  from = "/slownik-erp/*"
+  to = "/.netlify/functions/dictionary-term"
+  status = 200
+  force = true
+  conditions = {User-Agent = ["Googlebot|bingbot|DuckDuckBot|facebookexternalhit|Twitterbot"]}
 
 # Serve index.html for all routes
 [[redirects]]
