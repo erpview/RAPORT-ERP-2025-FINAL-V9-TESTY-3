@@ -96,7 +96,13 @@ export default async function handler(request: Request, context: Context) {
 
   <!-- Initial State -->
   <script>
-    window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+    window.__INITIAL_STATE__ = ${JSON.stringify({
+      currentTerm: {
+        slug,
+        name: termName,
+        isPrerendered: true
+      }
+    })};
   </script>
 
   <!-- App Resources -->

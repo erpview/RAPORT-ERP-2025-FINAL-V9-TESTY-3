@@ -50,6 +50,7 @@ const SlownikErpTerm: React.FC = () => {
             term: initialState.currentTerm.name,
             slug: initialState.currentTerm.slug,
             explanation: '', // This will be updated when we fetch the full data
+            letter: initialState.currentTerm.name.charAt(0).toUpperCase(), // Add the letter property
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString()
           });
