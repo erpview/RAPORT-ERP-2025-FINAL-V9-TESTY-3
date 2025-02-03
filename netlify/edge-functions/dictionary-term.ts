@@ -92,7 +92,9 @@ export default async function handler(request: Request, context: Context) {
   </script>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+    ${slug ? `<h1>Słownik ERP - ${termName}</h1><p>Poznaj definicję terminu ${termName} w kontekście systemów ERP.</p>` : `<h1>Słownik ERP - Kompendium wiedzy o systemach ERP</h1><p>Poznaj kompleksowo zasoby terminologiczne dotyczące systemów ERP.</p>`}
+  </div>
   <script>
     // Ensure the router knows about the initial URL
     window.history.replaceState({}, '', '${url.pathname}');
