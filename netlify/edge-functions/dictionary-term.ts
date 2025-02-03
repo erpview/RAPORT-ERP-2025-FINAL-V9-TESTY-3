@@ -98,10 +98,13 @@ export default async function handler(request: Request, context: Context) {
   </script>
 
   <!-- App Resources -->
-  <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
-  <script type="module" crossorigin src="/assets/js/browser-siKyeAva.js"></script>
-  <script type="module" crossorigin src="/assets/js/main-BDfrACjH.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/css/style-Bf7uuL58.css">
+  <script type="module">
+    // Import vendor chunk first
+    import('/assets/js/vendor.js');
+    // Import main chunk
+    import('/assets/js/main.js');
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
   <div id="root"></div>

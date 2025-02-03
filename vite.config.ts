@@ -82,19 +82,21 @@ export default defineConfig(async (): Promise<UserConfig> => {
           ...termEntries
         },
         output: {
+          chunkFileNames: 'assets/js/[name].js',
+          entryFileNames: 'assets/js/[name].js',
           assetFileNames: (assetInfo) => {
-            if (!assetInfo.name) return 'assets/[name]-[hash][extname]';
+            if (!assetInfo.name) return 'assets/[name][extname]';
             const extType = assetInfo.name.split('.')[1];
-            if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-              return `assets/images/[name]-[hash][extname]`;
+            if (extType) {
+              switch (extType) {
+                case 'css':
+                  return 'assets/css/style.css';
+                default:
+                  return `assets/[ext]/[name].[ext]`;
+              }
             }
-            if (/css/i.test(extType)) {
-              return `assets/css/[name]-[hash][extname]`;
-            }
-            return `assets/[name]-[hash][extname]`;
+            return `assets/[name][extname]`;
           },
-          chunkFileNames: 'assets/js/[name]-[hash].js',
-          entryFileNames: 'assets/js/[name]-[hash].js',
           manualChunks: {
             vendor: ['react', 'react-dom'],
             main: ['/src/main.tsx']
