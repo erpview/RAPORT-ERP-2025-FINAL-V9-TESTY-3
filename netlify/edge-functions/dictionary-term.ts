@@ -3,48 +3,35 @@ interface Context {
   requestId: string;
   geo: {
     city?: string;
-    country?: string;
-    region?: string;
+    country?: {
+      code?: string;
+      name?: string;
+    };
   };
 }
 
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
-  const path = url.pathname;
+  const slug = url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
   
-  // Handle both the root dictionary path and term pages
-  if (path === '/slownik-erp' || path === '/slownik-erp/') {
-    // This is the root dictionary page
-    return await generateResponse('', request);
+  if (!slug) {
+    return;
   }
-  
-  // Handle term pages
-  const termMatch = path.match(/^\/slownik-erp\/(.+?)\/?$/);
-  if (!termMatch) {
-    return new Response('Not Found', { status: 404 });
-  }
-  
-  const slug = termMatch[1];
-  return await generateResponse(slug, request);
-}
 
-async function generateResponse(slug: string, request: Request) {
-  // Format the term name for display - properly handle dashes and capitalization
+  // Format the term name for display
   const termName = slug
-    ? slug
-        .split('-')
-        .map(word => {
-          // Special case for ABC
-          if (word.toLowerCase() === 'abc') return 'ABC';
-          // Special case for ERP
-          if (word.toLowerCase() === 'erp') return 'ERP';
-          // Special case for IT
-          if (word.toLowerCase() === 'it') return 'IT';
-          // For other words, just capitalize first letter
-          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-        })
-        .join(' ')
-    : 'Słownik ERP';
+    .split('-')
+    .map(word => {
+      // Special case for ABC
+      if (word.toLowerCase() === 'abc') return 'ABC';
+      // Special case for ERP
+      if (word.toLowerCase() === 'erp') return 'ERP';
+      // Special case for IT
+      if (word.toLowerCase() === 'it') return 'IT';
+      // For other words, just capitalize first letter
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(' ');
 
   const html = `<!DOCTYPE html>
 <html lang="pl">
@@ -72,22 +59,21 @@ async function generateResponse(slug: string, request: Request) {
   <meta name="HandheldFriendly" content="true">
   
   <!-- SEO Meta Tags -->
-  <title>${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL</title>
-  <meta name="description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
-  <meta name="keywords" content="${slug ? `${termName}, definicja ${termName}, ${termName} ERP, znaczenie ${termName}, system ERP ${termName}` : 'słownik erp, terminologia erp, pojęcia erp, definicje erp, system erp, słowniczek erp'}">
+  <title>Słownik ERP - ${termName} | ERP-VIEW.PL</title>
+  <meta name="description" content="Poznaj definicję terminu ${termName} w kontekście systemów ERP. Dowiedz się więcej na ERP-VIEW.PL">
+  <meta name="keywords" content="${termName}, definicja ${termName}, ${termName} ERP, znaczenie ${termName}, system ERP ${termName}">
   <meta name="robots" content="index, follow">
   
   <!-- OpenGraph Tags -->
-  <meta property="og:title" content="${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL">
-  <meta property="og:description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
+  <meta property="og:title" content="Słownik ERP - ${termName} | ERP-VIEW.PL">
+  <meta property="og:description" content="Poznaj definicję terminu ${termName} w kontekście systemów ERP. Dowiedz się więcej na ERP-VIEW.PL">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://www.raport-erp.pl${slug ? `/slownik-erp/${slug}` : '/slownik-erp'}">
+  <meta property="og:url" content="https://www.raport-erp.pl/slownik-erp/${slug}">
   
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    ${slug ? `
     "@type": "DefinedTerm",
     "name": "${termName}",
     "description": "Definicja terminu ${termName} w kontekście systemów ERP",
@@ -95,11 +81,7 @@ async function generateResponse(slug: string, request: Request) {
       "@type": "DefinedTermSet",
       "name": "Słownik ERP",
       "url": "https://www.raport-erp.pl/slownik-erp"
-    }` : `
-    "@type": "DefinedTermSet",
-    "name": "Słownik ERP",
-    "description": "Kompleksowy słownik pojęć i terminów związanych z systemami ERP",
-    "url": "https://www.raport-erp.pl/slownik-erp"`}
+    }
   }
   </script>
 
@@ -116,8 +98,7 @@ async function generateResponse(slug: string, request: Request) {
   return new Response(html, {
     headers: {
       'content-type': 'text/html;charset=UTF-8',
-      'x-robots-tag': 'index,follow',
-      'cache-control': 'public, max-age=0, must-revalidate'
+      'x-robots-tag': 'index,follow'
     }
   });
 }

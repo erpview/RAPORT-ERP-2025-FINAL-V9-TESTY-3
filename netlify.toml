@@ -10,36 +10,22 @@
   [headers.values]
     X-Robots-Tag = "all"
 
-# Dictionary pages with edge function
-[[edge_functions]]
-  path = "/slownik-erp"
-  function = "dictionary-term"
-
+# Dictionary term pages with edge function
 [[edge_functions]]
   path = "/slownik-erp/*"
   function = "dictionary-term"
 
-# Handle trailing slashes
-[[redirects]]
-  from = "/slownik-erp/"
-  to = "/slownik-erp"
-  status = 301
-  force = true
-
-# Client-side routing for dictionary pages
-[[redirects]]
-  from = "/slownik-erp"
-  to = "/index.html"
-  status = 200
-  force = true
-  conditions = {Cookie = ["__prerender_bypass"], User-Agent = [".*"]}
-
+# Dictionary term pages fallback
 [[redirects]]
   from = "/slownik-erp/*"
   to = "/index.html"
   status = 200
-  force = true
-  conditions = {Cookie = ["__prerender_bypass"], User-Agent = [".*"]}
+
+# Dictionary index page
+[[redirects]]
+  from = "/slownik-erp"
+  to = "/index.html"
+  status = 200
 
 # Other pages with SEO versions
 [[redirects]]
@@ -61,5 +47,44 @@
 
 [[redirects]]
   from = "/partnerzy"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/systemy-erp"
+  to = "/seo/systemy-erp/index.html"
+  status = 200
+  conditions = {Cookie = ["__prerender_bypass"]}
+
+[[redirects]]
+  from = "/systemy-erp"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/kalkulator"
+  to = "/seo/kalkulator/index.html"
+  status = 200
+  conditions = {Cookie = ["__prerender_bypass"]}
+
+[[redirects]]
+  from = "/kalkulator"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/porownaj-systemy-erp"
+  to = "/seo/porownaj-systemy-erp/index.html"
+  status = 200
+  conditions = {Cookie = ["__prerender_bypass"]}
+
+[[redirects]]
+  from = "/porownaj-systemy-erp"
+  to = "/index.html"
+  status = 200
+
+# Fallback redirect for SPA
+[[redirects]]
+  from = "/*"
   to = "/index.html"
   status = 200
