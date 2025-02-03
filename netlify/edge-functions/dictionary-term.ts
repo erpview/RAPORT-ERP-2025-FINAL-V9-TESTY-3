@@ -48,70 +48,69 @@ async function generateResponse(slug: string, request: Request) {
 
   const html = `<!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
-    
-    <!-- Mobile Settings -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-touch-fullscreen" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="HandheldFriendly" content="true" />
-    <meta name="MobileOptimized" content="width" />
-    
-    <!-- Icons -->
-    <link rel="icon" href="https://erp-view.pl/images/icony/favicon.png" />
-    <link rel="shortcut icon" href="https://erp-view.pl/images/icony/favicon.png" />
-    <link rel="apple-touch-icon" href="https://erp-view.pl/images/icony/icon-192.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://erp-view.pl/images/icony/icon-192.png" />
-    <link rel="icon" sizes="192x192" href="https://erp-view.pl/images/icony/icon-192.png" />
-    <link rel="icon" sizes="512x512" href="https://erp-view.pl/images/icony/icon-512.png" />
-    
-    <!-- PWA -->
-    <meta name="apple-mobile-web-app-title" content="Raport ERP by ERP-VIEW.PL" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <script src="/tinymce/js/tinymce/tinymce.min.js"></script>
-    
-    <!-- SEO Meta Tags -->
-    <title>${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL</title>
-    <meta name="description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
-    <meta name="keywords" content="${slug ? `${termName}, definicja ${termName}, ${termName} ERP, znaczenie ${termName}, system ERP ${termName}` : 'słownik erp, terminologia erp, pojęcia erp, definicje erp, system erp, słowniczek erp'}">
-    <meta name="robots" content="index, follow">
-    
-    <!-- OpenGraph Tags -->
-    <meta property="og:title" content="${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL">
-    <meta property="og:description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://www.raport-erp.pl${slug ? `/slownik-erp/${slug}` : '/slownik-erp'}">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      ${slug ? `
-      "@type": "DefinedTerm",
-      "name": "${termName}",
-      "description": "Definicja terminu ${termName} w kontekście systemów ERP",
-      "inDefinedTermSet": {
-        "@type": "DefinedTermSet",
-        "name": "Słownik ERP",
-        "url": "https://www.raport-erp.pl/slownik-erp"
-      }` : `
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Icons -->
+  <link rel="icon" href="https://erp-view.pl/images/icony/favicon.png" />
+  <link rel="shortcut icon" href="https://erp-view.pl/images/icony/favicon.png" />
+  <link rel="apple-touch-icon" href="https://erp-view.pl/images/icony/icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://erp-view.pl/images/icony/icon-192.png" />
+  <link rel="icon" sizes="192x192" href="https://erp-view.pl/images/icony/icon-192.png" />
+  <link rel="icon" sizes="512x512" href="https://erp-view.pl/images/icony/icon-512.png" />
+  
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest" />
+  
+  <!-- Mobile Settings -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="HandheldFriendly" content="true">
+  
+  <!-- SEO Meta Tags -->
+  <title>${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL</title>
+  <meta name="description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
+  <meta name="keywords" content="${slug ? `${termName}, definicja ${termName}, ${termName} ERP, znaczenie ${termName}, system ERP ${termName}` : 'słownik erp, terminologia erp, pojęcia erp, definicje erp, system erp, słowniczek erp'}">
+  <meta name="robots" content="index, follow">
+  
+  <!-- OpenGraph Tags -->
+  <meta property="og:title" content="${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL">
+  <meta property="og:description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.raport-erp.pl${slug ? `/slownik-erp/${slug}` : '/slownik-erp'}">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    ${slug ? `
+    "@type": "DefinedTerm",
+    "name": "${termName}",
+    "description": "Definicja terminu ${termName} w kontekście systemów ERP",
+    "inDefinedTermSet": {
       "@type": "DefinedTermSet",
       "name": "Słownik ERP",
-      "description": "Kompleksowy słownik pojęć i terminów związanych z systemami ERP",
-      "url": "https://www.raport-erp.pl/slownik-erp"`}
-    }
-    </script>
+      "url": "https://www.raport-erp.pl/slownik-erp"
+    }` : `
+    "@type": "DefinedTermSet",
+    "name": "Słownik ERP",
+    "description": "Kompleksowy słownik pojęć i terminów związanych z systemami ERP",
+    "url": "https://www.raport-erp.pl/slownik-erp"`}
+  }
+  </script>
 
-    <!-- App Resources -->
-    <script type="module" src="/src/main.tsx"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+  <!-- App Resources -->
+  <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
+  <script type="module" crossorigin src="/assets/js/main-BQkLDaqi.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/css/style-Bo9wvlM9.css">
+</head>
+<body>
+  <div id="root"></div>
+</body>
 </html>`;
 
   return new Response(html, {
