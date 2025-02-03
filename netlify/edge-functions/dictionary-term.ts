@@ -18,9 +18,21 @@ export default async function handler(request: Request, context: Context) {
     return new Response('Not Found', { status: 404 });
   }
 
-  // Format the term name for display
+  // Format the term name for display - properly handle dashes and capitalization
   const termName = slug
-    ? slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+    ? slug
+        .split('-')
+        .map(word => {
+          // Special case for ABC
+          if (word.toLowerCase() === 'abc') return 'ABC';
+          // Special case for ERP
+          if (word.toLowerCase() === 'erp') return 'ERP';
+          // Special case for IT
+          if (word.toLowerCase() === 'it') return 'IT';
+          // For other words, just capitalize first letter
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        })
+        .join(' ')
     : 'Słownik ERP';
 
   const html = `<!DOCTYPE html>
@@ -51,7 +63,7 @@ export default async function handler(request: Request, context: Context) {
   <!-- SEO Meta Tags -->
   <title>${slug ? `Słownik ERP - ${termName}` : 'Słownik ERP - Kompendium wiedzy o systemach ERP'} | ERP-VIEW.PL</title>
   <meta name="description" content="${slug ? `Poznaj definicję terminu ${termName} w kontekście systemów ERP.` : 'Kompleksowy słownik pojęć i terminów związanych z systemami ERP. Poznaj znaczenie i zastosowanie terminologii ERP.'} Dowiedz się więcej na ERP-VIEW.PL">
-  <meta name="keywords" content="${slug ? `${termName}, definicja ${termName}, ${termName} erp, znaczenie ${termName}, system erp ${termName}` : 'słownik erp, terminologia erp, pojęcia erp, definicje erp, system erp, słowniczek erp'}">
+  <meta name="keywords" content="${slug ? `${termName}, definicja ${termName}, ${termName} ERP, znaczenie ${termName}, system ERP ${termName}` : 'słownik erp, terminologia erp, pojęcia erp, definicje erp, system erp, słowniczek erp'}">
   <meta name="robots" content="index, follow">
   
   <!-- OpenGraph Tags -->
