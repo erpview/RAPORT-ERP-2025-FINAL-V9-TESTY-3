@@ -19,20 +19,27 @@
   path = "/slownik-erp/*"
   function = "dictionary-term"
 
-# Ensure client-side routing works
+# Handle trailing slashes
+[[redirects]]
+  from = "/slownik-erp/"
+  to = "/slownik-erp"
+  status = 301
+  force = true
+
+# Client-side routing for dictionary pages
 [[redirects]]
   from = "/slownik-erp"
   to = "/index.html"
   status = 200
   force = true
-  conditions = {Cookie = ["__prerender_bypass"]}
+  conditions = {Cookie = ["__prerender_bypass"], User-Agent = [".*"]}
 
 [[redirects]]
   from = "/slownik-erp/*"
   to = "/index.html"
   status = 200
   force = true
-  conditions = {Cookie = ["__prerender_bypass"]}
+  conditions = {Cookie = ["__prerender_bypass"], User-Agent = [".*"]}
 
 # Other pages with SEO versions
 [[redirects]]
