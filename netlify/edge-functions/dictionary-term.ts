@@ -28,15 +28,7 @@ export default async function handler(request: Request, context: Context) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Base URL and Router State -->
   <base href="/" />
-  <script>
-    window.__INITIAL_STATE__ = {
-      path: '${url.pathname}',
-      term: ${slug ? `'${slug}'` : 'null'}
-    };
-  </script>
   
   <!-- Icons -->
   <link rel="icon" href="https://erp-view.pl/images/icony/favicon.png" />
@@ -90,20 +82,20 @@ export default async function handler(request: Request, context: Context) {
   </script>
 
   <!-- App Resources -->
-  <script type="module" crossorigin src="/assets/js/browser-siKyeAva.js"></script>
   <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
   <script type="module" crossorigin src="/assets/js/main-BQkLDaqi.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/css/style-Bo9wvlM9.css">
+
+  <!-- Initial State -->
+  <script>
+    window.__INITIAL_PATH__ = '${url.pathname}';
+  </script>
 </head>
 <body>
   <div id="root"></div>
   <script>
-    // Ensure proper routing on page load
-    window.history.replaceState(
-      window.__INITIAL_STATE__,
-      '',
-      window.__INITIAL_STATE__.path
-    );
+    // Ensure the router knows about the initial URL
+    window.history.replaceState({}, '', '${url.pathname}');
   </script>
 </body>
 </html>`;
@@ -111,8 +103,7 @@ export default async function handler(request: Request, context: Context) {
   return new Response(html, {
     headers: {
       'content-type': 'text/html;charset=UTF-8',
-      'x-robots-tag': 'index,follow',
-      'Cache-Control': 'public, max-age=0, must-revalidate'
+      'x-robots-tag': 'index,follow'
     }
   });
 }
