@@ -36,13 +36,15 @@ const SlownikErpTerm: React.FC = () => {
   const [term, setTerm] = useState<DictionaryTerm | null>(() => {
     // Initialize from preloaded state if available
     const preloadedState = window.__PRELOADED_STATE__;
-    if (preloadedState?.dictionary?.currentTerm?.slug === slug) {
+    const currentTerm = preloadedState?.dictionary?.currentTerm;
+    
+    if (currentTerm && currentTerm.slug === slug) {
       return {
         id: 0,
-        term: preloadedState.dictionary.currentTerm.name,
-        slug: preloadedState.dictionary.currentTerm.slug,
+        term: currentTerm.name,
+        slug: currentTerm.slug,
         explanation: '',
-        letter: preloadedState.dictionary.currentTerm.name.charAt(0).toUpperCase(),
+        letter: currentTerm.name.charAt(0).toUpperCase(),
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       };
