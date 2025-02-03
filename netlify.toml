@@ -12,12 +12,22 @@
 
 # Dictionary term pages with edge function
 [[edge_functions]]
+  path = "/slownik-erp"
+  function = "dictionary-term"
+
+[[edge_functions]]
   path = "/slownik-erp/*"
   function = "dictionary-term"
 
-# Dictionary term pages fallback
+# Dictionary term pages fallback (if edge function fails)
 [[redirects]]
   from = "/slownik-erp/*"
+  to = "/index.html"
+  status = 200
+
+# Dictionary index page fallback (if edge function fails)
+[[redirects]]
+  from = "/slownik-erp"
   to = "/index.html"
   status = 200
 
@@ -27,11 +37,6 @@
   to = "/seo/slownik-erp/index.html"
   status = 200
   conditions = {Cookie = ["__prerender_bypass"]}
-
-[[redirects]]
-  from = "/slownik-erp"
-  to = "/index.html"
-  status = 200
 
 # Other pages with SEO versions
 [[redirects]]
