@@ -21,26 +21,8 @@ export default async function handler(request: Request, context: Context) {
   // Format the term name for display
   const termName = slug
     .split('-')
-    .map(word => {
-      // Special case for ABC
-      if (word.toLowerCase() === 'abc') return 'ABC';
-      // Special case for ERP
-      if (word.toLowerCase() === 'erp') return 'ERP';
-      // Special case for IT
-      if (word.toLowerCase() === 'it') return 'IT';
-      // For other words, just capitalize first letter
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    })
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
-
-  // Create initial state for the app
-  const initialState = {
-    currentTerm: {
-      slug,
-      name: termName,
-      isPrerendered: true
-    }
-  };
 
   const html = `<!DOCTYPE html>
 <html lang="pl">
@@ -70,7 +52,7 @@ export default async function handler(request: Request, context: Context) {
   <!-- SEO Meta Tags -->
   <title>Słownik ERP - ${termName} | ERP-VIEW.PL</title>
   <meta name="description" content="Poznaj definicję terminu ${termName} w kontekście systemów ERP. Dowiedz się więcej na ERP-VIEW.PL">
-  <meta name="keywords" content="${termName}, definicja ${termName}, ${termName} ERP, znaczenie ${termName}, system ERP ${termName}">
+  <meta name="keywords" content="${termName}, definicja ${termName}, ${termName} erp, znaczenie ${termName}, system erp ${termName}">
   <meta name="robots" content="index, follow">
   
   <!-- OpenGraph Tags -->
@@ -94,21 +76,10 @@ export default async function handler(request: Request, context: Context) {
   }
   </script>
 
-  <!-- Initial State -->
-  <script>
-    window.__INITIAL_STATE__ = ${JSON.stringify({
-      currentTerm: {
-        slug,
-        name: termName,
-        isPrerendered: true
-      }
-    })};
-  </script>
-
   <!-- App Resources -->
-  <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
-  <script type="module" crossorigin src="/assets/js/main-BQkLDaqi.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/css/style-Bo9wvlM9.css">
+  <script type="module" crossorigin src="/assets/js/vendor-O2RIE6o4.js"></script>
+  <script type="module" crossorigin src="/assets/js/main-CJpgmRj7.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-CBZhq_I6.css">
 </head>
 <body>
   <div id="root"></div>
