@@ -90,6 +90,7 @@ export default async function handler(request: Request, context: Context) {
   </script>
 
   <!-- App Resources -->
+  <script type="module" crossorigin src="/assets/js/browser-siKyeAva.js"></script>
   <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
   <script type="module" crossorigin src="/assets/js/main-BQkLDaqi.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/css/style-Bo9wvlM9.css">
