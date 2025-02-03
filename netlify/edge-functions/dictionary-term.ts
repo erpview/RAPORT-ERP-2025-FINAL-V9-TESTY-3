@@ -100,7 +100,7 @@ export default async function handler(request: Request, context: Context) {
   <!-- App Resources -->
   <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
   <script type="module" crossorigin src="/assets/js/browser-siKyeAva.js"></script>
-  <script type="module" crossorigin src="/assets/js/main-BQkLDaqi.js"></script>
+  <script type="module" crossorigin src="/assets/js/main-e72vEeef.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/css/style-Bo9wvlM9.css">
 </head>
 <body>
@@ -108,7 +108,7 @@ export default async function handler(request: Request, context: Context) {
 </body>
 </html>`;
 
-  return new Response(html, {
+  return new Response(html.trim(), {
     headers: {
       'content-type': 'text/html;charset=UTF-8',
       'x-robots-tag': 'index,follow',
