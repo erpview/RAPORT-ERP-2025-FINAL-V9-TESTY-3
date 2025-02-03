@@ -247,7 +247,7 @@ const SystemsCatalog: React.FC = () => {
       </div>
 
       {/* Mobile Floating Bar */}
-      {selectedSystems.length > 0 && (
+      {selectedSystems.length > 0 && isMobile && (
         <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/80 backdrop-blur-md border-t border-[#d2d2d7]/30">
           <div className="p-4">
             {/* Counter and Compare Button */}
