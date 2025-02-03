@@ -24,11 +24,13 @@
   from = "/slownik-erp/*"
   to = "/index.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/slownik-erp"
   to = "/index.html"
   status = 200
+  force = true
 
 # Other pages with SEO versions
 [[redirects]]

@@ -28,7 +28,6 @@ export default async function handler(request: Request, context: Context) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="/" />
   
   <!-- Icons -->
   <link rel="icon" href="https://erp-view.pl/images/icony/favicon.png" />
@@ -85,25 +84,17 @@ export default async function handler(request: Request, context: Context) {
   <script type="module" crossorigin src="/assets/js/vendor-oyeZ1I31.js"></script>
   <script type="module" crossorigin src="/assets/js/main-BQkLDaqi.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/css/style-Bo9wvlM9.css">
-
-  <!-- Initial State -->
-  <script>
-    window.__INITIAL_PATH__ = '${url.pathname}';
-  </script>
 </head>
 <body>
   <div id="root"></div>
-  <script>
-    // Ensure the router knows about the initial URL
-    window.history.replaceState({}, '', '${url.pathname}');
-  </script>
 </body>
 </html>`;
 
   return new Response(html, {
     headers: {
       'content-type': 'text/html;charset=UTF-8',
-      'x-robots-tag': 'index,follow'
+      'x-robots-tag': 'index,follow',
+      'cache-control': 'public, max-age=0, must-revalidate'
     }
   });
 }
