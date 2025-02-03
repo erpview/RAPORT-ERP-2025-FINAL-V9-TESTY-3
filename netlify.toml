@@ -28,15 +28,9 @@
   status = 301
   force = true
 
-# Client-side routing for dictionary pages
+# Serve index.html for all routes
 [[redirects]]
-  from = "/slownik-erp"
-  to = "/index.html"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/slownik-erp/*"
+  from = "/*"
   to = "/index.html"
   status = 200
   force = true
