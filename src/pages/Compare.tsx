@@ -9,11 +9,21 @@ import { Scale, Info } from 'lucide-react';
 import { System } from '../types/system';
 import { useComparison } from '../context/ComparisonContext';
 import { SEOHead } from '../components/seo/SEOHead';
+import { useLocation } from 'react-router-dom';
 
 export const Compare: React.FC = () => {
   const { selectedSystems, addSystem, removeSystem } = useComparison();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if we should open the modal automatically
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get('compare') === 'true' && selectedSystems.length >= 2) {
+      setIsModalOpen(true);
+    }
+  }, [location.search, selectedSystems.length]);
 
   useEffect(() => {
     const checkMobile = () => {
