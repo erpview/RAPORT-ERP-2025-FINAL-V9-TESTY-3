@@ -19,18 +19,20 @@
   path = "/slownik-erp/*"
   function = "dictionary-term"
 
-# Dictionary pages fallback
-[[redirects]]
-  from = "/slownik-erp/*"
-  to = "/index.html"
-  status = 200
-  force = true
-
+# Ensure client-side routing works
 [[redirects]]
   from = "/slownik-erp"
   to = "/index.html"
   status = 200
   force = true
+  conditions = {Cookie = ["__prerender_bypass"]}
+
+[[redirects]]
+  from = "/slownik-erp/*"
+  to = "/index.html"
+  status = 200
+  force = true
+  conditions = {Cookie = ["__prerender_bypass"]}
 
 # Other pages with SEO versions
 [[redirects]]

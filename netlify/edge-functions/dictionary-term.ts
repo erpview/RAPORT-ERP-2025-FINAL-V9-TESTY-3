@@ -1,3 +1,5 @@
+import { Context } from '@netlify/edge-functions';
+
 interface Context {
   ip: string;
   requestId: string;
@@ -12,12 +14,25 @@ interface Context {
 
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
-  const slug = url.pathname === '/slownik-erp' || url.pathname === '/slownik-erp/' ? '' : url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
+  const path = url.pathname;
   
-  if (slug === undefined) {
+  // Handle both the root dictionary path and term pages
+  if (path === '/slownik-erp' || path === '/slownik-erp/') {
+    // This is the root dictionary page
+    return await generateResponse('', request);
+  }
+  
+  // Handle term pages
+  const termMatch = path.match(/^\/slownik-erp\/(.+?)\/?$/);
+  if (!termMatch) {
     return new Response('Not Found', { status: 404 });
   }
+  
+  const slug = termMatch[1];
+  return await generateResponse(slug, request);
+}
 
+async function generateResponse(slug: string, request: Request) {
   // Format the term name for display - properly handle dashes and capitalization
   const termName = slug
     ? slug
