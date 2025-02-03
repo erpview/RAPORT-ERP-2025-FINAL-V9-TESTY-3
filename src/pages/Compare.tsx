@@ -9,11 +9,13 @@ import { Scale, Info } from 'lucide-react';
 import { System } from '../types/system';
 import { useComparison } from '../context/ComparisonContext';
 import { SEOHead } from '../components/seo/SEOHead';
+import { useLocation } from 'react-router-dom';
 
 export const Compare: React.FC = () => {
   const { selectedSystems, addSystem, removeSystem } = useComparison();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const checkMobile = () => {
@@ -24,6 +26,13 @@ export const Compare: React.FC = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get('compare') === 'true' && selectedSystems.length >= 2) {
+      setIsModalOpen(true);
+    }
+  }, [location.search, selectedSystems.length]);
 
   const handleSystemSelect = (system: System) => {
     const maxSystems = isMobile ? 2 : 4;
