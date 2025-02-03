@@ -1,14 +1,10 @@
-import { Context } from '@netlify/edge-functions';
-
 interface Context {
   ip: string;
   requestId: string;
   geo: {
     city?: string;
-    country?: {
-      code?: string;
-      name?: string;
-    };
+    country?: string;
+    region?: string;
   };
 }
 
