@@ -10,14 +10,16 @@
   [headers.values]
     X-Robots-Tag = "all"
 
-# Dictionary pages with edge function
+# Dictionary pages with edge function (only for SEO)
 [[edge_functions]]
   path = "/slownik-erp"
   function = "dictionary-term"
+  condition = {User-Agent = ["Googlebot|bingbot|DuckDuckBot|facebookexternalhit|Twitterbot"]}
 
 [[edge_functions]]
   path = "/slownik-erp/*"
   function = "dictionary-term"
+  condition = {User-Agent = ["Googlebot|bingbot|DuckDuckBot|facebookexternalhit|Twitterbot"]}
 
 # Handle trailing slashes
 [[redirects]]
@@ -32,14 +34,12 @@
   to = "/index.html"
   status = 200
   force = true
-  conditions = {Cookie = ["__prerender_bypass"], User-Agent = [".*"]}
 
 [[redirects]]
   from = "/slownik-erp/*"
   to = "/index.html"
   status = 200
   force = true
-  conditions = {Cookie = ["__prerender_bypass"], User-Agent = [".*"]}
 
 # Other pages with SEO versions
 [[redirects]]
@@ -50,16 +50,5 @@
 
 [[redirects]]
   from = "/firmy-it"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/partnerzy"
-  to = "/seo/partnerzy/index.html"
-  status = 200
-  conditions = {Cookie = ["__prerender_bypass"]}
-
-[[redirects]]
-  from = "/partnerzy"
   to = "/index.html"
   status = 200
