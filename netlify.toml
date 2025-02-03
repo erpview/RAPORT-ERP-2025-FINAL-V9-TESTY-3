@@ -20,12 +20,15 @@
   from = "/slownik-erp/*"
   to = "/index.html"
   status = 200
+  force = true
+  conditions = {Cookie = ["__prerender_bypass"]}
 
 # Dictionary index page
 [[redirects]]
   from = "/slownik-erp"
   to = "/index.html"
   status = 200
+  force = true
 
 # Other pages with SEO versions
 [[redirects]]
