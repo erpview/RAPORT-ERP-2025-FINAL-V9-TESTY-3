@@ -263,7 +263,7 @@ export const AdminSystems: React.FC = () => {
                       <p className="text-[15px] text-[#86868b]">
                         {system.vendor}
                       </p>
-                      <SystemStatusBadge status={system.status} />
+                      {system.status && <SystemStatusBadge status={system.status} />}
                     </div>
                     {system.review_notes && (
                       <div className="mt-3 p-3 bg-[#F5F5F7] rounded-xl">
