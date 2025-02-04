@@ -99,7 +99,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
           },
           manualChunks: {
             vendor: ['react', 'react-dom'],
-            main: ['/src/main.tsx']
+            main2: ['/src/main.tsx']
           }
         }
       },

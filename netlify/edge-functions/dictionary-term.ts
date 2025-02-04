@@ -102,7 +102,7 @@ export default async function handler(request: Request, context: Context) {
     // Import vendor chunk first
     import('/assets/js/vendor.js');
     // Import main chunk
-    import('/assets/js/main.js');
+    import('/assets/js/main2.js');
   </script>
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
