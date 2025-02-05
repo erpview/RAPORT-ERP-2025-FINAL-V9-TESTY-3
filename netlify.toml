@@ -12,6 +12,12 @@
 
 # Legacy dictionary term URLs redirect
 [[redirects]]
+  from = "/slownik-erp/:id-:slug"
+  to = "/slownik-erp/:slug"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/slownik-erp/:id-:slug.html"
   to = "/slownik-erp/:slug"
   status = 301
