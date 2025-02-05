@@ -32,30 +32,6 @@ const POLISH_CHARS_MAP: { [key: string]: string } = {
   'Ż': 'Z'
 };
 
-// URL cleanup function
-function cleanupSlug(slug: string): string {
-  // Remove any trailing special characters and query parameters
-  slug = slug.split(/[?&]/)[0];
-  
-  // Double decode to handle double-encoded characters
-  let decodedSlug = decodeURIComponent(decodeURIComponent(slug));
-  
-  // Normalize Polish characters
-  decodedSlug = decodedSlug
-    .split('')
-    .map(char => POLISH_CHARS_MAP[char] || char)
-    .join('');
-  
-  // Replace spaces with hyphens and handle multiple hyphens
-  decodedSlug = decodedSlug
-    .replace(/\s+/g, '-')           // Replace spaces with hyphens
-    .replace(/-+/g, '-')            // Replace multiple hyphens with single hyphen
-    .replace(/(\w)-(\w)/g, '$1---$2')  // Replace single hyphens between words with triple hyphens
-    .toLowerCase();                  // Convert to lowercase
-    
-  return decodedSlug;
-}
-
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
   const pathPart = url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
@@ -64,28 +40,34 @@ export default async function handler(request: Request, context: Context) {
     return;
   }
 
-  // Clean up the slug
-  const cleanSlug = cleanupSlug(pathPart);
-  
-  // If the path is different after cleanup, redirect
-  if (pathPart !== cleanSlug) {
-    return Response.redirect(`${url.origin}/slownik-erp/${cleanSlug}`, 301);
+  // Decode URL-encoded characters
+  const decodedPath = decodeURIComponent(pathPart);
+
+  // Normalize Polish characters
+  const normalizedPath = decodedPath
+    .split('')
+    .map(char => POLISH_CHARS_MAP[char] || char)
+    .join('');
+
+  // If the path contains Polish characters, redirect to normalized version
+  if (decodedPath !== normalizedPath) {
+    return Response.redirect(`${url.origin}/slownik-erp/${normalizedPath}`, 301);
   }
 
   // Check if it's a legacy URL format (ID-slug.html)
-  const legacyMatch = cleanSlug.match(/^\d+-(.+?)(?:\.html)?$/);
+  const legacyMatch = normalizedPath.match(/^\d+-(.+?)(?:\.html)?$/);
   if (legacyMatch) {
-    const newSlug = cleanupSlug(legacyMatch[1]);
+    const newSlug = legacyMatch[1].replace(/\.html$/, '');
     return Response.redirect(`${url.origin}/slownik-erp/${newSlug}`, 301);
   }
 
   // Check if it's a simple .html extension
-  if (cleanSlug.endsWith('.html')) {
-    const newSlug = cleanupSlug(cleanSlug.replace(/\.html$/, ''));
+  if (normalizedPath.endsWith('.html')) {
+    const newSlug = normalizedPath.replace(/\.html$/, '');
     return Response.redirect(`${url.origin}/slownik-erp/${newSlug}`, 301);
   }
 
-  const slug = cleanSlug;
+  const slug = normalizedPath;
 
   // Format the term name for display
   const termName = slug
