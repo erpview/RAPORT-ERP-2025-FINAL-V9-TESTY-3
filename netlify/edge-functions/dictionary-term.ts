@@ -12,11 +12,20 @@ interface Context {
 
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
-  const slug = url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
+  const pathPart = url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
   
-  if (!slug) {
+  if (!pathPart) {
     return;
   }
+
+  // Check if it's a legacy URL format (ID-slug.html)
+  const legacyMatch = pathPart.match(/^\d+-(.+?)(?:\.html)?$/);
+  if (legacyMatch) {
+    const newSlug = legacyMatch[1].replace(/\.html$/, '');
+    return Response.redirect(`${url.origin}/slownik-erp/${newSlug}`, 301);
+  }
+
+  const slug = pathPart;
 
   // Format the term name for display
   const termName = slug
