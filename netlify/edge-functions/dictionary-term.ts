@@ -10,6 +10,28 @@ interface Context {
   };
 }
 
+// Polish character mapping
+const POLISH_CHARS_MAP: { [key: string]: string } = {
+  'ą': 'a',
+  'ć': 'c',
+  'ę': 'e',
+  'ł': 'l',
+  'ń': 'n',
+  'ó': 'o',
+  'ś': 's',
+  'ź': 'z',
+  'ż': 'z',
+  'Ą': 'A',
+  'Ć': 'C',
+  'Ę': 'E',
+  'Ł': 'L',
+  'Ń': 'N',
+  'Ó': 'O',
+  'Ś': 'S',
+  'Ź': 'Z',
+  'Ż': 'Z'
+};
+
 export default async function handler(request: Request, context: Context) {
   const url = new URL(request.url);
   const pathPart = url.pathname.split('/slownik-erp/')[1]?.replace(/\/$/, '');
@@ -18,14 +40,28 @@ export default async function handler(request: Request, context: Context) {
     return;
   }
 
+  // Decode URL-encoded characters
+  const decodedPath = decodeURIComponent(pathPart);
+
+  // Normalize Polish characters
+  const normalizedPath = decodedPath
+    .split('')
+    .map(char => POLISH_CHARS_MAP[char] || char)
+    .join('');
+
+  // If the path contains Polish characters, redirect to normalized version
+  if (decodedPath !== normalizedPath) {
+    return Response.redirect(`${url.origin}/slownik-erp/${normalizedPath}`, 301);
+  }
+
   // Check if it's a legacy URL format (ID-slug.html)
-  const legacyMatch = pathPart.match(/^\d+-(.+?)(?:\.html)?$/);
+  const legacyMatch = normalizedPath.match(/^\d+-(.+?)(?:\.html)?$/);
   if (legacyMatch) {
     const newSlug = legacyMatch[1].replace(/\.html$/, '');
     return Response.redirect(`${url.origin}/slownik-erp/${newSlug}`, 301);
   }
 
-  const slug = pathPart;
+  const slug = normalizedPath;
 
   // Format the term name for display
   const termName = slug
