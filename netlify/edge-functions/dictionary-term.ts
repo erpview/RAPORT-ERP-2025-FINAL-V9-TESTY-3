@@ -61,6 +61,12 @@ export default async function handler(request: Request, context: Context) {
     return Response.redirect(`${url.origin}/slownik-erp/${newSlug}`, 301);
   }
 
+  // Check if it's a simple .html extension
+  if (normalizedPath.endsWith('.html')) {
+    const newSlug = normalizedPath.replace(/\.html$/, '');
+    return Response.redirect(`${url.origin}/slownik-erp/${newSlug}`, 301);
+  }
+
   const slug = normalizedPath;
 
   // Format the term name for display
