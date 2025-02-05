@@ -10,6 +10,13 @@
   [headers.values]
     X-Robots-Tag = "all"
 
+# Legacy dictionary term URLs redirect
+[[redirects]]
+  from = "/slownik-erp/:id-:slug.html"
+  to = "/slownik-erp/:slug"
+  status = 301
+  force = true
+
 # Dictionary term pages with edge function
 [[edge_functions]]
   path = "/slownik-erp/*"
