@@ -40,12 +40,12 @@ export default async function handler(request: Request, context: Context) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Icons -->
-  <link rel="icon" href="https://raport-erp.pl/images/icony/favicon.png" />
-  <link rel="shortcut icon" href="https://raport-erp.pl/images/icony/favicon.png" />
-  <link rel="apple-touch-icon" href="https://raport-erp.pl/images/icony/icon-192.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="https://raport-erp.pl/images/icony/icon-192.png" />
-  <link rel="icon" sizes="192x192" href="https://raport-erp.pl/images/icony/icon-192.png" />
-  <link rel="icon" sizes="512x512" href="https://raport-erp.pl/images/icony/icon-512.png" />
+  <link rel="icon" href="https://erp-view.pl/images/icony/favicon.png" />
+  <link rel="shortcut icon" href="https://erp-view.pl/images/icony/favicon.png" />
+  <link rel="apple-touch-icon" href="https://erp-view.pl/images/icony/icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://erp-view.pl/images/icony/icon-192.png" />
+  <link rel="icon" sizes="192x192" href="https://erp-view.pl/images/icony/icon-192.png" />
+  <link rel="icon" sizes="512x512" href="https://erp-view.pl/images/icony/icon-512.png" />
   
   <!-- PWA -->
   <link rel="manifest" href="/manifest.webmanifest" />
