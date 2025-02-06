@@ -27,6 +27,9 @@ interface User {
     full_name: string;
     company_size: string;
     position: string;
+    czy_korzysta_z_erp?: boolean;
+    czy_zamierza_wdrozyc_erp?: boolean;
+    czy_dokonal_wyboru_erp?: boolean;
   };
   // Flattened profile fields
   company_name: string;
@@ -48,6 +51,9 @@ interface UserWithProfiles {
     full_name: string;
     company_size: string;
     position: string;
+    czy_korzysta_z_erp?: boolean;
+    czy_zamierza_wdrozyc_erp?: boolean;
+    czy_dokonal_wyboru_erp?: boolean;
   } | null;
 }
 
@@ -116,7 +122,10 @@ export const AdminUsers: React.FC = () => {
             industry,
             full_name,
             company_size,
-            position
+            position,
+            czy_korzysta_z_erp,
+            czy_zamierza_wdrozyc_erp,
+            czy_dokonal_wyboru_erp
           )
         `)
         .order('created_at', { ascending: false });
@@ -381,6 +390,21 @@ export const AdminUsers: React.FC = () => {
                                 <span className="font-medium">Stanowisko:</span> {user.position}
                               </p>
                             )}
+                            {user.profiles?.czy_korzysta_z_erp !== null && (
+                              <p className="text-[15px] text-[#86868b]">
+                                <span className="font-medium">Korzysta z ERP:</span> {user.profiles.czy_korzysta_z_erp ? 'Tak' : 'Nie'}
+                              </p>
+                            )}
+                            {user.profiles?.czy_zamierza_wdrozyc_erp !== null && (
+                              <p className="text-[15px] text-[#86868b]">
+                                <span className="font-medium">Zamierza wdrożyć ERP:</span> {user.profiles.czy_zamierza_wdrozyc_erp ? 'Tak' : 'Nie'}
+                              </p>
+                            )}
+                            {user.profiles?.czy_dokonal_wyboru_erp !== null && (
+                              <p className="text-[15px] text-[#86868b]">
+                                <span className="font-medium">Dokonał wyboru ERP:</span> {user.profiles.czy_dokonal_wyboru_erp ? 'Tak' : 'Nie'}
+                              </p>
+                            )}
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
@@ -476,6 +500,21 @@ export const AdminUsers: React.FC = () => {
                           {user.position && (
                             <p className="text-[15px] text-[#86868b]">
                               <span className="font-medium">Stanowisko:</span> {user.position}
+                            </p>
+                          )}
+                          {user.profiles?.czy_korzysta_z_erp !== null && (
+                            <p className="text-[15px] text-[#86868b]">
+                              <span className="font-medium">Korzysta z ERP:</span> {user.profiles.czy_korzysta_z_erp ? 'Tak' : 'Nie'}
+                            </p>
+                          )}
+                          {user.profiles?.czy_zamierza_wdrozyc_erp !== null && (
+                            <p className="text-[15px] text-[#86868b]">
+                              <span className="font-medium">Zamierza wdrożyć ERP:</span> {user.profiles.czy_zamierza_wdrozyc_erp ? 'Tak' : 'Nie'}
+                            </p>
+                          )}
+                          {user.profiles?.czy_dokonal_wyboru_erp !== null && (
+                            <p className="text-[15px] text-[#86868b]">
+                              <span className="font-medium">Dokonał wyboru ERP:</span> {user.profiles.czy_dokonal_wyboru_erp ? 'Tak' : 'Nie'}
                             </p>
                           )}
                         </div>

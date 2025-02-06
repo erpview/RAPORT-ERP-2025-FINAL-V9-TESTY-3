@@ -12,8 +12,10 @@ interface AuthContextType {
   canViewSystems: boolean;
   canViewCompanies: boolean;
   loading: boolean;
+  showSurvey: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: (silent?: boolean) => Promise<void>;
+  closeSurvey: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -24,8 +26,10 @@ const AuthContext = createContext<AuthContextType>({
   canViewSystems: false,
   canViewCompanies: false,
   loading: true,
+  showSurvey: false,
   signIn: async () => {},
   signOut: async () => {},
+  closeSurvey: () => {},
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -36,6 +40,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [canViewSystems, setCanViewSystems] = useState(false);
   const [canViewCompanies, setCanViewCompanies] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showSurvey, setShowSurvey] = useState(false);
   const navigate = useNavigate();
 
   const checkUserRole = async (user: User | null) => {
@@ -52,12 +57,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const { data: userData, error: userError } = await supabase
         .from('user_management')
-        .select('role, is_active, status, can_view_users, can_view_systems, can_view_companies')
+        .select('*')
         .eq('user_id', user.id)
-        .maybeSingle();
+        .single();
 
       if (userError) throw userError;
 
+      // Important security checks
       if (!userData || userData.status === 'pending') {
         await signOut();
         return;
@@ -69,14 +75,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setIsAdmin(userData.role === 'admin');
-      setIsEditor(userData.role === 'editor');
-      setCanViewUsers(userData.can_view_users || userData.role === 'admin');
-      setCanViewSystems(userData.can_view_systems || userData.role === 'admin');
-      setCanViewCompanies(userData.can_view_companies || userData.role === 'admin');
-      setLoading(false);
+      const isUserAdmin = userData.role === 'admin';
+      const isUserEditor = userData.role === 'editor';
+      
+      setIsAdmin(isUserAdmin);
+      setIsEditor(isUserEditor);
+      setCanViewUsers(userData.can_view_users || isUserAdmin);
+      setCanViewSystems(userData.can_view_systems || isUserAdmin || isUserEditor);
+      setCanViewCompanies(userData.can_view_companies || isUserAdmin);
+
+      // Check if we need to show the survey for regular users
+      if (userData.role === 'user' && userData.is_active && userData.status !== 'pending') {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('czy_korzysta_z_erp, czy_zamierza_wdrozyc_erp, czy_dokonal_wyboru_erp')
+          .eq('id', user.id)
+          .single();
+
+        // Show survey if any of the fields are null
+        if (profile && (profile.czy_korzysta_z_erp === null || 
+            profile.czy_zamierza_wdrozyc_erp === null || 
+            profile.czy_dokonal_wyboru_erp === null)) {
+          setShowSurvey(true);
+        }
+      }
     } catch (error) {
       console.error('Error checking user role:', error);
+    } finally {
       setLoading(false);
     }
   };
@@ -194,18 +219,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const closeSurvey = () => {
+    setShowSurvey(false);
+  };
+
   return (
-    <AuthContext.Provider value={{
-      user,
-      isAdmin,
-      isEditor,
-      canViewUsers,
-      canViewSystems,
-      canViewCompanies,
-      loading,
-      signIn,
-      signOut,
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isAdmin,
+        isEditor,
+        canViewUsers,
+        canViewSystems,
+        canViewCompanies,
+        loading,
+        showSurvey,
+        signIn,
+        signOut,
+        closeSurvey,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

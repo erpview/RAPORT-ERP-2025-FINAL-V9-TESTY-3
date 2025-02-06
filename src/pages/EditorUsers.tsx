@@ -18,6 +18,9 @@ interface UserData {
   full_name?: string;
   company_size?: string;
   position?: string;
+  czy_korzysta_z_erp?: boolean;
+  czy_zamierza_wdrozyc_erp?: boolean;
+  czy_dokonal_wyboru_erp?: boolean;
 }
 
 export const EditorUsers: React.FC = () => {
@@ -47,7 +50,10 @@ export const EditorUsers: React.FC = () => {
             industry,
             full_name,
             company_size,
-            position
+            position,
+            czy_korzysta_z_erp,
+            czy_zamierza_wdrozyc_erp,
+            czy_dokonal_wyboru_erp
           )
         `)
         .neq('role', 'editor')
@@ -130,7 +136,7 @@ export const EditorUsers: React.FC = () => {
                   </div>
                 </div>
 
-                {(user.company_name || user.position || user.industry || user.nip || user.phone_number || user.company_size) && (
+                {(user.company_name || user.position || user.industry || user.nip || user.phone_number || user.company_size || typeof user.czy_korzysta_z_erp === 'boolean' || typeof user.czy_zamierza_wdrozyc_erp === 'boolean' || typeof user.czy_dokonal_wyboru_erp === 'boolean') && (
                   <div className="mt-4 pt-4 border-t border-[#d2d2d7]/30">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       {user.company_name && (
@@ -190,6 +196,36 @@ export const EditorUsers: React.FC = () => {
                           </p>
                           <p className="text-[15px] text-[#86868b]">
                             {user.company_size}
+                          </p>
+                        </div>
+                      )}
+                      {typeof user.czy_korzysta_z_erp === 'boolean' && (
+                        <div>
+                          <p className="text-[13px] font-medium text-[#1d1d1f]">
+                            Korzysta z ERP
+                          </p>
+                          <p className="text-[15px] text-[#86868b]">
+                            {user.czy_korzysta_z_erp ? 'Tak' : 'Nie'}
+                          </p>
+                        </div>
+                      )}
+                      {typeof user.czy_zamierza_wdrozyc_erp === 'boolean' && (
+                        <div>
+                          <p className="text-[13px] font-medium text-[#1d1d1f]">
+                            Zamierza wdrożyć ERP
+                          </p>
+                          <p className="text-[15px] text-[#86868b]">
+                            {user.czy_zamierza_wdrozyc_erp ? 'Tak' : 'Nie'}
+                          </p>
+                        </div>
+                      )}
+                      {typeof user.czy_dokonal_wyboru_erp === 'boolean' && (
+                        <div>
+                          <p className="text-[13px] font-medium text-[#1d1d1f]">
+                            Dokonał wyboru ERP
+                          </p>
+                          <p className="text-[15px] text-[#86868b]">
+                            {user.czy_dokonal_wyboru_erp ? 'Tak' : 'Nie'}
                           </p>
                         </div>
                       )}
