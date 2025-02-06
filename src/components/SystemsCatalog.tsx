@@ -176,9 +176,9 @@ const SystemsCatalog: React.FC = () => {
             <div key={system.id} className="sf-card p-6 space-y-4 hover:shadow-md transition-all duration-200">
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-[24px] font-semibold text-[#1d1d1f]">
+                  <h2 className="text-[24px] font-semibold text-[#1d1d1f]">
                     {system.name}
-                  </h3>
+                  </h2>
                   <p className="text-[15px] text-[#86868b] mt-1">
                     {system.vendor}
                   </p>
