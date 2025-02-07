@@ -390,17 +390,17 @@ export const AdminUsers: React.FC = () => {
                                 <span className="font-medium">Stanowisko:</span> {user.position}
                               </p>
                             )}
-                            {user.profiles && typeof user.profiles.czy_korzysta_z_erp !== null && (
+                            {user.profiles && user.profiles.czy_korzysta_z_erp !== null && (
                               <p className="text-[15px] text-[#86868b]">
                                 <span className="font-medium">Korzysta z ERP:</span> {user.profiles.czy_korzysta_z_erp ? 'Tak' : 'Nie'}
                               </p>
                             )}
-                            {user.profiles && typeof user.profiles.czy_zamierza_wdrozyc_erp !== null && (
+                            {user.profiles && user.profiles.czy_zamierza_wdrozyc_erp !== null && (
                               <p className="text-[15px] text-[#86868b]">
                                 <span className="font-medium">Zamierza wdrożyć ERP:</span> {user.profiles.czy_zamierza_wdrozyc_erp ? 'Tak' : 'Nie'}
                               </p>
                             )}
-                            {user.profiles && typeof user.profiles.czy_dokonal_wyboru_erp !== null && (
+                            {user.profiles && user.profiles.czy_dokonal_wyboru_erp !== null && (
                               <p className="text-[15px] text-[#86868b]">
                                 <span className="font-medium">Dokonał wyboru ERP:</span> {user.profiles.czy_dokonal_wyboru_erp ? 'Tak' : 'Nie'}
                               </p>
@@ -502,17 +502,17 @@ export const AdminUsers: React.FC = () => {
                               <span className="font-medium">Stanowisko:</span> {user.position}
                             </p>
                           )}
-                          {user.profiles && typeof user.profiles.czy_korzysta_z_erp !== null && (
+                          {user.profiles && user.profiles.czy_korzysta_z_erp !== null && (
                             <p className="text-[15px] text-[#86868b]">
                               <span className="font-medium">Korzysta z ERP:</span> {user.profiles.czy_korzysta_z_erp ? 'Tak' : 'Nie'}
                             </p>
                           )}
-                          {user.profiles && typeof user.profiles.czy_zamierza_wdrozyc_erp !== null && (
+                          {user.profiles && user.profiles.czy_zamierza_wdrozyc_erp !== null && (
                             <p className="text-[15px] text-[#86868b]">
                               <span className="font-medium">Zamierza wdrożyć ERP:</span> {user.profiles.czy_zamierza_wdrozyc_erp ? 'Tak' : 'Nie'}
                             </p>
                           )}
-                          {user.profiles && typeof user.profiles.czy_dokonal_wyboru_erp !== null && (
+                          {user.profiles && user.profiles.czy_dokonal_wyboru_erp !== null && (
                             <p className="text-[15px] text-[#86868b]">
                               <span className="font-medium">Dokonał wyboru ERP:</span> {user.profiles.czy_dokonal_wyboru_erp ? 'Tak' : 'Nie'}
                             </p>
