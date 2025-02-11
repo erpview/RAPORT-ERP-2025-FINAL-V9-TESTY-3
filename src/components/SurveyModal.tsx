@@ -167,7 +167,7 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
 
   const handleSubmit = async () => {
     try {
-      const hasErrors = false;
+      let hasErrors = false;
       const missingFields: string[] = [];
 
       surveyData?.modules.forEach((module) => {
