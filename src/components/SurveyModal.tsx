@@ -9,12 +9,13 @@ import { toast } from 'react-hot-toast';
 
 interface SurveyField {
   id: string;
+  module_id: string;
   name: string;
   label: string;
   field_type: 'text' | 'number' | 'select' | 'multiselect' | 'radio' | 'checkbox' | 'textarea' | 'rating' | 'email' | 'url';
-  options?: string[];
+  options?: string[] | null;
   is_required: boolean;
-  order_index?: number;
+  order_index: number;
 }
 
 interface SurveyModule {
@@ -130,7 +131,16 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
         const modulePromises = modulesData.map(async (module) => {
           const { data: fieldsData, error: fieldsError } = await supabase
             .from('survey_fields')
-            .select('*')
+            .select(`
+              id,
+              module_id,
+              name,
+              label,
+              field_type,
+              options,
+              is_required,
+              order_index
+            `)
             .eq('module_id', module.id)
             .order('order_index', { ascending: true });
 
@@ -139,7 +149,13 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
             return { ...module, fields: [] };
           }
 
-          return { ...module, fields: fieldsData || [] };
+          // Map fields to include label
+          const fieldsWithLabel = fieldsData?.map(field => ({
+            ...field,
+            label: field.label || field.name // Use name as label if not specified
+          })) || [];
+
+          return { ...module, fields: fieldsWithLabel };
         });
 
         const modulesWithFields = await Promise.all(modulePromises);
