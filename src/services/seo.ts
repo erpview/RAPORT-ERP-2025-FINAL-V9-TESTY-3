@@ -84,7 +84,7 @@ const DEFAULT_SEO_TEMPLATES = {
     id: 'systems',
     page_identifier: '/systemy-erp',
     is_dynamic: false,
-    title_template: 'Systemy ERP w Polsce - Porównanie i Ranking 2025 | Raport ERP',
+    title_template: 'Systemy ERP w Polsce - Porównanie ERP i Ranking ERP | Raport ERP by ERP-VIEW.PL',
     description_template: 'Kompleksowy przegląd systemów ERP dostępnych w Polsce. Porównaj funkcjonalności, ceny i opinie o najpopularniejszych systemach ERP na rynku.',
     keywords_template: 'systemy erp, porównanie systemów erp, ranking erp, oprogramowanie erp polska, wdrożenie erp',
     structured_data_template: {
