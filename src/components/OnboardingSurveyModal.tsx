@@ -75,13 +75,13 @@ export const OnboardingSurveyModal: React.FC<OnboardingSurveyModalProps> = ({ is
       maxWidth="max-w-lg"
       persistent={true}
     >
-      <div className="space-y-4 mb-6">
+      <div className="space-y-4">
         <p className="text-[17px] text-[#86868b]">
           Aby lepiej dostosować naszą platformę do Twoich potrzeb, prosimy o odpowiedź na kilka krótkich pytań.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="mt-6 space-y-6">
         <div className="space-y-6">
           <div className="space-y-3">
             <p className="text-[15px] font-medium text-[#1d1d1f]">
@@ -178,7 +178,7 @@ export const OnboardingSurveyModal: React.FC<OnboardingSurveyModalProps> = ({ is
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full inline-flex items-center justify-center px-6 py-2.5 bg-[#2c3b67] text-white text-[15px] font-medium rounded-lg hover:bg-[#2c3b67]/90 transition-colors disabled:opacity-50"
+            className="w-full inline-flex items-center justify-center px-6 py-2.5 bg-[#2c3b67] text-white text-[15px] font-medium rounded-lg hover:bg-[#2c3b67]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <>

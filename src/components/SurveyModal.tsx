@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Modal } from './ui/Modal';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../config/supabase';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { LogIn, UserCog } from 'lucide-react';
+import debounce from 'lodash.debounce';
+import { toast } from 'react-hot-toast';
 
 interface SurveyField {
   id: string;
@@ -48,6 +50,9 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [surveyData, setSurveyData] = useState<SurveyForm | null>(null);
+  const [existingResponse, setExistingResponse] = useState<{ created_at: string } | null>(null);
+  const [systemId, setSystemId] = useState<string | null>(null);
+  const [savingDraft, setSavingDraft] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -155,84 +160,247 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
     loadSurveyData();
   }, [surveyForm?.id]);
 
+  useEffect(() => {
+    const checkExistingResponse = async () => {
+      if (!user || !assignmentId) return;
+
+      const { data, error } = await supabase
+        .from('survey_responses')
+        .select('created_at')
+        .eq('user_id', user.id)
+        .eq('assignment_id', assignmentId)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error checking existing response:', error);
+        return;
+      }
+
+      if (data) {
+        setExistingResponse(data);
+      }
+    };
+
+    checkExistingResponse();
+  }, [user, assignmentId]);
+
+  useEffect(() => {
+    const fetchSystemIdAndDraft = async () => {
+      if (!assignmentId || !user) return;
+
+      const { data: assignmentData, error: assignmentError } = await supabase
+        .from('survey_assignments')
+        .select(`
+          target_id,
+          target_type
+        `)
+        .eq('id', assignmentId)
+        .single();
+
+      if (assignmentError) {
+        console.error('Error fetching system ID:', assignmentError);
+        return;
+      }
+
+      if (assignmentData && assignmentData.target_type === 'system') {
+        console.log('Found system ID:', assignmentData.target_id);
+        setSystemId(assignmentData.target_id);
+
+        // Fetch existing draft
+        const { data: draftData, error: draftError } = await supabase
+          .from('survey_drafts')
+          .select('form_data')
+          .eq('user_id', user.id)
+          .eq('system_id', assignmentData.target_id)
+          .maybeSingle();
+
+        if (draftError) {
+          console.error('Error fetching draft:', draftError);
+          return;
+        }
+
+        if (draftData) {
+          console.log('Found existing draft:', draftData);
+          setFormData(draftData.form_data);
+        }
+      }
+    };
+
+    fetchSystemIdAndDraft();
+  }, [assignmentId, user]);
+
+  const debouncedSaveDraft = useCallback(
+    debounce(async (data: Record<string, any>, userId: string, sysId: string) => {
+      if (!userId || !sysId) return;
+
+      // First check if user has submitted in past 12 months
+      const { data: existingResponse } = await supabase
+        .from('survey_responses')
+        .select('created_at')
+        .eq('user_id', userId)
+        .eq('system_id', sysId)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (existingResponse) {
+        const lastSubmissionDate = new Date(existingResponse.created_at);
+        const twelveMonthsAgo = new Date();
+        twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12);
+
+        if (lastSubmissionDate > twelveMonthsAgo) {
+          // User has submitted within last 12 months, don't save draft
+          console.log('Not saving draft - user has submitted within last 12 months');
+          setSavingDraft(false);
+          return;
+        }
+      }
+
+      try {
+        setSavingDraft(true);
+        const { error } = await supabase
+          .from('survey_drafts')
+          .upsert({
+            user_id: userId,
+            system_id: sysId,
+            form_data: data
+          }, {
+            onConflict: 'user_id,system_id'
+          });
+
+        if (error) throw error;
+      } catch (error) {
+        console.error('Error saving draft:', error);
+      } finally {
+        setSavingDraft(false);
+      }
+    }, 1000),
+    []
+  );
+
+  useEffect(() => {
+    if (user && systemId && Object.keys(formData).length > 0) {
+      console.log('Saving draft for system:', systemId);
+      debouncedSaveDraft(formData, user.id, systemId);
+    }
+  }, [formData, user, systemId]);
+
   const handleFieldChange = (moduleId: string, fieldId: string, value: any) => {
-    setFormData(prev => ({
-      ...prev,
+    console.log('Field changed:', { moduleId, fieldId, value });
+    const newFormData = {
+      ...formData,
       [moduleId]: {
-        ...prev[moduleId],
+        ...(formData[moduleId] || {}),
         [fieldId]: value
       }
-    }));
+    };
+    console.log('New form data:', newFormData);
+    setFormData(newFormData);
+  };
+
+  const clearDraft = async () => {
+    if (!user || !systemId) return;
+
+    console.log('Clearing draft from database...');
+    const { error } = await supabase
+      .from('survey_drafts')
+      .delete()
+      .eq('user_id', user.id)
+      .eq('system_id', systemId);
+
+    if (error) {
+      console.error('Error clearing draft:', error);
+    } else {
+      console.log('Draft cleared successfully');
+    }
+  };
+
+  const canSubmitNewSurvey = () => {
+    if (!existingResponse) return true;
+
+    const lastSubmissionDate = new Date(existingResponse.created_at);
+    const twelveMonthsAgo = new Date();
+    twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12);
+
+    return lastSubmissionDate < twelveMonthsAgo;
   };
 
   const handleSubmit = async () => {
     try {
+      if (!canSubmitNewSurvey()) {
+        const lastSubmissionDate = new Date(existingResponse!.created_at);
+        const nextAvailableDate = new Date(lastSubmissionDate);
+        nextAvailableDate.setMonth(nextAvailableDate.getMonth() + 12);
+
+        setError(`Możesz wypełnić ankietę dla tego systemu tylko raz na 12 miesięcy. Następna możliwość wypełnienia ankiety będzie dostępna od ${nextAvailableDate.toLocaleDateString('pl-PL')}.`);
+        return;
+      }
+
       let hasErrors = false;
       const missingFields: string[] = [];
 
-      surveyData?.modules.forEach((module) => {
-        module.fields.forEach((field) => {
-          if (field.is_required && (!formData[module.id] || !formData[module.id][field.id])) {
-            hasErrors = true;
-            missingFields.push(`${module.name} - ${field.name}`);
+      surveyForm.modules.forEach(module => {
+        module.fields.forEach(field => {
+          if (field.is_required) {
+            const moduleData = formData[module.id] || {};
+            if (!moduleData[field.id]) {
+              hasErrors = true;
+              missingFields.push(`${module.name} - ${field.label}`);
+            }
           }
         });
       });
 
       if (hasErrors) {
-        setError(`Proszę wypełnić wszystkie wymagane pola:\n${missingFields.join('\n')}`);
-        return;
-      }
-
-      if (!user) {
-        setError('Musisz być zalogowany, aby wypełnić ankietę');
-        return;
-      }
-
-      if (!assignmentId || !surveyData?.id) {
-        setError('Nie znaleziono przypisania ankiety');
+        setError(`Proszę wypełnić wszystkie wymagane pola: ${missingFields.join(', ')}`);
         return;
       }
 
       setLoading(true);
       setError(null);
 
-      // First, insert the survey response
-      const { error: responseError } = await supabase
+      console.log('Submitting survey response...');
+      const { error: submitError } = await supabase
         .from('survey_responses')
         .insert({
-          form_id: surveyData.id,
+          form_id: surveyForm.id,
           assignment_id: assignmentId,
-          user_id: user.id,
+          user_id: user!.id,
           responses: formData
         });
 
-      if (responseError) {
-        throw responseError;
+      if (submitError) throw submitError;
+
+      if (user && systemId) {
+        console.log('Deleting draft after successful submission...');
+        const { error: deleteError } = await supabase
+          .from('survey_drafts')
+          .delete()
+          .eq('user_id', user.id)
+          .eq('system_id', systemId);
+
+        if (deleteError) {
+          console.error('Error deleting draft:', deleteError);
+        } else {
+          console.log('Draft deleted successfully');
+        }
       }
 
-      // Then update the user's profile
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .update({
-          czy_korzysta_z_erp: true,
-          czy_dokonal_wyboru_erp: true
-        })
-        .eq('id', user.id);
-
-      if (profileError) {
-        console.error('Error updating profile:', profileError);
-        // Don't throw here as the survey was already saved
-      }
-
-      setLoading(false);
+      toast.success('Dziękujemy za wypełnienie ankiety.');
       onClose();
     } catch (error) {
       console.error('Error submitting survey:', error);
-      setError('Błąd podczas zapisywania ankiety');
+      toast.error('Wystąpił błąd podczas zapisywania ankiety. Spróbuj ponownie później.');
+      setError('Wystąpił błąd podczas zapisywania ankiety. Spróbuj ponownie później.');
+    } finally {
       setLoading(false);
     }
   };
+
+  const isSubmitDisabled = loading || savingDraft;
+  const submitButtonText = loading ? 'Zapisywanie...' : savingDraft ? 'Zapisywanie wersji roboczej...' : 'Zapisz';
 
   const renderField = (module: SurveyModule, field: SurveyField) => {
     const value = formData[module.id]?.[field.id] ?? '';
@@ -465,10 +633,10 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
           </button>
           <button
             onClick={handleSubmit}
-            disabled={loading}
+            disabled={isSubmitDisabled}
             className="flex items-center justify-center gap-3 px-6 py-2.5 bg-[#2c3b67] text-white rounded-lg hover:bg-[#2c3b67]/90 transition-colors font-medium text-base min-w-[120px]"
           >
-            {loading ? 'Zapisywanie...' : 'Zapisz'}
+            {submitButtonText}
           </button>
         </div>
       </div>

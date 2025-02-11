@@ -124,7 +124,7 @@ const DraggableSystemCard: React.FC<DraggableSystemCardProps> = ({ system, isSel
 
 export const SystemGrid: React.FC<SystemGridProps> = ({ onSystemSelect, selectedSystems }) => {
   const { systems, loading, error } = useSystems();
-  const [systemSurveys, setSystemSurveys] = useState<Record<string, any>>({});
+  const [systemSurveys, setSystemSurveys] = useState<Record<string, { form: any, assignment_id: string }>>({});
   const [showSurvey, setShowSurvey] = useState(false);
   const [selectedSystemId, setSelectedSystemId] = useState<string | null>(null);
 
@@ -167,10 +167,13 @@ export const SystemGrid: React.FC<SystemGridProps> = ({ onSystemSelect, selected
 
       console.log('Survey assignments raw data:', data);
 
-      const surveyMap: Record<string, any> = {};
+      const surveyMap: Record<string, { form: any, assignment_id: string }> = {};
       data?.forEach(assignment => {
         if (assignment.form) {
-          surveyMap[assignment.target_id] = assignment.form;
+          surveyMap[assignment.target_id] = {
+            form: assignment.form,
+            assignment_id: assignment.id
+          };
         }
       });
 
@@ -206,7 +209,7 @@ export const SystemGrid: React.FC<SystemGridProps> = ({ onSystemSelect, selected
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {systems.map((system) => {
         const isSelected = selectedSystems.some(s => s.id === system.id);
-        const hasSurvey = systemSurveys[system.id];
+        const hasSurvey = systemSurveys[system.id]?.form;
         
         console.log('System survey data:', system.id, systemSurveys[system.id]);
         
@@ -216,23 +219,21 @@ export const SystemGrid: React.FC<SystemGridProps> = ({ onSystemSelect, selected
             system={system}
             isSelected={isSelected}
             onSelect={onSystemSelect}
-            hasSurvey={hasSurvey}
+            hasSurvey={!!hasSurvey}
             setShowSurvey={setShowSurvey}
             setSelectedSystemId={setSelectedSystemId}
           />
         );
       })}
-      {showSurvey && selectedSystemId && (
+      {showSurvey && selectedSystemId && systemSurveys[selectedSystemId] && (
         <SurveyModal
           isOpen={showSurvey}
           onClose={() => {
             setShowSurvey(false);
             setSelectedSystemId(null);
           }}
-          targetType="system"
-          targetId={selectedSystemId}
-          surveyForm={systemSurveys[selectedSystemId]}
-          assignmentId={systemSurveys[selectedSystemId]?.assignment_id || ''}
+          surveyForm={systemSurveys[selectedSystemId].form}
+          assignmentId={systemSurveys[selectedSystemId].assignment_id}
         />
       )}
     </div>

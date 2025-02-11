@@ -52,12 +52,12 @@ export const Modal: React.FC<ModalProps> = ({
           aria-modal="true"
         >
           {title && (
-            <div className="sticky top-0 flex items-center justify-between p-6 pb-4 bg-white border-b border-gray-200 rounded-t-2xl">
-              <h2 className="text-lg font-medium text-gray-900">{title}</h2>
+            <div className="sticky top-0 flex items-center justify-between p-6 pb-4 bg-white border-b border-[#d2d2d7] rounded-t-2xl">
+              <h2 className="text-[17px] font-medium text-[#1d1d1f]">{title}</h2>
               {!persistent && (
                 <button
                   onClick={onClose}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-[#86868b] hover:text-[#1d1d1f] transition-colors"
                   aria-label="Zamknij"
                 >
                   <X className="w-6 h-6" />
@@ -68,13 +68,13 @@ export const Modal: React.FC<ModalProps> = ({
           {!title && !persistent && (
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 z-10"
+              className="absolute right-4 top-4 text-[#86868b] hover:text-[#1d1d1f] transition-colors z-10"
               aria-label="Zamknij"
             >
               <X className="w-6 h-6" />
             </button>
           )}
-          <div className="custom-scrollbar max-h-[calc(100vh-8rem)] overflow-y-auto rounded-b-2xl">
+          <div className="custom-scrollbar max-h-[calc(100vh-8rem)] overflow-y-auto rounded-b-2xl p-6">
             {children}
           </div>
         </div>
