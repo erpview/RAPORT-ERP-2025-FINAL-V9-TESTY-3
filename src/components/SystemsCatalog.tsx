@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Building2, Globe, Filter, ChevronDown, X, Loader2, Scale, FileText } from 'lucide-react';
+import { Search, Building2, Filter, ChevronDown, X, Loader2, Scale, FileText } from 'lucide-react';
 import { useSystems } from '../hooks/useSystems';
 import { useComparison } from '../context/ComparisonContext';
 import { useAuth } from '../context/AuthContext';
-import { System } from '../types/system';
-import { MultiSelectValue } from './ui/MultiSelectValue';
-import { normalizeMultiselectValue } from '../utils/fieldUtils';
-import { Link } from 'react-router-dom';
-import { adminSupabase as supabase } from '../config/supabase';
 import { SurveyModal } from './SurveyModal';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../config/supabase';
 
-const SystemsCatalog: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedSize, setSelectedSize] = useState<string[]>([]);
-  const [selectedVendor, setSelectedVendor] = useState<string>('');
-  const { systems, loading, error } = useSystems();
-  const { selectedSystems, addSystem, removeSystem } = useComparison();
+export const SystemsCatalog = () => {
+  const navigate = useNavigate();
   const { user, isAdmin, isEditor } = useAuth();
-  const canSubmitSurvey = user && (isAdmin || (!isAdmin && !isEditor));
-  const isRegularUser = user && !isAdmin && !isEditor;
-  const [systemSurveys, setSystemSurveys] = useState<Record<string, any>>({});
-  const [surveyAssignments, setSurveyAssignments] = useState<Record<string, string>>({});
+  const { selectedSystems, toggleSystem, maxSystems } = useComparison();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [showFilters, setShowFilters] = useState(false);
   const [showSurvey, setShowSurvey] = useState(false);
   const [selectedSystemId, setSelectedSystemId] = useState<string | null>(null);
+  const [surveyAssignment, setSurveyAssignment] = useState<any>(null);
+  const [surveyForm, setSurveyForm] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+
+  const { systems, isLoading, error } = useSystems();
+  const canSubmitSurvey = user && (isAdmin || (!isAdmin && !isEditor));
 
   useEffect(() => {
     loadSurveyAssignments();
@@ -71,8 +70,8 @@ const SystemsCatalog: React.FC = () => {
 
       console.log('Survey map:', surveyMap);
       console.log('Assignment map:', assignmentMap);
-      setSystemSurveys(surveyMap);
-      setSurveyAssignments(assignmentMap);
+      setSurveyForm(surveyMap);
+      setSurveyAssignment(assignmentMap);
     } catch (error) {
       console.error('Error loading survey assignments:', error);
     }
@@ -84,7 +83,7 @@ const SystemsCatalog: React.FC = () => {
   // Get unique sizes from all systems with custom sort order
   const sizeOrder = ['Małe', 'Średnie', 'Duże'];
   const sizes = Array.from(new Set(
-    systems.flatMap(system => normalizeMultiselectValue(system.size))
+    systems.flatMap(system => system.size)
   )).sort((a, b) => {
     const indexA = sizeOrder.indexOf(a);
     const indexB = sizeOrder.indexOf(b);
@@ -92,7 +91,6 @@ const SystemsCatalog: React.FC = () => {
   });
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-  const maxSystems = isMobile ? 2 : 4;
 
   // Add resize listener
   useEffect(() => {
@@ -109,33 +107,33 @@ const SystemsCatalog: React.FC = () => {
                          system.vendor.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          system.description.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const systemSizes = normalizeMultiselectValue(system.size);
-    const matchesSize = selectedSize.length === 0 || 
-                       systemSizes.some(size => selectedSize.includes(size));
+    const systemSizes = system.size;
+    const matchesSize = selectedFilters.length === 0 || 
+                       systemSizes.some(size => selectedFilters.includes(size));
     
-    const matchesVendor = !selectedVendor || system.vendor === selectedVendor;
+    const matchesVendor = !selectedFilters.includes('vendor') || system.vendor === selectedFilters.find(filter => filter.startsWith('vendor:'))?.split(':')[1];
 
     return matchesSearch && matchesSize && matchesVendor;
   });
 
   const toggleSize = (size: string) => {
-    setSelectedSize(prev =>
+    setSelectedFilters(prev =>
       prev.includes(size)
         ? prev.filter(s => s !== size)
         : [...prev, size]
     );
   };
 
-  const handleCompareToggle = (system: System) => {
+  const handleCompareToggle = (system: any) => {
     const isSelected = selectedSystems.some(s => s.id === system.id);
     if (isSelected) {
-      removeSystem(system.id);
+      toggleSystem(system.id);
     } else if (selectedSystems.length < maxSystems) {
-      addSystem(system);
+      toggleSystem(system.id);
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="flex items-center gap-3 text-[#86868b]">
@@ -184,12 +182,15 @@ const SystemsCatalog: React.FC = () => {
               </h4>
               <div className="flex flex-wrap gap-2">
                 {sizes.map(size => (
-                  <MultiSelectValue
+                  <button
                     key={size}
-                    value={size}
-                    onClick={toggleSize}
-                    isHighlighted={selectedSize.includes(size)}
-                  />
+                    onClick={() => toggleSize(size)}
+                    className={`sf-button h-10 text-[15px] font-medium flex items-center bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] px-4
+                      ${selectedFilters.includes(size) ? 'bg-[#2c3b67] text-white hover:bg-[#2c3b67]/90' : ''}
+                    `}
+                  >
+                    {size}
+                  </button>
                 ))}
               </div>
             </div>
@@ -202,8 +203,8 @@ const SystemsCatalog: React.FC = () => {
                 <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#86868b] w-5 h-5" />
                 <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#86868b] w-5 h-5 pointer-events-none" />
                 <select
-                  value={selectedVendor}
-                  onChange={(e) => setSelectedVendor(e.target.value)}
+                  value={selectedFilters.find(filter => filter.startsWith('vendor:'))?.split(':')[1] || ''}
+                  onChange={(e) => setSelectedFilters(prev => [...prev.filter(filter => !filter.startsWith('vendor:')), `vendor:${e.target.value}`])}
                   className="sf-input pl-10 pr-16 w-full appearance-none bg-white cursor-pointer hover:bg-[#F5F5F7] transition-colors duration-200"
                 >
                   <option value="">Wszyscy dostawcy</option>
@@ -213,9 +214,9 @@ const SystemsCatalog: React.FC = () => {
                     </option>
                   ))}
                 </select>
-                {selectedVendor && (
+                {selectedFilters.find(filter => filter.startsWith('vendor:')) && (
                   <button
-                    onClick={() => setSelectedVendor('')}
+                    onClick={() => setSelectedFilters(prev => prev.filter(filter => !filter.startsWith('vendor:')))}
                     className="absolute right-8 top-1/2 transform -translate-y-1/2 p-1 hover:bg-[#F5F5F7] rounded-full transition-colors duration-200"
                     title="Resetuj wybór dostawcy"
                   >
@@ -232,8 +233,7 @@ const SystemsCatalog: React.FC = () => {
       <div className="grid grid-cols-1 gap-6">
         {filteredSystems.map((system) => {
           const isSelected = selectedSystems.some(s => s.id === system.id);
-          const systemSizes = normalizeMultiselectValue(system.size);
-          const hasSurvey = systemSurveys[system.id];
+          const hasSurvey = surveyForm && surveyForm[system.id];
           
           return (
             <div key={system.id} className="sf-card p-6 space-y-4 hover:shadow-md transition-all duration-200">
@@ -291,13 +291,16 @@ const SystemsCatalog: React.FC = () => {
               </p>
 
               <div className="flex flex-wrap gap-2">
-                {normalizeMultiselectValue(system.size).map((size, index) => (
-                  <MultiSelectValue
+                {system.size.map((size, index) => (
+                  <button
                     key={`${size}-${index}`}
-                    value={size}
-                    onClick={toggleSize}
-                    isHighlighted={selectedSize.includes(size)}
-                  />
+                    onClick={() => toggleSize(size)}
+                    className={`sf-button h-10 text-[15px] font-medium flex items-center bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] px-4
+                      ${selectedFilters.includes(size) ? 'bg-[#2c3b67] text-white hover:bg-[#2c3b67]/90' : ''}
+                    `}
+                  >
+                    {size}
+                  </button>
                 ))}
               </div>
 
@@ -326,20 +329,15 @@ const SystemsCatalog: React.FC = () => {
                   {selectedSystems.length}/{maxSystems} systemów
                 </span>
               </div>
-              <Link
-                to="/porownaj-systemy-erp?compare=true"
+              <button
+                onClick={() => navigate('/porownaj-systemy-erp?compare=true')}
                 className={`sf-button-primary text-[15px] py-2
                   ${selectedSystems.length < 2 
                     ? 'opacity-50 cursor-not-allowed' 
                     : ''}`}
-                onClick={(e) => {
-                  if (selectedSystems.length < 2) {
-                    e.preventDefault();
-                  }
-                }}
               >
                 Porównaj systemy
-              </Link>
+              </button>
             </div>
             
             {/* Selected Systems Chips */}
@@ -372,14 +370,10 @@ const SystemsCatalog: React.FC = () => {
             setShowSurvey(false);
             setSelectedSystemId(null);
           }}
-          targetType="system"
-          targetId={selectedSystemId}
-          surveyForm={systemSurveys[selectedSystemId]}
-          assignmentId={surveyAssignments[selectedSystemId]}
+          surveyForm={surveyForm[selectedSystemId]}
+          assignmentId={surveyAssignment[selectedSystemId]}
         />
       )}
     </div>
   );
 };
-
-export default SystemsCatalog;
