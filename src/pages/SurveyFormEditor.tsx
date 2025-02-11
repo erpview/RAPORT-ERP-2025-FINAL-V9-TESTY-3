@@ -18,10 +18,10 @@ const FIELD_TYPES: FieldType[] = [
   { value: 'number', label: 'Liczba' },
   { value: 'email', label: 'Email' },
   { value: 'url', label: 'URL' },
-  { value: 'date', label: 'Data' },
   { value: 'select', label: 'Lista wyboru' },
   { value: 'multiselect', label: 'Lista wielokrotnego wyboru' },
-  { value: 'checkbox', label: 'Pola wyboru (2 kolumny)' },
+  { value: 'radio', label: 'Przyciski opcji' },
+  { value: 'checkbox', label: 'Pola wyboru' },
   { value: 'textarea', label: 'Tekst wielolinijkowy' },
   { value: 'rating', label: 'Ocena (1-5 gwiazdek + N/A)' }
 ];
@@ -169,8 +169,6 @@ const SurveyFormEditor = () => {
         name: 'Nowe pole',
         label: 'Nowe pole',
         field_type: 'text' as const,
-        field_key: '',
-        description: null,
         order_index: moduleFields.length,
         options: null,
         is_required: false,
