@@ -9,6 +9,8 @@ import { ModuleField } from '../types/moduleField';
 import { useAuth } from '../hooks/useAuth';
 import { supabase } from '../config/supabase';
 import { MultiSelectValue } from '../components/ui/MultiSelectValue';
+import { SurveyModal } from '../components/SurveyModal';
+import { FileText } from 'lucide-react';
 
 export const CompanyDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -19,6 +21,10 @@ export const CompanyDetail: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const { user, isLoading: authLoading } = useAuth();
   const isAdmin = user?.user_metadata?.role === 'admin';
+  const isEditor = user?.user_metadata?.role === 'editor';
+  const canSubmitSurvey = user && (isAdmin || (!isAdmin && !isEditor));
+  const [hasSurvey, setHasSurvey] = useState(false);
+  const [showSurvey, setShowSurvey] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -123,12 +129,14 @@ export const CompanyDetail: React.FC = () => {
               }
               return acc;
             }, {});
+
+            // Update fields state with company fields
+            setFields(companyFields);
           }
         }
 
         setCompany(companyData);
         setModules(modulesData);
-        setFields(fieldsData);
       } catch (error) {
         console.error('Error loading company details:', error);
       } finally {
@@ -139,7 +147,7 @@ export const CompanyDetail: React.FC = () => {
     if (!authLoading && slug) {
       loadData();
     }
-  }, [slug, user, authLoading]);
+  }, [slug, user, authLoading, navigate]);
 
   const renderFieldValue = (field: any, value: any) => {
     if (!value) return 'Brak wartości';
@@ -163,16 +171,27 @@ export const CompanyDetail: React.FC = () => {
     }
   };
 
-  if (loading || authLoading) {
-    return <div className="flex justify-center items-center min-h-screen">
-      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-    </div>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+      </div>
+    );
   }
 
   if (!company) {
-    return <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-red-600">Firma nie została znaleziona</h1>
-    </div>;
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900">
+            Nie znaleziono firmy
+          </h1>
+          <p className="mt-2 text-gray-600">
+            Przepraszamy, ale nie możemy znaleźć firmy o podanym identyfikatorze.
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -184,15 +203,15 @@ export const CompanyDetail: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
             <div className="order-2 md:order-1">
               <h1 className="text-3xl font-bold text-center md:text-left text-[#1d1d1f] mb-2">
-                {company.name}
+                {company?.name}
               </h1>
-              {company.category && (
+              {company?.category && (
                 <div className="text-[#424245] text-center md:text-left">
                   {company.category}
                 </div>
               )}
             </div>
-            {company.logo_url && (
+            {company?.logo_url && (
               <div className="mb-4 md:mb-0 order-1 md:order-2">
                 <img
                   src={company.logo_url}
@@ -212,29 +231,29 @@ export const CompanyDetail: React.FC = () => {
               <div className="space-y-3">
                 <div>
                   <span className="font-medium text-[#1d1d1f]">Adres:</span>{' '}
-                  <span className="text-[#424245]">{company.street}</span>
+                  <span className="text-[#424245]">{company?.street}</span>
                 </div>
                 <div>
                   <span className="font-medium text-[#1d1d1f]">Kod pocztowy:</span>{' '}
-                  <span className="text-[#424245]">{company.postal_code}</span>
+                  <span className="text-[#424245]">{company?.postal_code}</span>
                 </div>
                 <div>
                   <span className="font-medium text-[#1d1d1f]">Miasto:</span>{' '}
-                  <span className="text-[#424245]">{company.city}</span>
+                  <span className="text-[#424245]">{company?.city}</span>
                 </div>
                 <div>
                   <span className="font-medium text-[#1d1d1f]">Telefon:</span>{' '}
-                  <span className="text-[#424245]">{company.phone}</span>
+                  <span className="text-[#424245]">{company?.phone}</span>
                 </div>
                 <div>
                   <span className="font-medium text-[#1d1d1f]">Email:</span>{' '}
-                  <span className="text-[#424245]">{company.email}</span>
+                  <span className="text-[#424245]">{company?.email}</span>
                 </div>
                 <div>
                   <span className="font-medium text-[#1d1d1f]">NIP:</span>{' '}
-                  <span className="text-[#424245]">{company.nip}</span>
+                  <span className="text-[#424245]">{company?.nip}</span>
                 </div>
-                {company.website && (
+                {company?.website && (
                   <div>
                     <span className="font-medium text-[#1d1d1f]">Strona WWW:</span>{' '}
                     <a 
@@ -254,7 +273,7 @@ export const CompanyDetail: React.FC = () => {
               <div className="border-b border-[#d2d2d7]/30 pb-4 mb-4">
                 <h2 className="text-xl font-semibold text-[#1d1d1f]">O firmie</h2>
               </div>
-              <p className="text-[#424245] whitespace-pre-wrap">{company.description}</p>
+              <p className="text-[#424245] whitespace-pre-wrap">{company?.description}</p>
             </div>
           </div>
 
@@ -267,7 +286,7 @@ export const CompanyDetail: React.FC = () => {
                   .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
                   .map(module => {
                     const moduleFields = fields.filter(field => field.module_id === module.id);
-                    const moduleValues = company.module_values?.[module.id] || {};
+                    const moduleValues = company?.module_values?.[module.id] || {};
 
                     // Check if module has any fields with values
                     const hasAnyValues = moduleFields.some(field => {
@@ -302,8 +321,8 @@ export const CompanyDetail: React.FC = () => {
                                   {field.description && (
                                     <p className="text-[13px] text-[#86868b] mb-1">{field.description}</p>
                                   )}
-                                  <div>
-                                    <span className="font-medium text-[#1d1d1f]">{field.name}:</span>{' '}
+                                  <div className="flex flex-col">
+                                    <span className="font-medium text-[#1d1d1f] mb-2">{field.name}:</span>
                                     {field.field_type === 'multiselect' ? (
                                       <div className="mt-2">
                                         {renderFieldValue(field, value)}
@@ -330,14 +349,39 @@ export const CompanyDetail: React.FC = () => {
             <div className="mt-8 pt-8 border-t border-gray-200">
               <h2 className="text-2xl font-semibold mb-6">Informacje SEO</h2>
               <div className="space-y-4">
-                <p><span className="font-medium">Meta tytuł:</span> {company.meta_title}</p>
-                <p><span className="font-medium">Meta opis:</span> {company.meta_description}</p>
-                <p><span className="font-medium">URL kanoniczny:</span> {company.canonical_url}</p>
+                <p><span className="font-medium">Meta tytuł:</span> {company?.meta_title}</p>
+                <p><span className="font-medium">Meta opis:</span> {company?.meta_description}</p>
+                <p><span className="font-medium">URL kanoniczny:</span> {company?.canonical_url}</p>
               </div>
             </div>
           )}
         </div>
       </div>
+
+      {hasSurvey && !isEditor && (
+        <button
+          onClick={() => {
+            if (canSubmitSurvey) {
+              setShowSurvey(true);
+            } else {
+              // If not logged in, show the survey modal with login prompt
+              setShowSurvey(true);
+            }
+          }}
+          className="sf-button bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] flex items-center gap-2"
+        >
+          <FileText className="w-5 h-5" />
+          Wypełnij ankietę
+        </button>
+      )}
+
+      {showSurvey && company && (
+        <SurveyModal
+          isOpen={showSurvey}
+          onClose={() => setShowSurvey(false)}
+          companyId={company.id}
+        />
+      )}
     </div>
   );
 };

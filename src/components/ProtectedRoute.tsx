@@ -34,28 +34,35 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   }
 
   if (!user) {
-    return <Navigate to="/admin/login" />;
+    return <Navigate to="/login" />;
   }
 
-  if (requireAdmin && !isAdmin && !allowEditor) {
-    return <Navigate to="/" />;
+  // If admin access is required
+  if (requireAdmin) {
+    // Allow both admin and editor if allowEditor is true
+    if (allowEditor && (isAdmin || isEditor)) {
+      return <>{children}</>;
+    }
+    // Only allow admin if allowEditor is false
+    if (!allowEditor && !isAdmin) {
+      return <Navigate to="/systemy-erp" />;
+    }
   }
 
-  if (requireAdmin && !isAdmin && allowEditor && !isEditor) {
-    return <Navigate to="/" />;
-  }
-
+  // Check specific view permissions
   if (requireUserView && !canViewUsers && !isAdmin) {
-    return <Navigate to="/" />;
+    return <Navigate to="/systemy-erp" />;
   }
 
   if (requireSystemView && !canViewSystems && !isAdmin) {
-    return <Navigate to="/" />;
+    return <Navigate to="/systemy-erp" />;
   }
 
   if (requireCompanyView && !canViewCompanies && !isAdmin) {
-    return <Navigate to="/" />;
+    return <Navigate to="/systemy-erp" />;
   }
 
   return <>{children}</>;
 };
+
+export default ProtectedRoute;

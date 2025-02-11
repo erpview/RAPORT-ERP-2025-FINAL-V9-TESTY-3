@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Users, Scale, LogIn, Settings, UserCog, Home, Search } from 'lucide-react';
+import { Menu, X, Users, Scale, LogIn, Settings, UserCog, Home, Search, Layers } from 'lucide-react';
 import { useUsers } from '../context/UsersContext';
 import { useComparison } from '../context/ComparisonContext';
 import { useAuth } from '../context/AuthContext';
@@ -295,10 +295,9 @@ export const Navigation: React.FC = () => {
                     >
                       <Settings className="w-4 h-4" />
                       <span className="text-[15px] font-medium">
-                        PANEL
+                        Panel
                       </span>
                     </NavLink>
-
                     <NavLink
                       to="/admin/firmy-it"
                       className={({ isActive }) =>
@@ -311,7 +310,7 @@ export const Navigation: React.FC = () => {
                     >
                       <Settings className="w-4 h-4" />
                       <span className="text-[15px] font-medium">
-                        FIRMY
+                        Firmy
                       </span>
                     </NavLink>
 
@@ -596,9 +595,8 @@ export const Navigation: React.FC = () => {
                       }
                     >
                       <Settings className="w-4 h-4" />
-                      PANEL
+                      Panel
                     </NavLink>
-
                     <NavLink
                       to="/admin/firmy-it"
                       className={({ isActive }) =>
@@ -610,9 +608,8 @@ export const Navigation: React.FC = () => {
                       }
                     >
                       <Settings className="w-4 h-4" />
-                      FIRMY
+                      Firmy
                     </NavLink>
-
                     <NavLink
                       to="/admin/users"
                       className={({ isActive }) =>

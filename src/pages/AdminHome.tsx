@@ -514,6 +514,21 @@ export default function AdminHome() {
                 Zarządzanie SEO
               </Button>
             </Link>
+            <Link to="/admin/ankiety">
+              <Button type="button" variant="secondary" className="w-full">
+                Zarządzanie ankietami
+              </Button>
+            </Link>
+            <Link to="/admin/ankiety/przypisania">
+              <Button type="button" variant="secondary" className="w-full">
+                Przypisania ankiet
+              </Button>
+            </Link>
+            <Link to="/admin/ankiety/odpowiedzi">
+              <Button type="button" variant="secondary" className="w-full">
+                Odpowiedzi ankiet
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -960,7 +975,7 @@ export default function AdminHome() {
                       height: 300,
                       menubar: true,
                       plugins: [
-                        'advlist', 'autolink', 'lists', 'link', 'charmap', 'preview',
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                         'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
                         'insertdatetime', 'media', 'table', 'help', 'wordcount'
                       ],

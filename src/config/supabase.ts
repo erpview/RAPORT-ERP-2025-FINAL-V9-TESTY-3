@@ -29,13 +29,27 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables');
 }
 
+// Create singleton instances
+let supabaseInstance: ReturnType<typeof createClient<Database>> | null = null;
+let adminSupabaseInstance: ReturnType<typeof createClient<Database>> | null = null;
+
 // Regular client for normal operations
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+export const supabase = (() => {
+  if (!supabaseInstance) {
+    supabaseInstance = createClient<Database>(supabaseUrl, supabaseAnonKey);
+  }
+  return supabaseInstance;
+})();
 
 // Service role client for admin operations
-export const adminSupabase = createClient(supabaseUrl, serviceRoleKey || supabaseAnonKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false
+export const adminSupabase = (() => {
+  if (!adminSupabaseInstance) {
+    adminSupabaseInstance = createClient<Database>(supabaseUrl, serviceRoleKey || supabaseAnonKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    });
   }
-});
+  return adminSupabaseInstance;
+})();

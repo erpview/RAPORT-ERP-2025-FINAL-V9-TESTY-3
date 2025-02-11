@@ -203,29 +203,26 @@ export const AdminSystems: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
-            <UserCog className="w-8 h-8 text-[#2c3b67]" />
-            <h1 className="text-[32px] font-semibold text-[#1d1d1f]">
-              {isAdmin ? 'Zarządzanie systemami ERP' : 'Moje systemy ERP'}
-            </h1>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => navigate('/admin/modules')}
-              className="sf-button bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED]"
-            >
-              <Layers className="w-5 h-5 mr-2" />
-              MODUŁY
-            </button>
+    <div className="min-h-screen bg-[#F5F5F7]">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Panel administracyjny</h1>
+          <div className="flex gap-4">
+            {isAdmin && (
+              <button
+                onClick={() => navigate('/admin/ankiety')}
+                className="sf-button bg-[#2c3b67] text-white hover:bg-[#2c3b67]/90"
+              >
+                <Layers className="w-5 h-5 mr-2" />
+                Zarządzanie ankietami
+              </button>
+            )}
             <button
               onClick={() => {
                 setSelectedSystem(null);
                 setIsCreating(true);
               }}
-              className="sf-button-primary"
+              className="sf-button bg-[#2c3b67] text-white hover:bg-[#2c3b67]/90"
             >
               <Plus className="w-5 h-5 mr-2" />
               Dodaj nowy system

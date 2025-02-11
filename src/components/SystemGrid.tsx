@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
-import { Globe, GripHorizontal, Loader2 } from 'lucide-react';
+import { Globe, GripHorizontal, Loader2, FileText } from 'lucide-react';
 import { System } from '../types/system';
 import { useSystems } from '../hooks/useSystems';
 import { MultiSelectValue } from './ui/MultiSelectValue';
 import { normalizeMultiselectValue } from '../utils/fieldUtils';
 import { useAuth } from '../context/AuthContext';
+import { SurveyModal } from './SurveyModal'; // Update import to use correct SurveyModal
+import { supabase } from '../config/supabase';
 
 interface SystemGridProps {
   onSystemSelect: (system: System) => void;
@@ -16,9 +18,12 @@ interface DraggableSystemCardProps {
   system: System;
   isSelected: boolean;
   onSelect: (system: System) => void;
+  hasSurvey: boolean;
+  setShowSurvey: (show: boolean) => void;
+  setSelectedSystemId: (id: string | null) => void;
 }
 
-const DraggableSystemCard: React.FC<DraggableSystemCardProps> = ({ system, isSelected, onSelect }) => {
+const DraggableSystemCard: React.FC<DraggableSystemCardProps> = ({ system, isSelected, onSelect, hasSurvey, setShowSurvey, setSelectedSystemId }) => {
   const [{ isDragging }, drag] = useDrag({
     type: 'system',
     item: system,
@@ -29,6 +34,9 @@ const DraggableSystemCard: React.FC<DraggableSystemCardProps> = ({ system, isSel
   });
 
   const { user, isAdmin, isEditor } = useAuth();
+
+  // Show survey for admin and regular users, hide for editors
+  const canSubmitSurvey = user && (isAdmin || (!isAdmin && !isEditor));
 
   return (
     <div
@@ -51,19 +59,40 @@ const DraggableSystemCard: React.FC<DraggableSystemCardProps> = ({ system, isSel
             {system.vendor}
           </p>
         </div>
-        {(user || isAdmin || isEditor) && (
-          <a
-            href={system.website}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            className="sf-button bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] p-2"
-            aria-label={`Odwiedź stronę ${system.vendor}`}
-            title="Strona dostawcy"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Globe className="w-5 h-5" />
-          </a>
-        )}
+        <div className="flex gap-2">
+          {hasSurvey && !isEditor && (
+            <button
+              onClick={() => {
+                if (canSubmitSurvey) {
+                  setSelectedSystemId(system.id);
+                  setShowSurvey(true);
+                } else {
+                  // If not logged in, show the survey modal with login prompt
+                  setSelectedSystemId(system.id);
+                  setShowSurvey(true);
+                }
+              }}
+              className="sf-button bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] p-2"
+              aria-label="Wypełnij ankietę"
+              title="Wypełnij ankietę"
+            >
+              <FileText className="w-5 h-5" />
+            </button>
+          )}
+          {(user || isAdmin || isEditor) && (
+            <a
+              href={system.website}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="sf-button bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] p-2"
+              aria-label={`Odwiedź stronę ${system.vendor}`}
+              title="Strona dostawcy"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Globe className="w-5 h-5" />
+            </a>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -93,6 +122,62 @@ const DraggableSystemCard: React.FC<DraggableSystemCardProps> = ({ system, isSel
 
 export const SystemGrid: React.FC<SystemGridProps> = ({ onSystemSelect, selectedSystems }) => {
   const { systems, loading, error } = useSystems();
+  const [systemSurveys, setSystemSurveys] = useState<Record<string, any>>({});
+  const [showSurvey, setShowSurvey] = useState(false);
+  const [selectedSystemId, setSelectedSystemId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (systems.length > 0) {
+      loadSurveyAssignments();
+    }
+  }, [systems]);
+
+  const loadSurveyAssignments = async () => {
+    try {
+      console.log('Loading survey assignments...');
+      const { data, error } = await supabase
+        .from('survey_assignments')
+        .select(`
+          id,
+          target_id,
+          form:survey_forms!inner (
+            id,
+            name,
+            description,
+            modules:survey_modules!inner (
+              id,
+              name,
+              description,
+              fields:survey_fields!inner (
+                id,
+                name,
+                label,
+                field_type,
+                options,
+                required
+              )
+            )
+          )
+        `)
+        .eq('target_type', 'system');
+
+      if (error) throw error;
+
+      console.log('Survey assignments raw data:', data);
+
+      const surveyMap: Record<string, any> = {};
+      data?.forEach(assignment => {
+        if (assignment.form) {
+          surveyMap[assignment.target_id] = assignment.form;
+        }
+      });
+
+      console.log('Survey map:', surveyMap);
+      setSystemSurveys(surveyMap);
+    } catch (error) {
+      console.error('Error loading survey assignments:', error);
+    }
+  };
 
   if (loading) {
     return (
@@ -117,14 +202,37 @@ export const SystemGrid: React.FC<SystemGridProps> = ({ onSystemSelect, selected
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {systems.map((system) => (
-        <DraggableSystemCard
-          key={system.id}
-          system={system}
-          isSelected={selectedSystems.some(s => s.id === system.id)}
-          onSelect={onSystemSelect}
+      {systems.map((system) => {
+        const isSelected = selectedSystems.some(s => s.id === system.id);
+        const hasSurvey = systemSurveys[system.id];
+        
+        console.log('System survey data:', system.id, systemSurveys[system.id]);
+        
+        return (
+          <DraggableSystemCard
+            key={system.id}
+            system={system}
+            isSelected={isSelected}
+            onSelect={onSystemSelect}
+            hasSurvey={hasSurvey}
+            setShowSurvey={setShowSurvey}
+            setSelectedSystemId={setSelectedSystemId}
+          />
+        );
+      })}
+      {showSurvey && selectedSystemId && (
+        <SurveyModal
+          isOpen={showSurvey}
+          onClose={() => {
+            setShowSurvey(false);
+            setSelectedSystemId(null);
+          }}
+          targetType="system"
+          targetId={selectedSystemId}
+          surveyForm={systemSurveys[selectedSystemId]}
+          assignmentId={systemSurveys[selectedSystemId]?.assignment_id || ''}
         />
-      ))}
+      )}
     </div>
   );
 };

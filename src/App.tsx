@@ -5,6 +5,7 @@ import { Navigation } from './components/Navigation';
 import { Footer } from './components/Footer';
 import { MetaTags } from './components/MetaTags';
 import { Toaster } from 'react-hot-toast';
+import { OnboardingProvider, useOnboarding } from './context/OnboardingContext';
 import { UsersProvider } from './context/UsersContext';
 import { ComparisonProvider } from './context/ComparisonContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
@@ -23,6 +24,7 @@ import { EditorUsers } from './pages/EditorUsers';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { RegistrationSuccess } from './pages/RegistrationSuccess';
+import { PendingAccount } from './pages/PendingAccount';
 import { SystemForm } from './pages/SystemForm';
 import { Companies } from './pages/Companies';
 import { AdminCompanies } from './pages/AdminCompanies';
@@ -40,9 +42,13 @@ import AdminSEO from './pages/AdminSEO';
 import AdminCompanyModules from './pages/AdminCompanyModules';
 import AdminCompanyModuleFields from './pages/AdminCompanyModuleFields';
 import AdminCompanyFields from './pages/AdminCompanyFields';
+import AdminSurveyForms from './pages/AdminSurveyForms';
+import AdminSurveyAssignments from './pages/AdminSurveyAssignments';
+import AdminSurveyResponses from './pages/AdminSurveyResponses';
+import SurveyFormEditor from './pages/SurveyFormEditor';
 import { emailConfig } from './config/email';
 import emailjs from '@emailjs/browser';
-import { SurveyModal } from './components/SurveyModal';
+import { FeedbackModal } from './components/FeedbackModal';
 
 const AppContent = () => {
   const { showSurvey, closeSurvey } = useAuth();
@@ -60,7 +66,7 @@ const AppContent = () => {
       >
         <div id="recaptcha-container"></div>
       </div>
-      {showSurvey && <SurveyModal isOpen={showSurvey} onClose={closeSurvey} />}
+      {showSurvey && <FeedbackModal isOpen={showSurvey} onClose={closeSurvey} />}
       <MetaTags />
       <Navigation />
       <Routes>
@@ -71,14 +77,66 @@ const AppContent = () => {
         <Route path="/porownaj-systemy-erp" element={<Compare />} />
         <Route path="/partnerzy" element={<PartnersPage />} />
         <Route path="/partnerzy/:slug" element={<PartnerDetailPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/rejestracja" element={<Register />} />
+        <Route path="/rejestracja/sukces" element={<RegistrationSuccess />} />
+        <Route path="/rejestracja/oczekujace" element={<PendingAccount />} />
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/register" element={<Register />} />
-        <Route path="/rejestracja/sukces" element={<RegistrationSuccess />} />
         <Route 
           path="/admin/home" 
           element={
-            <ProtectedRoute>
+            <ProtectedRoute requireAdmin allowEditor>
               <AdminHome />
+            </ProtectedRoute>
+          } 
+        />
+        <Route path="/admin" element={<Navigate to="/admin/home" replace />} />
+        <Route 
+          path="/admin/systemy" 
+          element={
+            <ProtectedRoute requireAdmin allowEditor>
+              <AdminSystems />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/ankiety" 
+          element={
+            <ProtectedRoute requireAdmin allowEditor>
+              <AdminSurveyForms />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/ankiety/przypisania" 
+          element={
+            <ProtectedRoute requireAdmin allowEditor>
+              <AdminSurveyAssignments />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/ankiety/odpowiedzi" 
+          element={
+            <ProtectedRoute requireAdmin allowEditor>
+              <AdminSurveyResponses />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/ankiety/:formId/edycja" 
+          element={
+            <ProtectedRoute requireAdmin allowEditor>
+              <SurveyFormEditor />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin/ankiety/:formId/przypisania" 
+          element={
+            <ProtectedRoute requireAdmin allowEditor>
+              <AdminSurveyAssignments />
             </ProtectedRoute>
           } 
         />
@@ -95,14 +153,6 @@ const AppContent = () => {
           element={
             <ProtectedRoute requireSystemView>
               <SystemForm mode="edit" />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/admin/systemy" 
-          element={
-            <ProtectedRoute requireAdmin>
-              <AdminSystems />
             </ProtectedRoute>
           } 
         />
@@ -125,7 +175,7 @@ const AppContent = () => {
         <Route 
           path="/admin/users" 
           element={
-            <ProtectedRoute requireAdmin>
+            <ProtectedRoute requireUserView allowEditor>
               <AdminUsers />
             </ProtectedRoute>
           } 
@@ -200,38 +250,44 @@ const AppContent = () => {
             </ProtectedRoute>
           } 
         />
-        <Route path="/editor">
-          <Route 
-            path="systems" 
-            element={
-              <ProtectedRoute allowEditor>
-                <EditorSystems />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="users"
-            element={
-              <ProtectedRoute requireAdmin allowEditor requireUserView>
-                <EditorUsers />
-              </ProtectedRoute>
-            }
-          />
-          <Route 
-            path="firmy-it" 
-            element={
-              <ProtectedRoute requireCompanyView allowEditor>
-                <AdminCompanies />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="companies" 
-            element={
-              <Navigate to="/editor/firmy-it" replace />
-            }
-          />
-        </Route>
+        <Route 
+          path="/editor" 
+          element={
+            <ProtectedRoute allowEditor>
+              <EditorSystems />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/editor/systems" 
+          element={
+            <ProtectedRoute allowEditor>
+              <EditorSystems />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/editor/users"
+          element={
+            <ProtectedRoute requireUserView allowEditor>
+              <EditorUsers />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/editor/firmy-it" 
+          element={
+            <ProtectedRoute requireCompanyView allowEditor>
+              <AdminCompanies />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/editor/companies" 
+          element={
+            <Navigate to="/editor/firmy-it" replace />
+          }
+        />
         <Route path="/slownik-erp" element={<SlownikErp />} />
         <Route path="/slownik-erp/:slug" element={<SlownikErpTerm />} />
         <Route path="/firmy-it" element={<Companies />} />
@@ -265,38 +321,40 @@ export const App: React.FC = () => {
   return (
     <HelmetProvider>
       <AuthProvider>
-        <UsersProvider>
-          <ComparisonProvider>
-            <div
-              style={{
-                position: 'fixed',
-                top: '50%',
-                left: '50%',
-                transform: 'translateY(-50%)',
-              }}
-            />
-            <AppContent />
-            <Toaster
-              position="top-center"
-              toastOptions={{
-                duration: 3000,
-                className: 'bg-white text-apple-gray-700 text-base px-8 py-4 shadow-lg rounded-xl border border-apple-gray-100 min-w-[300px] font-medium',
-                success: {
-                  icon: '✓',
+        <OnboardingProvider>
+          <UsersProvider>
+            <ComparisonProvider>
+              <div
+                style={{
+                  position: 'fixed',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translateY(-50%)',
+                }}
+              />
+              <AppContent />
+              <Toaster
+                position="top-center"
+                toastOptions={{
+                  duration: 3000,
                   className: 'bg-white text-apple-gray-700 text-base px-8 py-4 shadow-lg rounded-xl border border-apple-gray-100 min-w-[300px] font-medium',
-                },
-                error: {
-                  icon: '✕',
-                  className: 'bg-white text-red-600 text-base px-8 py-4 shadow-lg rounded-xl border border-red-100 min-w-[300px] font-medium',
-                },
-              }}
-              containerStyle={{
-                top: '50%',
-                transform: 'translateY(-50%)',
-              }}
-            />
-          </ComparisonProvider>
-        </UsersProvider>
+                  success: {
+                    icon: '✓',
+                    className: 'bg-white text-apple-gray-700 text-base px-8 py-4 shadow-lg rounded-xl border border-apple-gray-100 min-w-[300px] font-medium',
+                  },
+                  error: {
+                    icon: '✕',
+                    className: 'bg-white text-red-600 text-base px-8 py-4 shadow-lg rounded-xl border border-red-100 min-w-[300px] font-medium',
+                  },
+                }}
+                containerStyle={{
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                }}
+              />
+            </ComparisonProvider>
+          </UsersProvider>
+        </OnboardingProvider>
       </AuthProvider>
     </HelmetProvider>
   );

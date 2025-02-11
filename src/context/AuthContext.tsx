@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User } from '@supabase/supabase-js';
-import { supabase, adminSupabase } from '../config/supabase';
+import { supabase } from '../config/supabase';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -13,7 +13,7 @@ interface AuthContextType {
   canViewCompanies: boolean;
   loading: boolean;
   showSurvey: boolean;
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<{ data?: any; error?: any }>;
   signOut: (silent?: boolean) => Promise<void>;
   closeSurvey: () => void;
 }
@@ -27,7 +27,7 @@ const AuthContext = createContext<AuthContextType>({
   canViewCompanies: false,
   loading: true,
   showSurvey: false,
-  signIn: async () => {},
+  signIn: async () => ({ data: null, error: new Error('AuthContext not initialized') }),
   signOut: async () => {},
   closeSurvey: () => {},
 });
@@ -55,23 +55,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     try {
+      // Check user_management table first
       const { data: userData, error: userError } = await supabase
         .from('user_management')
         .select('*')
         .eq('user_id', user.id)
         .single();
 
-      if (userError) throw userError;
+      if (userError) {
+        console.error('Error fetching user data:', userError);
+        await signOut(true);
+        return;
+      }
 
       // Important security checks
-      if (!userData || userData.status === 'pending') {
-        await signOut();
+      if (!userData) {
+        console.log('No user data found, signing out');
+        await signOut(true);
+        return;
+      }
+
+      if (userData.status === 'pending') {
+        console.log('User account is pending approval');
+        await signOut(true);
         return;
       }
 
       if (!userData.is_active) {
+        console.log('User account is inactive');
         toast.error('Twoje konto zostało dezaktywowane');
-        await signOut();
+        await signOut(true);
         return;
       }
 
@@ -85,16 +98,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setCanViewCompanies(userData.can_view_companies || isUserAdmin);
 
       // Check if we need to show the survey for regular users
-      if (userData.role === 'user' && userData.is_active && userData.status !== 'pending') {
+      if (userData.role === 'user' && userData.is_active && userData.status === 'active') {
         const { data: profile } = await supabase
           .from('profiles')
-          .select('czy_korzysta_z_erp, czy_zamierza_wdrozyc_erp, czy_dokonal_wyboru_erp')
+          .select('czy_korzysta_z_erp, czy_zamierza_wdrozic_erp, czy_dokonal_wyboru_erp')
           .eq('id', user.id)
           .single();
 
         // Show survey if any of the fields are null
         if (profile && (profile.czy_korzysta_z_erp === null || 
-            profile.czy_zamierza_wdrozyc_erp === null || 
+            profile.czy_zamierza_wdrozic_erp === null || 
             profile.czy_dokonal_wyboru_erp === null)) {
           setShowSurvey(true);
         }
@@ -114,7 +127,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setUser(session?.user ?? null);
       checkUserRole(session?.user ?? null);
     });
@@ -123,58 +136,69 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) throw error;
+      if (error) {
+        // Replace Supabase's default error message
+        if (error.message === 'Invalid login credentials') {
+          return { error: new Error('Nieprawidłowy login lub hasło') };
+        }
+        return { error };
+      }
 
-    if (data?.user) {
-      // Check role in app_metadata first
-      const role = data.user.app_metadata?.role;
-      if (role === 'admin' || role === 'service_role') {
-        navigate('/admin/systemy');
+      if (data?.user) {
+        // Check user_management table first
+        const { data: userData, error: userError } = await supabase
+          .from('user_management')
+          .select('role, is_active, status')
+          .eq('user_id', data.user.id)
+          .single();
+
+        if (userError) {
+          await supabase.auth.signOut();
+          return { error: userError };
+        }
+
+        // Check if user exists and is active
+        if (!userData) {
+          await supabase.auth.signOut();
+          return { error: new Error('Konto nie zostało znalezione') };
+        }
+
+        // Check if user is pending
+        if (userData.status === 'pending') {
+          await supabase.auth.signOut();
+          navigate('/rejestracja/oczekujace');
+          return { error: new Error('Twoje konto oczekuje na zatwierdzenie') };
+        }
+
+        // Check if user is inactive
+        if (!userData.is_active) {
+          await supabase.auth.signOut();
+          return { error: new Error('Twoje konto zostało dezaktywowane') };
+        }
+
+        // Handle different roles
+        if (userData.role === 'admin') {
+          navigate('/admin/home');
+        } else if (userData.role === 'editor') {
+          navigate('/systemy-erp');
+        } else {
+          navigate('/porownaj-systemy-erp');
+        }
+        
         toast.success('Zalogowano pomyślnie');
-        return;
+        return { data };
       }
 
-      if (role === 'editor') {
-        navigate('/admin/systemy');
-        toast.success('Zalogowano pomyślnie');
-        return;
-      }
-
-      // Then check user_management table
-      const { data: roleData, error: roleError } = await supabase
-        .from('user_management')
-        .select('role, is_active, status')
-        .eq('user_id', data.user.id)
-        .maybeSingle();
-
-      if (roleError) throw roleError;
-
-      // Check if user exists and is active
-      if (!roleData || !roleData.is_active) {
-        await supabase.auth.signOut();
-        throw new Error('Konto jest nieaktywne');
-      }
-
-      // Check if user is pending
-      if (roleData.status === 'pending') {
-        await supabase.auth.signOut();
-        throw new Error('Konto oczekuje na zatwierdzenie');
-      }
-
-      // Handle different roles
-      if (roleData.role === 'admin' || roleData.role === 'editor') {
-        navigate('/admin/systemy');
-      } else {
-        // For regular users, navigate to the main page
-        navigate('/');
-      }
-      
-      toast.success('Zalogowano pomyślnie');
+      return { error: new Error('Nieprawidłowy login lub hasło') };
+    } catch (error: any) {
+      console.error('Error signing in:', error);
+      return { error };
     }
   };
 

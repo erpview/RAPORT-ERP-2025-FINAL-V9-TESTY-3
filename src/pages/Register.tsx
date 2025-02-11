@@ -261,15 +261,16 @@ export const Register: React.FC = () => {
             industry: validatedData.industry,
             company_size: validatedData.companySize,
             marketing_accepted: validatedData.marketingAccepted
-          }
+          },
+          emailRedirectTo: `${window.location.origin}/login`
         }
       });
 
       if (authError) throw authError;
 
       if (authData.user) {
-        // Immediately redirect to success page
-        navigate('/rejestracja/sukces', { replace: true });
+        // Sign out immediately to prevent auto-login
+        await supabase.auth.signOut();
         
         // Continue with profile creation in the background
         try {
@@ -290,7 +291,10 @@ export const Register: React.FC = () => {
               marketing_accepted: validatedData.marketingAccepted
             });
 
-          if (profileError) console.error('Profile creation error:', profileError);
+          if (profileError) {
+            console.error('Profile creation error:', profileError);
+            throw new Error('Błąd podczas tworzenia profilu');
+          }
 
           // Insert user management record
           const { error: managementError } = await adminSupabase
@@ -303,7 +307,10 @@ export const Register: React.FC = () => {
               status: 'pending'
             });
 
-          if (managementError) console.error('User management creation error:', managementError);
+          if (managementError) {
+            console.error('User management creation error:', managementError);
+            throw new Error('Błąd podczas tworzenia konta');
+          }
 
           // Send registration confirmation email
           try {
@@ -317,11 +324,18 @@ export const Register: React.FC = () => {
           } catch (emailError) {
             console.error('Error sending registration email:', emailError);
           }
+
+          // Redirect to success page only after all background tasks are complete
+          navigate('/rejestracja/sukces', { replace: true });
+          toast.success('Rejestracja przebiegła pomyślnie. Administrator zatwierdzi Twoje konto.');
         } catch (error) {
           console.error('Background tasks error:', error);
+          if (error instanceof Error) {
+            toast.error(error.message);
+          } else {
+            toast.error('Wystąpił błąd podczas rejestracji');
+          }
         }
-        
-        toast.success('Rejestracja przebiegła pomyślnie');
       }
     } catch (error) {
       if (error instanceof z.ZodError) {

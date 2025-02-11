@@ -13,16 +13,25 @@ export const Login: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Get the redirect path from location state
-  const from = location.state?.from || '/admin/systemy';
+  // Get the redirect path from location state or default based on role
+  const getRedirectPath = () => {
+    const userRole = user?.user_metadata?.role;
+    if (userRole === 'admin') {
+      return location.state?.from || '/admin/home';
+    }
+    if (userRole === 'editor') {
+      return location.state?.from || '/systemy-erp';
+    }
+    return '/porownaj-systemy-erp';
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
     // Redirect if already logged in
     if (user) {
-      navigate(from);
+      navigate(getRedirectPath());
     }
-  }, [user, from, navigate]);
+  }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,10 +39,16 @@ export const Login: React.FC = () => {
     setLoading(true);
     
     try {
-      await signIn(email, password);
-      navigate(from);
-    } catch (err) {
-      setError('Nieprawidłowy email lub hasło');
+      const { error: signInError } = await signIn(email, password);
+      if (signInError) {
+        setError(signInError.message || 'Nieprawidłowy login lub hasło');
+        // Clear password field on error for security
+        setPassword('');
+      }
+    } catch (err: any) {
+      console.error('Login error:', err);
+      setError('Wystąpił błąd podczas logowania');
+      setPassword('');
     } finally {
       setLoading(false);
     }

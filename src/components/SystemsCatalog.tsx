@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Building2, Globe, Filter, ChevronDown, X, Loader2, Scale } from 'lucide-react';
+import { Search, Building2, Globe, Filter, ChevronDown, X, Loader2, Scale, FileText } from 'lucide-react';
 import { useSystems } from '../hooks/useSystems';
 import { useComparison } from '../context/ComparisonContext';
 import { useAuth } from '../context/AuthContext';
@@ -7,6 +7,8 @@ import { System } from '../types/system';
 import { MultiSelectValue } from './ui/MultiSelectValue';
 import { normalizeMultiselectValue } from '../utils/fieldUtils';
 import { Link } from 'react-router-dom';
+import { adminSupabase as supabase } from '../config/supabase';
+import { SurveyModal } from './SurveyModal';
 
 const SystemsCatalog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,6 +17,66 @@ const SystemsCatalog: React.FC = () => {
   const { systems, loading, error } = useSystems();
   const { selectedSystems, addSystem, removeSystem } = useComparison();
   const { user, isAdmin, isEditor } = useAuth();
+  const canSubmitSurvey = user && (isAdmin || (!isAdmin && !isEditor));
+  const isRegularUser = user && !isAdmin && !isEditor;
+  const [systemSurveys, setSystemSurveys] = useState<Record<string, any>>({});
+  const [surveyAssignments, setSurveyAssignments] = useState<Record<string, string>>({});
+  const [showSurvey, setShowSurvey] = useState(false);
+  const [selectedSystemId, setSelectedSystemId] = useState<string | null>(null);
+
+  useEffect(() => {
+    loadSurveyAssignments();
+  }, [systems]);
+
+  const loadSurveyAssignments = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('survey_assignments')
+        .select(`
+          id,
+          target_id,
+          form:survey_forms!inner (
+            id,
+            name,
+            description,
+            modules:survey_modules!inner (
+              id,
+              name,
+              description,
+              fields:survey_fields!inner (
+                id,
+                name,
+                label,
+                field_type,
+                options,
+                required
+              )
+            )
+          )
+        `)
+        .eq('target_type', 'system');
+
+      if (error) throw error;
+
+      console.log('Survey assignments data:', data);
+
+      const surveyMap: Record<string, any> = {};
+      const assignmentMap: Record<string, string> = {};
+      data?.forEach(assignment => {
+        if (assignment.form) {
+          surveyMap[assignment.target_id] = assignment.form;
+          assignmentMap[assignment.target_id] = assignment.id;
+        }
+      });
+
+      console.log('Survey map:', surveyMap);
+      console.log('Assignment map:', assignmentMap);
+      setSystemSurveys(surveyMap);
+      setSurveyAssignments(assignmentMap);
+    } catch (error) {
+      console.error('Error loading survey assignments:', error);
+    }
+  };
 
   // Sort vendors alphabetically
   const vendors = Array.from(new Set(systems.map(system => system.vendor))).sort();
@@ -171,6 +233,7 @@ const SystemsCatalog: React.FC = () => {
         {filteredSystems.map((system) => {
           const isSelected = selectedSystems.some(s => s.id === system.id);
           const systemSizes = normalizeMultiselectValue(system.size);
+          const hasSurvey = systemSurveys[system.id];
           
           return (
             <div key={system.id} className="sf-card p-6 space-y-4 hover:shadow-md transition-all duration-200">
@@ -184,6 +247,25 @@ const SystemsCatalog: React.FC = () => {
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
+                  {hasSurvey && !isEditor && (
+                    <button
+                      onClick={() => {
+                        if (canSubmitSurvey) {
+                          setSelectedSystemId(system.id);
+                          setShowSurvey(true);
+                        } else {
+                          // If not logged in, show the survey modal with login prompt
+                          setSelectedSystemId(system.id);
+                          setShowSurvey(true);
+                        }
+                      }}
+                      className="sf-button bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] p-2"
+                      aria-label="Wypełnij ankietę"
+                      title="Wypełnij ankietę"
+                    >
+                      <FileText className="w-5 h-5" />
+                    </button>
+                  )}
                   <button
                     onClick={() => handleCompareToggle(system)}
                     disabled={!isSelected && selectedSystems.length >= maxSystems}
@@ -199,22 +281,7 @@ const SystemsCatalog: React.FC = () => {
                     <span className="hidden sm:inline">
                       {isSelected ? 'Usuń z raportu ERP' : 'Dodaj do raportu ERP'}
                     </span>
-                    <span className="sm:hidden">
-                      ERP
-                    </span>
                   </button>
-                  {(user || isAdmin || isEditor) && (
-                    <a
-                      href={system.website}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      className="sf-button bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] h-[44px] px-4 flex items-center justify-center"
-                      aria-label="Strona dostawcy"
-                      title="Strona dostawcy"
-                    >
-                      <Globe className="w-5 h-5" />
-                    </a>
-                  )}
                 </div>
               </div>
 
@@ -295,6 +362,20 @@ const SystemsCatalog: React.FC = () => {
             </div>
           </div>
         </div>
+      )}
+      
+      {showSurvey && selectedSystemId && (
+        <SurveyModal
+          isOpen={showSurvey}
+          onClose={() => {
+            setShowSurvey(false);
+            setSelectedSystemId(null);
+          }}
+          targetType="system"
+          targetId={selectedSystemId}
+          surveyForm={systemSurveys[selectedSystemId]}
+          assignmentId={surveyAssignments[selectedSystemId]}
+        />
       )}
     </div>
   );

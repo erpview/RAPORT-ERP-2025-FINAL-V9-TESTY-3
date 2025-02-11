@@ -108,8 +108,27 @@
   }
 
   .sf-checkbox {
-    @apply h-5 w-5 rounded-md border-[#d2d2d7] text-[#2c3b67] 
-           focus:ring-2 focus:ring-[#2c3b67] focus:ring-offset-0;
+    @apply w-5 h-5 rounded border-2 border-[#d2d2d7] text-[#2c3b67] 
+           focus:ring-2 focus:ring-[#2c3b67] focus:ring-offset-2
+           hover:border-[#2c3b67] transition-colors duration-200
+           checked:bg-[#2c3b67] checked:border-[#2c3b67];
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: white;
+    margin: 0;
+    display: grid;
+    place-content: center;
+  }
+
+  .sf-checkbox:checked::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+    box-shadow: inset 1em 1em white;
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
   }
 
   .sf-radio {
