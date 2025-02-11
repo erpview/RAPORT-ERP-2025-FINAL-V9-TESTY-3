@@ -73,8 +73,8 @@ const DraggableSystemCard: React.FC<DraggableSystemCardProps> = ({ system, isSel
                 }
               }}
               className="sf-button bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] p-2"
-              aria-label="Wypełnij ankietę"
-              title="Wypełnij ankietę"
+              aria-label="Oceń system ERP"
+              title="Oceń system ERP"
             >
               <FileText className="w-5 h-5" />
             </button>
@@ -114,7 +114,9 @@ const DraggableSystemCard: React.FC<DraggableSystemCardProps> = ({ system, isSel
           }`}
         aria-label={isSelected ? 'System już wybrany' : 'Wybierz do porównania'}
       >
-        {isSelected ? 'System wybrany' : 'Wybierz do porównania'}
+        <span className="text-[15px] font-medium">
+          {isSelected ? 'System wybrany' : 'Wybierz do porównania'}
+        </span>
       </button>
     </div>
   );

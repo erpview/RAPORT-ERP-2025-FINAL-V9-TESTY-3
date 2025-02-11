@@ -167,19 +167,14 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
 
   const handleSubmit = async () => {
     try {
-      // Validate required fields
-      let hasErrors = false;
+      const hasErrors = false;
       const missingFields: string[] = [];
 
-      surveyData?.modules.forEach(module => {
-        module.fields.forEach(field => {
-          if (field.is_required) {
-            const value = formData[module.id]?.[field.id];
-            if (value === undefined || value === null || value === '' || 
-                (Array.isArray(value) && value.length === 0)) {
-              hasErrors = true;
-              missingFields.push(`${module.name} - ${field.name}`);
-            }
+      surveyData?.modules.forEach((module) => {
+        module.fields.forEach((field) => {
+          if (field.is_required && (!formData[module.id] || !formData[module.id][field.id])) {
+            hasErrors = true;
+            missingFields.push(`${module.name} - ${field.name}`);
           }
         });
       });
@@ -202,7 +197,8 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
       setLoading(true);
       setError(null);
 
-      const { error } = await supabase
+      // First, insert the survey response
+      const { error: responseError } = await supabase
         .from('survey_responses')
         .insert({
           form_id: surveyData.id,
@@ -211,12 +207,30 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
           responses: formData
         });
 
-      if (error) throw error;
+      if (responseError) {
+        throw responseError;
+      }
+
+      // Then update the user's profile
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({
+          czy_korzysta_z_erp: true,
+          czy_dokonal_wyboru_erp: true
+        })
+        .eq('id', user.id);
+
+      if (profileError) {
+        console.error('Error updating profile:', profileError);
+        // Don't throw here as the survey was already saved
+      }
 
       setLoading(false);
+      onClose();
     } catch (error) {
       console.error('Error submitting survey:', error);
       setError('Błąd podczas zapisywania ankiety');
+      setLoading(false);
     }
   };
 

@@ -259,17 +259,18 @@ const SystemsCatalog: React.FC = () => {
                           setShowSurvey(true);
                         }
                       }}
-                      className="sf-button bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] p-2"
-                      aria-label="Wypełnij ankietę"
-                      title="Wypełnij ankietę"
+                      className="sf-button h-10 text-[15px] font-medium flex items-center bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] px-4"
+                      aria-label="Oceń system ERP"
+                      title="Oceń system ERP"
                     >
-                      <FileText className="w-5 h-5" />
+                      <FileText className="w-5 h-5 mr-2" />
+                      <span className="hidden sm:inline">Oceń system ERP</span>
                     </button>
                   )}
                   <button
                     onClick={() => handleCompareToggle(system)}
                     disabled={!isSelected && selectedSystems.length >= maxSystems}
-                    className={`sf-button text-[15px] font-medium flex items-center
+                    className={`sf-button h-10 text-[15px] font-medium flex items-center px-4
                       ${isSelected 
                         ? 'bg-[#2c3b67] text-white hover:bg-[#2c3b67]/90'
                         : selectedSystems.length >= maxSystems
