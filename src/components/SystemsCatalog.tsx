@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Building2, Filter, ChevronDown, X, Loader2, Scale, FileText } from 'lucide-react';
+import { Search, Building2, Globe, Filter, ChevronDown, X, Loader2, Scale, FileText } from 'lucide-react';
 import { useSystems } from '../hooks/useSystems';
 import { useComparison } from '../context/ComparisonContext';
 import { useAuth } from '../context/AuthContext';
+import { System } from '../types/system';
+import { MultiSelectValue } from './ui/MultiSelectValue';
+import { normalizeMultiselectValue } from '../utils/fieldUtils';
+import { Link } from 'react-router-dom';
+import { adminSupabase as supabase } from '../config/supabase';
 import { SurveyModal } from './SurveyModal';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../config/supabase';
 
-export const SystemsCatalog = () => {
-  const navigate = useNavigate();
-  const { user, isAdmin, isEditor } = useAuth();
-  const { selectedSystems, toggleSystem, maxSystems } = useComparison();
+const SystemsCatalog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const [showFilters, setShowFilters] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string[]>([]);
+  const [selectedVendor, setSelectedVendor] = useState<string>('');
+  const { systems, loading, error } = useSystems();
+  const { selectedSystems, addSystem, removeSystem } = useComparison();
+  const { user, isAdmin, isEditor } = useAuth();
+  const canSubmitSurvey = user && (isAdmin || (!isAdmin && !isEditor));
+  const isRegularUser = user && !isAdmin && !isEditor;
+  const [systemSurveys, setSystemSurveys] = useState<Record<string, any>>({});
+  const [surveyAssignments, setSurveyAssignments] = useState<Record<string, string>>({});
   const [showSurvey, setShowSurvey] = useState(false);
   const [selectedSystemId, setSelectedSystemId] = useState<string | null>(null);
-  const [surveyAssignment, setSurveyAssignment] = useState<any>(null);
-  const [surveyForm, setSurveyForm] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-
-  const { systems, isLoading, error } = useSystems();
-  const canSubmitSurvey = user && (isAdmin || (!isAdmin && !isEditor));
 
   useEffect(() => {
     loadSurveyAssignments();
@@ -70,8 +71,8 @@ export const SystemsCatalog = () => {
 
       console.log('Survey map:', surveyMap);
       console.log('Assignment map:', assignmentMap);
-      setSurveyForm(surveyMap);
-      setSurveyAssignment(assignmentMap);
+      setSystemSurveys(surveyMap);
+      setSurveyAssignments(assignmentMap);
     } catch (error) {
       console.error('Error loading survey assignments:', error);
     }
@@ -83,7 +84,7 @@ export const SystemsCatalog = () => {
   // Get unique sizes from all systems with custom sort order
   const sizeOrder = ['Małe', 'Średnie', 'Duże'];
   const sizes = Array.from(new Set(
-    systems.flatMap(system => system.size)
+    systems.flatMap(system => normalizeMultiselectValue(system.size))
   )).sort((a, b) => {
     const indexA = sizeOrder.indexOf(a);
     const indexB = sizeOrder.indexOf(b);
@@ -91,6 +92,7 @@ export const SystemsCatalog = () => {
   });
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+  const maxSystems = isMobile ? 2 : 4;
 
   // Add resize listener
   useEffect(() => {
@@ -107,33 +109,33 @@ export const SystemsCatalog = () => {
                          system.vendor.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          system.description.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const systemSizes = system.size;
-    const matchesSize = selectedFilters.length === 0 || 
-                       systemSizes.some(size => selectedFilters.includes(size));
+    const systemSizes = normalizeMultiselectValue(system.size);
+    const matchesSize = selectedSize.length === 0 || 
+                       systemSizes.some(size => selectedSize.includes(size));
     
-    const matchesVendor = !selectedFilters.includes('vendor') || system.vendor === selectedFilters.find(filter => filter.startsWith('vendor:'))?.split(':')[1];
+    const matchesVendor = !selectedVendor || system.vendor === selectedVendor;
 
     return matchesSearch && matchesSize && matchesVendor;
   });
 
   const toggleSize = (size: string) => {
-    setSelectedFilters(prev =>
+    setSelectedSize(prev =>
       prev.includes(size)
         ? prev.filter(s => s !== size)
         : [...prev, size]
     );
   };
 
-  const handleCompareToggle = (system: any) => {
+  const handleCompareToggle = (system: System) => {
     const isSelected = selectedSystems.some(s => s.id === system.id);
     if (isSelected) {
-      toggleSystem(system.id);
+      removeSystem(system.id);
     } else if (selectedSystems.length < maxSystems) {
-      toggleSystem(system.id);
+      addSystem(system);
     }
   };
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="flex items-center gap-3 text-[#86868b]">
@@ -182,15 +184,12 @@ export const SystemsCatalog = () => {
               </h4>
               <div className="flex flex-wrap gap-2">
                 {sizes.map(size => (
-                  <button
+                  <MultiSelectValue
                     key={size}
-                    onClick={() => toggleSize(size)}
-                    className={`sf-button h-10 text-[15px] font-medium flex items-center bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] px-4
-                      ${selectedFilters.includes(size) ? 'bg-[#2c3b67] text-white hover:bg-[#2c3b67]/90' : ''}
-                    `}
-                  >
-                    {size}
-                  </button>
+                    value={size}
+                    onClick={toggleSize}
+                    isHighlighted={selectedSize.includes(size)}
+                  />
                 ))}
               </div>
             </div>
@@ -203,8 +202,8 @@ export const SystemsCatalog = () => {
                 <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#86868b] w-5 h-5" />
                 <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#86868b] w-5 h-5 pointer-events-none" />
                 <select
-                  value={selectedFilters.find(filter => filter.startsWith('vendor:'))?.split(':')[1] || ''}
-                  onChange={(e) => setSelectedFilters(prev => [...prev.filter(filter => !filter.startsWith('vendor:')), `vendor:${e.target.value}`])}
+                  value={selectedVendor}
+                  onChange={(e) => setSelectedVendor(e.target.value)}
                   className="sf-input pl-10 pr-16 w-full appearance-none bg-white cursor-pointer hover:bg-[#F5F5F7] transition-colors duration-200"
                 >
                   <option value="">Wszyscy dostawcy</option>
@@ -214,9 +213,9 @@ export const SystemsCatalog = () => {
                     </option>
                   ))}
                 </select>
-                {selectedFilters.find(filter => filter.startsWith('vendor:')) && (
+                {selectedVendor && (
                   <button
-                    onClick={() => setSelectedFilters(prev => prev.filter(filter => !filter.startsWith('vendor:')))}
+                    onClick={() => setSelectedVendor('')}
                     className="absolute right-8 top-1/2 transform -translate-y-1/2 p-1 hover:bg-[#F5F5F7] rounded-full transition-colors duration-200"
                     title="Resetuj wybór dostawcy"
                   >
@@ -233,7 +232,8 @@ export const SystemsCatalog = () => {
       <div className="grid grid-cols-1 gap-6">
         {filteredSystems.map((system) => {
           const isSelected = selectedSystems.some(s => s.id === system.id);
-          const hasSurvey = surveyForm && surveyForm[system.id];
+          const systemSizes = normalizeMultiselectValue(system.size);
+          const hasSurvey = systemSurveys[system.id];
           
           return (
             <div key={system.id} className="sf-card p-6 space-y-4 hover:shadow-md transition-all duration-200">
@@ -291,16 +291,13 @@ export const SystemsCatalog = () => {
               </p>
 
               <div className="flex flex-wrap gap-2">
-                {system.size.map((size, index) => (
-                  <button
+                {normalizeMultiselectValue(system.size).map((size, index) => (
+                  <MultiSelectValue
                     key={`${size}-${index}`}
-                    onClick={() => toggleSize(size)}
-                    className={`sf-button h-10 text-[15px] font-medium flex items-center bg-[#F5F5F7] text-[#1d1d1f] hover:bg-[#E8E8ED] px-4
-                      ${selectedFilters.includes(size) ? 'bg-[#2c3b67] text-white hover:bg-[#2c3b67]/90' : ''}
-                    `}
-                  >
-                    {size}
-                  </button>
+                    value={size}
+                    onClick={toggleSize}
+                    isHighlighted={selectedSize.includes(size)}
+                  />
                 ))}
               </div>
 
@@ -329,15 +326,20 @@ export const SystemsCatalog = () => {
                   {selectedSystems.length}/{maxSystems} systemów
                 </span>
               </div>
-              <button
-                onClick={() => navigate('/porownaj-systemy-erp?compare=true')}
+              <Link
+                to="/porownaj-systemy-erp?compare=true"
                 className={`sf-button-primary text-[15px] py-2
                   ${selectedSystems.length < 2 
                     ? 'opacity-50 cursor-not-allowed' 
                     : ''}`}
+                onClick={(e) => {
+                  if (selectedSystems.length < 2) {
+                    e.preventDefault();
+                  }
+                }}
               >
                 Porównaj systemy
-              </button>
+              </Link>
             </div>
             
             {/* Selected Systems Chips */}
@@ -370,10 +372,12 @@ export const SystemsCatalog = () => {
             setShowSurvey(false);
             setSelectedSystemId(null);
           }}
-          surveyForm={surveyForm[selectedSystemId]}
-          assignmentId={surveyAssignment[selectedSystemId]}
+          surveyForm={systemSurveys[selectedSystemId]}
+          assignmentId={surveyAssignments[selectedSystemId]}
         />
       )}
     </div>
   );
 };
+
+export default SystemsCatalog;
