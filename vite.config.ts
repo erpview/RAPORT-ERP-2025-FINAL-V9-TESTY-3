@@ -57,7 +57,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
   const termEntries = terms.length > 0 ? Object.fromEntries(
     terms.map(term => [
       `slownik-${term}`,
-      resolve(__dirname, `slownik-erp/${term}/index.html`)
+      resolve(__dirname, `public/seo/slownik-erp/${term}/index.html`)
     ])
   ) : {};
 
@@ -66,7 +66,7 @@ export default defineConfig(async (): Promise<UserConfig> => {
   const systemEntries = systemSlugs.length > 0 ? Object.fromEntries(
     systemSlugs.map(slug => [
       `system-${slug}`,
-      resolve(__dirname, `systemy-erp/${slug}/index.html`)
+      resolve(__dirname, `public/seo/systemy-erp/${slug}/index.html`)
     ])
   ) : {};
 
