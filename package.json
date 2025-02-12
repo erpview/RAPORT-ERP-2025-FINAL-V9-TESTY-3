@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && cp -r public/seo dist/",
+    "build": "tsc && vite build && cp -r public/seo dist/public/",
     "preview": "serve dist -l 4173",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "migrate": "tsx src/scripts/runMigration.ts",
