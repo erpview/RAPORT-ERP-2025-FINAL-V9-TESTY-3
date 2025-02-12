@@ -32,7 +32,7 @@ const SYSTEM_SLUGS = [
   'oracle-fusion-cloud-erp',
   'proalpha-erp',
   'sap-business-one',
-  'sap-s',
+  'sap-s/4-hana',
   'symfonia-erp',
   'teta-erp'
 ];
