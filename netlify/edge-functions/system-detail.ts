@@ -1,5 +1,4 @@
-import type { Context } from '@netlify/edge-functions';
-import { getRuntime } from '@netlify/edge-functions';
+import { Config, Context } from '@netlify/edge-functions';
 import { createClient } from '@supabase/supabase-js';
 
 export default async (request: Request, context: Context) => {
@@ -10,8 +9,8 @@ export default async (request: Request, context: Context) => {
 
     // Initialize Supabase client
     const supabase = createClient(
-      context.env.VITE_SUPABASE_URL || '',
-      context.env.VITE_SUPABASE_ANON_KEY || ''
+      Deno.env.get('VITE_SUPABASE_URL') || '',
+      Deno.env.get('VITE_SUPABASE_ANON_KEY') || ''
     );
 
     // Fetch system data
