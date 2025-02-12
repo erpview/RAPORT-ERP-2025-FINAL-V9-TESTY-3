@@ -23,7 +23,9 @@ const FIELD_TYPES: FieldType[] = [
   { value: 'radio', label: 'Przyciski opcji' },
   { value: 'checkbox', label: 'Pola wyboru' },
   { value: 'textarea', label: 'Tekst wielolinijkowy' },
-  { value: 'rating', label: 'Ocena (1-5 gwiazdek + N/A)' }
+  { value: 'rating', label: 'Ocena (1-5 gwiazdek + N/A)' },
+  { value: 'nps', label: 'NPS (0-10)' },
+  { value: 'year', label: 'Rok' }
 ];
 
 const SurveyFormEditor = () => {

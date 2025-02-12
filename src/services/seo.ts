@@ -2,6 +2,32 @@ import { supabase } from '../config/supabase';
 import { SEOData, DynamicSEOData, ProcessedSEOData } from '../types/seo';
 
 const DEFAULT_SEO_TEMPLATES = {
+  'system-detail': {
+    id: 'system-detail',
+    page_identifier: 'system-detail',
+    is_dynamic: true,
+    title_template: 'System ERP {systemName} | Raport ERP by ERP-VIEW.PL',
+    description_template: 'System ERP {systemName} od {vendor}. {systemDescription} Sprawdź opinie, funkcjonalności i porównaj z innymi systemami ERP.',
+    keywords_template: '{systemName}, System ERP, {vendor}, opinie, funkcjonalności, porównanie systemów ERP, raport ERP, ERP-VIEW.PL, {keywords}',
+    structured_data_template: {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "{systemName}",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "description": "{systemDescription}",
+      "offers": {
+        "@type": "Offer",
+        "price": "Contact for Pricing",
+        "priceCurrency": "PLN"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{vendor}"
+      }
+    },
+    robots: 'index, follow'
+  },
   '': {
     id: 'default-home',
     page_identifier: '',

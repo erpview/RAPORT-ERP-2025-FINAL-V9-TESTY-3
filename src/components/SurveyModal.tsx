@@ -12,7 +12,7 @@ interface SurveyField {
   module_id: string;
   name: string;
   label: string;
-  field_type: 'text' | 'number' | 'select' | 'multiselect' | 'radio' | 'checkbox' | 'textarea' | 'rating' | 'email' | 'url';
+  field_type: 'text' | 'number' | 'select' | 'multiselect' | 'radio' | 'checkbox' | 'textarea' | 'rating' | 'email' | 'url' | 'nps' | 'year';
   options?: string[] | null;
   is_required: boolean;
   order_index: number;
@@ -345,6 +345,11 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
 
   const handleSubmit = async () => {
     try {
+      if (!surveyForm) {
+        setError('Nie można znaleźć formularza ankiety.');
+        return;
+      }
+
       if (!canSubmitNewSurvey()) {
         const lastSubmissionDate = new Date(existingResponse!.created_at);
         const nextAvailableDate = new Date(lastSubmissionDate);
@@ -522,28 +527,57 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
         );
       case 'checkbox':
         const checkedValues = Array.isArray(value) ? value : [];
+        const options = field.options || [];
+        const midPoint = Math.ceil(options.length / 2);
+        const leftColumn = options.slice(0, midPoint);
+        const rightColumn = options.slice(midPoint);
+
         return (
-          <div className="space-y-2">
-            {field.options?.map((option) => (
-              <label key={option} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  value={option}
-                  checked={checkedValues.includes(option)}
-                  onChange={(e) => {
-                    const newValues = e.target.checked
-                      ? [...checkedValues, option]
-                      : checkedValues.filter(v => v !== option);
-                    handleFieldChange(module.id, field.id, newValues);
-                  }}
-                  className={`sf-checkbox ${field.is_required ? 'required' : ''}`}
-                  required={field.is_required && checkedValues.length === 0}
-                  aria-required={field.is_required}
-                  aria-label={`${field.name} - ${option}`}
-                />
-                <span>{option}</span>
-              </label>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+            <div>
+              {leftColumn.map((option) => (
+                <label key={option} className="flex items-start gap-2 py-1">
+                  <input
+                    type="checkbox"
+                    value={option}
+                    checked={checkedValues.includes(option)}
+                    onChange={(e) => {
+                      const newValues = e.target.checked
+                        ? [...checkedValues, option]
+                        : checkedValues.filter(v => v !== option);
+                      handleFieldChange(module.id, field.id, newValues);
+                    }}
+                    className={`sf-checkbox flex-shrink-0 mt-1 w-4 h-4 ${field.is_required ? 'required' : ''}`}
+                    required={field.is_required && checkedValues.length === 0}
+                    aria-required={field.is_required}
+                    aria-label={`${field.name} - ${option}`}
+                  />
+                  <span className="text-[15px] leading-relaxed">{option}</span>
+                </label>
+              ))}
+            </div>
+            <div className="sm:block">
+              {rightColumn.map((option) => (
+                <label key={option} className="flex items-start gap-2 py-1">
+                  <input
+                    type="checkbox"
+                    value={option}
+                    checked={checkedValues.includes(option)}
+                    onChange={(e) => {
+                      const newValues = e.target.checked
+                        ? [...checkedValues, option]
+                        : checkedValues.filter(v => v !== option);
+                      handleFieldChange(module.id, field.id, newValues);
+                    }}
+                    className={`sf-checkbox flex-shrink-0 mt-1 w-4 h-4 ${field.is_required ? 'required' : ''}`}
+                    required={field.is_required && checkedValues.length === 0}
+                    aria-required={field.is_required}
+                    aria-label={`${field.name} - ${option}`}
+                  />
+                  <span className="text-[15px] leading-relaxed">{option}</span>
+                </label>
+              ))}
+            </div>
           </div>
         );
       case 'rating':
@@ -592,6 +626,58 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
               </div>
             </button>
           </div>
+        );
+      case 'nps':
+        return (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between gap-1">
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((rating) => (
+                <button
+                  key={rating}
+                  type="button"
+                  onClick={() => handleFieldChange(module.id, field.id, rating)}
+                  className={`w-12 h-12 rounded-lg text-lg font-medium flex items-center justify-center transition-all relative group
+                    ${value === rating 
+                      ? 'bg-[#2c3b67] text-white' 
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}
+                    ${field.is_required ? 'required' : ''}`}
+                  aria-required={field.is_required}
+                  aria-label={`${field.name} - ${rating}`}
+                >
+                  {rating}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-between text-sm text-gray-600">
+              <span>Mało prawdopodobne</span>
+              <span>Bardzo prawdopodobne</span>
+            </div>
+          </div>
+        );
+      case 'year':
+        const currentYear = new Date().getFullYear();
+        const startYear = 1990;
+        const years = Array.from(
+          { length: currentYear - startYear + 1 },
+          (_, i) => currentYear - i
+        );
+
+        return (
+          <select
+            value={value || ''}
+            onChange={(e) => handleFieldChange(module.id, field.id, e.target.value)}
+            className={`sf-input w-full ${field.is_required ? 'required' : ''}`}
+            required={field.is_required}
+            aria-required={field.is_required}
+            aria-label={field.name}
+          >
+            <option value="">Wybierz rok...</option>
+            {years.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
         );
       default:
         return null;

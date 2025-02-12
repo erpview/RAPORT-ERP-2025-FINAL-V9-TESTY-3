@@ -5,11 +5,48 @@ import { seoPlugin } from './vite-seo-plugin';
 import fs from 'fs/promises';
 import path from 'path';
 
+// Get system slugs from the SEO directory
+async function getSystemSlugs() {
+  try {
+    const systemsDir = path.join(process.cwd(), 'public/seo/systemy-erp');
+    const systems = await fs.readdir(systemsDir);
+    return systems.filter(system => system !== 'index.html');
+  } catch (error) {
+    console.warn('Warning: Systems directory not found');
+    return [];
+  }
+}
+
+// List of system slugs for SEO
+const SYSTEM_SLUGS = [
+  'abas-erp',
+  'asseco-softlab-erp',
+  'berberis',
+  'comarch-erp-xl',
+  'enova365',
+  'impuls-evo',
+  'infor-ln',
+  'isof',
+  'merit-erp',
+  'microsoft-dynamics-365',
+  'oracle-netsuite',
+  'proalpha-erp',
+  'sap-business-one',
+  'sap-s4hana',
+  'symfonia-erp',
+  'teta-constellation'
+];
+
 // Get all dictionary terms
 async function getDictionaryTerms() {
-  const termsDir = path.join(process.cwd(), 'public/seo/slownik-erp');
-  const terms = await fs.readdir(termsDir);
-  return terms.filter(term => term !== 'index.html' && term !== 'structured-data.json');
+  try {
+    const termsDir = path.join(process.cwd(), 'public/seo/slownik-erp');
+    const terms = await fs.readdir(termsDir);
+    return terms.filter(term => term !== 'index.html' && term !== 'structured-data.json');
+  } catch (error) {
+    console.warn('Warning: Dictionary terms directory not found');
+    return [];
+  }
 }
 
 export default defineConfig(async (): Promise<UserConfig> => {
@@ -17,12 +54,21 @@ export default defineConfig(async (): Promise<UserConfig> => {
   const terms = await getDictionaryTerms();
   
   // Create input entries for all dictionary terms
-  const termEntries = Object.fromEntries(
+  const termEntries = terms.length > 0 ? Object.fromEntries(
     terms.map(term => [
       `slownik-${term}`,
       resolve(__dirname, `slownik-erp/${term}/index.html`)
     ])
-  );
+  ) : {};
+
+  // Add system detail entries
+  const systemSlugs = await getSystemSlugs();
+  const systemEntries = systemSlugs.length > 0 ? Object.fromEntries(
+    systemSlugs.map(slug => [
+      `system-${slug}`,
+      resolve(__dirname, `systemy-erp/${slug}/index.html`)
+    ])
+  ) : {};
 
   return {
     base: '/',
@@ -79,7 +125,8 @@ export default defineConfig(async (): Promise<UserConfig> => {
           symfonia: resolve(__dirname, 'partnerzy/symfonia/index.html'),
           sygnity: resolve(__dirname, 'partnerzy/sygnity-business-solutions/index.html'),
           vendo: resolve(__dirname, 'partnerzy/vendo.erp/index.html'),
-          ...termEntries
+          ...termEntries,
+          ...systemEntries
         },
         output: {
           chunkFileNames: 'assets/js/[name].js',

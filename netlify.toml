@@ -28,9 +28,27 @@
   path = "/slownik-erp/*"
   function = "dictionary-term"
 
+# System detail pages with edge function
+[[edge_functions]]
+  path = "/systemy-erp/*"
+  function = "system-detail"
+
+# Partner pages with edge function
+[[edge_functions]]
+  path = "/partnerzy/*"
+  function = "partners"
+
 # Dictionary term pages fallback
 [[redirects]]
   from = "/slownik-erp/*"
+  to = "/index.html"
+  status = 200
+  force = true
+  conditions = {Cookie = ["__prerender_bypass"]}
+
+# System detail pages fallback
+[[redirects]]
+  from = "/systemy-erp/*"
   to = "/index.html"
   status = 200
   force = true
@@ -56,15 +74,17 @@
   status = 200
 
 [[redirects]]
-  from = "/partnerzy"
-  to = "/seo/partnerzy/index.html"
+  from = "/partnerzy/*"
+  to = "/index.html"
   status = 200
+  force = true
   conditions = {Cookie = ["__prerender_bypass"]}
 
 [[redirects]]
   from = "/partnerzy"
   to = "/index.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/systemy-erp"

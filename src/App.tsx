@@ -14,6 +14,7 @@ import { useScrollToTop } from './hooks/useScrollToTop';
 import Calculator from './pages/Calculator';
 import { Cost } from './pages/Cost';
 import { Systems } from './pages/Systems';
+import SystemDetail from './pages/SystemDetail';
 import { Compare } from './pages/Compare';
 import { AdminSystems } from './pages/AdminSystems';
 import { AdminUsers } from './pages/AdminUsers';
@@ -74,6 +75,7 @@ const AppContent = () => {
         <Route path="/kalkulator" element={<Calculator />} />
         <Route path="/koszt-wdrozenia-erp" element={<Cost />} />
         <Route path="/systemy-erp" element={<Systems />} />
+        <Route path="/systemy-erp/:systemName" element={<SystemDetail />} />
         <Route path="/porownaj-systemy-erp" element={<Compare />} />
         <Route path="/partnerzy" element={<PartnersPage />} />
         <Route path="/partnerzy/:slug" element={<PartnerDetailPage />} />

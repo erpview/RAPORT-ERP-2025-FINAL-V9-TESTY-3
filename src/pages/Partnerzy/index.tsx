@@ -82,18 +82,11 @@ export default function PartnersPage() {
 
   return (
     <>
-      <Helmet>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-touch-fullscreen" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="HandheldFriendly" content="true" />
-        <meta name="MobileOptimized" content="width" />
-      </Helmet>
-      
-      <MetaTags />
+      <MetaTags
+        title="Partnerzy - Raport ERP by ERP-VIEW.PL"
+        description="Poznaj naszych partnerów technologicznych i głównych, którzy wspierają rozwój Raportu ERP. Dowiedz się więcej o firmach współpracujących z nami."
+        pageData={{ partners }}
+      />
       <div className="min-h-screen bg-[#F5F5F7] py-12">
         <div className="container mx-auto px-4 py-8">
           {/* Main Partners Section */}

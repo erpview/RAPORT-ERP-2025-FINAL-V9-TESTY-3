@@ -239,9 +239,12 @@ const SystemsCatalog: React.FC = () => {
             <div key={system.id} className="sf-card p-6 space-y-4 hover:shadow-md transition-all duration-200">
               <div className="flex justify-between items-start">
                 <div>
-                  <h2 className="text-[24px] font-semibold text-[#1d1d1f]">
+                  <Link 
+                    to={`/systemy-erp/${encodeURIComponent(system.name.toLowerCase().replace(/ /g, '-'))}`}
+                    className="text-[24px] font-semibold text-[#1d1d1f] hover:text-[#007AFF] transition-colors"
+                  >
                     {system.name}
-                  </h2>
+                  </Link>
                   <p className="text-[15px] text-[#86868b] mt-1">
                     {system.vendor}
                   </p>

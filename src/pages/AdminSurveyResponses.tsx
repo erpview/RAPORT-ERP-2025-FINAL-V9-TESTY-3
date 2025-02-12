@@ -391,7 +391,15 @@ const AdminSurveyResponses = () => {
                           {moduleResponse.module_name}
                         </h4>
                         <div className="space-y-3 bg-[#F5F5F7] rounded-xl p-4 mb-4">
-                          {moduleResponse.fields.map((field: FormattedField, fieldIndex: number) => (
+                          {moduleResponse.fields
+                            .filter((field: FormattedField) => {
+                              // Show field if value is not null/undefined and for arrays, show only if not empty
+                              if (Array.isArray(field.value)) {
+                                return field.value.length > 0;
+                              }
+                              return field.value !== null && field.value !== undefined && field.value !== '';
+                            })
+                            .map((field: FormattedField, fieldIndex: number) => (
                             <div key={fieldIndex} className="flex items-start">
                               <span className="text-[15px] font-medium text-[#1d1d1f] w-1/3">
                                 {field.field_name}:
@@ -400,7 +408,7 @@ const AdminSurveyResponses = () => {
                                 {field.field_type === 'checkbox' && Array.isArray(field.value) ? (
                                   <div className="flex flex-wrap gap-2">
                                     {field.value.map((item: string, i: number) => (
-                                      <span key={i} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                      <span key={i} className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-[#2c3b67] text-white">
                                         {item}
                                       </span>
                                     ))}
@@ -409,8 +417,18 @@ const AdminSurveyResponses = () => {
                                   <span className="text-[#2c3b67]">
                                     {field.value === 'N/A' ? 'N/A' : '★'.repeat(Number(field.value))}
                                   </span>
+                                ) : field.field_type === 'select' || field.field_type === 'radio' ? (
+                                  <span className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-[#2c3b67] text-white">
+                                    {field.value?.toString() || '-'}
+                                  </span>
                                 ) : Array.isArray(field.value) ? (
-                                  field.value.join(', ')
+                                  <div className="flex flex-wrap gap-2">
+                                    {field.value.map((item: string, i: number) => (
+                                      <span key={i} className="inline-flex items-center px-3 py-1 rounded-lg text-sm font-medium bg-[#2c3b67] text-white">
+                                        {item}
+                                      </span>
+                                    ))}
+                                  </div>
                                 ) : field.value === null || field.value === undefined ? (
                                   '-'
                                 ) : (

@@ -6,7 +6,32 @@ interface RouteMap {
   [key: string]: string;
 }
 
+// Get system slugs from the SEO directory
+async function getSystemSlugs() {
+  try {
+    const systemsDir = path.join(process.cwd(), 'public/seo/systemy-erp');
+    const systems = await fs.readdir(systemsDir);
+    return systems.filter(system => system !== 'index.html');
+  } catch (error) {
+    console.warn('Warning: Systems directory not found');
+    return [];
+  }
+}
+
+// Get partner slugs from the SEO directory
+async function getPartnerSlugs() {
+  try {
+    const partnersDir = path.join(process.cwd(), 'public/seo/partnerzy');
+    const partners = await fs.readdir(partnersDir);
+    return partners.filter(partner => partner !== 'index.html');
+  } catch (error) {
+    console.warn('Warning: Partners directory not found');
+    return [];
+  }
+}
+
 const ROUTES_MAP: RouteMap = {
+  
   'index.html': '',
   'porownaj-systemy-erp/index.html': '/porownaj-systemy-erp',
   'systemy-erp/index.html': '/systemy-erp',
@@ -18,6 +43,26 @@ const ROUTES_MAP: RouteMap = {
   'firmy-it/index.html': 'firmy-it',
   'firmy-it.html': 'firmy-it'
 };
+
+// List of system slugs for SEO
+const SYSTEM_SLUGS = [
+  'abas-erp',
+  'asseco-softlab-erp',
+  'berberis',
+  'comarch-erp-xl',
+  'enova365',
+  'impuls-evo',
+  'infor-ln',
+  'isof',
+  'merit-erp',
+  'microsoft-dynamics-365',
+  'oracle-netsuite',
+  'proalpha-erp',
+  'sap-business-one',
+  'sap-s4hana',
+  'symfonia-erp',
+  'teta-constellation'
+];
 
 // List of partner slugs for SEO
 const PARTNER_SLUGS = [
@@ -40,6 +85,16 @@ const PARTNER_SLUGS = [
   'sygnity-business-solutions',
   'vendo.erp'
 ];
+
+// Function to check if a system SEO file exists
+async function systemSeoExists(systemSlug: string): Promise<boolean> {
+  try {
+    await fs.access(path.join(process.cwd(), 'systemy-erp', systemSlug, 'index.html'));
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 // Function to check if a term SEO file exists
 async function termSeoExists(termSlug: string): Promise<boolean> {
@@ -153,17 +208,61 @@ function injectMetaTags(html: string, metaTags: { [key: string]: string }) {
 }
 
 export function seoPlugin(): Plugin {
+  let dynamicRoutes: RouteMap = {};
   return {
     name: 'vite-plugin-seo',
     enforce: 'pre',
-    configureServer(server) {
+    async configureServer(server) {
+      // Initialize dynamic routes
+      const systemSlugs = await getSystemSlugs();
+      const partnerSlugs = await getPartnerSlugs();
+
+      // Add system detail routes
+      dynamicRoutes = {
+        ...dynamicRoutes,
+        ...Object.fromEntries(
+          systemSlugs.map(slug => [
+            `systemy-erp/${slug}/index.html`,
+            `/systemy-erp/${slug}`
+          ])
+        ),
+        ...Object.fromEntries(
+          partnerSlugs.map(slug => [
+            `partnerzy/${slug}/index.html`,
+            `/partnerzy/${slug}`
+          ])
+        )
+      };
       console.log('SEO Plugin: Initializing...');
       
       // Handle client-side routing in development and preview
       server.middlewares.use(async (req, res, next) => {
         const url = req.url || '/';
+        const allRoutes = { ...ROUTES_MAP, ...dynamicRoutes };
         const route = url.split('?')[0].split('#')[0];
         
+        // Handle system detail pages
+        const systemDetailMatch = route.match(/^\/systemy-erp\/([\w-]+)$/);
+        if (systemDetailMatch) {
+          const systemSlug = systemDetailMatch[1];
+          const seoPath = path.join(process.cwd(), 'public/seo/systemy-erp', systemSlug, 'index.html');
+          
+          try {
+            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const metaTags = extractMetaTags(seoContent);
+            
+            // Inject SEO meta tags into the HTML response
+            res.setHeader('Content-Type', 'text/html');
+            let html = await fs.readFile(path.join(process.cwd(), 'index.html'), 'utf-8');
+            html = injectMetaTags(html, metaTags);
+            
+            return res.end(html);
+          } catch (error) {
+            console.error(`Error serving system detail page for ${systemSlug}:`, error);
+            next();
+          }
+        }
+
         // Handle calculator page
         if (route === '/kalkulator') {
           const seoPath = path.join(process.cwd(), 'public/seo/kalkulator/index.html');
@@ -180,6 +279,30 @@ export function seoPlugin(): Plugin {
             return res.end(html);
           } catch (error) {
             console.error('Error serving calculator page:', error);
+          }
+        }
+
+        // Handle system detail pages
+        const systemMatch = route.match(/^\/systemy-erp\/([\w-]+)$/);
+        if (systemMatch) {
+          const systemSlug = systemMatch[1];
+          if (SYSTEM_SLUGS.includes(systemSlug)) {
+            const seoPath = path.join(process.cwd(), 'public/seo/systemy-erp', systemSlug, 'index.html');
+            
+            try {
+              const seoContent = await fs.readFile(seoPath, 'utf-8');
+              const metaTags = extractMetaTags(seoContent);
+              
+              // Inject SEO meta tags into the HTML response
+              res.setHeader('Content-Type', 'text/html');
+              let html = await fs.readFile(path.join(process.cwd(), 'index.html'), 'utf-8');
+              html = injectMetaTags(html, metaTags);
+              
+              return res.end(html);
+            } catch (error) {
+              console.error(`Error serving system detail page for ${systemSlug}:`, error);
+              next();
+            }
           }
         }
 

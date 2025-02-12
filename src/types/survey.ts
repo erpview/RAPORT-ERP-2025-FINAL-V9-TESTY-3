@@ -22,7 +22,7 @@ export interface SurveyField {
   id: string;
   module_id: string;
   name: string;
-  field_type: 'text' | 'number' | 'select' | 'multiselect' | 'radio' | 'checkbox' | 'textarea' | 'rating' | 'email' | 'url';
+  field_type: 'text' | 'number' | 'select' | 'multiselect' | 'radio' | 'checkbox' | 'textarea' | 'rating' | 'email' | 'url' | 'nps' | 'year';
   field_key?: string;
   description?: string | null;
   options?: string[] | null;
