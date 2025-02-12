@@ -1,8 +1,16 @@
-/// <reference lib="deno.ns" />
 import { Config, Context } from '@netlify/edge-functions';
 import { createClient } from '@supabase/supabase-js';
 
-export default async (request: Request, context: Context) => {
+// Extend Context type to include env
+type NetlifyContext = Context & {
+  env: {
+    VITE_SUPABASE_URL: string;
+    VITE_SUPABASE_ANON_KEY: string;
+    [key: string]: string;
+  };
+};
+
+export default async (request: Request, context: NetlifyContext) => {
   try {
     // Extract system name from URL
     const url = new URL(request.url);
@@ -10,8 +18,8 @@ export default async (request: Request, context: Context) => {
 
     // Initialize Supabase client
     const supabase = createClient(
-      Deno.env.get('VITE_SUPABASE_URL') || '',
-      Deno.env.get('VITE_SUPABASE_ANON_KEY') || ''
+      context.env.VITE_SUPABASE_URL,
+      context.env.VITE_SUPABASE_ANON_KEY
     );
 
     // Fetch system data
