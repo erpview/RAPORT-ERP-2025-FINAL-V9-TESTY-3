@@ -439,12 +439,12 @@ export function seoPlugin(): Plugin {
       const outDir = path.join(projectDir, 'dist');
       
       try {
-        // Create dist/seo directory if it doesn't exist
-        await fs.mkdir(path.join(outDir, 'seo'), { recursive: true });
+        // Create dist/public/seo directory if it doesn't exist
+        await fs.mkdir(path.join(outDir, 'public/seo'), { recursive: true });
         
-        // Copy all SEO files to dist/seo
-        await fs.cp(seoDir, path.join(outDir, 'seo'), { recursive: true });
-        console.log('SEO Plugin: Copied all SEO files to dist/seo');
+        // Copy all SEO files to dist/public/seo
+        await fs.cp(seoDir, path.join(outDir, 'public/seo'), { recursive: true });
+        console.log('SEO Plugin: Copied all SEO files to dist/public/seo');
         
         // Read all dictionary terms
         const termsDir = path.join(seoDir, 'slownik-erp');
