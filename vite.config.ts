@@ -20,21 +20,21 @@ async function getSystemSlugs() {
 // List of system slugs for SEO
 const SYSTEM_SLUGS = [
   'abas-erp',
-  'asseco-softlab-erp',
-  'berberis',
+  'softlab-erp',
+  'erp-berberis',
   'comarch-erp-xl',
   'enova365',
-  'impuls-evo',
+  'impuls-evo-1.5',
   'infor-ln',
-  'isof',
+  'isof-erp',
   'merit-erp',
   'microsoft-dynamics-365',
-  'oracle-netsuite',
+  'oracle-fusion-cloud-erp',
   'proalpha-erp',
   'sap-business-one',
-  'sap-s4hana',
+  'sap-s',
   'symfonia-erp',
-  'teta-constellation'
+  'teta-erp'
 ];
 
 // Get all dictionary terms
