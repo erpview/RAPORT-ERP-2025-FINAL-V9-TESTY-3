@@ -188,6 +188,27 @@ const DEFAULT_SEO_TEMPLATES = {
     },
     robots: 'index, follow'
   },
+  'dictionary-term': {
+    id: 'dictionary-term',
+    page_identifier: 'dictionary-term',
+    is_dynamic: true,
+    title_template: '{term} - Definicja w Słowniku ERP | Raport ERP by ERP-VIEW.PL',
+    description_template: '{definition}',
+    keywords_template: '{term}, definicja {term}, {term} erp, znaczenie {term}, system erp {term}',
+    structured_data_template: {
+      "@context": "https://schema.org",
+      "@type": "DefinedTerm",
+      "name": "{term}",
+      "description": "{definition}",
+      "inDefinedTermSet": {
+        "@type": "DefinedTermSet",
+        "name": "Słownik ERP",
+        "url": "https://www.raport-erp.pl/slownik-erp"
+      }
+    },
+    robots: 'index, follow'
+  },
+
   'partner': {
     id: 'partner',
     page_identifier: 'partner',
