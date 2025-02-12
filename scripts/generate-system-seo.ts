@@ -29,9 +29,11 @@ async function generateSystemSEO() {
     for (const system of systems) {
       let systemSlug = system.name.toLowerCase().replace(/ /g, '-');
       // Special case for SAP S/4 HANA
-      if (systemSlug === 'sap-s/4-hana') {
+      if (systemSlug === 'sap-s/4-hana' || systemSlug === 'sap-s/4hana' || systemSlug === 'sap-s/4') {
         systemSlug = 'sap-s-4-hana';
       }
+      // Remove any remaining slashes
+      systemSlug = systemSlug.replace(/\//g, '-');
       const systemDir = path.join(seoDir, systemSlug);
       await fs.mkdir(systemDir, { recursive: true });
 
