@@ -1,6 +1,14 @@
 import { Plugin, HtmlTagDescriptor } from 'vite';
 import fs from 'fs/promises';
 import path from 'path';
+import { TextDecoder } from 'util';
+
+// Helper function to read files with proper UTF-8 encoding
+async function readFileWithEncoding(filePath: string): Promise<string> {
+  const buffer = await fs.readFile(filePath);
+  const decoder = new TextDecoder('utf-8');
+  return decoder.decode(buffer);
+}
 
 interface RouteMap {
   [key: string]: string;
@@ -130,7 +138,13 @@ function extractMetaTags(html: string) {
     } else if (contentMatch) {
       const name = (nameMatch && nameMatch[1]) || (propertyMatch && propertyMatch[1]);
       if (name) {
-        metaTags[name] = contentMatch[1].replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+        // Decode HTML entities and ensure proper UTF-8 encoding
+        let content = contentMatch[1]
+          .replace(/&quot;/g, '"')
+          .replace(/&amp;/g, '&')
+          .replace(/&#x([0-9A-Fa-f]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16)))
+          .replace(/&#([0-9]+);/g, (_, code) => String.fromCharCode(parseInt(code, 10)));
+        metaTags[name] = content;
       }
     }
   });
@@ -248,7 +262,7 @@ export function seoPlugin(): Plugin {
           const seoPath = path.join(process.cwd(), 'public/seo/systemy-erp', systemSlug, 'index.html');
           
           try {
-            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const seoContent = await readFileWithEncoding(seoPath);
             const metaTags = extractMetaTags(seoContent);
             
             // Inject SEO meta tags into the HTML response
@@ -268,7 +282,7 @@ export function seoPlugin(): Plugin {
           const seoPath = path.join(process.cwd(), 'public/seo/kalkulator/index.html');
           
           try {
-            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const seoContent = await readFileWithEncoding(seoPath);
             const metaTags = extractMetaTags(seoContent);
             
             // Inject SEO meta tags into the HTML response
@@ -290,7 +304,7 @@ export function seoPlugin(): Plugin {
             const seoPath = path.join(process.cwd(), 'public/seo/systemy-erp', systemSlug, 'index.html');
             
             try {
-              const seoContent = await fs.readFile(seoPath, 'utf-8');
+              const seoContent = await readFileWithEncoding(seoPath);
               const metaTags = extractMetaTags(seoContent);
               
               // Inject SEO meta tags into the HTML response
@@ -311,7 +325,7 @@ export function seoPlugin(): Plugin {
           const seoPath = path.join(process.cwd(), 'public/seo/firmy-it/index.html');
           
           try {
-            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const seoContent = await readFileWithEncoding(seoPath);
             const metaTags = extractMetaTags(seoContent);
             
             // Inject SEO meta tags into the HTML response
@@ -331,7 +345,7 @@ export function seoPlugin(): Plugin {
           const seoPath = path.join(process.cwd(), 'public/seo/slownik-erp/index.html');
           
           try {
-            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const seoContent = await readFileWithEncoding(seoPath);
             const metaTags = extractMetaTags(seoContent);
             
             // Inject SEO meta tags into the HTML response
@@ -352,7 +366,7 @@ export function seoPlugin(): Plugin {
           const seoPath = path.join(process.cwd(), 'public/seo/slownik-erp', termSlug, 'index.html');
           
           try {
-            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const seoContent = await readFileWithEncoding(seoPath);
             const metaTags = extractMetaTags(seoContent);
             
             // Inject SEO meta tags into the HTML response
@@ -372,7 +386,7 @@ export function seoPlugin(): Plugin {
           const seoPath = path.join(process.cwd(), 'public/seo/systemy-erp/index.html');
           
           try {
-            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const seoContent = await readFileWithEncoding(seoPath);
             const metaTags = extractMetaTags(seoContent);
             
             // Inject SEO meta tags into the HTML response
@@ -392,7 +406,7 @@ export function seoPlugin(): Plugin {
           const seoPath = path.join(process.cwd(), 'public/seo/partnerzy/index.html');
           
           try {
-            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const seoContent = await readFileWithEncoding(seoPath);
             const metaTags = extractMetaTags(seoContent);
             
             // Inject SEO meta tags into the HTML response
@@ -414,7 +428,7 @@ export function seoPlugin(): Plugin {
           const seoPath = path.join(process.cwd(), 'public/seo/partnerzy', partnerSlug, 'index.html');
           
           try {
-            const seoContent = await fs.readFile(seoPath, 'utf-8');
+            const seoContent = await readFileWithEncoding(seoPath);
             const metaTags = extractMetaTags(seoContent);
             
             // Inject SEO meta tags into the HTML response
@@ -552,9 +566,9 @@ export function seoPlugin(): Plugin {
           matches.forEach(tag => {
             if (!tag.includes('viewport') && !tag.includes('charset')) {
               // Parse meta tag attributes
-              const nameMatch = tag.match(/name="([^"]+)"/);
-              const contentMatch = tag.match(/content="([^"]+)"/);
-              const propertyMatch = tag.match(/property="([^"]+)"/);
+              const nameMatch = tag.match(/name="([^"]+)"/),
+                    contentMatch = tag.match(/content="([^"]+)"/),
+                    propertyMatch = tag.match(/property="([^"]+)"/);
               
               if ((nameMatch || propertyMatch) && contentMatch) {
                 metaTags.push({
