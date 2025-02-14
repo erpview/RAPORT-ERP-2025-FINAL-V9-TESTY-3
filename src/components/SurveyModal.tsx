@@ -97,12 +97,12 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
     );
   }
 
-  const handleLogin = () => {
+  const handleLogin = () => { // eslint-disable-line @typescript-eslint/no-unused-vars
     onClose();
     navigate('/admin/login', { state: { from: location.pathname } });
   };
 
-  const handleRegister = () => {
+  const handleRegister = () => { // eslint-disable-line @typescript-eslint/no-unused-vars
     onClose();
     navigate('/admin/register', { state: { from: location.pathname } });
   };
@@ -316,7 +316,7 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
     setFormData(newFormData);
   };
 
-  const clearDraft = async () => {
+  const clearDraft = async () => { // eslint-disable-line @typescript-eslint/no-unused-vars
     if (!user || !systemId) return;
 
     console.log('Clearing draft from database...');
