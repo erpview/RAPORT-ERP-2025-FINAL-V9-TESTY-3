@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSystems } from '../hooks/useSystems';
 import { Loader2, ChevronLeft, Scale, FileText } from 'lucide-react';
+import ReviewAddCard from '../components/ReviewAddCard';
+import NasCard from '../components/NasCard';
 import LikesAndDislikes from '../components/LikesAndDislikes';
 import ReviewCards from '../components/ReviewCards';
 import { Button } from '../components/ui/Button';
@@ -51,6 +53,10 @@ const SystemDetail: React.FC = () => {
   const [reviews, setReviews] = useState<Array<any>>([]);
   const [hasMoreReviews, setHasMoreReviews] = useState(false);
   const [isLoadingReviews, setIsLoadingReviews] = useState(false);
+  const [nasScore, setNasScore] = useState<number>(0);
+  const [nasError, setNasError] = useState<string | null>(null);
+  const [isLoadingNas, setIsLoadingNas] = useState(false);
+  const [nasReviewCount, setNasReviewCount] = useState(0);
   const [isLoadingFeedback, setIsLoadingFeedback] = useState(false);
   const [visibleCount, setVisibleCount] = useState(2);
 
@@ -97,6 +103,7 @@ const SystemDetail: React.FC = () => {
   useEffect(() => {
     if (system?.id && surveyAssignments[system.id]) {
       loadFeedback();
+      loadNasScore();
     }
   }, [system?.id, surveyAssignments[system?.id ?? '']]);
 
@@ -145,11 +152,13 @@ const SystemDetail: React.FC = () => {
         return;
       }
 
-      // Get all survey responses for this system
+      // Get all published survey responses for this system
       const { data: surveyResponses, error } = await supabase
         .from('survey_responses')
         .select('responses')
-        .eq('assignment_id', assignmentId);
+        .eq('assignment_id', assignmentId)
+        .eq('form_id', '65220036-b679-427b-8d75-4300b8634452')
+        .eq('status', 'published');
 
       console.log('Found survey responses:', surveyResponses);
 
@@ -258,7 +267,10 @@ const SystemDetail: React.FC = () => {
   };
 
   const getFieldInfo = (moduleId: string, fieldId: string) => {
-    const module = systemSurveys[system?.id]?.modules.find((m: any) => m.id === moduleId);
+    if (!system?.id || !systemSurveys[system.id]) {
+      return { name: fieldId, orderIndex: 999 };
+    }
+    const module = systemSurveys[system.id].modules.find((m: any) => m.id === moduleId);
     if (!module) return { name: fieldId, orderIndex: 999 };
     const field = module.fields.find((f: any) => f.id === fieldId);
     return {
@@ -268,7 +280,10 @@ const SystemDetail: React.FC = () => {
   };
 
   const getModuleInfo = (moduleId: string) => {
-    const module = systemSurveys[system?.id]?.modules.find((m: any) => m.id === moduleId);
+    if (!system?.id || !systemSurveys[system.id]) {
+      return { name: moduleId, orderIndex: 999 };
+    }
+    const module = systemSurveys[system.id].modules.find((m: any) => m.id === moduleId);
     if (!module) return { name: moduleId, orderIndex: 999 }; // Put unknown modules at the end
     
     // Handle order_index more robustly
@@ -317,17 +332,21 @@ const SystemDetail: React.FC = () => {
     console.log('Loading reviews for system:', system.id, 'with assignment:', assignmentId);
 
     try {
-      // First, get total count of reviews
+      // First, get total count of published reviews
       const { count } = await supabase
         .from('survey_responses')
         .select('id', { count: 'exact', head: true })
-        .eq('assignment_id', assignmentId);
+        .eq('assignment_id', assignmentId)
+        .eq('form_id', '65220036-b679-427b-8d75-4300b8634452')
+        .eq('status', 'published');
 
-      // Get reviews with pagination
+      // Get published reviews with pagination
       const { data: reviewsData, error: reviewsError } = await supabase
         .from('survey_responses')
         .select('*, user_id')
         .eq('assignment_id', assignmentId)
+        .eq('form_id', '65220036-b679-427b-8d75-4300b8634452')
+        .eq('status', 'published')
         .order('created_at', { ascending: false })
         .range(reviews.length, reviews.length + REVIEWS_PER_PAGE - 1);
 
@@ -339,8 +358,15 @@ const SystemDetail: React.FC = () => {
           .select('id, position, company_size, industry')
           .in('id', userIds);
 
+        interface Profile {
+          id: string;
+          position?: string;
+          company_size?: string;
+          industry?: string;
+        }
+
         // Create a map of user_id to profile data
-        const profileMap = (profilesData || []).reduce((acc, profile) => {
+        const profileMap = (profilesData || []).reduce<Record<string, Profile>>((acc, profile) => {
           acc[profile.id] = profile;
           return acc;
         }, {});
@@ -519,11 +545,13 @@ const SystemDetail: React.FC = () => {
     console.log('Loading feedback for system:', system.id, 'with assignment:', assignmentId);
     
     try {
-      // Load likes
+      // Load likes from published responses
       const { data: likesData, error: likesError } = await supabase
         .from('survey_responses')
         .select('responses, created_at')
         .eq('assignment_id', assignmentId)
+        .eq('form_id', '65220036-b679-427b-8d75-4300b8634452')
+        .eq('status', 'published')
         .not('responses->bccaf7e8-5f79-41f9-b338-6e861d94577b', 'is', 'null')
         .order('created_at', { ascending: false });
 
@@ -534,11 +562,13 @@ const SystemDetail: React.FC = () => {
 
       console.log('Loaded likes data:', likesData);
 
-      // Load dislikes
+      // Load dislikes from published responses
       const { data: dislikesData, error: dislikesError } = await supabase
         .from('survey_responses')
         .select('responses, created_at')
         .eq('assignment_id', assignmentId)
+        .eq('form_id', '65220036-b679-427b-8d75-4300b8634452')
+        .eq('status', 'published')
         .not('responses->79913215-7d75-4853-8f70-35ee5f7ecc17', 'is', 'null')
         .order('created_at', { ascending: false});
 
@@ -581,6 +611,55 @@ const SystemDetail: React.FC = () => {
       console.error('Error loading feedback:', error);
     } finally {
       setIsLoadingFeedback(false);
+    }
+  };
+
+  const loadNasScore = async () => {
+    if (!system) return;
+    
+    setIsLoadingNas(true);
+    setNasError(null);
+
+    const assignmentId = surveyAssignments[system.id];
+    if (!assignmentId) {
+      setNasError('No survey assignment found');
+      setIsLoadingNas(false);
+      return;
+    }
+
+    try {
+      const { data: nasResponses, error: nasError } = await supabase
+        .from('survey_responses')
+        .select('responses')
+        .eq('assignment_id', assignmentId)
+        .eq('form_id', '65220036-b679-427b-8d75-4300b8634452')
+        .eq('status', 'published')
+        .not('responses->dddcd6a3-0d6b-483c-a4eb-e26c86fa7281->86422dc6-d0c6-4117-ac62-bd32db087477', 'is', null);
+
+      if (nasError) {
+        console.error('Error loading NAS data:', nasError);
+        setNasError('Failed to load NAS score');
+        return;
+      }
+
+      if (!nasResponses || nasResponses.length === 0) {
+        setNasScore(0);
+        setNasReviewCount(0);
+        return;
+      }
+
+      const sum = nasResponses.reduce((acc, response) => {
+        const value = Number(response.responses?.['dddcd6a3-0d6b-483c-a4eb-e26c86fa7281']?.['86422dc6-d0c6-4117-ac62-bd32db087477']) || 0;
+        return acc + value;
+      }, 0);
+
+      setNasScore(sum / nasResponses.length);
+      setNasReviewCount(nasResponses.length);
+    } catch (error) {
+      console.error('Error in NAS calculation:', error);
+      setNasError('Failed to calculate NAS score');
+    } finally {
+      setIsLoadingNas(false);
     }
   };
 
@@ -828,24 +907,38 @@ const SystemDetail: React.FC = () => {
         </div>
       ) : (
         <div className="container mx-auto px-8 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <RatingCard
-              averageRating={systemRating.averageRating}
-              totalReviews={systemRating.totalReviews}
-              distribution={systemRating.distribution}
-            />
-            <CategoryRatings ratings={categoryRatings} />
-          </div>
-          <LikesAndDislikes
-            likes={likes.slice(0, visibleCount)}
-            dislikes={dislikes.slice(0, visibleCount)}
-            onLoadMore={handleLoadMore}
-          />
-          <ReviewCards 
-            reviews={reviews} 
-            onLoadMore={loadReviews} 
-            hasMore={hasMoreReviews}
-          />
+          {user ? (
+            <>
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <RatingCard
+                    averageRating={systemRating.averageRating}
+                    totalReviews={systemRating.totalReviews}
+                    distribution={systemRating.distribution}
+                  />
+                  <CategoryRatings ratings={categoryRatings} />
+                </div>
+                <NasCard
+                  nasScore={nasScore}
+                  totalReviews={nasReviewCount}
+                  isLoading={isLoadingNas}
+                  error={nasError}
+                />
+              </div>
+              <LikesAndDislikes
+                likes={likes.slice(0, visibleCount)}
+                dislikes={dislikes.slice(0, visibleCount)}
+                onLoadMore={handleLoadMore}
+              />
+              <ReviewCards 
+                reviews={reviews} 
+                onLoadMore={loadReviews} 
+                hasMore={hasMoreReviews}
+              />
+            </>
+          ) : (
+            <ReviewAddCard />
+          )}
         </div>
       )}
 
