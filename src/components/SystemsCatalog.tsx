@@ -3,6 +3,7 @@ import { Search, Building2, Globe, Filter, ChevronDown, X, Loader2, Scale, FileT
 import { useSystems } from '../hooks/useSystems';
 import { useComparison } from '../context/ComparisonContext';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { System } from '../types/system';
 import { MultiSelectValue } from './ui/MultiSelectValue';
 import { normalizeMultiselectValue } from '../utils/fieldUtils';
@@ -11,6 +12,7 @@ import { adminSupabase as supabase } from '../config/supabase';
 import { SurveyModal } from './SurveyModal';
 
 const SystemsCatalog: React.FC = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSize, setSelectedSize] = useState<string[]>([]);
   const [selectedVendor, setSelectedVendor] = useState<string>('');
@@ -236,9 +238,23 @@ const SystemsCatalog: React.FC = () => {
           const hasSurvey = systemSurveys[system.id];
           
           return (
-            <div key={system.id} className="sf-card p-6 space-y-4 hover:shadow-md transition-all duration-200">
-              <div className="flex justify-between items-start">
-                <div>
+            <div 
+              key={system.id} 
+              className="sf-card p-6 space-y-4 hover:shadow-md transition-all duration-200 cursor-pointer relative"
+              onClick={(e) => {
+                // Don't navigate if clicked on buttons or their children
+                const target = e.target as HTMLElement;
+                if (target.closest('button') || target.closest('.sf-button')) {
+                  return;
+                }
+                // Navigate if clicked on the card or its non-interactive content
+                if (target === e.currentTarget || target.closest('.card-content')) {
+                  navigate(`/systemy-erp/${encodeURIComponent(system.name.toLowerCase().replace(/ /g, '-'))}`);
+                }
+              }}
+            >
+              <div className="flex justify-between items-start card-content">
+                <div className="card-content">
                   <Link 
                     to={`/systemy-erp/${encodeURIComponent(system.name.toLowerCase().replace(/ /g, '-'))}`}
                     className="text-[24px] font-semibold text-[#1d1d1f] hover:text-[#007AFF] transition-colors"
