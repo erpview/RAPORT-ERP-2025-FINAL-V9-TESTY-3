@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import { useAuth } from '../context/AuthContext';
 import { Helmet } from 'react-helmet-async';
-import { Layers } from 'lucide-react';
+import { Eye, EyeOff, Settings2, Layers, Clock } from 'lucide-react';
 
 interface FormattedField {
   field_name: string;
@@ -25,6 +25,7 @@ interface SurveyResponse {
   form_id: string;
   user_id: string;
   assignment_id: string;
+  status: 'pending' | 'published' | 'unpublished';
   form: {
     name: string;
   };
@@ -84,6 +85,7 @@ const AdminSurveyResponses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [expandedResponses, setExpandedResponses] = useState<string[]>([]);
+  const [statusUpdating, setStatusUpdating] = useState<string | null>(null);
   const { user } = useAuth();
 
   const toggleResponse = (responseId: string) => {
@@ -262,6 +264,7 @@ const AdminSurveyResponses = () => {
             form_id: response.form_id,
             user_id: response.user_id,
             assignment_id: response.assignment_id,
+            status: response.status || 'pending',
             form: {
               name: form?.name || 'Nieznany formularz'
             },
@@ -297,6 +300,66 @@ const AdminSurveyResponses = () => {
   const getUserName = (user: any) => {
     if (!user) return 'Nieznany użytkownik';
     return user.full_name || user.email || 'Nieznany użytkownik';
+  };
+
+  const getStatusBadgeStyle = (status: string) => {
+    switch (status) {
+      case 'published':
+        return 'bg-[#34C759] text-white';
+      case 'unpublished':
+        return 'bg-[#FF3B30] text-white';
+      default:
+        return 'bg-[#FF9500] text-white';
+    }
+  };
+
+  const getStatusButtonStyle = (status: string) => {
+    switch (status) {
+      case 'published':
+        return 'bg-[#FF9500] text-white hover:bg-[#FF9500]/90';
+      case 'unpublished':
+        return 'bg-[#FF3B30] text-white hover:bg-[#FF3B30]/90';
+      default:
+        return 'bg-[#34C759] text-white hover:bg-[#34C759]/90';
+    }
+  };
+
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case 'published':
+        return 'Opublikowany';
+      case 'unpublished':
+        return 'Nieopublikowany';
+      default:
+        return 'Oczekujący';
+    }
+  };
+
+  const handleStatusChange = async (responseId: string, newStatus: 'pending' | 'published' | 'unpublished') => {
+    try {
+      setStatusUpdating(responseId);
+      
+      const { error } = await supabase
+        .from('survey_responses')
+        .update({ status: newStatus })
+        .eq('id', responseId);
+
+      if (error) throw error;
+
+      // Update local state
+      setResponses(prev =>
+        prev.map(response =>
+          response.id === responseId
+            ? { ...response, status: newStatus }
+            : response
+        )
+      );
+    } catch (err) {
+      console.error('Error updating status:', err);
+      setError('Wystąpił błąd podczas aktualizacji statusu');
+    } finally {
+      setStatusUpdating(null);
+    }
   };
 
   return (
@@ -335,10 +398,22 @@ const AdminSurveyResponses = () => {
                   onClick={() => toggleResponse(response.id)}
                 >
                   <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="text-[19px] font-semibold text-[#1d1d1f] mb-1">
-                        {response.form.name}
-                      </h3>
+                    <div className="flex-grow">
+                      <div className="flex justify-between items-center mb-2">
+                        <h3 className="text-[19px] font-semibold text-[#1d1d1f]">
+                          {response.form.name}
+                        </h3>
+                        <span className={`sf-button ${getStatusBadgeStyle(response.status)} flex items-center text-[15px] py-1`}>
+                          {response.status === 'published' ? (
+                            <><Eye className="w-4 h-4 mr-2" />Opublikowany</>
+                          ) : response.status === 'unpublished' ? (
+                            <><EyeOff className="w-4 h-4 mr-2" />Nieopublikowany</>
+                          ) : (
+                            <><Clock className="w-4 h-4 mr-2" />Oczekujący</>
+                          )}
+                        </span>
+                      </div>
+
                       <p className="text-[15px] text-[#86868b]">
                         System: {response.assignment.system.name} ({response.assignment.system.vendor})
                       </p>
@@ -366,9 +441,34 @@ const AdminSurveyResponses = () => {
                           </span>
                         </p>
                       )}
+                      <div className="flex items-center justify-end gap-2 mt-4 border-t pt-4">
+                        {statusUpdating === response.id ? (
+                          <div className="flex items-center gap-2 text-[#86868b]">
+                            <div className="spinner" />
+                            <span className="text-[15px]">Aktualizacja...</span>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => handleStatusChange(
+                              response.id,
+                              response.status === 'published' ? 'unpublished' :
+                              response.status === 'unpublished' ? 'pending' : 'published'
+                            )}
+                            className={`sf-button ${getStatusButtonStyle(response.status)}`}
+                          >
+                            {response.status === 'published' ? (
+                              <><EyeOff className="w-5 h-5 mr-2" />Ukryj</>
+                            ) : response.status === 'unpublished' ? (
+                              <><Clock className="w-5 h-5 mr-2" />Oczekujący</>
+                            ) : (
+                              <><Eye className="w-5 h-5 mr-2" />Opublikuj</>
+                            )}
+                          </button>
+                        )}
+                      </div>
                     </div>
                     <button 
-                      className="text-gray-500 hover:text-gray-700 transition-colors"
+                      className="text-gray-500 hover:text-gray-700 transition-colors ml-6"
                       aria-label={expandedResponses.includes(response.id) ? "Zwiń" : "Rozwiń"}
                     >
                       <svg 
