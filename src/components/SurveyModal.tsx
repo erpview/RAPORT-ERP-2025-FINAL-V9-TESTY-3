@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { LogIn, UserCog } from 'lucide-react';
 import debounce from 'lodash.debounce';
 import { toast } from 'react-hot-toast';
+import { LinkedInAuthButton } from './LinkedInAuthButton';
 
 interface SurveyField {
   id: string;
@@ -46,7 +47,10 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
   surveyForm,
   assignmentId
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { user, isAdmin, isEditor } = useAuth();
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<Record<string, any>>({});
@@ -54,25 +58,85 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
   const [existingResponse, setExistingResponse] = useState<{ created_at: string } | null>(null);
   const [systemId, setSystemId] = useState<string | null>(null);
   const [savingDraft, setSavingDraft] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [isLinkedInUser, setIsLinkedInUser] = useState(false);
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
 
-  const canSubmitSurvey = user && (isAdmin || (!isAdmin && !isEditor));
+  // Check if user is LinkedIn user
+  useEffect(() => {
+    const checkLinkedInStatus = async () => {
+      if (!user) return;
 
-  if (!canSubmitSurvey) {
-    return (
-      <Modal isOpen={isOpen} onClose={onClose} size="md">
-        <div className="p-8 text-center">
-          <div className="mb-8">
-            <div className="mx-auto w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4">
-              <UserCog className="w-8 h-8 text-blue-600" />
-            </div>
-            <p className="text-gray-700 text-lg">
-              Zaloguj się lub zarejestruj, aby dokonać oceny.
-            </p>
-          </div>
-          
-          <div className="space-y-3">
+      try {
+        const { data: userData, error: userError } = await supabase
+          .from('user_management')
+          .select('auth_provider')
+          .eq('user_id', user.id)
+          .single();
+
+        if (userError) throw userError;
+
+        // Set LinkedIn user status
+        setIsLinkedInUser(userData?.auth_provider === 'linkedin_oidc');
+      } catch (error) {
+        console.error('Error checking LinkedIn status:', error);
+      }
+    };
+
+    checkLinkedInStatus();
+  }, [user]);
+
+
+
+  // Check for existing survey response
+  useEffect(() => {
+    const checkExistingResponse = async () => {
+      if (!user || !assignmentId) return;
+
+      try {
+        const { data, error } = await supabase
+          .from('survey_responses')
+          .select('created_at')
+          .eq('user_id', user.id)
+          .eq('assignment_id', assignmentId)
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (error) {
+          console.error('Error checking existing response:', error);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          setExistingResponse(data[0]);
+        }
+      } catch (error) {
+        console.error('Error checking existing response:', error);
+      }
+    };
+
+    checkExistingResponse();
+  }, [user, assignmentId]);
+
+  const renderUnauthorizedContent = () => (
+    <div className="p-8 text-center">
+      <div className="mb-8">
+        <div className="mx-auto w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4">
+          <UserCog className="w-8 h-8 text-blue-600" />
+        </div>
+        {!user ? (
+          <p className="text-gray-700 text-lg">
+            Zaloguj się lub zarejestruj, aby dokonać oceny.
+          </p>
+        ) : (
+          <p className="text-gray-700 text-lg">
+            Nie masz uprawnień do oceny systemu.
+          </p>
+        )}
+      </div>
+      
+      <div className="space-y-3">
+        {!user && (
+          <>
             <button
               onClick={() => navigate('/login', { state: { from: location.pathname } })}
               className="w-full flex items-center justify-center gap-3 px-6 py-2.5 bg-[#2c3b67] text-white rounded-lg hover:bg-[#2c3b67]/90 transition-colors font-medium text-base"
@@ -87,25 +151,60 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
               <UserCog className="w-5 h-5" />
               Rejestracja
             </button>
-          </div>
+            <div className="relative my-2">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">lub</span>
+              </div>
+            </div>
+            <LinkedInAuthButton
+              onSuccess={onClose}
+              className=""
+            />
+          </>
+        )}
+      </div>
 
-          <p className="mt-6 text-sm text-gray-500">
-            Twoje dane są bezpieczne i nie będą udostępniane osobom trzecim.
-          </p>
-        </div>
-      </Modal>
-    );
-  }
+      <p className="mt-6 text-sm text-gray-500">
+        Twoje dane są bezpieczne i nie będą udostępniane osobom trzecim.
+      </p>
+    </div>
+  );
 
-  const handleLogin = () => { // eslint-disable-line @typescript-eslint/no-unused-vars
-    onClose();
-    navigate('/admin/login', { state: { from: location.pathname } });
-  };
+  // Allow all users (including LinkedIn) to submit system reviews
+  const canSubmitSurvey = user && (isAdmin || (!isAdmin && !isEditor));
 
-  const handleRegister = () => { // eslint-disable-line @typescript-eslint/no-unused-vars
-    onClose();
-    navigate('/admin/register', { state: { from: location.pathname } });
-  };
+  // Remove unused handlers since we handle navigation directly in the buttons
+  useEffect(() => {
+    const checkExistingResponse = async () => {
+      if (!user || !assignmentId) return;
+
+      try {
+        const { data, error } = await supabase
+          .from('survey_responses')
+          .select('created_at')
+          .eq('user_id', user.id)
+          .eq('assignment_id', assignmentId)
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (error) {
+          console.error('Error checking existing response:', error);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          setExistingResponse(data[0]);
+        }
+      } catch (error) {
+        console.error('Error checking existing response:', error);
+      }
+    };
+
+    checkExistingResponse();
+  }, [user, assignmentId]);
 
   useEffect(() => {
     const loadSurveyData = async () => {
@@ -248,47 +347,80 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
   }, [assignmentId, user]);
 
   const debouncedSaveDraft = useCallback(
-    debounce(async (data: Record<string, any>, userId: string, sysId: string) => {
-      if (!userId || !sysId) return;
-
-      // First check if user has submitted in past 12 months
-      const { data: existingResponse } = await supabase
-        .from('survey_responses')
-        .select('created_at')
-        .eq('user_id', userId)
-        .eq('system_id', sysId)
-        .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
-
-      if (existingResponse) {
-        const lastSubmissionDate = new Date(existingResponse.created_at);
-        const twelveMonthsAgo = new Date();
-        twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12);
-
-        if (lastSubmissionDate > twelveMonthsAgo) {
-          // User has submitted within last 12 months, don't save draft
-          console.log('Not saving draft - user has submitted within last 12 months');
-          setSavingDraft(false);
-          return;
-        }
-      }
+    debounce(async (data: Record<string, any>, userId: string, assignId: string) => {
+      if (!userId || !assignId) return;
 
       try {
         setSavingDraft(true);
-        const { error } = await supabase
+
+        // Get the system_id from the assignment
+        const { data: assignmentData, error: assignmentError } = await supabase
+          .from('survey_assignments')
+          .select('target_id')
+          .eq('id', assignId)
+          .single();
+
+        if (assignmentError) {
+          console.error('Error getting assignment:', assignmentError);
+          setSavingDraft(false);
+          return;
+        }
+
+        if (!assignmentData?.target_id) {
+          console.error('No system found for assignment');
+          setSavingDraft(false);
+          return;
+        }
+
+        // First check if user has submitted in past 12 months
+        const { data: existingResponse, error: responseError } = await supabase
+          .from('survey_responses')
+          .select('created_at')
+          .eq('user_id', userId)
+          .eq('assignment_id', assignId)
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (responseError) {
+          console.error('Error checking existing response:', responseError);
+          return;
+        }
+
+        if (existingResponse && existingResponse.length > 0) {
+          const lastSubmissionDate = new Date(existingResponse[0].created_at);
+          const twelveMonthsAgo = new Date();
+          twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12);
+
+          if (lastSubmissionDate > twelveMonthsAgo) {
+            // User has submitted within last 12 months, don't save draft
+            console.log('Not saving draft - user has submitted within last 12 months');
+            setSavingDraft(false);
+            return;
+          }
+        }
+
+        // Check if there are any changes to save
+        if (Object.keys(data).length === 0) {
+          console.log('No changes to save');
+          setSavingDraft(false);
+          return;
+        }
+
+        const { error: draftError } = await supabase
           .from('survey_drafts')
           .upsert({
             user_id: userId,
-            system_id: sysId,
-            form_data: data
+            system_id: assignmentData.target_id,
+            form_data: data,
+            updated_at: new Date().toISOString()
           }, {
             onConflict: 'user_id,system_id'
           });
 
-        if (error) throw error;
+        if (draftError) throw draftError;
       } catch (error) {
         console.error('Error saving draft:', error);
+        toast.error('Wystąpił błąd podczas zapisywania wersji roboczej');
       } finally {
         setSavingDraft(false);
       }
@@ -297,11 +429,11 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
   );
 
   useEffect(() => {
-    if (user && systemId && Object.keys(formData).length > 0) {
-      console.log('Saving draft for system:', systemId);
-      debouncedSaveDraft(formData, user.id, systemId);
+    if (user && assignmentId && canSubmitSurvey) {
+      console.log('Saving draft for assignment:', assignmentId);
+      debouncedSaveDraft(formData, user.id, assignmentId);
     }
-  }, [formData, user, systemId]);
+  }, [formData, user, assignmentId, debouncedSaveDraft, canSubmitSurvey]);
 
   const handleFieldChange = (moduleId: string, fieldId: string, value: any) => {
     console.log('Field changed:', { moduleId, fieldId, value });
@@ -317,14 +449,14 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
   };
 
   const clearDraft = async () => { // eslint-disable-line @typescript-eslint/no-unused-vars
-    if (!user || !systemId) return;
+    if (!user || !assignmentId) return;
 
     console.log('Clearing draft from database...');
     const { error } = await supabase
       .from('survey_drafts')
       .delete()
       .eq('user_id', user.id)
-      .eq('system_id', systemId);
+      .eq('assignment_id', assignmentId);
 
     if (error) {
       console.error('Error clearing draft:', error);
@@ -343,7 +475,30 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
     return lastSubmissionDate < twelveMonthsAgo;
   };
 
-  const handleSubmit = async () => {
+  const validateForm = (form: SurveyForm) => {
+    const missingFields: string[] = [];
+    form.modules.forEach(module => {
+      module.fields.forEach(field => {
+        if (field.is_required) {
+          const moduleData = formData[module.id] || {};
+          const fieldValue = moduleData[field.id];
+          // Check for empty values, whitespace, and special cases
+          if (
+            !fieldValue ||
+            (typeof fieldValue === 'string' && fieldValue.trim() === '') ||
+            (Array.isArray(fieldValue) && fieldValue.length === 0) ||
+            fieldValue === null
+          ) {
+            missingFields.push(`${module.name} - ${field.label}`);
+          }
+        }
+      });
+    });
+    return missingFields;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
       if (!surveyForm) {
         setError('Nie można znaleźć formularza ankiety.');
@@ -359,22 +514,9 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
         return;
       }
 
-      let hasErrors = false;
-      const missingFields: string[] = [];
-
-      surveyForm.modules.forEach(module => {
-        module.fields.forEach(field => {
-          if (field.is_required) {
-            const moduleData = formData[module.id] || {};
-            if (!moduleData[field.id]) {
-              hasErrors = true;
-              missingFields.push(`${module.name} - ${field.label}`);
-            }
-          }
-        });
-      });
-
-      if (hasErrors) {
+      // Validate required fields
+      const missingFields = validateForm(surveyForm);
+      if (missingFields.length > 0) {
         setError(`Proszę wypełnić wszystkie wymagane pola: ${missingFields.join(', ')}`);
         return;
       }
@@ -689,11 +831,14 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
   return (
     <Modal 
       isOpen={isOpen} 
-      onClose={onClose} 
-      size="xl"
-      className="w-full"
+      onClose={onClose}
+      size={!canSubmitSurvey ? "md" : "xl"}
+      className={canSubmitSurvey ? "w-full" : undefined}
     >
-      <div className="flex flex-col h-full">
+      {!canSubmitSurvey ? (
+        renderUnauthorizedContent()
+      ) : (
+        <form onSubmit={handleSubmit} className="flex flex-col h-full">
         <div className="flex-1 p-6 overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-6">{surveyData?.name}</h2>
           {error && (
@@ -728,20 +873,22 @@ export const SurveyModal: React.FC<SurveyModalProps> = ({
         
         <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4 flex justify-end gap-3 rounded-b-2xl">
           <button
+            type="button"
             onClick={onClose}
             className="flex items-center justify-center gap-3 px-6 py-2.5 bg-[#F5F5F7] text-[#1d1d1f] rounded-lg hover:bg-[#E8E8ED] transition-colors font-medium text-base min-w-[120px]"
           >
             Anuluj
           </button>
           <button
-            onClick={handleSubmit}
+            type="submit"
             disabled={isSubmitDisabled}
             className="flex items-center justify-center gap-3 px-6 py-2.5 bg-[#2c3b67] text-white rounded-lg hover:bg-[#2c3b67]/90 transition-colors font-medium text-base min-w-[120px]"
           >
             {submitButtonText}
           </button>
         </div>
-      </div>
+        </form>
+      )}
     </Modal>
   );
 };

@@ -40,9 +40,69 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
   const [highlightDifferences, setHighlightDifferences] = useState(false);
 
   // Check if user has full access to comparison
-  const hasFullAccess = isAdmin || 
-                       (!isEditor && user) || // regular user (role: user)
-                       (isEditor && (canViewUsers || canViewSystems)); // editor with at least one permission
+  const [hasFullAccess, setHasFullAccess] = useState(false);
+  const [isLinkedInUser, setIsLinkedInUser] = useState(false);
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
+
+  useEffect(() => {
+    const checkAccess = async () => {
+      if (isAdmin || (isEditor && (canViewUsers || canViewSystems))) {
+        setHasFullAccess(true);
+        return;
+      }
+
+      if (!user) {
+        setHasFullAccess(false);
+        return;
+      }
+
+      try {
+        // Check if user is LinkedIn user and if their profile is complete
+        const { data: userData, error: userError } = await supabase
+          .from('user_management')
+          .select('auth_provider')
+          .eq('user_id', user.id)
+          .single();
+
+        if (userError) throw userError;
+
+        const isLinkedIn = userData.auth_provider === 'linkedin_oidc';
+        setIsLinkedInUser(isLinkedIn);
+
+        if (isLinkedIn) {
+          // For LinkedIn users, check if profile is complete
+          const { data: profile, error: profileError } = await supabase
+            .from('profiles')
+            .select('company_name, phone_number, nip, position, industry, company_size')
+            .eq('id', user.id)
+            .single();
+
+          if (profileError) throw profileError;
+
+          const profileComplete = Boolean(
+            profile.company_name &&
+            profile.phone_number &&
+            profile.nip &&
+            profile.position &&
+            profile.industry &&
+            profile.company_size
+          );
+          setIsProfileComplete(profileComplete);
+          setHasFullAccess(profileComplete);
+        } else {
+          // Regular users have full access
+          setHasFullAccess(true);
+          setIsProfileComplete(true);
+        }
+      } catch (error) {
+        console.error('Error checking user access:', error);
+        setHasFullAccess(false);
+        setIsProfileComplete(false);
+      }
+    };
+
+    checkAccess();
+  }, [isAdmin, isEditor, canViewUsers, canViewSystems, user]);
 
   useEffect(() => {
     if (isOpen) {
@@ -378,10 +438,13 @@ export default function ComparisonModal({ systems, isOpen, onClose }: Comparison
             <div className="mt-8 p-6 bg-[#F5F5F7] rounded-lg">
               <div className="flex flex-col items-center text-center space-y-4">
                 <p className="text-lg text-[#1d1d1f]">
-                  {user ? 
-                    "Nie masz wystarczających uprawnień, aby zobaczyć pełną treść raportu. Skontaktuj się z administratorem." :
+                  {!user ? (
                     "Zarejestruj się lub zaloguj, aby zobaczyć pełną treść raportu."
-                  }
+                  ) : isLinkedInUser && !isProfileComplete ? (
+                    "Uzupełnij wszystkie dane w profilu, aby uzyskać dostęp do pełnego raportu."
+                  ) : (
+                    "Nie masz wystarczających uprawnień, aby zobaczyć pełną treść raportu. Skontaktuj się z administratorem."
+                  )}
                 </p>
                 {!user && (
                   <div className="flex gap-4">

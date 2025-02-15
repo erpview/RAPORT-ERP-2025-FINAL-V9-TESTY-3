@@ -3,6 +3,7 @@ import { X, Star } from 'lucide-react';
 import { Modal } from './ui/Modal';
 import { StarRating } from './ReviewCards';
 import { cn } from '../utils/cn';
+import { LinkedInAuthButton } from './LinkedInAuthButton';
 
 interface ReviewPopupModalProps {
   isOpen: boolean;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Building2, UserCircle, Briefcase, Phone } from 'lucide-react';
 import { supabase } from '../config/supabase';
 import toast from 'react-hot-toast';
@@ -7,6 +7,7 @@ import { COMPANY_SIZE_OPTIONS } from '../constants/company';
 import { useAuth } from '../context/AuthContext';
 import { createPortal } from 'react-dom';
 import { validateNIP, validatePolishPhone } from '../utils/validators';
+import { useOnboarding } from '../context/OnboardingContext';
 
 interface UserProfileModalProps {
   isOpen: boolean;
@@ -18,6 +19,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
   onClose,
 }) => {
   const { user } = useAuth();
+  const { checkOnboardingStatus } = useOnboarding();
+  const [isLinkedInUser, setIsLinkedInUser] = useState(false);
   const [formData, setFormData] = useState({
     company_name: '',
     full_name: '',
@@ -26,35 +29,58 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
     industry: '',
     position: '',
     company_size: '',
+    czy_korzysta_z_erp: null,
+    czy_zamierza_wdrozyc_erp: null,
+    czy_dokonal_wyboru_erp: null,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Load user profile data
-  React.useEffect(() => {
-    const loadProfile = async () => {
+  // Load user profile and check if LinkedIn user
+  useEffect(() => {
+    const loadProfileAndCheckUser = async () => {
       if (!user) return;
       
       try {
+        // Check if LinkedIn user
+        const { data: userData, error: userError } = await supabase
+          .from('user_management')
+          .select('auth_provider')
+          .eq('user_id', user.id)
+          .single();
+
+        if (userError) throw userError;
+        setIsLinkedInUser(userData.auth_provider === 'linkedin_oidc');
+
+        // Load profile data
+        console.log('Loading profile data for user:', user.id);
         const { data, error } = await supabase
           .from('profiles')
           .select('*')
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
+        
+        console.log('Profile data loaded:', data);
+        console.log('Profile error:', error);
 
         if (error && error.code !== 'PGRST116') { // Only show error if it's not a "not found" error
           throw error;
         }
 
+        // If data exists, use it. Otherwise, keep the default empty values
         if (data) {
+          console.log('Setting form data with:', data);
           setFormData({
-            company_name: data.company_name || '',
-            full_name: data.full_name || '',
-            nip: data.nip || '',
-            phone_number: data.phone_number || '',
-            industry: data.industry || '',
-            position: data.position || '',
-            company_size: data.company_size || '',
+            company_name: data.company_name === null ? '' : data.company_name,
+            full_name: data.full_name === null ? '' : data.full_name,
+            nip: data.nip === null ? '' : data.nip,
+            phone_number: data.phone_number === null ? '' : data.phone_number,
+            industry: data.industry === null ? '' : data.industry,
+            position: data.position === null ? '' : data.position,
+            company_size: data.company_size === null ? '' : data.company_size,
+            czy_korzysta_z_erp: data.czy_korzysta_z_erp,
+            czy_zamierza_wdrozyc_erp: data.czy_zamierza_wdrozyc_erp,
+            czy_dokonal_wyboru_erp: data.czy_dokonal_wyboru_erp,
           });
         }
       } catch (error) {
@@ -63,7 +89,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
       }
     };
 
-    loadProfile();
+    loadProfileAndCheckUser();
   }, [user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -71,16 +97,25 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
     if (!user) return;
 
     setIsSubmitting(true);
+    setErrors({});
 
     try {
       // Clean data before sending
-      const cleanNIP = formData.nip.replace(/[^0-9]/g, '');
+      const cleanNIP = formData.nip.replace(/[^0-9-]/g, '').replace(/-/g, '');
       const cleanPhone = formData.phone_number.replace(/[^0-9]/g, '');
 
       // Validate NIP
-      if (cleanNIP && !validateNIP(cleanNIP)) {
-        setErrors(prev => ({ ...prev, nip: 'Nieprawidłowy numer NIP' }));
-        return;
+      if (cleanNIP) {
+        if (cleanNIP.length !== 10) {
+          setErrors(prev => ({ ...prev, nip: 'NIP musi mieć dokładnie 10 cyfr' }));
+          setIsSubmitting(false);
+          return;
+        }
+        if (!validateNIP(cleanNIP)) {
+          setErrors(prev => ({ ...prev, nip: 'Nieprawidłowy numer NIP' }));
+          setIsSubmitting(false);
+          return;
+        }
       }
 
       // Validate phone number
@@ -89,20 +124,55 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
         return;
       }
 
+      console.log('Submitting form data:', formData);
+      
+      // Prepare update data with current values
+      const updateData: Record<string, any> = {
+        // Text fields - preserve existing values if not changed
+        company_name: formData.company_name.trim() || null,
+        full_name: formData.full_name.trim() || null,
+        nip: cleanNIP || null,
+        phone_number: cleanPhone || null,
+        industry: formData.industry.trim() || null,
+        position: formData.position.trim() || null,
+        company_size: formData.company_size.trim() || null,
+        
+        // Only include ERP fields if they are not null
+        ...(formData.czy_korzysta_z_erp !== null && { czy_korzysta_z_erp: formData.czy_korzysta_z_erp }),
+        ...(formData.czy_zamierza_wdrozyc_erp !== null && { czy_zamierza_wdrozyc_erp: formData.czy_zamierza_wdrozyc_erp }),
+        ...(formData.czy_dokonal_wyboru_erp !== null && { czy_dokonal_wyboru_erp: formData.czy_dokonal_wyboru_erp })
+      };
+      
+      console.log('Updating profile with:', updateData);
+
       const { error: profileError } = await supabase
         .from('profiles')
-        .update({
-          company_name: formData.company_name.trim() || null,
-          full_name: formData.full_name.trim() || null,
-          nip: cleanNIP || null,
-          phone_number: cleanPhone || null,
-          industry: formData.industry.trim() || null,
-          position: formData.position.trim() || null,
-          company_size: formData.company_size.trim() || null,
-        })
+        .update(updateData)
         .eq('id', user.id);
 
       if (profileError) throw profileError;
+
+      // Check if profile is complete for LinkedIn users
+      const isProfileComplete = Boolean(
+        formData.company_name &&
+        formData.phone_number &&
+        cleanNIP &&
+        formData.position &&
+        formData.industry &&
+        formData.company_size
+      );
+
+      // For LinkedIn users with complete profiles, check if survey is needed
+      if (isLinkedInUser && isProfileComplete) {
+        toast.success('Profil został zaktualizowany');
+        onClose();
+        
+        // Trigger onboarding check after a short delay to ensure profile update is saved
+        setTimeout(() => {
+          checkOnboardingStatus();
+        }, 500);
+        return;
+      }
 
       toast.success('Profil został zaktualizowany');
       onClose();
@@ -120,6 +190,17 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
     
     // Limit to exactly 9 digits
     return digits.slice(0, 9);
+  };
+
+  const formatNIP = (nip: string): string => {
+    // Remove any non-digit characters and limit to 10 digits
+    const cleanNIP = nip.replace(/[^0-9]/g, '').slice(0, 10);
+    
+    // Format with dashes
+    if (cleanNIP.length <= 3) return cleanNIP;
+    if (cleanNIP.length <= 6) return `${cleanNIP.slice(0, 3)}-${cleanNIP.slice(3)}`;
+    if (cleanNIP.length <= 8) return `${cleanNIP.slice(0, 3)}-${cleanNIP.slice(3, 6)}-${cleanNIP.slice(6)}`;
+    return `${cleanNIP.slice(0, 3)}-${cleanNIP.slice(3, 6)}-${cleanNIP.slice(6, 8)}-${cleanNIP.slice(8)}`;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -140,7 +221,10 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
         setErrors(prev => ({ ...prev, phone_number: '' }));
       }
     } else if (name === 'nip') {
-      const cleanNIP = value.replace(/[^0-9]/g, '');
+      // Remove any non-digit characters and limit to 10 digits
+      const cleanNIP = value.replace(/[^0-9-]/g, '').replace(/-/g, '').slice(0, 10);
+      formattedValue = formatNIP(cleanNIP);
+      
       if (cleanNIP.length === 10) {
         if (!validateNIP(cleanNIP)) {
           setErrors(prev => ({ ...prev, nip: 'Nieprawidłowy numer NIP' }));

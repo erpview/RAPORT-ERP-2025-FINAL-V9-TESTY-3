@@ -13,6 +13,8 @@ interface AuthContextType {
   canViewCompanies: boolean;
   loading: boolean;
   showSurvey: boolean;
+  isLinkedInUser: boolean;
+  isProfileComplete: boolean;
   signIn: (email: string, password: string) => Promise<{ data?: any; error?: any }>;
   signOut: (silent?: boolean) => Promise<void>;
   closeSurvey: () => void;
@@ -27,6 +29,8 @@ const AuthContext = createContext<AuthContextType>({
   canViewCompanies: false,
   loading: true,
   showSurvey: false,
+  isLinkedInUser: false,
+  isProfileComplete: false,
   signIn: async () => ({ data: null, error: new Error('AuthContext not initialized') }),
   signOut: async () => {},
   closeSurvey: () => {},
@@ -41,7 +45,77 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [canViewCompanies, setCanViewCompanies] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showSurvey, setShowSurvey] = useState(false);
+  const [isLinkedInUser, setIsLinkedInUser] = useState(false);
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
   const navigate = useNavigate();
+
+  const handleLinkedInUser = async (user: User) => {
+    try {
+      console.log('Handling LinkedIn user:', user);
+      
+      // Check if user exists in user_management
+      const { data: existingUser, error: userError } = await supabase
+        .from('user_management')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+
+      if (userError && userError.code !== 'PGRST116') {
+        console.error('Error checking user existence:', userError);
+        return;
+      }
+
+      if (!existingUser) {
+        console.log('Creating new user in user_management...');
+        
+        // Create new user_management entry
+        const { error: insertError } = await supabase.from('user_management').insert({
+          user_id: user.id,
+          role: 'user',
+          is_active: true,
+          status: 'active',
+          auth_provider: 'linkedin_oidc'
+        });
+
+        if (insertError) {
+          console.error('Error creating user_management entry:', insertError);
+          return;
+        }
+
+        // Get LinkedIn profile data
+        const metadata = user.user_metadata;
+        console.log('LinkedIn user metadata:', metadata);
+
+        // Create profile entry with LinkedIn data
+        const { error: profileError } = await supabase.from('profiles').insert({
+          id: user.id,
+          full_name: metadata.name || metadata.full_name || '',
+          email: user.email,
+          company_name: metadata.company || '',
+          position: metadata.position || metadata.title || '',
+          linkedin_profile_link: metadata.linkedin_url || metadata.sub || '',
+          status: 'active',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          czy_korzysta_z_erp: null,
+          czy_zamierza_wdrozic_erp: null,
+          czy_dokonal_wyboru_erp: null
+        });
+
+        if (profileError) {
+          console.error('Error creating profile:', profileError);
+          return;
+        }
+
+        console.log('Successfully created user and profile');
+      } else {
+        console.log('User already exists:', existingUser);
+      }
+    } catch (error) {
+      console.error('Error handling LinkedIn user:', error);
+      toast.error('Wystąpił błąd podczas tworzenia konta');
+    }
+  };
 
   const checkUserRole = async (user: User | null) => {
     if (!user) {
@@ -97,19 +171,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setCanViewSystems(userData.can_view_systems || isUserAdmin || isUserEditor);
       setCanViewCompanies(userData.can_view_companies || isUserAdmin);
 
-      // Check if we need to show the survey for regular users
+      // Set LinkedIn user status
+      setIsLinkedInUser(userData.auth_provider === 'linkedin_oidc');
+
+      // Check profile completion and survey visibility
       if (userData.role === 'user' && userData.is_active && userData.status === 'active') {
         const { data: profile } = await supabase
           .from('profiles')
-          .select('czy_korzysta_z_erp, czy_zamierza_wdrozic_erp, czy_dokonal_wyboru_erp')
+          .select('*')
           .eq('id', user.id)
           .single();
 
-        // Show survey if any of the fields are null
-        if (profile && (profile.czy_korzysta_z_erp === null || 
-            profile.czy_zamierza_wdrozic_erp === null || 
-            profile.czy_dokonal_wyboru_erp === null)) {
-          setShowSurvey(true);
+        if (profile) {
+          if (userData.auth_provider === 'linkedin_oidc') {
+            // For LinkedIn users, never show the feedback survey
+            const isComplete = Boolean(
+              profile.full_name &&
+              profile.company_name &&
+              profile.position
+            );
+            setIsProfileComplete(isComplete);
+            setShowSurvey(false); // Never show feedback survey for LinkedIn users
+          } else {
+            // For regular users, always show survey if fields are null
+            if (profile.czy_korzysta_z_erp === null ||
+                profile.czy_zamierza_wdrozic_erp === null ||
+                profile.czy_dokonal_wyboru_erp === null) {
+              setShowSurvey(true);
+            }
+          }
         }
       }
     } catch (error) {
@@ -127,9 +217,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setUser(session?.user ?? null);
-      checkUserRole(session?.user ?? null);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      const user = session?.user ?? null;
+      setUser(user);
+
+      if (event === 'SIGNED_IN' && user?.app_metadata?.provider === 'linkedin') {
+        await handleLinkedInUser(user);
+      }
+
+      await checkUserRole(user);
     });
 
     return () => subscription.unsubscribe();
@@ -258,6 +354,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         canViewCompanies,
         loading,
         showSurvey,
+        isLinkedInUser,
+        isProfileComplete,
         signIn,
         signOut,
         closeSurvey,

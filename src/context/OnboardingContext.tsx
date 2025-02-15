@@ -6,11 +6,13 @@ import { OnboardingSurveyModal } from '../components/OnboardingSurveyModal';
 interface OnboardingContextType {
   showOnboardingSurvey: boolean;
   closeOnboardingSurvey: () => void;
+  checkOnboardingStatus: () => Promise<void>;
 }
 
 const OnboardingContext = createContext<OnboardingContextType>({
   showOnboardingSurvey: false,
   closeOnboardingSurvey: () => {},
+  checkOnboardingStatus: async () => {},
 });
 
 export const useOnboarding = () => useContext(OnboardingContext);
@@ -19,15 +21,14 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const { user } = useAuth();
   const [showOnboardingSurvey, setShowOnboardingSurvey] = useState(false);
 
-  useEffect(() => {
-    const checkOnboardingStatus = async () => {
+  const checkOnboardingStatus = async () => {
       if (!user?.id) return;
 
       try {
-        // Check if user is a regular user and if they have completed the onboarding survey
+        // Check user type and status
         const { data: userData, error: userError } = await supabase
           .from('user_management')
-          .select('role, status')
+          .select('role, status, auth_provider')
           .eq('user_id', user.id)
           .single();
 
@@ -39,16 +40,31 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         // Only show survey for regular users who are approved (status === 'active')
         if (userData.role !== 'user' || userData.status !== 'active') return;
 
-        // Check if profile fields are null
+        // Get complete profile data
         const { data: profile, error: profileError } = await supabase
           .from('profiles')
-          .select('czy_korzysta_z_erp, czy_zamierza_wdrozyc_erp, czy_dokonal_wyboru_erp')
+          .select('*')
           .eq('id', user.id)
           .single();
 
         if (profileError) {
           console.error('Error checking profile:', profileError);
           return;
+        }
+
+        // For LinkedIn users, only show survey if profile is complete but ERP fields are null
+        if (userData.auth_provider === 'linkedin_oidc') {
+          const isProfileComplete = Boolean(
+            profile.company_name &&
+            profile.phone_number &&
+            profile.nip &&
+            profile.position &&
+            profile.industry &&
+            profile.company_size
+          );
+
+          // Only show survey if profile is complete
+          if (!isProfileComplete) return;
         }
 
         // Show survey if any of the required fields are null
@@ -64,15 +80,17 @@ export const OnboardingProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       }
     };
 
+  useEffect(() => {
     checkOnboardingStatus();
   }, [user]);
+
 
   const closeOnboardingSurvey = () => {
     setShowOnboardingSurvey(false);
   };
 
   return (
-    <OnboardingContext.Provider value={{ showOnboardingSurvey, closeOnboardingSurvey }}>
+    <OnboardingContext.Provider value={{ showOnboardingSurvey, closeOnboardingSurvey, checkOnboardingStatus }}>
       {children}
       <OnboardingSurveyModal
         isOpen={showOnboardingSurvey}

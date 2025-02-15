@@ -50,6 +50,7 @@ import SurveyFormEditor from './pages/SurveyFormEditor';
 import { emailConfig } from './config/email';
 import emailjs from '@emailjs/browser';
 import { FeedbackModal } from './components/FeedbackModal';
+import AuthCallback from './components/AuthCallback';
 
 const AppContent = () => {
   const { showSurvey, closeSurvey } = useAuth();
@@ -83,6 +84,7 @@ const AppContent = () => {
         <Route path="/rejestracja" element={<Register />} />
         <Route path="/rejestracja/sukces" element={<RegistrationSuccess />} />
         <Route path="/rejestracja/oczekujace" element={<PendingAccount />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin/register" element={<Register />} />
         <Route 
